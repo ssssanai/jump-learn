@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.BbsMapper">
+
+<!--    <insert id="insert" parameterType="com.ssanai.jumplearn.vo.BbsDefaultVO"-->
+<!--            useGeneratedKeys="true" keyColumn="id" keyProperty="int">-->
+<!--        INSERT INTO tbl_edu (-->
+<!--            `admin_id`, `title` , `content`, `created_at`,`updated_at`-->
+<!--        ) VALUES (-->
+<!--            '#{admin_id}', '#{title}', '#{content}', NOW(), NOW()-->
+<!--        );-->
+<!--    </insert>-->
+
+    <select id="listAll">
+        SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
+        FROM tbl_edu
+        WHERE 1=1
+        ORDER BY id DESC
+    </select>
+
+<!--    <select id="list">-->
+<!--        SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`-->
+<!--        FROM tbl_edu-->
+<!--        WHERE 1=1-->
+<!--        ORDER BY id DESC-->
+<!--    </select>-->
+
+    <update id="update">
+        UPDATE tbl_edu
+        SET `title`='#{title}', `content`='#{content}',`updated_at`= NOW()
+        WHERE `id` = '#{id}'
+    </update>
+
+
+<!--    <delete id="delete">-->
+<!--        -->
+<!--    </delete>-->
+
+    <select id="selectOne" parameterType="int" resultType="com.ssanai.jumplearn.vo.BbsDefaultVO">
+        SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
+        FROM tbl_edu
+        WHERE `id` = '#{id}'
+    </select>
+
+</mapper>
