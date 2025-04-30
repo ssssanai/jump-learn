@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 // 교육 정보, 대입 정보, ...
-public abstract class BbsDTOInterface {
+public class BbsDTOInterface {
 	private int id;
 	private String title;
 	private String content;
