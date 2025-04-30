@@ -9,14 +9,14 @@ import java.util.List;
 public interface BbsMapper {
     public List<BbsDefaultVO> listAll();
 
-//    public List<BbsDefaultVO> list();
+    public List<BbsDefaultVO> list();
 
-//    public int insert(BbsDefaultVO vo);
+    public int insert(BbsDefaultVO vo);
 
     public int update(BbsDefaultVO vo);
 
-//    public int delete(int id);
+    public int delete(int id);
 
-//    public BbsDefaultVO selectOne(@Param("id") int id);
+    public BbsDefaultVO selectOne( int id);
 
 }
