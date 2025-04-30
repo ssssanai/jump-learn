@@ -23,14 +23,14 @@
     </header>
     <main>
         <div class="login_content">
-            <form class="login_form" action="#" method="post" onsubmit="return validateForm()">
+            <form class="login_form" action="/member/login" method="post" onsubmit="return validateForm()">
                 <div class="input_div one">
                     <div class="i">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="div">
                         <h5>아이디</h5>
-                        <input type="text" class="input" name="memberId" autocomplete="off" value="">
+                        <input type="text" class="input" name="id" autocomplete="off" value="">
                     </div>
                 </div>
                 <div class="input_div pass">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="div">
                         <h5>비밀번호</h5>
-                        <input id="password" type="password" class="input" autocomplete="off" name="memberPwd">
+                        <input id="password" type="password" class="input" autocomplete="off" name="password">
                         <button id="togglePassword" type="button">😍</button>
                     </div>
                 </div>

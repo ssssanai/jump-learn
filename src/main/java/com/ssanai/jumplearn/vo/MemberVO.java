@@ -14,7 +14,7 @@ public class MemberVO {
     private String id; //회원 아이디
     private String password; //회원 비밀번호
     private String name; //회원 이름
-    private Date birthday; //회원 생일
+    private Date birth; //회원 생일
     private String email; //회원 이메일
     private String grade; //고1 = grade1, 고2 = grade2, 고3 = grade3, n수 = n이라고 명시해야합니다.
     private String gender; //성별 남자 M/ 여자 F 명시해야함
@@ -25,5 +25,5 @@ public class MemberVO {
     private String file_path; //회원 프로필 사진 파일 경로
     private long file_size; // 회원 프로필 사진 파일 크기
     private String file_ext; // 회원 프로필 파일 확장자 ->사진 같은경우는 이미지만 들어가야함
-    private LocalDateTime status_changed_date; //Status 변경 날짜
+    private LocalDateTime status_changed_at; //Status 변경 날짜
 }
