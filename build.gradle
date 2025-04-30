@@ -14,18 +14,83 @@ ext {
   junitVersion = '5.10.0'
 }
 
-sourceCompatibility = '11'
-targetCompatibility = '11'
+sourceCompatibility = '17'
+targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
 }
 
 dependencies {
-  compileOnly('jakarta.servlet:jakarta.servlet-api:6.0.0')
+  // Servlet
+  compileOnly('jakarta.servlet:jakarta.servlet-api:5.0.0')
 
+  // JUnit
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+  // Servlet
+  implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+
+  // JSTL
+  implementation 'org.eclipse.jetty:glassfish-jstl:11.0.18'
+
+  // JDBC
+  implementation 'org.mariadb.jdbc:mariadb-java-client:3.2.0'
+
+  // Lombok
+  implementation 'org.projectlombok:lombok:1.18.38'
+  annotationProcessor 'org.projectlombok:lombok:1.18.38'
+  testImplementation 'org.projectlombok:lombok:1.18.38'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.38'
+
+  // HikariCP https://mvnrepository.com/artifact/com.zaxxer/HikariCP
+  implementation 'com.zaxxer:HikariCP:6.0.0'
+
+  // ModelMapper https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+  implementation 'org.modelmapper:modelmapper:3.2.2'
+
+  // log4j-core https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+  implementation 'org.apache.logging.log4j:log4j-core:2.24.3'
+  // log4j-api https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+  implementation 'org.apache.logging.log4j:log4j-api:2.24.3'
+  // log4j-impl https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl
+  implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.24.3'
+
+  // Spring Core https://mvnrepository.com/artifact/org.springframework/spring-core
+  implementation 'org.springframework:spring-core:6.1.0'
+  // Spring Context https://mvnrepository.com/artifact/org.springframework/spring-context
+  implementation 'org.springframework:spring-context:6.1.0'
+  // Spring Test https://mvnrepository.com/artifact/org.springframework/spring-test
+  testImplementation 'org.springframework:spring-test:6.1.0'
+  // Spring Web MVC (REST Web Services implementation) https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+  implementation 'org.springframework:spring-webmvc:6.1.0'
+  // Spring JDBC https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+  implementation 'org.springframework:spring-jdbc:6.1.0'
+  // Spring TX (Transaction) https://mvnrepository.com/artifact/org.springframework/spring-tx
+  implementation 'org.springframework:spring-tx:6.1.0'
+
+  // MyBatis https://mvnrepository.com/artifact/org.mybatis/mybatis --> JDBC, TX 없으면 동작 안 함
+  implementation 'org.mybatis:mybatis:3.5.19'
+  // MyBatis-Spring https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
+  implementation 'org.mybatis:mybatis-spring:3.0.4'
+
+  // Hibernate Validator https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+  implementation 'org.hibernate.validator:hibernate-validator:8.0.2.Final'
+
+  // AspectJ Runtime https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+  implementation 'org.aspectj:aspectjrt:1.9.24'
+  // AspectJ Weaver https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+  implementation 'org.aspectj:aspectjweaver:1.9.24'
+
+  // Common FileUpload https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+  implementation 'commons-fileupload:commons-fileupload:1.5'
+
+  // Image Scaling Library https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib
+  implementation 'org.imgscalr:imgscalr-lib:4.2'
+
+  // Jakarta Annotation https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
+  implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
 }
 
 test {

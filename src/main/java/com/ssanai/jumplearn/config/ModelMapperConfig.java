@@ -1,4 +1,4 @@
-package net.fullstack10.mvc.config;
+package com.ssanai.jumplearn.config;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

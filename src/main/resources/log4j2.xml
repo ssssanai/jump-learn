@@ -7,7 +7,7 @@
         </Console>
     </Appenders>
     <loggers>
-        <logger name="net.fullstack10" level="INFO" additivity="false">
+        <logger name="com.ssanai.jumplearn" level="INFO" additivity="false">
             <Appender-ref ref="CONSOLE"/>
         </logger>
         <root level="INFO" additivity="false">
