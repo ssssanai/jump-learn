@@ -23,8 +23,8 @@ public class BbsDefaultDTO {
 	private String title;
 	@NotBlank
 	private String content;
-	private LocalDateTime create_time;
-	private LocalDateTime update_time;
+	private LocalDateTime created_at;
+	private LocalDateTime updated_at;
 	@PositiveOrZero
 	@Builder.Default
 	@Min(0)
