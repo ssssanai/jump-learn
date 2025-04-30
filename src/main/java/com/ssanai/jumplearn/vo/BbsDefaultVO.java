@@ -18,9 +18,8 @@ public class BbsDefaultVO  {
 	private int id;
 	private String title;
 	private String content;
-	private Timestamp created_at;
-	private Timestamp updated_at
-			;
+	private LocalDateTime created_at;
+	private LocalDateTime updated_at;
 	private int view_count;
 	private String admin_id;
 }
