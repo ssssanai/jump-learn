@@ -29,7 +29,7 @@ public class MemberDTO {
     @Past(message = "생일은 과거 날짜여야 합니다.")
     @NotEmpty
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthday;
+    private Date birth;
     @NotEmpty
     @Email(message = "이메일 형식이 올바르지 않습니다.")
     private String email;

@@ -34,12 +34,11 @@
     <!-- 추가 설정: 1. 인터페이스 정의 , 2. XML 정의 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>  <!-- ref = 매개변수 -->
-    <!--TODO: mapper.xml 작성하고 주석 해제-->
-    <!-- <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>-->
+         <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
     </bean>
 
     <aop:aspectj-autoproxy/>
-    <!-- Mapper 인터페이스 스캔 TODO: 인터페이스 만들고 주석 해제 -->
-    <!-- <mybatis:scan base-package="com.ssanai.jumplearn.mapper"/>-->
-  <context:component-scan base-package="com.ssanai.jumplearn.config"/>
+     <mybatis:scan base-package="com.ssanai.jumplearn.mapper"/>
+    <context:component-scan base-package="com.ssanai.jumplearn.config"/>
+    <context:component-scan base-package="com.ssanai.jumplearn.service"/>
 </beans>

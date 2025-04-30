@@ -1,0 +1,424 @@
+@charset "utf-8";
+* {
+  margin:0; padding:0;
+  box-sizing: border-box;
+  font-family: 'KakaoSmallSans-Bold';
+}
+a {
+  display:block;
+  text-decoration: none;
+  color:#222222;
+}
+ul li {
+  list-style-type:none;
+}
+
+@font-face {
+  font-family: 'KakaoSmallSans-Bold';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoSmallSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+#slider-wrapper {
+  width: 100%;
+  height: 370px;
+  margin: 20px auto;
+  position: relative;
+  margin-bottom: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index:-100;
+}
+
+#s1 {
+  padding: 6px;
+  background: #152c91;
+  position: absolute;
+  left: 50%;
+  bottom: 25px;
+  margin-left: -36px;
+  border-radius: 20px;
+  opacity: 0.3;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#s2 {
+  padding: 6px;
+  background: #152c91;
+  position: absolute;
+  left: 50%;
+  bottom: 25px;
+  margin-left: -12px;
+  border-radius: 20px;
+  opacity: 0.3;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#s3 {
+  padding: 6px;
+  background: #152c91;
+  position: absolute;
+  left: 50%;
+  bottom: 25px;
+  margin-left: 12px;
+  border-radius: 20px;
+  opacity: 0.3;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#s1:hover,
+#s2:hover,
+#s3:hover {
+  opacity: .50;
+}
+
+.inner-wrapper {
+  width: 100%;
+  height: 370px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-bottom: 0px;
+  overflow: hidden;
+}
+
+.control {
+  display: none;
+}
+
+#Slide1:checked ~ .overflow-wrapper {
+  margin-left: 0%;
+}
+
+#Slide2:checked ~ .overflow-wrapper {
+  margin-left: -100%;
+}
+
+#Slide3:checked ~ .overflow-wrapper {
+  margin-left: -200%;
+}
+
+#Slide4:checked ~ .overflow-wrapper {
+  margin-left: -300%;
+}
+
+#Slide1:checked + #s1 {
+  opacity: 1;
+}
+
+#Slide2:checked + #s2 {
+  opacity: 1;
+}
+
+#Slide3:checked + #s3 {
+  opacity: 1;
+}
+
+#Slide4:checked + #s4 {
+  opacity: 1;
+}
+
+.overflow-wrapper {
+  width: 400%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: hidden;
+  z-index: 1;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.slide img {
+  width: 25%;
+  float: left;
+}
+
+.main {
+  display:flex;
+  flex-direction: row;
+  margin:40px auto;
+  width:80%; height:240px;
+}
+.buyStudy1 {
+  flex:30%;
+}
+.bsTitle {
+  width:100%; height:50px;
+}
+.bsTitle > h1 {
+  display: block;
+  height:100px;
+  font-size:20px;
+}
+.bsCont {
+  width:100%;
+  height:140px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+}
+.bsCont > p {
+  display: block;
+  height:140px;
+  font-size:14px;
+  text-align: justify;
+  line-height:25px;
+}
+.bsBtn {
+  display: grid;
+  grid-template-columns: 160px 160px;
+  width:100%;
+  height:50px;
+  gap:15px;
+  justify-content: center;
+}
+.buyLink, .review {
+  display:block;
+  width:100%; height:35px;
+  background-color:#4d6bf1;
+  text-align: center;
+  line-height:32px;
+  font-size:14px;
+  color:#fff;
+  align-content: center;
+  border-radius: 5px;
+}
+.buyLink:hover, .review:hover  {
+  background-color: #2240c4;
+}
+.buyStudy2 {
+  flex:50%;
+  padding: 0 20px 0 30px;
+}
+.buyStudy2 > img {
+  width:100%; height:100%;
+}
+.loginBox1 {
+  display: none;
+  flex:20%;
+  margin: 0 10px;
+  background-color: #f3f3f33a;
+}
+.loginHead {
+  display: grid;
+  grid-template-columns:100%;
+  height:190px;
+  place-content: center;
+  border-left:1px solid #d6d6d6b3;
+  border-right:1px solid #d6d6d6b3;
+  border-top:1px solid #d6d6d6b3;
+  padding: 0 20px;
+}
+.loginHead > a {
+  width:100%; height:100px;
+  color:#fff;
+  background-color: #4d6bf1;
+  border-radius: 8px;
+  text-align: center;
+  line-height:98px;
+  font-size:24px;
+}
+.loginHead:hover a {
+  background-color: #2240c4;
+}
+.myPageBtn {
+  width:100%; height:25px;
+  border:1px solid #d6d6d6b3;
+}
+.myPageBtn > a {
+  font-size:12px;
+  text-align: center;
+  line-height:23px;
+}
+.myPageBtn:hover a {
+  font-weight:bold;
+  color: #2240c4;
+}
+.loginFoot {
+  width:100%; height:25px;
+}
+.registBtn {
+  float:left;
+  width:50%; height:25px;
+  font-size:12px;
+  text-align: center;
+  line-height:23px;
+  border-left:1px solid #d6d6d6b3;
+  border-right:1px solid #d6d6d6b3;
+  border-bottom:1px solid #d6d6d6b3;
+}
+.foundPwd {
+  float:left;
+  width:50%; height:25px;
+  font-size:12px;
+  text-align: center;
+  line-height:23px;
+  border-right:1px solid #d6d6d6b3;
+  border-bottom:1px solid #d6d6d6b3;
+}
+.registBtn:hover a {
+  font-weight:bold;
+  color: #2240c4;
+}
+.foundPwd:hover a {
+  font-weight:bold;
+  color: #2240c4;
+}
+.loginBox2 {
+  flex:20%;
+  margin: 0 10px;
+  background-color: #f3f3f33a;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  width:100%; height:100%;
+  align-items: center;
+}
+.profileImg {
+  width:130px; height:130px;
+  border-radius: 49%;
+  border: 2px solid #000;
+  background-image: url('../images/mainPage/profile.jpg');
+  background-size: cover;
+}
+.profileInfo {
+  width:100%; height:50%;
+}
+.infoHead {
+  width:100%; height:50%;
+}
+.infoHead > p {
+  display: block;
+  width:100%; height:100%;
+  text-align: center;
+  padding: 20px;
+  font-size:19px;
+}
+.infobody {
+  width:100%; height:50%;
+}
+.infobody > p {
+  display: block;
+  width:100%; height:100%;
+  text-align: center;
+  padding: 20px;
+  font-size:14px;
+}
+article {
+  display:flex;
+  width:80%; height:400px;
+  margin:0 auto;
+  gap:40px;
+  margin-bottom: 50px;
+  justify-content: space-between;
+}
+.gradCard {
+  width:300px;
+  border:1px solid #d6d6d6b3;
+}
+.gradeImg {
+  width:100%; height:340px;
+  border-bottom:1px solid #d6d6d6b3;
+  background-image: url('../images/mainPage/profile.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.gradeCont {
+  width:100%; height:60px;
+}
+.gradeP {
+  float: left;
+  width:70%; height:100%;
+  font-size:14px;
+  text-align: left;
+  line-height: 58px;
+  padding-left: 20px;
+}
+.gradeA {
+  float: left;
+  width:30%; height:100%;
+  font-size:12px;
+  text-align: right;
+  line-height: 58px;
+  padding-right: 20px;
+}
+.gradeA:hover a {
+  font-weight:bold;
+  color: #2240c4;
+}
+@media (max-width: 1230px) {
+  .buyStudy2 {
+    display:none;
+  }
+  .loginBox {
+    flex:30%;
+  }
+  article {
+    width:90%;
+    height:1000px;
+    flex-direction: column;
+  }
+  .gradCard {
+    margin: 0 auto;
+    width:70%;
+    border:1px solid #d6d6d6b3;
+    justify-content: center;
+  }
+  .gradeImg {
+    width:100%;
+    height:150px;
+    background-image: url('../images/mainPage/profile.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+@media (max-width: 800px) {
+  #slider-wrapper {
+    margin: 0;
+    width:100%;
+    height:300px;
+  }
+  .inner-wrapper {
+    width:100%;
+    height:300px;
+  }
+  .slide img {
+    height:300px;
+  }
+
+  .main {
+    width:90%;
+    height:500px;
+    flex-direction: column;
+  }
+  .buyStudy2 {
+    display:none;
+  }
+  .loginHead {
+    height:200px;
+  }
+  article {
+    width:90%;
+    height:1000px;
+    flex-direction: column;
+  }
+  .gradCard {
+    width:100%;
+    margin: 0;
+  }
+  .gradeImg {
+    width:100%;
+    height:150px;
+  }
+}

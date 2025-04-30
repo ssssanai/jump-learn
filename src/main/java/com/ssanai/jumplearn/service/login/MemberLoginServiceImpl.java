@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberLoginServiceimpl implements MemberLoginServiceIf {
+public class MemberLoginServiceImpl implements MemberLoginServiceIf {
     private final MemberLoginMapper MemberLoginXmlMapper;
     private final ModelMapper modelMapper;
 
@@ -24,9 +24,13 @@ public class MemberLoginServiceimpl implements MemberLoginServiceIf {
     }
     @Override //로그인
     public MemberDTO login(MemberDTO dto){
+        log.info("로그인 시도1");
+        log.info(dto.toString());
         MemberVO vo = modelMapper.map(dto, MemberVO.class);
-        MemberLoginXmlMapper.login(vo);
-        return dto;
+        log.info(vo.toString());
+        MemberDTO Mdto = MemberLoginXmlMapper.login(vo);
+        log.info(Mdto);
+        return Mdto;
     }
     @Override //비밀번호 변경전 아이디, 이메일 확인
     public void confirmMember(MemberDTO dto){

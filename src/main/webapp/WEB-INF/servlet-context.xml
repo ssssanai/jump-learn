@@ -21,21 +21,21 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-<!--  bean 등록 예시  -->
-<!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
-<!--        <property name="formatters">-->
-<!--            <set>-->
-<!--                <bean class="com.ssanai.jumplearn.XXX"/>-->
-<!--            </set>-->
-<!--        </property>-->
-<!--    </bean>-->
+    <!--  bean 등록 예시  -->
+    <!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+    <!--        <property name="formatters">-->
+    <!--            <set>-->
+    <!--                <bean class="com.ssanai.jumplearn.XXX"/>-->
+    <!--            </set>-->
+    <!--        </property>-->
+    <!--    </bean>-->
 
-   <context:component-scan base-package="com.ssanai.jumplearn.controller"/>
+    <context:component-scan base-package="com.ssanai.jumplearn.controller"/>
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
-<!--  파일 업로드 패스 예시 -->
-<!--    <bean id="uploadPath" class="java.lang.String">-->
-<!--        <constructor-arg value="/Users/macbookair/Desktop/Spring/springmvc/src" />-->
-<!--    </bean>-->
+    <!--  파일 업로드 패스 예시 -->
+    <!--    <bean id="uploadPath" class="java.lang.String">-->
+    <!--        <constructor-arg value="/Users/macbookair/Desktop/Spring/springmvc/src" />-->
+    <!--    </bean>-->
 </beans>
