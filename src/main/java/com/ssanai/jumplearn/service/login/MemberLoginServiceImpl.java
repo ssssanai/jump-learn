@@ -19,8 +19,13 @@ public class MemberLoginServiceImpl implements MemberLoginServiceIf {
 
 
     @Override//회원가입
-    public void register(MemberDTO dto){
-
+    public int register(MemberDTO dto){
+        log.info("회원가입 시도1");
+        log.info(dto.toString());
+        MemberVO vo = modelMapper.map(dto, MemberVO.class);
+        int rs = MemberLoginXmlMapper.register(vo);
+        log.info("성공 실패 여부 : "+ rs);
+        return rs;
     }
     @Override //로그인
     public MemberDTO login(MemberDTO dto){
@@ -31,6 +36,14 @@ public class MemberLoginServiceImpl implements MemberLoginServiceIf {
         MemberDTO Mdto = MemberLoginXmlMapper.login(vo);
         log.info(Mdto);
         return Mdto;
+    }
+    @Override //회원가입시 중복 ID CHECK
+    public MemberDTO registerIdCheck(String id) {
+        MemberDTO dto;
+        log.info("중복ID CHECK");
+        log.info(id);
+        dto = MemberLoginXmlMapper.registerIdCheck(id);
+        return dto;
     }
     @Override //비밀번호 변경전 아이디, 이메일 확인
     public void confirmMember(MemberDTO dto){

@@ -3,8 +3,9 @@ package com.ssanai.jumplearn.service.login;
 import com.ssanai.jumplearn.dto.MemberDTO;
 
 public interface MemberLoginServiceIf {
-    public void register(MemberDTO dto); //회원가입
+    public int register(MemberDTO dto); //회원가입
     public MemberDTO login(MemberDTO dto); //로그인
+    public MemberDTO registerIdCheck(String id); //회원가입시 중복 ID CHECK
     public void confirmMember(MemberDTO dto); //비밀번호 변경전 아이디, 이메일 확인
     public void changePassword(MemberDTO dto); //비밀번호 변경
     public void logout(MemberDTO dto); // 로그아웃

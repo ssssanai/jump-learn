@@ -9,6 +9,14 @@
         WHERE id = #{id}
         AND password = SHA2(#{password}, 256)
     </select>
-
+    <insert id="register">
+        INSERT INTO tbl_member(`id`, `password`, `name`, `birth`, `email`, `grade`, `gender`)
+        VALUES(#{id},SHA2(#{password},256), #{name},#{birth},#{email},#{grade},#{gender})
+    </insert>
+    <select id="registerIdCheck">
+        select id, name
+        from tbl_member
+        where id = #{id}
+    </select>
 </mapper>
     

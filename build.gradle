@@ -91,6 +91,13 @@ dependencies {
 
   // Jakarta Annotation https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
   implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
+
+  // https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api
+  implementation 'javax.mail:javax.mail-api:1.6.2'
+  implementation 'com.sun.mail:javax.mail:1.6.2'
+
+  // https://mvnrepository.com/artifact/jakarta.activation/jakarta.activation-api
+  implementation("jakarta.activation:jakarta.activation-api:2.0.1")
 }
 
 test {
