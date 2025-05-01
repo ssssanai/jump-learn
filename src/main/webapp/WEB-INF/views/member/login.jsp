@@ -30,7 +30,7 @@
                     </div>
                     <div class="div">
                         <h5>아이디</h5>
-                        <input type="text" class="input" name="id" autocomplete="off" value="">
+                        <input type="text" class="input" name="id" autocomplete="off"  value="${saveIdFlag != null && saveIdFlag.equals('Y') ? saveId : ''}">
                     </div>
                 </div>
                 <div class="input_div pass">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="save_id">
-                    <p>아이디 저장</p><input name="saveId" type="checkbox" id="save_id" value="Y">
+                    <p>아이디 저장</p><input name="saveId" type="checkbox" id="save_id" value="Y" ${saveIdFlag != null && saveIdFlag.equals('Y') ? 'checked' : ''}>
                 </div>
                 <input type="submit" class="btn" value="로그인">
                 <div class="regi_chgpwd_div">
