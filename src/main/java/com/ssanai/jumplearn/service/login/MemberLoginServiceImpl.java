@@ -46,23 +46,25 @@ public class MemberLoginServiceImpl implements MemberLoginServiceIf {
         return dto;
     }
     @Override //비밀번호 변경전 아이디, 이메일 확인
-    public void confirmMember(MemberDTO dto){
+    public int confirmMember(MemberDTO dto){
 
+        return 0;
     }
     @Override //비밀번호 변경
-    public void changePassword(MemberDTO dto){
+    public int changePassword(MemberDTO dto){
 
+        return 0;
     }
     @Override //로그아웃
     public void logout(MemberDTO dto){
 
     }
     @Override //사진 업로드
-    public void profileUpdate(MemberDTO dto){
-
+    public int profileUpdate(MemberDTO dto){
+        return 0;
     }
     @Override //회원정보 수정
-    public void memberUpdate(MemberDTO dto){
-
+    public int memberUpdate(MemberDTO dto){
+        return 0;
     }
 }

@@ -136,7 +136,7 @@ public class MemberLoginController {
         int code1 = (int) (Math.random() * 900000) + 100000;
         String code = String.valueOf(code1);
 
-        String subject = "숲공에서 보낸 인증 메일 입니다.";
+        String subject = "Jump Learn 에서 보낸 인증 메일 입니다.";
         String content = "인증번호 " + code + " 입니다.";
 
         try {
@@ -151,6 +151,4 @@ public class MemberLoginController {
         System.out.println("Generated auth code: " + code);
         return "success:" + code;
     }
-
-
 }
