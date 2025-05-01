@@ -48,7 +48,7 @@
                 </div>
                 <input type="submit" class="btn" value="로그인">
                 <div class="regi_chgpwd_div">
-                    <a href="#">회원가입</a>
+                    <a href="/member/register">회원가입</a>
                     <a href="#">비밀번호 찾기</a>
                 </div>
             </form>

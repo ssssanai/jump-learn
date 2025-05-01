@@ -27,14 +27,14 @@ public class MemberDTO {
     @Pattern(regexp = "^[가-힣]{1,10}$", message = "이름은 한글 10자 이내여야 합니다.")
     private String name;
     @Past(message = "생일은 과거 날짜여야 합니다.")
-    @NotEmpty
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     @NotEmpty
     @Email(message = "이메일 형식이 올바르지 않습니다.")
     private String email;
     @NotEmpty
-    @Pattern(regexp = "^(grade1|grade2|grade3|n)$", message = "학년은 grade1, grade2, grade3, 또는 n이어야 합니다.")
+    @Pattern(regexp = "^(1|2|3|n)$", message = "학년은 grade1, grade2, grade3, 또는 n이어야 합니다.")
     private String grade;
     @NotEmpty
     @Pattern(regexp = "^[MF]{1}$", message = "성별은 M 또는 F로 입력해야 합니다.")

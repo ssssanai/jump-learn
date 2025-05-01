@@ -4,8 +4,9 @@ import com.ssanai.jumplearn.dto.MemberDTO;
 import com.ssanai.jumplearn.vo.MemberVO;
 
 public interface MemberLoginMapper {
-    public void register(MemberVO vo); //회원가입
+    public int register(MemberVO vo); //회원가입
     public MemberDTO login(MemberVO vo); //로그인
+    public MemberDTO registerIdCheck(String id); //회원가입시 중복 ID CHECK
     public void confirmMember(MemberVO vo); //비밀번호 변경전 아이디, 이메일 확인
     public void changePassword(MemberVO vo); //비밀번호 변경
     public void logout(MemberVO vo); // 로그아웃

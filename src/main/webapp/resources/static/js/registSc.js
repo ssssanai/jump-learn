@@ -4,7 +4,9 @@ const userPwInput = document.getElementById('userPw');
 const userPwConfirmInput = document.getElementById('userPwConfirm');
 const realNameInput = document.getElementById('realName');
 const birthDateInput = document.getElementById('birthDate');
-const userEmailInput = document.getElementById('userEmail');
+const userEmailInput1 = document.getElementById('userEmail');
+const userEmailInput2 =document.getElementById('select_email1');
+
 
 // 에러 메시지를 표시할 span 요소
 const userIdError = document.getElementById('userIdError');
@@ -21,7 +23,14 @@ registerForm.addEventListener('submit', function(event) {
 
     let isValid = true;
 
+    const userEmail = (userEmailInput1.value+"@"+ userEmailInput2.value).trim();
+
+
     if (!validateUserId(userIdInput.value)) {
+        isValid = false;
+    }
+    if (document.getElementById("idCheck").value !== "true") {
+        alert("아이디 중복 확인을 해주세요.");
         isValid = false;
     }
     if (!validateUserPw(userPwInput.value)) {
@@ -36,34 +45,22 @@ registerForm.addEventListener('submit', function(event) {
     if (!validateBirthDate(birthDateInput.value)) {
         isValid = false;
     }
-    if (!validateUserEmail(userEmailInput.value)) {
+    if (!validateUserEmail(userEmail)) {
+        isValid = false;
+    }
+    const codeConfirmValue = document.getElementById('codeConfirm').value;
+    if (codeConfirmValue !== "true") {
+        alert("이메일 인증을 완료해주세요.");
         isValid = false;
     }
 
 
     // 모든 유효성 검사를 통과했을 때
     if (isValid) {
-        // 여기에 폼 제출이나 다음 단계로 넘어가는 코드를 작성합니다.
-        // 예: 실제 폼 제출하기
-        // registerForm.submit();
-
-        // 예: AJAX로 데이터 전송하기
-        // fetch('/register', { method: 'POST', body: new FormData(registerForm) })
-        //   .then(response => response.json())
-        //   .then(data => { console.log('Success:', data); })
-        //   .catch((error) => { console.error('Error:', error); });
-
-        // 간단하게 성공 메시지 보여주기
-        alert('회원가입 성공! (실제 제출은 막았습니다)');
-        console.log('폼 데이터:', {
-            userId: userIdInput.value,
-            userPw: userPwInput.value, // 실제로는 비밀번호를 콘솔에 찍지 마세요! 보안상 위험합니다.
-            realName: realNameInput.value,
-            birthDate: birthDateInput.value,
-            userEmail: userEmailInput.value
-        });
+         document.getElementById('hiddenEmail').value = userEmail;
+         registerForm.submit();
     } else {
-        console.log('유효성 검사 실패');
+        console.log('다시 회원가입을 시도 해주세요');
     }
 });
 
@@ -85,8 +82,8 @@ function validateUserId(id) {
         return false;
     }
     if (trimmedId.includes(' ')) {
-         userIdError.textContent = '아이디에는 공백을 사용할 수 없습니다.';
-         return false;
+        userIdError.textContent = '아이디에는 공백을 사용할 수 없습니다.';
+        return false;
     }
     // 8자 이상 20자 이하 (19자까지)
     if (trimmedId.length < 8 || trimmedId.length >= 20) {
@@ -104,22 +101,22 @@ function validateUserId(id) {
 
 // 비밀번호 눈 아이콘 클릭시 비밀번호 표시 및 아이콘 변경
 document.getElementById('togglePassword').addEventListener('click', function () {
-	const passwordInput = document.getElementById('userPw');
-	const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-	passwordInput.setAttribute('type', type);
-	this.textContent = type === 'password' ? '👁️' : '🙈'; // 아이콘 변경
+    const passwordInput = document.getElementById('userPw');
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.textContent = type === 'password' ? '👁️' : '🙈'; // 아이콘 변경
 });
 
 // 비밀번호 검사
 function validateUserPw(pw) {
     const trimmedPw = pw.trim();
-     if (trimmedPw === '') {
+    if (trimmedPw === '') {
         userPwError.textContent = '비밀번호를 입력해주세요.';
         return false;
     }
-     if (trimmedPw.includes(' ')) {
-         userPwError.textContent = '비밀번호에는 공백을 사용할 수 없습니다.';
-         return false;
+    if (trimmedPw.includes(' ')) {
+        userPwError.textContent = '비밀번호에는 공백을 사용할 수 없습니다.';
+        return false;
     }
     // 8자 이상 20자 이하 (19자까지)
     if (trimmedPw.length < 8 || trimmedPw.length >= 20) {
@@ -141,14 +138,14 @@ function validateUserPw(pw) {
 
 // 비밀번호 확인 검사
 function validateUserPwConfirm(pw, pwConfirm) {
-     const trimmedPwConfirm = pwConfirm.trim();
+    const trimmedPwConfirm = pwConfirm.trim();
     if (trimmedPwConfirm === '') {
         userPwConfirmError.textContent = '비밀번호 확인을 입력해주세요.';
-         return false;
-     }
-      if (trimmedPwConfirm.includes(' ')) {
-         userPwConfirmError.textContent = '비밀번호 확인에는 공백을 사용할 수 없습니다.';
-         return false;
+        return false;
+    }
+    if (trimmedPwConfirm.includes(' ')) {
+        userPwConfirmError.textContent = '비밀번호 확인에는 공백을 사용할 수 없습니다.';
+        return false;
     }
 
     if (pw !== trimmedPwConfirm) {
@@ -162,13 +159,13 @@ function validateUserPwConfirm(pw, pwConfirm) {
 // 이름 검사
 function validateRealName(name) {
     const trimmedName = name.trim();
-     if (trimmedName === '') {
+    if (trimmedName === '') {
         realNameError.textContent = '이름을 입력해주세요.';
         return false;
     }
     if (trimmedName.includes(' ')) {
-         realNameError.textContent = '이름에는 공백을 사용할 수 없습니다.';
-         return false;
+        realNameError.textContent = '이름에는 공백을 사용할 수 없습니다.';
+        return false;
     }
 
     if (trimmedName.length < 1 || trimmedName.length >= 10) {
@@ -177,10 +174,10 @@ function validateRealName(name) {
     }
 
     const regex = /^[가-힣]+$/;
-     if (!regex.test(trimmedName)) {
-         realNameError.textContent = '이름은 한글만 사용할 수 있습니다.';
-         return false;
-     }
+    if (!regex.test(trimmedName)) {
+        realNameError.textContent = '이름은 한글만 사용할 수 있습니다.';
+        return false;
+    }
     return true;
 }
 
@@ -191,12 +188,12 @@ function validateBirthDate(date) {
         birthDateError.textContent = '생년월일을 입력해주세요.';
         return false;
     }
-     if (trimmedDate.includes(' ')) {
-         birthDateError.textContent = '생년월일에는 공백을 사용할 수 없습니다.';
-         return false;
+    if (trimmedDate.includes(' ')) {
+        birthDateError.textContent = '생년월일에는 공백을 사용할 수 없습니다.';
+        return false;
     }
 
-	// YYYY-MM-DD 형식인 졍규 표현식식
+    // YYYY-MM-DD 형식인 졍규 표현식식
     // 실제 날짜 유효성 (예: 2월 30일 같은 잘못된 날짜)까지 검사
     const regex = /^\d{4}-\d{2}-\d{2}$/;
     if (!regex.test(trimmedDate)) {
@@ -209,8 +206,8 @@ function validateBirthDate(date) {
     const dateObj = new Date(year, month - 1, day); // 월은 0부터 시작하므로 month-1
     // Date 객체가 생성된 후, 원래 입력된 연/월/일과 같은지 확인하여 유효한 날짜인지 판별
     if (dateObj.getFullYear() !== year || dateObj.getMonth() !== month - 1 || dateObj.getDate() !== day) {
-         birthDateError.textContent = '유효하지 않은 날짜입니다.';
-         return false;
+        birthDateError.textContent = '유효하지 않은 날짜입니다.';
+        return false;
     }
     // 추가: 미래 날짜인지 검사 (보통 생년월일은 현재 날짜보다 이전이어야 함)
     const today = new Date();
@@ -220,7 +217,7 @@ function validateBirthDate(date) {
         return false;
     }
 
-	today.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
     if (dateObj > today) {
         birthDateError.textContent = '생년월일은 미래 날짜일 수 없습니다.';
         return false;
@@ -231,20 +228,21 @@ function validateBirthDate(date) {
 }
 
 // 이메일 검사: 올바른 형식, 공백 불가
-function validateUserEmail(email) {
-     const trimmedEmail = email.trim();
-     if (trimmedEmail === '') {
+function validateUserEmail(userEmail) {
+    const trimmedEmail = userEmail
+    console.log(trimmedEmail + "이메일");
+    if (trimmedEmail === '') {
         userEmailError.textContent = '이메일을 입력해주세요.';
         return false;
     }
-     if (trimmedEmail.includes(' ')) {
-         userEmailError.textContent = '이메일에는 공백을 사용할 수 없습니다.';
-         return false;
+    if (trimmedEmail.includes(' ')) {
+        userEmailError.textContent = '이메일에는 공백을 사용할 수 없습니다.';
+        return false;
     }
     // 기본적인 이메일 형식을 확인하는 정규표현식
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-     if (!regex.test(trimmedEmail)) {
-         userEmailError.textContent = '올바른 이메일 형식이 아닙니다.';
+    if (!regex.test(trimmedEmail)) {
+        userEmailError.textContent = '올바른 이메일 형식이 아닙니다.';
          return false;
      }
     return true; // 모든 검사 통과
@@ -273,3 +271,107 @@ if (birthDateInput1) {
     // 오늘 날짜를 계산해서 max 속성에 설정합니다.
     birthDateInput1.max = getTodayString();
 }
+
+document.getElementById("idVali").addEventListener("click", function () {
+    const userIdInput = document.getElementById("userId");
+    const userIdError = document.getElementById("userIdError");
+    const idCheckHidden = document.getElementById("idCheck");
+
+    const trimmedId = userIdInput.value.trim();
+    userIdError.textContent = "";
+
+    // 1. 공백 체크
+    if (trimmedId.includes(" ")) {
+        userIdError.textContent = "아이디에는 공백을 사용할 수 없습니다.";
+        idCheckHidden.value = "";
+        return;
+    }
+
+    // 2. 길이 체크
+    if (trimmedId.length < 8 || trimmedId.length >= 20) {
+        userIdError.textContent = "아이디는 8자 이상 20자 미만이어야 합니다.";
+        idCheckHidden.value = "";
+        return;
+    }
+
+    // 3. 형식 체크 (소문자, 숫자만)
+    const regex = /^[a-z0-9]+$/;
+    if (!regex.test(trimmedId)) {
+        userIdError.textContent = "아이디는 영문 소문자와 숫자만 사용할 수 있습니다.";
+        idCheckHidden.value = "";
+        return;
+    }
+
+    // 4. 서버 중복 체크
+    fetch("/member/checkId?id=" + encodeURIComponent(trimmedId))
+        .then(response => response.text())
+        .then(result => {
+            if (result === "OK") {
+                alert("사용 가능한 아이디입니다.");
+                idCheckHidden.value = "true"; // 중복확인 통과 표시
+            } else {
+                userIdError.textContent = "이미 존재하는 아이디입니다.";
+                idCheckHidden.value = ""; // 실패
+            }
+        })
+        .catch(err => {
+            alert("서버 오류가 발생했습니다.");
+            console.error(err);
+        });
+});
+
+let sendCode = "";
+
+document.getElementById('emailCheck').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const emailId = document.getElementById('userEmail').value.trim();
+    const emailSelect = document.getElementById('select_email1').value;
+    let emailDomain = emailSelect;
+
+    const emailError = document.getElementById('userEmailError');
+
+    if (emailId === '' || emailDomain === '') {
+        emailError.textContent = '이메일을 입력해주세요.';
+        emailError.style.color = 'red';
+        return;
+    }
+
+    const fullEmail = emailId + '@' + emailDomain;
+
+
+    if (!emailError) {
+        console.error("emailError 요소를 찾을 수 없습니다. HTML에 id='emailError'가 있어야 합니다.");
+        return;
+    }
+
+    // 이메일 전송 요청
+    fetch("/member/emailCheck?email=" + encodeURIComponent(fullEmail))
+        .then(response => response.text())
+        .then(response => {
+            if (response.startsWith("success:")) {
+                sendCode = response.split(":")[1];
+                alert("이메일이 전송되었습니다. 코드 확인 후 입력 해주세요.");;
+            } else if (response.startsWith("fail:")) {
+                const errorMsg = response.split(":")[1];
+                alert(errorMsg || "이메일 전송 실패. 다시 시도해주세요.");
+            } else {
+                alert("알 수 없는 서버 응답입니다.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("서버 통신 오류가 발생했습니다.");
+        });
+
+});
+
+document.getElementById('codeCheck').addEventListener('click', function () {
+    const userInput = document.getElementById('userCode').value.trim();
+    if (userInput === sendCode) {
+        document.getElementById('codeConfirm').value = true;
+        alert("✅ 인증 성공!");
+    } else {
+        alert("❌ 인증 코드가 일치하지 않습니다.");
+    }
+});

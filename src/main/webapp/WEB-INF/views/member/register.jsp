@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DongGyu
@@ -23,7 +24,7 @@
             <img src="../../../resources/static/images/registLogo.jpg" class="registLogo" alt="홈페이지 로고"/>
         </div>
         <div class="registContent">
-            <form id="registerForm"class="regi_form" action="" method="post">
+            <form id="registerForm"class="regi_form" action="/member/register" method="post">
                 <div class="regi_input_box">
                     <p class="regi_tit">아이디</p>
                     <input type="text" name="id" id="userId" autocomplete="off" class="regi_input1"  placeholder="8~20자 미만의 영문 소문자, 숫자" maxlength="20">
@@ -32,14 +33,14 @@
                     <div id="userIdError" class="error"></div>
                 </div>
                 <div class="regi_input_box">
-                    <label for="password" class="regi_tit">비밀번호</label>
+                    <p class="regi_tit">비밀번호</p>
                     <input type="password" name="password" id="userPw" class="regi_input2" autocomplete="off" placeholder="8~20자 미만의 영문 소문자, 숫자, 특수문자 포함" maxlength="20">
                     <button id="togglePassword" type="button">👁️</button>
                     <div id="userPwError" class="error"></div>
                 </div>
                 <div class="regi_input_box">
                     <p class="regi_tit">비밀번호 확인</p>
-                    <input type="password2" id="userPwConfirm" name="passwordChk" class="regi_input2" autocomplete="off">
+                    <input type="password" id="userPwConfirm" name="passwordChk" class="regi_input2" autocomplete="off">
                     <div id="userPwConfirmError" class="error"></div>
                 </div>
                 <div class="regi_input_box">
@@ -54,7 +55,7 @@
                 </div>
                 <div class="regi_input_box1">
                     <p class="regi_tit">이메일</p>
-                    <input id="userEmail" class="select_email" type="text" name="email" autocomplete="off" placeholder="ex) textmail01" maxlength="20">
+                    <input id="userEmail" class="select_email" type="text" autocomplete="off" placeholder="ex) textmail01" maxlength="20">
                     <p class="email_between">@</p>
                     <select id="select_email1" name="select_email">
                         <option value="" disabled selected>도메인을 선택하세요</option>
@@ -67,12 +68,13 @@
                         <option value="hanmir.com">hanmir.com</option>
                         <option value="paran.com">paran.com</option>
                     </select>
+                    <input type="hidden" name="email" id="hiddenEmail">
                     <input type="button" name="" id="emailCheck"  autocomplete="off" class="emailCheck" value="인증">
                 </div>
                 <div id="userEmailError" class="error"></div>
                 <div class="regi_input_box1">
                     <p class="regi_tit">이메일 인증</p>
-                    <input id="userCode" type="text" name="name" class="regi_input1" maxlength="10" autocomplete="off" maxlength="10">
+                    <input id="userCode" type="text" name="emailCheck" class="regi_input1" maxlength="10" autocomplete="off" maxlength="10">
                     <input type="button" name="emailCheck" id="codeCheck"  autocomplete="off" class="emailCheck" value="확인">
                     <input type="hidden" id="codeConfirm" value="false" >
                 </div>
@@ -80,19 +82,19 @@
                 <div class="regi_input_box1">
                     <div class="grade_choice">
                         <label class="radio_style1">
-                            <input type="radio" name="grade" value="">
+                            <input type="radio" name="grade" value="1">
                             <span>고등학교 1학년</span>
                         </label>
                         <label class="radio_style1">
-                            <input type="radio" name="grade" value="" />
+                            <input type="radio" name="grade" value="2" />
                             <span>고등학교 2학년</span>
                         </label>
                         <label class="radio_style1">
-                            <input type="radio" name="grade" value="" />
+                            <input type="radio" name="grade" value="3" />
                             <span>고등학교 3학년</span>
                         </label>
                         <label class="radio_style1">
-                            <input type="radio" name="grade" value="" />
+                            <input type="radio" name="grade" value="N" />
                             <span>N 수생</span>
                         </label>
                     </div>
@@ -101,22 +103,28 @@
                 <div class="regi_input_box1">
                     <div class="sex_choice">
                         <label class="radio_style">
-                            <input id="gender_man" type="radio" name="gender" value="MALE" />
+                            <input id="gender_man" type="radio" name="gender" value="M" />
                             <span>남자</span>
                         </label>
                         <label class="radio_style">
-                            <input id="gender_woman" type="radio" name="gender" value="FEMALE" />
+                            <input id="gender_woman" type="radio" name="gender" value="F" />
                             <span>여자</span>
                         </label>
                     </div>
                     <div id="gender_error" class="generror"></div>
                 </div>
-                <input id="checkKey" class="regi_btn1" type="submit" name="regi_btn" value="회원가입하기">
-                <input id="checkKey" class="regi_btn2" type="reset" name="regi_btn" value="취소">
+                <input id="checkKey1" class="regi_btn1" type="submit" name="regi_btn" value="회원가입하기">
+                <input id="checkKey2" class="regi_btn2" type="reset" name="regi_btn" value="취소">
             </form>
         </div>
     </div>
 </div>
+<c:if test="${not empty errors}">
+    <script>
+        var errorMessage = '${errors[0].defaultMessage}';
+        alert(errorMessage);
+    </script>
+</c:if>
 <script src="../../../resources/static/js/registSc.js"></script>
 </body>
 </html>
