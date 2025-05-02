@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.mainpage.MainPageMapper">
+    <!-- 멤버 정보 -->
+    <select id="getMemberInfo">
+        SELECT id, name, status, grade, file_name, file_path, file_ext
+        FROM tbl_member
+        where id = #{id}
+    </select>
+    <!-- 하단 4개 -->
+    <select id="getBottomCards" resultType="com.ssanai.jumplearn.dto.mainpage.ClassDTO">
+        SELECT *
+        FROM (SELECT tc.id,
+                     tc.file_name,
+                     tc.file_path,
+                     tc.file_ext,
+                     tc.title,
+                     tc.teacher_id,
+                     tc.price,
+                     tc.target,
+                     (SELECT COUNT(*)
+                      FROM tbl_pay AS tp
+                      WHERE tp.class_id = tc.id) AS pay_count
+              FROM tbl_class AS tc
+              WHERE tc.target = '고1'
+              LIMIT 3) AS t1
+        UNION ALL
+        SELECT *
+        FROM (SELECT tc.id,
+                     tc.file_name,
+                     tc.file_path,
+                     tc.file_ext,
+                     tc.title,
+                     tc.teacher_id,
+                     tc.price,
+                     tc.target,
+                     (SELECT COUNT(*)
+                      FROM tbl_pay AS tp
+                      WHERE tp.class_id = tc.id) AS pay_count
+              FROM tbl_class AS tc
+              WHERE tc.target = '고2'
+              LIMIT 3) AS t2
+        UNION ALL
+        SELECT *
+        FROM (SELECT tc.id,
+                     tc.file_name,
+                     tc.file_path,
+                     tc.file_ext,
+                     tc.title,
+                     tc.teacher_id,
+                     tc.price,
+                     tc.target,
+                     (SELECT COUNT(*)
+                      FROM tbl_pay AS tp
+                      WHERE tp.class_id = tc.id) AS pay_count
+              FROM tbl_class AS tc
+              WHERE tc.target = '고3'
+              LIMIT 3) AS t3
+        UNION ALL
+        SELECT *
+        FROM (SELECT tc.id,
+                     tc.file_name,
+                     tc.file_path,
+                     tc.file_ext,
+                     tc.title,
+                     tc.teacher_id,
+                     tc.price,
+                     tc.target,
+                     (SELECT COUNT(*)
+                      FROM tbl_pay AS tp
+                      WHERE tp.class_id = tc.id) AS pay_count
+              FROM tbl_class AS tc
+              WHERE tc.target = 'N수생'
+              LIMIT 3) AS t4;
+    </select>
+    <!-- 비 로그인 시 추천 강의 목록 -->
+    <select id="getRecommendClassWithoutTarget" resultType="com.ssanai.jumplearn.dto.mainpage.ClassDTO">
+        SELECT *
+        FROM (SELECT tc.file_name,
+                     tc.file_path,
+                     tc.file_ext,
+                     tc.title,
+                     tc.introduce,
+                     tc.teacher_id,
+                     tc.price,
+                     tc.target,
+                     tc.id,
+                     (SELECT count(*)
+                      FROM tbl_pay
+                      WHERE class_id = tc.id
+                      GROUP BY class_id) AS 'pay_count'
+              FROM tbl_class AS tc
+              WHERE target = '고1'
+              ORDER BY 'pay_count' DESC
+              LIMIT 1) AS t1
+        UNION ALL
+        SELECT *
+        FROM (SELECT tc.file_name,
+                     tc.file_path,
+                     tc.file_ext,
+                     tc.title,
+                     tc.introduce,
+                     tc.teacher_id,
+                     tc.price,
+                     tc.target,
+                     tc.id,
+                     (SELECT count(*)
+                      FROM tbl_pay
+                      WHERE class_id = tc.id
+                      GROUP BY class_id) AS 'pay_count'
+              FROM tbl_class AS tc
+              WHERE target = '고2'
+              ORDER BY 'pay_count' DESC
+              LIMIT 1) AS t2
+        UNION ALL
+        SELECT *
+        FROM (SELECT tc.file_name,
+                     tc.file_path,
+                     tc.file_ext,
+                     tc.title,
+                     tc.introduce,
+                     tc.teacher_id,
+                     tc.price,
+                     tc.target,
+                     tc.id,
+                     (SELECT count(*)
+                      FROM tbl_pay
+                      WHERE class_id = tc.id
+                      GROUP BY class_id) AS 'pay_count'
+              FROM tbl_class AS tc
+              WHERE target = '고3'
+              ORDER BY 'pay_count' DESC
+              LIMIT 1) AS t3
+        UNION ALL
+        SELECT *
+        FROM (SELECT tc.file_name,
+                     tc.file_path,
+                     tc.file_ext,
+                     tc.title,
+                     tc.introduce,
+                     tc.teacher_id,
+                     tc.price,
+                     tc.target,
+                     tc.id,
+                     (SELECT count(*)
+                      FROM tbl_pay
+                      WHERE class_id = tc.id
+                      GROUP BY class_id) AS 'pay_count'
+              FROM tbl_class AS tc
+              WHERE target = 'N수생'
+              ORDER BY 'pay_count' DESC
+              LIMIT 1) AS t4
+    </select>
+    <select id="getRecommendClassWithTarget" resultType="com.ssanai.jumplearn.dto.mainpage.ClassDTO">
+        SELECT tc.file_name, tc.file_path, tc.file_ext, tc.id,
+               tc.title, tc.introduce, tc.teacher_id, tc.price, tc.target,
+               (
+                   SELECT count(*)
+                   FROM tbl_pay
+                   WHERE class_id = tc.id
+                   GROUP BY class_id
+               ) AS 'pay_count'
+        FROM tbl_class AS tc
+        WHERE target = #{target}
+        ORDER BY 'pay_count' DESC
+        LIMIT 4;
+    </select>
+</mapper>
+ 
