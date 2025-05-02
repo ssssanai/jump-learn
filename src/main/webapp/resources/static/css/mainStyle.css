@@ -201,7 +201,6 @@ ul li {
   width:100%; height:100%;
 }
 .loginBox1 {
-  display: none;
   flex:20%;
   margin: 0 10px;
   background-color: #f3f3f33a;
