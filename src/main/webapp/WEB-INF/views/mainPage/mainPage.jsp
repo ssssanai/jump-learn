@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DongGyu
@@ -79,127 +80,154 @@
 </div>
 <div id="slider-wrapper">
     <div class="inner-wrapper">
-        <input checked type="radio" name="slide" class="control" id="Slide1" />
+        <input checked type="radio" name="slide" class="control" id="Slide1"/>
         <label for="Slide1" id="s1"></label>
-        <input type="radio" name="slide" class="control" id="Slide2" />
+        <input type="radio" name="slide" class="control" id="Slide2"/>
         <label for="Slide2" id="s2"></label>
-        <input type="radio" name="slide" class="control" id="Slide3" />
+        <input type="radio" name="slide" class="control" id="Slide3"/>
         <label for="Slide3" id="s3"></label>
         <div class="overflow-wrapper">
-            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide01.jpg" alt="슬라이드 01" /></a>
-            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide02.jpg" alt="슬라이드 02" /></a>
-            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide03.jpg" alt="슬라이드 03" /></a>
+            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide01.jpg"
+                                           alt="슬라이드 01"/></a>
+            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide02.jpg"
+                                           alt="슬라이드 02"/></a>
+            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide03.jpg"
+                                           alt="슬라이드 03"/></a>
         </div>
     </div>
 </div>
 <div class="main">
-    <div class="buyStudy1">
-        <div class="bsTitle">
-            <h1>orem ipsum</h1>
-        </div>
-        <div class="bsCont">
-            <p>대표적인 강의 이미지를 넣은 후 강의에 대한 소개글입니다.
-                대표적인 강의 이미지를 넣은 후 강의에 대한 소개글입니다.
-                대표적인 강의 이미지를 넣은 후 강의에 대한 소개글입니다.
-                대표적인 강의 이미지를 넣은 후 강의에 대한 소개글입니다.
-            </p>
-        </div>
-        <div class="bsBtn">
-            <a href="#" class="buyLink">구매하기</a>
-            <a href="#" class="review">강의후기</a>
-        </div>
-    </div>
-    <div class="buyStudy2">
-        <img src="../../../resources/static/images/mainPage/slide03.jpg" alt="홍보 이미지"/>
-    </div>
+    <%-- TODO: 슬라이드 처리 --%>
+    <c:forEach var="recClass" items="${recommendList}">
+        <div class="buyStudy1">
 
-    <!-- 비로그인 시 -->
-    <div class="loginBox1">
-        <div class="loginHead">
-            <a href="#">로그인 하기</a>
-        </div>
-        <div class="myPageBtn">
-            <a href="#">마이페이지</a>
-        </div>
-        <div class="loginFoot">
-            <div class="registBtn">
-                <a href="#">회원가입</a>
+            <div class="bsTitle">
+                <h1>${recClass.title}</h1>
             </div>
-            <div class="foundPwd">
-                <a href="#">비밀번호 찾기</a>
+            <div class="bsCont">
+                <p>
+                        ${recClass.introduce}
+                </p>
             </div>
-        </div>
-    </div>
+            <div class="bsBtn">
+                <a href="#" class="buyLink">구매하기</a>
+                <a href="#" class="review">강의후기</a>
+            </div>
 
-    <!-- 로그인 시 -->
-    <div class="loginBox2">
-        <div class="profile">
-            <div class="profileImg">
+        </div>
+        <div class="buyStudy2">
+            <img src="../../../resources/static/images/mainPage/slide03.jpg" alt="홍보 이미지"/>
+                ${recClass.file_name} ${recClass.file_ext}
+        </div>
+    </c:forEach>
 
-            </div>
-            <div class="profileInfo">
-                <div class="infoHead">
-                    <p>OOO님 어서오세요.</p>
+    <c:choose>
+        <c:when test="${loginInfo eq null}">
+            <!-- 비로그인 시 -->
+            <div class="loginBox1">
+                <div class="loginHead">
+                    <a href="member/login">로그인 하기</a>
                 </div>
-                <div class="infobody">
-                    <p>오늘도 공부하는 당신에게 화이팅!</p>
+                    <%--                <div class="myPageBtn">--%>
+                    <%--                    <a href="#">마이페이지</a>--%>
+                    <%--                </div>--%>
+                <div class="loginFoot">
+                    <div class="registBtn">
+                        <a href="member/register">회원가입</a>
+                    </div>
+                    <div class="foundPwd">
+                        <a href="#">비밀번호 찾기</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </c:when>
+        <c:otherwise>
+            <!-- 로그인 시 -->
+            <div class="loginBox2">
+                <div class="profile">
+                    <div class="profileImg">
+                            ${member.file_path} ${member.file_name} ${member.file_ext}
+                    </div>
+                    <div class="profileInfo">
+                        <div class="infoHead">
+                            <p>${member.name}님 어서오세요.</p>
+                        </div>
+                        <div class="infobody">
+                            <p>오늘도 공부하는 당신에게 화이팅!</p>
+                        </div>
+                    </div>
+                        <%-- TODO: 로그아웃 버튼 --%>
+                </div>
+            </div>
+        </c:otherwise>
+    </c:choose>
 </div>
+
+<%-- TODO: 슬라이드 처리 --%>
 <article>
     <div class="gradCard">
-        <div class="gradeImg">
+        <c:forEach var="hs1Class" items="${hs1List}">
+            <div class="gradeImg">
 
-        </div>
-        <div class="gradeCont">
-            <div class="gradeP">
-                <p>고등학교 1학년 강의</p>
             </div>
-            <div class="gradeA">
-                <a href="#">바로가기</a>
+            <div class="gradeCont">
+                    ${hs1Class.title}
+                <div class="gradeP">
+                    <p>고등학교 1학년 강의</p>
+                </div>
+                <div class="gradeA">
+                    <a href="#">바로가기</a>
+                </div>
             </div>
-        </div>
+        </c:forEach>
     </div>
     <div class="gradCard">
-        <div class="gradeImg">
+        <c:forEach var="hs2Class" items="${hs2List}">
+            <div class="gradeImg">
 
-        </div>
-        <div class="gradeCont">
-            <div class="gradeP">
-                <p>고등학교 2학년 강의</p>
             </div>
-            <div class="gradeA">
-                <a href="#">바로가기</a>
+            <div class="gradeCont">
+                    ${hs2Class.title}
+                <div class="gradeP">
+                    <p>고등학교 2학년 강의</p>
+                </div>
+                <div class="gradeA">
+                    <a href="#">바로가기</a>
+                </div>
             </div>
-        </div>
+        </c:forEach>
     </div>
     <div class="gradCard">
-        <div class="gradeImg">
+        <c:forEach var="hs3Class" items="${hs3List}">
+            <div class="gradeImg">
 
-        </div>
-        <div class="gradeCont">
-            <div class="gradeP">
-                <p>고등학교 3학년 강의</p>
             </div>
-            <div class="gradeA">
-                <a href="#">바로가기</a>
+            <div class="gradeCont">
+                    ${hs3Class.title}
+                <div class="gradeP">
+                    <p>고등학교 3학년 강의</p>
+                </div>
+                <div class="gradeA">
+                    <a href="#">바로가기</a>
+                </div>
             </div>
-        </div>
+        </c:forEach>
     </div>
     <div class="gradCard">
-        <div class="gradeImg">
+        <c:forEach var="rptClass" items="${repeaterList}">
+            <div class="gradeImg">
 
-        </div>
-        <div class="gradeCont">
-            <div class="gradeP">
-                <p>N수생 강의</p>
             </div>
-            <div class="gradeA">
-                <a href="#">바로가기</a>
+            <div class="gradeCont">
+                    ${rptClass.title}
+                <div class="gradeP">
+                    <p>N수생 강의</p>
+                </div>
+                <div class="gradeA">
+                    <a href="#">바로가기</a>
+                </div>
             </div>
-        </div>
+        </c:forEach>
     </div>
 </article>
 
