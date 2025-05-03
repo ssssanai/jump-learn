@@ -1,0 +1,42 @@
+package com.ssanai.jumplearn.controller.course;
+
+import com.ssanai.jumplearn.dto.course.SearchDTO;
+import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
+import com.ssanai.jumplearn.service.course.CourseServiceIf;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Log4j2
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/course")
+public class CourseController {
+	private final CourseServiceIf courseService;
+
+	// TODO 1: course list GET (진입시)
+	@GetMapping("/list")
+	public String list(HttpServletRequest req, Model model) {
+		log.info("CourseController GET");
+		List<ClassDTO> courseList = courseService.getClassList();
+		log.info(courseList);
+		model.addAttribute("courseList", courseList);
+		return "course/list";
+	}
+	// TODO 2: course list POST (검색시)
+	@PostMapping("/list")
+	public String list(
+			@ModelAttribute("frm_search") SearchDTO searchDTO,
+			Model model
+	) {
+		log.info(searchDTO.toString());
+		return "course/list";
+	}
+	// TODO 3: course detail GET (진입시)
+}
