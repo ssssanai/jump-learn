@@ -10,7 +10,9 @@ th, td {
 }
 button {
     padding: 5px 10px;
-    color : darkolivegreen;
+    background-color : darkolivegreen;
+    color:whitesmoke;
+    border-radius: 10px;
 }
 
 #list{
@@ -33,5 +35,14 @@ h1 {
 }
 #total{
     margin: 0 auto;
-    width: 80%;
+    width: 50%;
+    margin-top: 20px;
+}
+#search{
+    display: flex;
+    gap: 8px;
+}
+#pages{
+    width: fit-content;
+    margin: 0 auto;
 }

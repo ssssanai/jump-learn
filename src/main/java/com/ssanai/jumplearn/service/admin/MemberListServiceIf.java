@@ -7,4 +7,6 @@ import java.util.List;
 public interface MemberListServiceIf {
     public List<MemberDTO> memberList();
     public int memberTotalCount();
+    public int memberDelete(String id);
+    public int memberChange(String id, int status);
 }

@@ -19,15 +19,27 @@ public class MemberListServiceImpl implements MemberListServiceIf {
     private final MemberListMapper memberListMapper;
 
     @Override
-    public List<MemberDTO> memberList(){
+    public List<MemberDTO> memberList() {
         List<MemberDTO> list;
         list = memberListMapper.memberList();
         return list;
     }
 
     @Override
-    public int memberTotalCount(){
+    public int memberTotalCount() {
         int rs = memberListMapper.memberTotalCount();
+        return rs;
+    }
+
+    @Override
+    public int memberDelete(String id){
+        int rs = memberListMapper.memberDelete(id);
+        return rs;
+    }
+
+    @Override
+    public int memberChange(String id, int status){
+        int rs = memberListMapper.memberChange(id, status);
         return rs;
     }
 }
