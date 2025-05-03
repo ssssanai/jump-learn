@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.course.CourseMapper">
+    <select id="getClassList" resultType="com.ssanai.jumplearn.dto.mainpage.ClassDTO">
+        SELECT id,
+               title,
+               category,
+               teacher_id,
+               target,
+               price,
+               introduce,
+               file_name,
+               file_path,
+               file_ext
+        FROM tbl_class AS tc
+        LIMIT 0, 10
+    </select>
+</mapper>
+ 
