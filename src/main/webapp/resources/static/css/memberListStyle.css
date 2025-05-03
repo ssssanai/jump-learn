@@ -1,0 +1,37 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+button {
+    padding: 5px 10px;
+    color : darkolivegreen;
+}
+
+#list{
+    margin : 0 auto;
+    width: 1000px;
+    height: 800px;
+}
+h1 {
+    text-align: center;
+}
+#AdminInfo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    font-size: 20px;
+}
+#AdminInfo span {
+    margin-left: 40px;
+}
+#total{
+    margin: 0 auto;
+    width: 80%;
+}

@@ -1,0 +1,28 @@
+.gnb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 10px 40px;
+    color: white;
+}
+
+.gnb .logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.gnb .menu a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.gnb .menu a:hover {
+    text-decoration: underline;
+}
+
+.menu {
+    display: flex;
+}
