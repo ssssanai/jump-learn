@@ -1,5 +1,6 @@
 package com.ssanai.jumplearn.service.course;
 
+import com.ssanai.jumplearn.dto.BasketDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.mapper.course.CourseMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,10 @@ public class CourseServiceImpl implements CourseServiceIf{
 	@Override
 	public List<ClassDTO> getClassList() {
 		return courseMapper.getClassList();
+	}
+
+	@Override
+	public List<BasketDTO> getBasketList(String id) {
+		return courseMapper.getBasketList(id);
 	}
 }
