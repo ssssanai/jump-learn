@@ -13,11 +13,11 @@
 </head>
 <body>
 <header class="gnb">
-    <div class="logo">Jump Learn 관리자페이지</div>
+    <div class="logo"> <a href="/admin/memberList">Jump Learn 관리자페이지</a></div>
     <nav class="menu">
-        <a href="#">회원조회</a>
+        <a href="/admin/memberList">회원조회</a>
         <a href="#">관리자조회</a>
-        <a href="#">선생님조회</a>
+        <a href="/admin/teacherList">선생님조회</a>
         <a href="#">강좌조회</a>
         <a href="#">신고조회</a>
         <a href="#">문의조회</a>
