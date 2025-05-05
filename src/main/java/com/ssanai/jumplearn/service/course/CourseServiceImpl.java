@@ -1,6 +1,7 @@
 package com.ssanai.jumplearn.service.course;
 
 import com.ssanai.jumplearn.dto.BasketDTO;
+import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.mapper.course.CourseMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +16,18 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CourseServiceImpl implements CourseServiceIf{
+public class CourseServiceImpl implements CourseServiceIf {
 	private final CourseMapper courseMapper;
 	private final ModelMapper modelMapper;
 
 	@Override
-	public List<ClassDTO> getClassList() {
-		return courseMapper.getClassList();
+	public List<ClassDTO> getClassList(SearchDTO searchDTO) {
+		return courseMapper.getClassList(searchDTO);
+	}
+
+	@Override
+	public int getListTotalCount(SearchDTO searchDTO) {
+		return courseMapper.getListTotalCount(searchDTO);
 	}
 
 	@Override
