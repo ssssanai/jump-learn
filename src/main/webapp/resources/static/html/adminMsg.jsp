@@ -17,5 +17,11 @@
         alert(errorMessage);
     </script>
 </c:if>
+<c:if test="${not empty msg}">
+    <script>
+        var errorMessage = '${msg[0].defaultMessage}';
+        alert(errorMessage);
+    </script>
+</c:if>
 </body>
 </html>

@@ -82,11 +82,11 @@ public class MemberLoginMapperTests {
         List<MemberDTO> list = lMapper.memberList();
         log.info(list.toString());
     }
-    @Test
-    public void testMemberTotalCount(){
-        int rs = lMapper.memberTotalCount();
-        log.info(rs);
-    }
+//    @Test
+//    public void testMemberTotalCount(){
+//        int rs = lMapper.memberTotalCount();
+//        log.info(rs);
+//    }
     @Test
     public void testMemberChage(){
         String id = "admin1";

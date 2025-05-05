@@ -21,15 +21,15 @@
 </div>
 <h1>회원 조회</h1>
 <div id="total">
-  총 회원 : ${totalCount}명
-  <form id="search" action="/admin/searchMember" method="get">
-    <select name="category">
+  총 회원 : ${pageInfo.total_count}명
+  <form id="search" action="/admin/member_search_list" method="get">
+    <select name="search_category">
       <option value="" disabled selected>선택</option>
       <option value="id">아이디</option>
       <option value="name">이름</option>
       <option value="email">상태</option>
     </select>
-    <input type="text" name="keyword" placeholder="검색어를 입력하세요"/>
+    <input type="text" name="search_word" placeholder="검색어를 입력하세요"/>
     <button type="submit">검색</button>
     <button type="button">전체</button>
   </form>
@@ -52,8 +52,8 @@
     <c:when test="${not empty dtoList}">
       <c:forEach var="list" items="${dtoList}" varStatus="loop">
         <tr>
-          <td>${loop.index + 1}</td>
-          <a href="/admin/member?id="${list.id}><td>${list.id}</td></a>
+          <td>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</td>
+          <td><a href="/admin/member?id=${list.id}">${list.id}</a></td>
           <td>${list.name}</td>
           <td>${list.status}</td>
           <td>${list.email}</td>
@@ -72,7 +72,58 @@
   </tbody>
 </table>
 <div id="pages">
-  ${map.paging }페이지영역
+  <ul class="pagination justify-content-center">
+    <li class="page-item <c:if test='${pageInfo.prev_page_flag ne true}'>disabled</c:if>'">
+      <a class="page-link"
+         data-num="
+         <c:choose>
+           <c:when test='${pageInfo.prev_page_flag}'>
+             ${pageInfo.page_block_start - 1}
+           </c:when>
+           <c:otherwise>1</c:otherwise>
+         </c:choose>"
+         href="/admin/member_search_list?"
+         <c:choose>
+           <c:when test='${pageInfo.prev_page_flag}'>
+             ${pageInfo.linkParams}&page_no=${pageInfo.page_block_start - 1}
+           </c:when>
+           <c:otherwise>#</c:otherwise>
+         </c:choose>">
+        Previous
+      </a>
+    </li>
+
+    <c:forEach begin="${pageInfo.page_block_start}" end="${pageInfo.page_block_end}" var="page_num">
+      <li class="page-item <c:if test='${pageInfo.page_no == page_num}'>active</c:if>'">
+        <a class="page-link" data-num="${page_num}"
+           href="<c:choose>
+                 <c:when test='${pageInfo.page_no == page_num}'>#</c:when>
+                 <c:otherwise>/admin/member_search_list?${pageInfo.linkParams}&page_no=${page_num}</c:otherwise>
+              </c:choose>">${page_num}</a>
+      </li>
+    </c:forEach>
+
+    <li class="page-item <c:if test='${pageInfo.next_page_flag ne true}'>disabled</c:if>'">
+      <a class="page-link"
+         data-num="
+         <c:choose>
+           <c:when test='${pageInfo.next_page_flag}'>
+             ${pageInfo.page_block_end + 1}
+           </c:when>
+           <c:otherwise>${pageInfo.page_block_end}</c:otherwise>
+         </c:choose>"
+         href="/admin/member_search_list?"
+         <c:choose>
+           <c:when test='${pageInfo.next_page_flag}'>
+             ${pageInfo.linkParams}&page_no=${pageInfo.page_block_end + 1}
+           </c:when>
+           <c:otherwise>#</c:otherwise>
+         </c:choose>">
+        Next
+      </a>
+    </li>
+  </ul>
+
 </div>
 <script>
   function changeMemberStatus(id) {
