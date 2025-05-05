@@ -10,7 +10,9 @@ th, td {
 }
 button {
     padding: 5px 10px;
-    color : darkolivegreen;
+    background-color : darkolivegreen;
+    color:whitesmoke;
+    border-radius: 10px;
 }
 
 #list{
@@ -33,5 +35,50 @@ h1 {
 }
 #total{
     margin: 0 auto;
-    width: 80%;
+    width: 50%;
+    margin-top: 20px;
+}
+#search{
+    display: flex;
+    gap: 8px;
+}
+#pages{
+    width: fit-content;
+    margin: 0 auto;
+}
+/* 기본 pagination 구조 정리 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+/* 각 페이지 번호 */
+.page-item {
+    margin: 0 5px;
+}
+
+/* 링크 자체는 버튼처럼 보이지 않게 */
+.page-item a.page-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: normal;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+}
+
+/* 현재 페이지 강조 */
+.page-item.active a.page-link {
+    font-weight: bold;
+    color: #000;
+}
+
+/* 비활성화 (prev/next 등) */
+.page-item.disabled a.page-link {
+    color: #aaa;
+    pointer-events: none;
 }
