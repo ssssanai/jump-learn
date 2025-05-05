@@ -27,11 +27,11 @@
       <option value="" disabled selected>선택</option>
       <option value="id">아이디</option>
       <option value="name">이름</option>
-      <option value="email">상태</option>
+      <option value="status">상태</option>
     </select>
     <input type="text" name="search_word" placeholder="검색어를 입력하세요"/>
     <button type="submit">검색</button>
-    <button type="button">전체</button>
+    <a href="/admin/memberList"><button type="button">전체</button></a>
   </form>
 </div>
 <table id="list">
@@ -73,7 +73,7 @@
 </table>
 <div id="pages">
   <ul class="pagination justify-content-center">
-    <li class="page-item <c:if test='${pageInfo.prev_page_flag ne true}'>disabled</c:if>'">
+    <li class="page-item <c:if test="${pageInfo.prev_page_flag eq false}">disabled</c:if>">
       <a class="page-link"
          data-num="
          <c:choose>
@@ -103,7 +103,7 @@
       </li>
     </c:forEach>
 
-    <li class="page-item <c:if test='${pageInfo.next_page_flag ne true}'>disabled</c:if>'">
+    <li class="page-item <c:if test="${pageInfo.next_page_flag eq false}">disabled</c:if>">
       <a class="page-link"
          data-num="
          <c:choose>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.Session;
 import java.util.List;
@@ -26,7 +27,6 @@ import java.util.List;
 @RequestMapping("/admin")
 public class MemberListController {
     private final MemberListServiceIf memberListService;
-    private final AdminListServiceIf adminListService;
 
     @GetMapping("/memberList")
     public String memberList(
@@ -57,50 +57,50 @@ public class MemberListController {
     @GetMapping("/memberDelete")
     public String memberDelete(
             HttpSession session,
-            @RequestParam(name = "id")
-            String id,
-            Model model){
-        AdminDTO loginInfo  = (AdminDTO)session.getAttribute("loginInfo");
+            @RequestParam(name = "id") String id,
+            RedirectAttributes redirectAttributes) {
+
+        AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
         int adminStatus = loginInfo.getStatus();
-        if(adminStatus != 1){
-            model.addAttribute("msg", "삭제 권한이 없습니다.");
+
+        if (adminStatus != 1) {
+            redirectAttributes.addFlashAttribute("msg", "삭제 권한이 없습니다.");
             return "redirect:/admin/memberList";
-        }else {
-            int rs = memberListService.memberDelete(id);
-            if(rs>0) {
-                model.addAttribute("msg", "삭제 성공");
-                return "redirect:/admin/memberList";
-            }else{
-                model.addAttribute("msg", "삭제 실패");
-                return "redirect:/admin/memberList";
-            }
         }
+
+        int rs = memberListService.memberDelete(id);
+        if (rs > 0) {
+            redirectAttributes.addFlashAttribute("msg", "삭제 성공");
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "삭제 실패");
+        }
+
+        return "redirect:/admin/memberList";
     }
 
     @GetMapping("/memberChange")
     public String memberChange(
             HttpSession session,
-            @RequestParam(name = "id")
-            String id,
-            @RequestParam(name = "s")
-            String s,
-            Model model){
-        AdminDTO loginInfo  = (AdminDTO)session.getAttribute("loginInfo");
+            @RequestParam(name = "id") String id,
+            @RequestParam(name = "s") String s,
+            RedirectAttributes redirectAttributes) {
+
+        AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
         int status = Integer.parseInt(s);
         int adminStatus = loginInfo.getStatus();
-        if(adminStatus != 1 && adminStatus != 2){
-            model.addAttribute("msg", "변경 권한이 없습니다.");
+
+        if (adminStatus != 1 && adminStatus != 2) {
+            redirectAttributes.addFlashAttribute("msg", "변경 권한이 없습니다.");
             return "redirect:/admin/memberList";
-        }else{
-            int rs = memberListService.memberChange(id, status);
-            if(rs>0) {
-                model.addAttribute("msg", "변경성공");
-                log.info("변경성공");
-                return "redirect:/admin/memberList";
-            }else{
-                model.addAttribute("msg", "변경 실패");
-                return "redirect:/admin/memberList";
-            }
         }
+
+        int rs = memberListService.memberChange(id, status);
+        if (rs > 0) {
+            redirectAttributes.addFlashAttribute("msg", "변경 성공");
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "변경 실패");
+        }
+        return "redirect:/admin/memberList";
     }
+
 }

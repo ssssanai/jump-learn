@@ -14,13 +14,17 @@
 <c:if test="${not empty errors}">
     <script>
         var errorMessage = '${errors[0].defaultMessage}';
-        alert(errorMessage);
+        if(errorMessage.trim() !== ''){
+            alert(errorMessage);
+        }
     </script>
 </c:if>
 <c:if test="${not empty msg}">
     <script>
-        var errorMessage = '${msg[0].defaultMessage}';
-        alert(errorMessage);
+        let msg = '${msg}';
+        if (msg.trim() !== '') {
+            alert(msg);
+        }
     </script>
 </c:if>
 </body>
