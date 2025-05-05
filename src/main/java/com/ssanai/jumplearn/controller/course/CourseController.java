@@ -1,9 +1,12 @@
 package com.ssanai.jumplearn.controller.course;
 
 import com.ssanai.jumplearn.dto.BasketDTO;
+import com.ssanai.jumplearn.dto.ClassDetailDTO;
 import com.ssanai.jumplearn.dto.MemberDTO;
+import com.ssanai.jumplearn.dto.ReviewDTO;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
+import com.ssanai.jumplearn.service.basket.BasketServiceIf;
 import com.ssanai.jumplearn.service.course.CourseServiceIf;
 import com.ssanai.jumplearn.service.mainpage.MainPageServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
@@ -22,6 +25,7 @@ import java.util.List;
 @RequestMapping("/course")
 public class CourseController {
 	private final CourseServiceIf courseService;
+	private final BasketServiceIf basketService;
 	private final MainPageServiceIf mainPageService;
 
 	@RequestMapping("/list")
@@ -39,7 +43,7 @@ public class CourseController {
 		MemberDTO reqDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
 		MemberDTO memberDTO = mainPageService.getMemberInfo(reqDTO.getId());
 		// 장바구니 목록
-		List<BasketDTO> basketList = courseService.getBasketList(reqDTO.getId());
+		List<BasketDTO> basketList = basketService.getBasketList(reqDTO.getId());
 		log.info(basketList);
 
 		// 강좌 목록
@@ -72,9 +76,16 @@ public class CourseController {
 	}
 
 	// TODO: course detail GET (진입시)
-	@GetMapping("/detail?{id}")
-	public String detail(@PathVariable("id") String id, Model model){
+	@GetMapping("/detail/{id}")
+	public String detail(@PathVariable("id") int id, Model model){
 		log.info(id);
+		ClassDetailDTO classDetailDTO = courseService.getClassDetailById(id);
+		List<ReviewDTO> reviewList = courseService.getReviewListById(id);
+		log.info(classDetailDTO);
+		log.info(reviewList);
+
+		model.addAttribute("classDetailDTO", classDetailDTO);
+		model.addAttribute("reviewList", reviewList);
 		return "course/detail";
 	}
 
