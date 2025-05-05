@@ -1,6 +1,7 @@
 package com.ssanai.jumplearn.mapper;
 
-import com.ssanai.jumplearn.dto.BasketDTO;
+import com.ssanai.jumplearn.dto.ClassDetailDTO;
+import com.ssanai.jumplearn.dto.ReviewDTO;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.mapper.course.CourseMapper;
@@ -106,10 +107,16 @@ public class CourseMapperTest {
 	}
 
 	@Test
-	public void getBasketListTest() {
-		List<BasketDTO> basketList = courseMapper.getBasketList("member002");
-		for (BasketDTO basketVO : basketList) {
-			log.info(basketVO);
+	public void getClassDetailByIdTest() {
+		ClassDetailDTO classDetail = courseMapper.getClassDetailById(27);
+		log.info(classDetail);
+	}
+
+	@Test
+	public void getReviewListByIdTest(){
+		List<ReviewDTO> reviewList = courseMapper.getReviewListById(6);
+		for (ReviewDTO reviewDTO : reviewList) {
+			log.info(reviewDTO);
 		}
 	}
 }

@@ -1,8 +1,11 @@
 package com.ssanai.jumplearn.service.course;
 
 import com.ssanai.jumplearn.dto.BasketDTO;
+import com.ssanai.jumplearn.dto.ClassDetailDTO;
+import com.ssanai.jumplearn.dto.ReviewDTO;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
+import com.ssanai.jumplearn.mapper.basket.BasketMapper;
 import com.ssanai.jumplearn.mapper.course.CourseMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -31,7 +34,12 @@ public class CourseServiceImpl implements CourseServiceIf {
 	}
 
 	@Override
-	public List<BasketDTO> getBasketList(String id) {
-		return courseMapper.getBasketList(id);
+	public ClassDetailDTO getClassDetailById(int id) {
+		return courseMapper.getClassDetailById(id);
+	}
+
+	@Override
+	public List<ReviewDTO> getReviewListById(int id) {
+		return courseMapper.getReviewListById(id);
 	}
 }
