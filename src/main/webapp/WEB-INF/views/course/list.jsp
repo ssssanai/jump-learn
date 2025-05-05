@@ -10,6 +10,8 @@
 <html>
 <head>
     <title>강좌 목록</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
         div {
             border: 1px solid black;
@@ -67,16 +69,16 @@
         <div id="cart">
             <div>장바구니</div>
             <div id="cart_list">
-                <c:set var="total_price" value="0" />
+                <c:set var="total_price" value="0"/>
                 <c:forEach items="${basketList}" var="b">
-                <div>
-                    <span id="cart_course_title">${b.title}</span>
-                    <span id="cart_course_introduce">${b.introduce}</span>
-                    <span id="cart_course_teacher">${b.teacher}</span>
-                    <span id="cart_course_price">${b.price}</span>
-                    <button>X</button>
-                    <c:set var="total_price" value="${total_price + b.price}" />
-                </div>
+                    <div>
+                        <span id="cart_course_title">${b.title}</span>
+                        <span id="cart_course_introduce">${b.introduce}</span>
+                        <span id="cart_course_teacher">${b.teacher}</span>
+                        <span id="cart_course_price">${b.price}</span>
+                        <button>X</button>
+                        <c:set var="total_price" value="${total_price + b.price}"/>
+                    </div>
                 </c:forEach>
             </div>
             <div id="cart_price">
@@ -90,54 +92,103 @@
         </div>
     </aside>
     <div class="course_container">
-        <form name="frm_search" method="post" action="/course/list">
+        <form name="frm_search" id="frm_search" method="get" action="/course/list">
             <select name="search_condition1">
-                <option>제목</option>
-                <option>강사</option>
+                <option value="제목" <c:if test="${searchDTO.search_condition1 == '제목'}">selected</c:if>>제목</option>
+                <option value="강사" <c:if test="${searchDTO.search_condition1 == '강사'}">selected</c:if>>강사</option>
             </select>
-            <input type="text" name="search_word" id="search_word"/>
+            <input type="text" name="search_word" id="search_word" <c:if test="${searchDTO.search_word != null and searchDTO.search_word != ''}">value="${searchDTO.search_word}"</c:if> />
             <input type="submit" name="search_btn" id="search_btn" value="검색"/>
             <select name="search_condition2">
-                <option value="none">선택</option>
-                <option value="고1">고1</option>
-                <option value="고2">고2</option>
-                <option value="고3">고3</option>
-                <option value="N수생">N수생</option>
+                <option value="none" <c:if test="${searchDTO.search_condition2 == 'none'}">selected</c:if>>선택</option>
+                <option value="고1" <c:if test="${searchDTO.search_condition2 == '고1'}">selected</c:if>>고1</option>
+                <option value="고2" <c:if test="${searchDTO.search_condition2 == '고2'}">selected</c:if>>고2</option>
+                <option value="고3" <c:if test="${searchDTO.search_condition2 == '고3'}">selected</c:if>>고3</option>
+                <option value="N수생" <c:if test="${searchDTO.search_condition2 == 'N수생'}">selected</c:if>>N수생</option>
             </select>
             <select name="search_condition3">
-                <option value="none">선택</option>
-                <option value="KOREAN">국어</option>
-                <option value="MATH">수학</option>
-                <option value="ENGLISH">영어</option>
+                <option value="none" <c:if test="${searchDTO.search_condition3 == 'none'}">selected</c:if>>선택</option>
+                <option value="KOREAN" <c:if test="${searchDTO.search_condition3 == 'KOREAN'}">selected</c:if>>국어</option>
+                <option value="MATH" <c:if test="${searchDTO.search_condition3 == 'MATH'}">selected</c:if>>수학</option>
+                <option value="ENGLISH" <c:if test="${searchDTO.search_condition3 == 'ENGLISH'}">selected</c:if>>영어</option>
             </select>
-            <input type="hidden" name="sort_condition" value=""/>
+            <input type="hidden" id="sort_condition" name="sort_condition" value=""/>
         </form>
         <div id="course_list_container">
-            <div class="sort_condition">
+            <div>
                 <span class="sort_condition" id="recently">최신순</span>
                 <span class="sort_condition" id="lower_price">낮은 가격순</span>
                 <span class="sort_condition" id="higher_price">높은 가격순</span>
             </div>
             <div id="course_list">
-                <c:forEach items="${courseList}" var="course">
-                    <div class="course">
-                        <span class="course_img">${course.file_path} ${course.file_name} ${course.file_ext}</span>
-                        <span class="course_title">${course.title}</span>
-                        <span class="course_introduce">${course.introduce}</span>
-                        <span class="course_category">${course.category}</span>
-                        <span class="course_price">${course.price}</span>
-                        <button>찜</button>
-                        <button>장바구니 담기</button>
-                    </div>
-                </c:forEach>
+                <c:choose>
+                    <c:when test="${not empty courseList }">
+                        <c:forEach items="${courseList}" var="course">
+                            <div class="course">
+                                <%-- TODO: 디테일 페이지 링크 걸기 --%>
+                                <span class="course_img">${course.file_path} ${course.file_name} ${course.file_ext}</span>
+                                <span class="course_title">${course.title}</span>
+                                <span class="course_introduce">${course.introduce}</span>
+                                <span class="course_teacher">${course.name}</span>
+                                <span class="course_category">${course.category}</span>
+                                <span class="course_target">${course.target}</span>
+                                <span class="course_price">${course.price}</span>
+                                <button>찜</button>
+                                <button>장바구니 담기</button>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        강좌 없음
+                    </c:otherwise>
+                </c:choose>
             </div>
-            <div id="paging_block"> < << paging block > >></div>
+            <div id="paging_block">
+                <a href="/course/list?page_no=1
+                    &search_condition1=${searchDTO.search_condition1}
+                    &search_word=${searchDTO.search_word}
+                    &search_condition2=${searchDTO.search_condition2}
+                    &search_condition3=${searchDTO.search_condition3}
+                    &sort_condition=${searchDTO.sort_condition}">
+                    첫 페이지
+                </a>
+                <!-- 페이지 번호 -->
+                <c:forEach begin="${startPage}" end="${endPage}" var="p">
+                    <c:choose>
+                        <c:when test="${p == searchDTO.page_no}">
+                            <strong>${p}</strong>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/course/list?page_no=${p}
+                                &search_condition1=${searchDTO.search_condition1}
+                                &search_word=${searchDTO.search_word}
+                                &search_condition2=${searchDTO.search_condition2}
+                                &search_condition3=${searchDTO.search_condition3}
+                                &sort_condition=${searchDTO.sort_condition}">
+                                    ${p}
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <a href="/course/list?page_no=${total_page}
+                    &search_condition1=${searchDTO.search_condition1}
+                    &search_word=${searchDTO.search_word}
+                    &search_condition2=${searchDTO.search_condition2}
+                    &search_condition3=${searchDTO.search_condition3}
+                    &sort_condition=${searchDTO.sort_condition}">
+                    마지막 페이지
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-
+    $('.sort_condition').on('click', function () {
+        $('#sort_condition').val(this.id); // 정렬 조건 값을 클릭한 요소의 id로 설정
+        $('#frm_search').submit();
+    });
 </script>
 </body>
 </html>
