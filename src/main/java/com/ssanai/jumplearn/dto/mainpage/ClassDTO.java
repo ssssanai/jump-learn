@@ -20,7 +20,8 @@ public class ClassDTO {
 	public String category;
 	public String title; // 강좌 제목
 	public String introduce; // 강좌 소개
-	public String teacher_id; // 강사
+	public String teacher_id; // 강사 ID
+	public String name; // 강사 이름
 	public int price; // 가격
 	public String target; // 대상
 	public int pay_count; // 팔린 수
