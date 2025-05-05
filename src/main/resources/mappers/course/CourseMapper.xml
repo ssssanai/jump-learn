@@ -16,5 +16,16 @@
         FROM tbl_class AS tc
         LIMIT 0, 10
     </select>
+
+    <select id="getBasketList" resultType="com.ssanai.jumplearn.dto.BasketDTO" >
+        SELECT tb.id,tb.class_id,tb.member_id,tb.created_at,
+               tc.title,tc.introduce,tc.price,
+               tc.file_path,tc.file_name,tc.file_ext,
+               tt.name
+        from tbl_basket as tb
+                 inner join tbl_class as tc on tb.class_id = tc.id
+                 inner join tbl_teacher as tt on tc.teacher_id = tt.id
+        where member_id = #{id}
+    </select>
 </mapper>
  
