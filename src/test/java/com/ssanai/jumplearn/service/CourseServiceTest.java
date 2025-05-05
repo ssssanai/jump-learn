@@ -1,8 +1,11 @@
 package com.ssanai.jumplearn.service;
 
 import com.ssanai.jumplearn.dto.BasketDTO;
+import com.ssanai.jumplearn.dto.ClassDetailDTO;
+import com.ssanai.jumplearn.dto.ReviewDTO;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
+import com.ssanai.jumplearn.service.basket.BasketServiceIf;
 import com.ssanai.jumplearn.service.course.CourseServiceIf;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -71,12 +74,16 @@ public class CourseServiceTest {
 	}
 
 	@Test
-	public void getBasketListTest() {
-		List<BasketDTO> list = courseService.getBasketList("member001");
-		for (BasketDTO basketDTO : list) {
-			log.info(basketDTO);
-		}
+	public void getClassDetailByIdTest(){
+		ClassDetailDTO classDetailDTO = courseService.getClassDetailById(6);
+		log.info(classDetailDTO);
 	}
 
-
+	@Test
+	public void getReviewListById(){
+		List<ReviewDTO> reviewList = courseService.getReviewListById(6);
+		for (ReviewDTO reviewDTO : reviewList) {
+			log.info(reviewDTO);
+		}
+	}
 }
