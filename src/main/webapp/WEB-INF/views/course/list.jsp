@@ -126,6 +126,7 @@
                         <c:forEach items="${courseList}" var="course">
                             <div class="course">
                                 <%-- TODO: 디테일 페이지 링크 걸기 --%>
+                                <a href="/course/detail/${course.id}">상세보기</a>
                                 <span class="course_img">${course.file_path} ${course.file_name} ${course.file_ext}</span>
                                 <span class="course_title">${course.title}</span>
                                 <span class="course_introduce">${course.introduce}</span>
