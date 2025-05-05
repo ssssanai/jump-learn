@@ -23,7 +23,7 @@
         }
 
         .course_container {
-            width: 100%;
+            width: 70%;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -60,24 +60,28 @@
 <div class="container">
     <aside>
         <div id="member_info">
-            <span id="member_img">img</span>
-            <span id="member_grade">grade</span>
-            <span id="greeting">환영합니다 name 님!</span>
+            <span id="member_img">${member.file_path} ${member.file_name} ${member.file_ext}</span>
+            <span id="member_grade">${member.grade}</span>
+            <span id="greeting">환영합니다 ${member.name} 님!</span>
         </div>
         <div id="cart">
             <div>장바구니</div>
             <div id="cart_list">
+                <c:set var="total_price" value="0" />
+                <c:forEach items="${basketList}" var="b">
                 <div>
-                    <span id="cart_course_title">title</span>
-                    <span id="cart_course_introduce">introduce</span>
-                    <span id="cart_course_teacher">teacher</span>
-                    <span id="cart_course_price">price</span>
+                    <span id="cart_course_title">${b.title}</span>
+                    <span id="cart_course_introduce">${b.introduce}</span>
+                    <span id="cart_course_teacher">${b.teacher}</span>
+                    <span id="cart_course_price">${b.price}</span>
                     <button>X</button>
+                    <c:set var="total_price" value="${total_price + b.price}" />
                 </div>
+                </c:forEach>
             </div>
             <div id="cart_price">
                 <span>총 합계금액</span>
-                <span id="total_price">total_price 원</span>
+                <span id="total_price">${total_price} 원</span>
             </div>
             <div>
                 <button id="purchase_btn">구매하기</button>
