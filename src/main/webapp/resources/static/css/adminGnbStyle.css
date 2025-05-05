@@ -11,7 +11,10 @@
     font-size: 20px;
     font-weight: bold;
 }
-
+.gnb .logo a {
+    text-decoration: none;
+    color: white;
+}
 .gnb .menu a {
     margin-left: 20px;
     color: white;
