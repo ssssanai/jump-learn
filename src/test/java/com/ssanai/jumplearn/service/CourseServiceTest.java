@@ -3,7 +3,6 @@ package com.ssanai.jumplearn.service;
 import com.ssanai.jumplearn.dto.BasketDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.service.course.CourseServiceIf;
-import com.ssanai.jumplearn.vo.BasketVO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
