@@ -1,6 +1,7 @@
 package com.ssanai.jumplearn.service;
 
 import com.ssanai.jumplearn.dto.BasketDTO;
+import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.service.course.CourseServiceIf;
 import lombok.extern.log4j.Log4j2;
@@ -21,10 +22,52 @@ public class CourseServiceTest {
 
 	@Test
 	public void getClassListTest() {
-		List<ClassDTO> list = courseService.getClassList();
+		List<ClassDTO> list = courseService.getClassList(new SearchDTO());
 		for (ClassDTO classDTO : list) {
 			log.info(classDTO);
 		}
+	}
+
+	@Test
+	public void getSearchListTest() {
+		List<ClassDTO> classList = courseService.getClassList(SearchDTO.builder().search_word("강사").search_condition1("강사").search_condition2("고2").build());
+		for (ClassDTO classDTO : classList) {
+			log.info(classDTO);
+		}
+	}
+
+	@Test
+	public void getSearchListTest2() {
+		List<ClassDTO> classList = courseService.getClassList(
+				new SearchDTO(1, 10, 0, 10,
+						"", "제목",  "none","none"
+						, "lower_price")
+		);
+		for (ClassDTO classDTO : classList) {
+			log.info(classDTO);
+		}
+	}
+	@Test
+	public void getListTotalCountTest1() {
+		int total_count = courseService.getListTotalCount(
+				SearchDTO.builder()
+						.search_condition1("제목")
+						.sort_condition("lower_price")
+						.build()
+		);
+		log.info(total_count);
+	}
+
+	@Test
+	public void getListTotalCountTest2() {
+		int total_count = courseService.getListTotalCount(
+				SearchDTO.builder()
+						.search_word("강사")
+						.search_condition1("강사")
+						.search_condition2("고2")
+						.build()
+		);
+		log.info(total_count);
 	}
 
 	@Test
