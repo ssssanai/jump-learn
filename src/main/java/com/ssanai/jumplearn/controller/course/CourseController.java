@@ -6,6 +6,7 @@ import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.service.course.CourseServiceIf;
 import com.ssanai.jumplearn.service.mainpage.MainPageServiceIf;
+import com.ssanai.jumplearn.util.BbsPage;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,37 +24,58 @@ public class CourseController {
 	private final CourseServiceIf courseService;
 	private final MainPageServiceIf mainPageService;
 
-	// 최초 진입 시
-	@GetMapping("/list")
-	public String list(HttpServletRequest req, Model model) {
-		log.info("CourseController GET");
+	@RequestMapping("/list")
+	public String list(HttpServletRequest req,
+					   @ModelAttribute("frm_search") SearchDTO searchDTO, // 자동 바인딩
+					   Model model){
+		log.info(searchDTO.toString());
+		searchDTO.setSearch_word( searchDTO.getSearch_word() != null ? searchDTO.getSearch_word().trim() : "");
+		searchDTO.setSearch_condition1(searchDTO.getSearch_condition1() != null ? searchDTO.getSearch_condition1().trim(): "");
+		searchDTO.setSearch_condition2(searchDTO.getSearch_condition2() != null ? searchDTO.getSearch_condition2().trim(): "");
+		searchDTO.setSearch_condition3(searchDTO.getSearch_condition3() != null ? searchDTO.getSearch_condition3().trim(): "");
+		searchDTO.setSort_condition(searchDTO.getSort_condition() != null ? searchDTO.getSort_condition().trim(): "");
+
 		// 학생 정보
 		MemberDTO reqDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
 		MemberDTO memberDTO = mainPageService.getMemberInfo(reqDTO.getId());
-		log.info(memberDTO);
 		// 장바구니 목록
 		List<BasketDTO> basketList = courseService.getBasketList(reqDTO.getId());
 		log.info(basketList);
 
 		// 강좌 목록
-		List<ClassDTO> courseList = courseService.getClassList();
+		List<ClassDTO> courseList = courseService.getClassList(searchDTO);
 		log.info(courseList);
 
+		// 검색된 강좌 개수
+		int total_count = courseService.getListTotalCount(searchDTO);
+		log.info(total_count);
+
+		int page_no = searchDTO.getPage_no();
+
+		int total_page = (int) Math.ceil(total_count / (double) searchDTO.getPage_size());
+		total_page = Math.max(total_page, 1);
+		int startPage = (int) Math.floor((page_no - 1) / (double) searchDTO.getPage_size()) * searchDTO.getPage_size() + 1;
+		int endPage = (int) Math.ceil(page_no / (double) searchDTO.getPage_size()) * searchDTO.getPage_size();
+		endPage = Math.min(endPage, total_page);
+
+		model.addAttribute("total_count", total_count);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+
+		model.addAttribute("total_count", total_count);
 		model.addAttribute("member", memberDTO);
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("courseList", courseList);
+		model.addAttribute("searchDTO", searchDTO);
 		return "course/list";
 	}
 
-	// TODO 2: course list POST (검색시)
-	@PostMapping("/list")
-	public String list(
-			@ModelAttribute("frm_search") SearchDTO searchDTO,
-			Model model
-	) {
-		log.info(searchDTO.toString());
-		return "course/list";
+	// TODO: course detail GET (진입시)
+	@GetMapping("/detail?{id}")
+	public String detail(@PathVariable("id") String id, Model model){
+		log.info(id);
+		return "course/detail";
 	}
-	// TODO 3: course detail GET (진입시)
 
 }
