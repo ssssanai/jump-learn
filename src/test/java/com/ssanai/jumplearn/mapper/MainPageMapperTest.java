@@ -1,7 +1,7 @@
-package com.ssanai.jumplearn.mapper.mainpage;
+package com.ssanai.jumplearn.mapper;
 
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
-import com.ssanai.jumplearn.vo.MemberVO;
+import com.ssanai.jumplearn.mapper.mainpage.MainPageMapper;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

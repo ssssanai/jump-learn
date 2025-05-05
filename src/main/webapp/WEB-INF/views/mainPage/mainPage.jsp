@@ -105,9 +105,7 @@
                 <h1>${recClass.title}</h1>
             </div>
             <div class="bsCont">
-                <p>
-                        ${recClass.introduce}
-                </p>
+                <p>${recClass.introduce}</p>
             </div>
             <div class="bsBtn">
                 <a href="#" class="buyLink">구매하기</a>

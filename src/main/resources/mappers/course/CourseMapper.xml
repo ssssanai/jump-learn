@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.course.CourseMapper">
+    <select id="getListTotalCount">
+        select count(*) as total_count
+        FROM tbl_class AS tc
+                 inner join tbl_teacher as tt on tc.teacher_id = tt.id
+        <include refid="whereCondition" />
+    </select>
+
+    <select id="getClassList" resultType="com.ssanai.jumplearn.dto.mainpage.ClassDTO">
+        SELECT tc.id,tc.title,tc.category,
+        tc.target,tc.price,tc.introduce,
+        tc.file_name,tc.file_path,tc.file_ext, tt.name
+        FROM tbl_class AS tc
+        inner join tbl_teacher as tt on tc.teacher_id = tt.id
+        <include refid="whereCondition" />
+        order by
+        <choose>
+            <when test="sort_condition eq 'recently'">
+                tc.created_at DESC
+            </when>
+            <when test="sort_condition eq 'lower_price'">
+                tc.price ASC
+            </when>
+            <when test="sort_condition eq 'higher_price'">
+                tc.price DESC
+            </when>
+            <otherwise>
+                tc.id DESC
+            </otherwise>
+        </choose>
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="getBasketList" resultType="com.ssanai.jumplearn.dto.BasketDTO" >
+        SELECT tb.id,tb.class_id,tb.member_id,tb.created_at,
+               tc.title,tc.introduce,tc.price,
+               tc.file_path,tc.file_name,tc.file_ext,
+               tt.name
+        from tbl_basket as tb
+                 inner join tbl_class as tc on tb.class_id = tc.id
+                 inner join tbl_teacher as tt on tc.teacher_id = tt.id
+        where member_id = #{id}
+    </select>
+
+    <sql id="whereCondition">
+        <where>
+            <if test="search_word != null and search_word != '' and search_word != 'null'">
+                <choose>
+                    <when test="search_condition1 eq '제목'">
+                        tc.title like concat('%', #{search_word}, '%')
+                    </when>
+                    <when test="search_condition1 eq '강사'">
+                        tt.name like concat('%', #{search_word}, '%')
+                    </when>
+                </choose>
+            </if>
+            <if test="search_condition2 != null and search_condition2 != 'none' and search_condition2 != ''">
+                and tc.target = #{search_condition2}
+            </if>
+            <if test="search_condition3 != null and search_condition3 != 'none' and search_condition3 != ''">
+                and tc.category = #{search_condition3}
+            </if>
+        </where>
+    </sql>
+</mapper>
+ 
