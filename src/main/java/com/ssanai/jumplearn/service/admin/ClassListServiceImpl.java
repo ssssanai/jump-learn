@@ -31,7 +31,7 @@ public class ClassListServiceImpl implements ClassListServiceIf {
 
     @Override
     public int classCreate(ClassDetailDTO classDTO) {
-        return 0;
+        return classListXmlMapper.classCreate(classDTO);
     }
 
     @Override
