@@ -14,7 +14,7 @@ public class TeacherVO {
     private String id; //선생님 아이디
     private String password; //선생님 비밀번호
     private String name; //선생님 이름
-    private Date birthday; //선생님 생일
+    private Date birth; //선생님 생일
     private String email; //선생님 이메일
     private String gender; //성별 남자 M/ 여자 F 명시해야함
     private LocalDateTime signup_date; //선생님 가입 날짜

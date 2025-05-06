@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssanai.jumplearn.mapper.admin.ClassListMapper">
+    <sql id="whereCondition">
+        <!--검색은 선생님ID, 강좌 제목, 강좌 타겟 층(고1,고2,고3, N수), 카테고리 -->
+        <where>
+            <if test="search_category != null ">
+                <if test="search_category == 'teacher_id'.toString()">
+                    teacher_id like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'class_title'.toString()">
+                    title like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'class_target'.toString()">
+                    target like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'class_category'.toString()">
+                    category like concat('%', #{search_word}, '%')
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="classTotalCount">
+        select count(*) AS total_count
+        from tbl_class
+        <include refid="whereCondition"></include>
+    </select>
+    <insert id="classCreate">
+        INSERT INTO tbl_class(`category`, `teacher_id`, `target`,`price`,`introduce`, `file_name`,`file_path`,`file_size`,`file_ext`, `title`)
+        VALUES(#{class_category},#{class_teacher_id}, #{class_target}, #{class_price}, #{class_introduce},#{class_file_name},#{class_file_path},
+                #{class_file_size},#{class_file_ext},"#{class_title}")
+    </insert>
+    <update id="classUpdate">
+        UPDATE tbl_class
+        <set>
+            <if test="class_title != null">title = #{class_title},</if>
+            <if test="class_category != null">category = #{class_category},</if>
+            <if test="class_target != null">target = #{class_target},</if>
+            <if test="class_price != 0">price = #{class_price},</if>
+            <if test="class_introduce != null">introduce = #{class_introduce},</if>
+            <if test="class_file_path != null">file_path = #{class_file_path},</if>
+            <if test="class_file_name != null">file_name = #{class_file_name},</if>
+            <if test="class_file_ext != null">file_ext = #{class_file_ext},</if>
+            <if test="class_teacher_id != null">teacher_id = #{class_teacher_id},</if>
+        </set>
+        WHERE id = #{class_id}
+    </update>
+    <select id="searchList">
+        select
+        id AS class_id,
+        title AS class_title,
+        teacher_id AS class_teacher_id,
+        category AS class_category,
+        target AS class_target,
+        price AS class_price
+        from tbl_class
+        <include refid="whereCondition"></include>
+        order by id desc
+        limit #{page_skip_count}, #{page_size}
+    </select>
+</mapper>
+    

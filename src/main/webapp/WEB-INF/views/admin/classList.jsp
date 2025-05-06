@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
-  Date: 2025-05-05
-  Time: 오후 5:04
+  Date: 2025-05-06
+  Time: 오후 5:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <html>
 <head>
     <link href="../../../resources/static/css/admin/memberListStyle.css" rel="stylesheet" type="text/css">
-    <title>선생님 조회</title>
+    <title>강좌 조회</title>
 </head>
 <body>
 <%@ include file="../../../resources/static/html/adminGnb.jsp" %>
@@ -19,33 +19,33 @@
     <span>${loginInfo.status == 1 ? '슈퍼관리자' : (loginInfo.status == 2 ? '중간 관리자' : (loginInfo.status == 3 ? '말단 관리자' : ''))}</span>
     <span>${loginInfo.name}</span>
 </div>
-<h1>선생님 조회</h1>
+<h1>강좌 조회</h1>
 <div id="total">
-    총 선생님 : ${pageInfo.total_count}명
-    <form id="search" action="/admin/teacher_search_list" method="get">
+    총 강좌 : ${pageInfo.total_count} 개
+    <form id="search" action="/admin/class_search_list" method="get">
         <select name="search_category">
             <option value="" disabled selected>선택</option>
-            <option value="id">아이디</option>
-            <option value="name">이름</option>
-            <option value="status">상태</option>
+            <option value="category">과목</option>
+            <option value="class_title">강좌 이름</option>
+            <option value="teacher_id">담당 선생님</option>
+            <option value="class_target">학년</option>
         </select>
         <input type="text" name="search_word" placeholder="검색어를 입력하세요"/>
         <button type="submit">검색</button>
-        <a href="/admin/teacherList"><button type="button">전체</button></a>
-        <a href="/admin/teacher_create"><button type="button">추가</button></a>
+        <a href="/admin/classList"><button type="button">전체</button></a>
+        <a href="/admin/class_create"><button type="button">추가</button></a>
     </form>
 </div>
 <table id="list">
     <thead>
     <tr>
         <th>순서</th>
-        <th>아이디</th>
-        <th>이름</th>
-        <th>상태</th>
-        <th>이메일</th>
-        <th>성별</th>
-        <th>상태변경</th>
-        <th>삭제</th>
+        <th>강좌 아이디</th>
+        <th>강좌  제목</th>
+        <th>선생님 아이디</th>
+        <th>과목</th>
+        <th>담당 학년</th>
+        <th>가격</th>
     </tr>
     </thead>
     <tbody>
@@ -54,19 +54,18 @@
             <c:forEach var="list" items="${dtoList}" varStatus="loop">
                 <tr>
                     <td>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</td>
-                    <td><a href="/admin/member?id=${list.id}">${list.id}</a></td>
-                    <td>${list.name}</td>
-                    <td>${list.status}</td>
-                    <td>${list.email}</td>
-                    <td>${list.gender}</td>
-                    <td><button onclick="changeTeacherStatus('${list.id}')">변경</button></td>
-                    <td><a href="/admin/teacherDelete?id=${list.id}"><button>삭제</button></a></td>
+                    <td><a href="/admin/member?id=${list.class_id}">${list.class_id}</a></td>
+                    <td>${list.class_title}</td>
+                    <td>${list.class_teacher_id}</td>
+                    <td>${list.class_category}</td>
+                    <td>${list.class_target}</td>
+                    <td>${list.class_price}</td>
                 </tr>
             </c:forEach>
         </c:when>
         <c:otherwise>
             <tr>
-                <td colspan="8">선생님 정보가 없습니다.</td>
+                <td colspan="8">강좌 정보가 없습니다.</td>
             </tr>
         </c:otherwise>
     </c:choose>
@@ -126,20 +125,5 @@
     </ul>
 
 </div>
-<script>
-    function changeTeacherStatus(id) {
-        const status = prompt("변경하고자 하는 상태 값을 입력하세요(1: 활성 2:제지 3:장기 미변경 4:유예)");
-
-        if (status !== null && status.trim() !== "") {
-            const pattern = /^[1-4]+$/; // 숫자만 허용
-
-            if (pattern.test(status)) {
-                window.location.href = "/admin/teacherChange?id=" + encodeURIComponent(id) + "&s=" + encodeURIComponent(status);
-            } else {
-                alert("1~4까지의 숫자만 입력할 수 있습니다.");
-            }
-        }
-    }
-</script>
 </body>
 </html>
