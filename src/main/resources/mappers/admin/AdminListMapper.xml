@@ -30,12 +30,12 @@
         order by status ASC, signup_date desc
         limit #{page_skip_count}, #{page_size}
     </select>
-    <delete id="adminDeletes">
+    <delete id="adminDelete">
         delete from tbl_admin
         where id = #{id}
     </delete>
     <update id="adminChange">
-        update from tbl_admin
+        update tbl_admin
         set status = #{status}
         where id = #{id}
     </update>

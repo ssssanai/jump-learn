@@ -75,7 +75,8 @@ public class TeacherListController {
             @RequestParam(name = "id")String id
     ){
         AdminDTO dto = (AdminDTO)session.getAttribute("loginInfo");
-        if(dto==null || dto.getStatus() != 2){
+        log.info(dto.getStatus());
+        if(dto==null || dto.getStatus() != 1){
             redirectAttributes.addFlashAttribute("msg","삭제 권한이 없습니다.");
             return "redirect:/admin/teacherList";
         }else {
