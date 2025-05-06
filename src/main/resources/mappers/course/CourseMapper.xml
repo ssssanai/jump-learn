@@ -48,16 +48,29 @@
             ) AS 'total_video_count'
         FROM tbl_class AS tc
                  INNER JOIN tbl_teacher AS tt ON tc.teacher_id = tt.id
-                 INNER JOIN tbl_class_video AS tcv ON tc.id = tcv.class_id
         WHERE tc.id = #{id};
     </select>
 
     <select id="getReviewListById" resultType="com.ssanai.jumplearn.dto.ReviewDTO">
         SELECT
-            tc.id AS 'class_id', te.member_id AS 'member_id', te.review AS 'review', te.feedback_score AS 'feedback_score'
-        FROM tbl_class AS tc
-            INNER JOIN tbl_enrollments AS te ON tc.id = te.class_id
-        WHERE tc.id = #{id}
+            class_id, member_id , review, feedback_score
+        FROM tbl_enrollments
+        WHERE id = #{id}
+    </select>
+
+    <select id="getReviewRate">
+        SELECT avg(feedback_score)
+        FROM tbl_enrollments
+        WHERE id = #{id}
+    </select>
+
+    <select id="getClassVideoList" resultType="com.ssanai.jumplearn.dto.ClassVideoDTO">
+        SELECT
+            id, class_id, video_order, video_path, video_url,
+            video_name, video_size, video_extension,
+            title, content, created_at, updated_at
+        FROM tbl_class_video
+        WHERE class_id = #{id};
     </select>
 
     <sql id="whereCondition">

@@ -2,6 +2,7 @@ package com.ssanai.jumplearn.service.course;
 
 import com.ssanai.jumplearn.dto.BasketDTO;
 import com.ssanai.jumplearn.dto.ClassDetailDTO;
+import com.ssanai.jumplearn.dto.ClassVideoDTO;
 import com.ssanai.jumplearn.dto.ReviewDTO;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
@@ -39,7 +40,17 @@ public class CourseServiceImpl implements CourseServiceIf {
 	}
 
 	@Override
+	public List<ClassVideoDTO> getClassVideoList(int id) {
+		return courseMapper.getClassVideoList(id);
+	}
+
+	@Override
 	public List<ReviewDTO> getReviewListById(int id) {
 		return courseMapper.getReviewListById(id);
+	}
+
+	@Override
+	public double getReviewRate(int id) {
+		return courseMapper.getReviewRate(id);
 	}
 }
