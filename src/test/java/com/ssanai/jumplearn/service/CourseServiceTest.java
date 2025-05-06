@@ -2,6 +2,7 @@ package com.ssanai.jumplearn.service;
 
 import com.ssanai.jumplearn.dto.BasketDTO;
 import com.ssanai.jumplearn.dto.ClassDetailDTO;
+import com.ssanai.jumplearn.dto.ClassVideoDTO;
 import com.ssanai.jumplearn.dto.ReviewDTO;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
@@ -86,4 +87,18 @@ public class CourseServiceTest {
 			log.info(reviewDTO);
 		}
 	}
+
+	@Test
+	public void getClassVideoList(){
+		List<ClassVideoDTO> classVideoList = courseService.getClassVideoList(6);
+		for (ClassVideoDTO classVideoDTO : classVideoList) {
+			log.info(classVideoDTO);
+		}
+	}
+	@Test
+	public void getReviewRateTest(){
+		double rate = courseService.getReviewRate(6);
+		log.info(rate);
+	}
+
 }
