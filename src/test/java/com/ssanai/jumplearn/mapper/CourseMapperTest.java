@@ -1,6 +1,7 @@
 package com.ssanai.jumplearn.mapper;
 
 import com.ssanai.jumplearn.dto.ClassDetailDTO;
+import com.ssanai.jumplearn.dto.ClassVideoDTO;
 import com.ssanai.jumplearn.dto.ReviewDTO;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
@@ -118,5 +119,19 @@ public class CourseMapperTest {
 		for (ReviewDTO reviewDTO : reviewList) {
 			log.info(reviewDTO);
 		}
+	}
+
+	@Test
+	public void getClassVideoListTest(){
+		List<ClassVideoDTO> classVideoList = courseMapper.getClassVideoList(6);
+		for (ClassVideoDTO classVideoDTO : classVideoList) {
+			log.info(classVideoDTO);
+		}
+	}
+
+	@Test
+	public void getReviewRateTest(){
+		double rate = courseMapper.getReviewRate(6);
+		log.info(rate);
 	}
 }

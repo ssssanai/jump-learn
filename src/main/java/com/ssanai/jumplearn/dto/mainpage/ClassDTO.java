@@ -12,19 +12,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class ClassDTO {
-	public String file_name;
-	public String file_path;
-	public String file_ext;
-	public long file_size;
-	public int id; // 강좌 id
-	public String category;
-	public String title; // 강좌 제목
-	public String introduce; // 강좌 소개
-	public String teacher_id; // 강사 ID
-	public String name; // 강사 이름
-	public int price; // 가격
-	public String target; // 대상
-	public int pay_count; // 팔린 수
-	public LocalDateTime created_at;
-	public String notice;
+	private String file_name;
+	private String file_path;
+	private String file_ext;
+	private long file_size;
+	private int id; // 강좌 id
+	private String category;
+	private String title; // 강좌 제목
+	private String introduce; // 강좌 소개
+	private String teacher_id; // 강사 ID
+	private String name; // 강사 이름
+	private int price; // 가격
+	private String target; // 대상
+	private int pay_count; // 팔린 수
+	private LocalDateTime created_at;
+	private String notice;
 }

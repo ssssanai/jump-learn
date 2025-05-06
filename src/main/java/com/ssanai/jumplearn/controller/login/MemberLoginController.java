@@ -151,4 +151,10 @@ public class MemberLoginController {
         System.out.println("Generated auth code: " + code);
         return "success:" + code;
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/main";
+    }
 }

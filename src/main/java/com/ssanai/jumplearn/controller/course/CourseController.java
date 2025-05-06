@@ -1,9 +1,6 @@
 package com.ssanai.jumplearn.controller.course;
 
-import com.ssanai.jumplearn.dto.BasketDTO;
-import com.ssanai.jumplearn.dto.ClassDetailDTO;
-import com.ssanai.jumplearn.dto.MemberDTO;
-import com.ssanai.jumplearn.dto.ReviewDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.service.basket.BasketServiceIf;
@@ -81,11 +78,19 @@ public class CourseController {
 		log.info(id);
 		ClassDetailDTO classDetailDTO = courseService.getClassDetailById(id);
 		List<ReviewDTO> reviewList = courseService.getReviewListById(id);
+		List<ClassVideoDTO> videoList = courseService.getClassVideoList(id);
+		double rate = courseService.getReviewRate(id);
+
 		log.info(classDetailDTO);
 		log.info(reviewList);
 
+		log.info(videoList);
+		log.info(rate);
+
 		model.addAttribute("classDetailDTO", classDetailDTO);
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("videoList", videoList);
+		model.addAttribute("reviewRate", rate);
 		return "course/detail";
 	}
 
