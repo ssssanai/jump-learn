@@ -1,12 +1,13 @@
-package com.ssanai.jumplearn.mapper.admin;
+package com.ssanai.jumplearn.service.admin;
 
 import com.ssanai.jumplearn.dto.PageRequestDTO;
+import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.dto.ReportDTO;
 
 import java.util.List;
 
-public interface ReportListMapper {
-    public List<ReportDTO> searchList(PageRequestDTO requestDTO);
+public interface ReportListServiceIf {
+    public PageResponseDTO<ReportDTO> searchList(PageRequestDTO requestDTO);
     public int reportTotalCount(PageRequestDTO requestDTO);
     public int reportDelete(ReportDTO reportDTO);
     public int reportResolution(ReportDTO reportDTO);

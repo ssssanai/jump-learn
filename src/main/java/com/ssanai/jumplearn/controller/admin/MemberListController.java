@@ -61,20 +61,17 @@ public class MemberListController {
             RedirectAttributes redirectAttributes) {
 
         AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
-        int adminStatus = loginInfo.getStatus();
-
-        if (adminStatus != 1) {
+        if (loginInfo == null || loginInfo.getStatus() != 1)  {
             redirectAttributes.addFlashAttribute("msg", "삭제 권한이 없습니다.");
             return "redirect:/admin/memberList";
+        }else {
+            int rs = memberListService.memberDelete(id);
+            if (rs > 0) {
+                redirectAttributes.addFlashAttribute("msg", "삭제 성공");
+            } else {
+                redirectAttributes.addFlashAttribute("msg", "삭제 실패");
+            }
         }
-
-        int rs = memberListService.memberDelete(id);
-        if (rs > 0) {
-            redirectAttributes.addFlashAttribute("msg", "삭제 성공");
-        } else {
-            redirectAttributes.addFlashAttribute("msg", "삭제 실패");
-        }
-
         return "redirect:/admin/memberList";
     }
 

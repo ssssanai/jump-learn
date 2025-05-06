@@ -16,7 +16,7 @@
                 <if test="search_category == 'class_target'.toString()">
                     target like concat('%', #{search_word}, '%')
                 </if>
-                <if test="search_category == 'class_category'.toString()">
+                <if test="search_category == 'category'.toString()">
                     category like concat('%', #{search_word}, '%')
                 </if>
             </if>
@@ -30,7 +30,7 @@
     <insert id="classCreate">
         INSERT INTO tbl_class(`category`, `teacher_id`, `target`,`price`,`introduce`, `file_name`,`file_path`,`file_size`,`file_ext`, `title`)
         VALUES(#{class_category},#{class_teacher_id}, #{class_target}, #{class_price}, #{class_introduce},#{class_file_name},#{class_file_path},
-                #{class_file_size},#{class_file_ext},"#{class_title}")
+                #{class_file_size},#{class_file_ext},#{class_title})
     </insert>
     <update id="classUpdate">
         UPDATE tbl_class
