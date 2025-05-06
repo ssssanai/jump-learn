@@ -20,6 +20,8 @@ public class ClassDetailDTO {
 	private String class_file_path;
 	private String class_file_name;
 	private String class_file_ext;
+	//fiLe_size추가
+	private long class_file_size;
 	//선생님 아이디 없길래 추가
 	private String class_teacher_id;
 
