@@ -1,7 +1,10 @@
 package com.ssanai.jumplearn.mapper.login;
 
 import com.ssanai.jumplearn.dto.AdminDTO;
+import com.ssanai.jumplearn.dto.ClassDetailDTO;
 import com.ssanai.jumplearn.dto.MemberDTO;
+import com.ssanai.jumplearn.dto.PageRequestDTO;
+import com.ssanai.jumplearn.mapper.admin.ClassListMapper;
 import com.ssanai.jumplearn.mapper.admin.MemberListMapper;
 import com.ssanai.jumplearn.util.CommonDateUtil;
 import com.ssanai.jumplearn.vo.AdminVO;
@@ -30,6 +33,8 @@ public class MemberLoginMapperTests {
     private AdminLoginMapper aMapper;
     @Autowired(required = false)
     private MemberListMapper lMapper;
+    @Autowired(required = false)
+    private ClassListMapper cMapper;
     private CommonDateUtil dUtil;
 
 
@@ -101,5 +106,10 @@ public class MemberLoginMapperTests {
         assertTrue(rs > 0);
     }
 
-
+    @Test
+    public void testClassList(){
+        PageRequestDTO requestDTO = new PageRequestDTO();
+        List<ClassDetailDTO> result = cMapper.searchList(requestDTO);
+        log.info(result.toString());
+    }
 }

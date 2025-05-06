@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <link href="../../../resources/static/css/memberListStyle.css" rel="stylesheet" type="text/css">
+  <link href="../../../resources/static/css/admin/memberListStyle.css" rel="stylesheet" type="text/css">
     <title>회원 조회</title>
 </head>
 <body>

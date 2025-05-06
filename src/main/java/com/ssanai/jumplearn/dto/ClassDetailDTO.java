@@ -20,6 +20,8 @@ public class ClassDetailDTO {
 	private String class_file_path;
 	private String class_file_name;
 	private String class_file_ext;
+	//선생님 아이디 없길래 추가
+	private String class_teacher_id;
 
 	// 강사 정보
 	private String teacher_name;
@@ -32,4 +34,5 @@ public class ClassDetailDTO {
 
 	// 동영상 개수
 	private int total_video_count;
+
 }
