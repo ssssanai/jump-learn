@@ -2,6 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssanai.jumplearn.mapper.BbsMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="search_category != null ">
+                <if test="search_category == 'title'.toString()">
+                    title like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'content'.toString()">
+                    content like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'admin_id'.toString()">
+                    userId like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'created_at'">
+                    <![CDATA[
+                    created_at BETWEEN #{search_date_from} AND #{search_date_to}
+                    ]]>
+                </if>
+
+            </if>
+        </where>
+    </sql>
+
+    <select id="getTotalCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) as total_count
+        FROM tbl_edu
+        <include refid="whereCondition"></include>
+    </select>
+
+    <select id="listAll">
+        SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
+        FROM tbl_edu
+        <include refid="whereCondition"></include>
+        ORDER BY id DESC
+        Limit #{page_skip_count} , #{page_size}
+        <!--TODO Order by 추후 추가 필요 -->
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="com.ssanai.jumplearn.vo.BbsDefaultVO">
+        SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
+        FROM tbl_edu
+        WHERE `id` = #{id}
+    </select>
 
     <insert id="insert" >
         INSERT INTO tbl_edu (
@@ -10,21 +52,6 @@
             #{admin_id}, #{title}, #{content}, NOW(), NOW()
         );
     </insert>
-
-    <select id="listAll">
-        SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
-        FROM tbl_edu
-        WHERE 1=1
-        ORDER BY id DESC
-    </select>
-
-    <select id="list">
-        SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
-        FROM tbl_edu
-        WHERE 1=1
-        ORDER BY id DESC
-        LIMIT 0,10
-    </select>
 
     <update id="update">
         UPDATE tbl_edu
@@ -38,10 +65,11 @@
         WHERE `id` = #{id}
     </delete>
 
-    <select id="selectOne" parameterType="int" resultType="com.ssanai.jumplearn.vo.BbsDefaultVO">
+    <select id="searchList">
         SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
         FROM tbl_edu
-        WHERE `id` = #{id}
+        <include refid="whereCondition"></include>
     </select>
+
 
 </mapper>

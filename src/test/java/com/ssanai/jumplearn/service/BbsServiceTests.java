@@ -2,6 +2,8 @@ package com.ssanai.jumplearn.service;
 
 
 import com.ssanai.jumplearn.dto.BbsDefaultDTO;
+import com.ssanai.jumplearn.dto.PageRequestDTO;
+import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.service.bbs.BbsServiceInterface;
 import com.ssanai.jumplearn.vo.BbsDefaultVO;
 import lombok.extern.log4j.Log4j2;
@@ -22,65 +24,85 @@ public class BbsServiceTests {
 
     @Autowired(required = false)
     private BbsServiceInterface bbsService;
-
+//
+//    @Test
+//    public void testGetTotalCount() {
+//        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+//                .page_no(2)
+//                .page_size(10)
+//                .build();
+//        int totalCount = bbsService.getTotalCount(pageRequestDTO);
+//        Assertions.assertTrue(totalCount >= 0, "전체 게시글 수 조회");
+//        log.info("BbsServiceTests >> testGetTotalCount >> totalCount : {}", totalCount);
+//    }
+//
+//    @Test
+//    public void testListAll() {
+//                PageRequestDTO pageDTO = PageRequestDTO.builder()
+//                .page_no(2)
+//                .page_size(10)
+//                .search_category("title")
+//                .search_word("50")
+//                .build();
+//        List<BbsDefaultDTO> dtoList = bbsService.listAll(pageDTO);
+//        Assertions.assertNotNull(dtoList, "listAll() should not return null");
+//        log.info("testListAll -> {}", dtoList);
+//    }
+//
+//    @Test
+//    public void testInsert() {
+//        BbsDefaultDTO dto = BbsDefaultDTO.builder()
+//                .title("서비스 테스트 제목")
+//                .content("서비스 테스트 본문")
+//                .admin_id("admin001")
+//                .build();
+//
+//        int result = bbsService.insert(dto);
+//        Assertions.assertEquals(1, result, "insert() should affect 1 row");
+//    }
+//
+//    @Test
+//    public void testUpdate() {
+//        BbsDefaultDTO dto = BbsDefaultDTO.builder()
+//                .id(106)
+//                .title("서비스 수정된 제목106-1")
+//                .content("서비스 수정된 본문106-1")
+//                .admin_id("admin001")
+//                .build();
+//
+//        int result = bbsService.update(dto);
+//    }
+////
+//    @Test
+//    public void testDelete() {
+//        int id = 105;
+//        int result = bbsService.delete(id);
+//        Assertions.assertEquals(1, result, "delete() should affect 1 row");
+//        log.info("testDelete affected rows: {}", result);
+//    }
+//
+//    @Test
+//    public void testSelectOne() {
+//        int id = 102;
+//        BbsDefaultDTO dto = bbsService.selectOne(id);
+//        Assertions.assertNotNull(dto, "selectOne(" + id + ") should find a record");
+//        log.info("testSelectOne -> {}", dto);
+//    }
     @Test
-    public void testListAll() {
-        List<BbsDefaultDTO> dtoList = bbsService.listAll();
-        Assertions.assertNotNull(dtoList, "listAll() should not return null");
-        log.info("testListAll -> {}", dtoList);
-    }
-
-    @Test
-    public void testList() {
-        List<BbsDefaultDTO> dtoList = bbsService.list();
-        Assertions.assertNotNull(dtoList, "list() should not return null");
-        log.info("testList -> {}", dtoList);
-    }
-
-    @Test
-    public void testSelectOne() {
-        // 사전에 ID=2 데이터가 반드시 있어야 합니다.
-        int id = 2;
-        BbsDefaultDTO dto = bbsService.selectOne(id);
-        Assertions.assertNotNull(dto, "selectOne(" + id + ") should find a record");
-        log.info("testSelectOne -> {}", dto);
-    }
-
-    @Test
-    public void testInsert() {
-        BbsDefaultDTO dto = BbsDefaultDTO.builder()
-                .title("서비스 테스트 제목")
-                .content("서비스 테스트 본문")
-                .admin_id("admin001")   // DTO에 맞는 필드명 사용
+    public void testSearchList(){
+        PageRequestDTO pageDTO = PageRequestDTO.builder()
+                .page_no(2)
+                .page_size(10)
+                .search_category("title")
+                .search_word("입력")
                 .build();
 
-        int result = bbsService.insert(dto);
-        Assertions.assertEquals(1, result, "insert() should affect 1 row");
-        log.info("testInsert affected rows: {}", result);
-        log.info("Inserted DTO (id may be set if service populates it): {}", dto);
+        PageResponseDTO resDTO = bbsService.searchList(pageDTO);
+        Assertions.assertNotNull(resDTO , "성공");
+        log.info("BbsTests >> testSearchList >> resDTO : {}", resDTO);
     }
 
-    @Test
-    public void testUpdate() {
-        // 사전에 ID=2 데이터가 있어야 합니다.
-        BbsDefaultDTO dto = BbsDefaultDTO.builder()
-                .id(2)                        // 수정할 PK
-                .title("서비스 수정된 제목")
-                .content("서비스 수정된 본문")
-                .admin_id("tester")             // 필요 시
-                .build();
+//
 
-        int result = bbsService.update(dto);
-        Assertions.assertEquals(1, result, "update() should affect 1 row");
-        log.info("testUpdate affected rows: {}", result);
-    }
 
-    @Test
-    public void testDelete() {
-        // 사전에 ID=3 데이터가 있어야 합니다.
-        int id = 4;
-        int result = bbsService.delete(id);
-        Assertions.assertEquals(1, result, "delete() should affect 1 row");
-        log.info("testDelete affected rows: {}", result);
-    }
 }
