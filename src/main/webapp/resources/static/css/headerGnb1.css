@@ -1,0 +1,146 @@
+@charset "utf-8";
+* {
+    margin:0; padding:0;
+    box-sizing: border-box;
+    font-family: 'KakaoSmallSans-Bold';
+}
+a {
+    display:block;
+    text-decoration: none;
+    color:#222222;
+}
+ul li {
+    list-style-type:none;
+}
+
+@font-face {
+    font-family: 'KakaoSmallSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoSmallSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width:80%;
+    gap:15px;
+}
+.logo {
+    float: left;
+    flex:16%;
+    height:90px;
+}
+.logo > img {
+    width:100%; height:120px;
+}
+.logo1 {
+    float: left;
+    flex:6%;
+    height:80px;
+}
+.mainmenu {
+    display: flex;
+    align-self: end;
+    justify-content: flex-end;
+    flex-direction: row;
+    float: left;
+    gap:30px;
+    color:#000;
+    flex:84%;
+    height:45px;
+    text-align: center;
+    line-height:43px;
+}
+.mainmenu > li {
+    float:left;
+    width:120px;
+    transition: all 0.5;
+}
+.mainmenu > li > a {
+    width:120px;
+}
+.mainmenu > li:hover  {
+    border-bottom: 2px solid #2240c4;
+}
+.submenu {
+    width:100%;
+    margin-top: 2px;
+}
+.submenu > li {
+    position:relative;
+    width:100%;
+    height:0px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+.submenu > li > a {
+    width:100%;
+    height:40px;
+    font-size:14px;
+    border-left: 2px solid #2240c4;
+    border-right: 2px solid #2240c4;
+    background-color: #fff;
+    z-index: 200;
+}
+.lsMenu {
+    border-radius: 0 0 8px 8px;
+    border-bottom: 2px solid #2240c4;
+}
+.submenu > li > a:hover {
+    font-weight:bold;
+    background-color: #e6e6e6;
+}
+
+.mainmenu > li:hover .submenu > li {
+    height:40px;
+}
+
+
+@media (max-width: 1150px) {
+    .header  {
+        width:90%;
+        flex-direction: row;
+    }
+    .header > a {
+        align-self: end;
+    }
+    .logo > img {
+        width:100%;
+    }
+}
+
+@media (max-width: 800px) {
+    .header  {
+        width:90%;
+        flex-direction: column;
+    }
+    .mainmenu  {
+        width:100%;
+        flex-direction: column;
+        margin-bottom: 20px;
+        gap:0;
+    }
+    .mainmenu > li {
+        width:100%;
+    }
+    .mainmenu > li > a {
+        width:100%;
+        text-align: center;
+    }
+    .lsMenu {
+        border-radius: 0 0 0 0;
+        border:none;
+    }
+    .mainmenu > li:hover {
+        background-color: #a2b3ff;
+    }
+    .submenu > li > a {
+        border:none;
+        z-index: 300;
+    }
+    .logo > img {
+        width:100%;
+        height:200px;
+    }
+}
