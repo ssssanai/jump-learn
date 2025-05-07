@@ -1,0 +1,24 @@
+
+table#list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table#list th, table#list td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+table#list th {
+    background-color: whitesmoke;
+    font-weight: bold;
+}
+
+table#list img {
+    width: 110px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
