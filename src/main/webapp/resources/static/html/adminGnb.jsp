@@ -20,7 +20,7 @@
         <a href="/admin/teacherList">선생님조회</a>
         <a href="/admin/classList">강좌조회</a>
         <a href="/admin/reportList">신고조회</a>
-        <a href="/admin/requiredList">문의조회</a>
+        <a href="/admin/inquiryList">문의조회</a>
         <a href="/admin/saleList">매출조회</a>
     </nav>
 </header>
