@@ -1,6 +1,8 @@
 package com.ssanai.jumplearn.service.bbs;
 
 import com.ssanai.jumplearn.dto.BbsDefaultDTO;
+import com.ssanai.jumplearn.dto.PageRequestDTO;
+import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.mapper.BbsMapper;
 import com.ssanai.jumplearn.vo.BbsDefaultVO;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +11,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Log4j2
@@ -21,13 +25,19 @@ public class BbsServiceImpl implements BbsServiceInterface {
     private final ModelMapper modelMapper;
 
 
-    public  List<BbsDefaultDTO> listAll(){
-        return null;
-    };
+    @Override
+    public int getTotalCount(PageRequestDTO requestDTO) {
+        return bbsMapper.getTotalCount(requestDTO);
+    }
 
     @Override
-    public List<BbsDefaultDTO> list(){
-        return null;
+    public  List<BbsDefaultDTO> listAll(PageRequestDTO pageDTO){
+        List<BbsDefaultVO> bbsVOList = bbsMapper.listAll(pageDTO);
+        List<BbsDefaultDTO> bbsDTOList =  bbsVOList.stream().map(
+                vo->modelMapper.map(vo, BbsDefaultDTO.class)
+        ).collect(Collectors.toList());
+        return bbsDTOList;
+
     };
 
     @Override
@@ -40,16 +50,41 @@ public class BbsServiceImpl implements BbsServiceInterface {
 
     @Override
     public int update(BbsDefaultDTO dto){
-        return 0;
+        BbsDefaultVO vo = modelMapper.map(dto,BbsDefaultVO.class);
+        int result = bbsMapper.update(vo);
+        return result;
     };
 
     @Override
     public int delete(int id){
-        return 0;
+        int result = bbsMapper.delete(id);
+        return result;
     };
 
     @Override
     public BbsDefaultDTO selectOne( int id){
-        return null;
+        BbsDefaultVO vo = bbsMapper.selectOne(id);
+        BbsDefaultDTO dto = (vo != null ? modelMapper.map(vo,BbsDefaultDTO.class) :null);
+        return dto;
     };
+
+    @Override
+    public PageResponseDTO<BbsDefaultDTO> searchList(PageRequestDTO pageDTO){
+        int totalCount = bbsMapper.getTotalCount(pageDTO);
+        List<BbsDefaultVO> voList = bbsMapper.searchList(pageDTO);
+        List<BbsDefaultDTO> bbsDefaultDTOList = voList.stream().map(
+                vo->modelMapper.map(vo, BbsDefaultDTO.class)
+        ).collect(Collectors.toList());
+
+        PageResponseDTO<BbsDefaultDTO> pageResponseDTO =
+                PageResponseDTO
+                        .<BbsDefaultDTO>withAll()
+                        .reqDTO(pageDTO)
+                        .dtoList(bbsDefaultDTOList)
+                        .total_count(totalCount)
+                        .build();
+        return pageResponseDTO;
+    }
+
+
 }
