@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.course.CourseMapper">
+    <select id="getListTotalCount">
+        select count(*) as total_count
+        FROM tbl_class AS tc
+                 inner join tbl_teacher as tt on tc.teacher_id = tt.id
+        <include refid="whereCondition" />
+    </select>
+
+    <select id="getClassList" resultType="com.ssanai.jumplearn.dto.mainpage.ClassDTO">
+        SELECT tc.id,tc.title,tc.category,
+        tc.target,tc.price,tc.introduce,
+        tc.file_name,tc.file_path,tc.file_ext, tt.name
+        FROM tbl_class AS tc
+        inner join tbl_teacher as tt on tc.teacher_id = tt.id
+        <include refid="whereCondition" />
+        order by
+        <choose>
+            <when test="sort_condition eq 'recently'">
+                tc.created_at DESC
+            </when>
+            <when test="sort_condition eq 'lower_price'">
+                tc.price ASC
+            </when>
+            <when test="sort_condition eq 'higher_price'">
+                tc.price DESC
+            </when>
+            <otherwise>
+                tc.id DESC
+            </otherwise>
+        </choose>
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="getClassDetailById" resultType="com.ssanai.jumplearn.dto.ClassDetailDTO">
+        SELECT DISTINCT
+            tc.id AS 'class_id', tc.title AS 'class_title', tc.category AS 'class_category',
+            tc.target AS 'class_target', tc.price AS 'class_price', tc.introduce AS 'class_introduce',
+            tc.file_path AS 'class_file_path', tc.file_name AS 'class_file_name', tc.file_ext AS 'class_file_ext',
+            tt.name AS 'teacher_name', tt.introduce1 AS 'teacher_introduce1', tt.introduce2 AS 'teacher_introduce2', tt.introduce3 AS 'teacher_introduce3',
+            tt.file_path AS 'teacher_file_path', tt.file_name AS 'teacher_file_name', tt.file_ext AS 'teacher_file_ext',
+            (
+                SELECT count(*)
+                FROM tbl_class_video AS tcv2
+                WHERE tc.id = tcv2.class_id
+            ) AS 'total_video_count'
+        FROM tbl_class AS tc
+                 INNER JOIN tbl_teacher AS tt ON tc.teacher_id = tt.id
+        WHERE tc.id = #{id};
+    </select>
+
+    <select id="getReviewListById" resultType="com.ssanai.jumplearn.dto.ReviewDTO">
+        SELECT
+            class_id, member_id , review, feedback_score
+        FROM tbl_enrollments
+        WHERE id = #{id}
+    </select>
+
+    <select id="getReviewRate">
+        SELECT avg(feedback_score)
+        FROM tbl_enrollments
+        WHERE id = #{id}
+    </select>
+
+    <select id="getClassVideoList" resultType="com.ssanai.jumplearn.dto.ClassVideoDTO">
+        SELECT
+            id, class_id, video_order, video_path, video_url,
+            video_name, video_size, video_extension,
+            title, content, created_at, updated_at
+        FROM tbl_class_video
+        WHERE class_id = #{id};
+    </select>
+
+    <sql id="whereCondition">
+        <where>
+            <if test="search_word != null and search_word != '' and search_word != 'null'">
+                <choose>
+                    <when test="search_condition1 eq '제목'">
+                        tc.title like concat('%', #{search_word}, '%')
+                    </when>
+                    <when test="search_condition1 eq '강사'">
+                        tt.name like concat('%', #{search_word}, '%')
+                    </when>
+                </choose>
+            </if>
+            <if test="search_condition2 != null and search_condition2 != 'none' and search_condition2 != ''">
+                and tc.target = #{search_condition2}
+            </if>
+            <if test="search_condition3 != null and search_condition3 != 'none' and search_condition3 != ''">
+                and tc.category = #{search_condition3}
+            </if>
+        </where>
+    </sql>
+</mapper>
+ 

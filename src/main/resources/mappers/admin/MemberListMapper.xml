@@ -3,12 +3,80 @@
         "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssanai.jumplearn.mapper.admin.MemberListMapper">
+    <!--멤버 리스트-->
     <select id="memberList">
         select id,name,status,email,gender
         from tbl_member
     </select>
+    <!-- 멤버 총 회원수-->
     <select id="memberTotalCount">
-        select count(*) from tbl_member
+            select count(*) AS total_count
+            from tbl_member
+            <include refid="whereCondition"></include>
+    </select>
+    <!-- 멤버 삭제-->
+    <delete id="memberDelete">
+        delete from tbl_member
+        where id = #{id}
+    </delete>
+    <!-- 멤버 상태 변경-->
+    <update id="memberChange">
+        UPDATE tbl_member
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
+    <sql id="whereCondition">
+        <where>
+            <if test="search_category != null ">
+                <if test="search_category == 'id'.toString()">
+                    id like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'name'.toString()">
+                    name like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'status'.toString()">
+                    status like concat('%', #{search_word}, '%')
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="searchList">
+        select id,name,status,email,gender
+        from tbl_member
+        <include refid="whereCondition"></include>
+        order by signup_date DESC
+        limit #{page_skip_count}, #{page_size}
+    </select>
+    <select id="memberDetail">
+        SELECT m.id AS id,
+        (SELECT COUNT(*) FROM tbl_post WHERE member_id = m.id) AS totalCountBbs,
+        (SELECT COUNT(*) FROM tbl_enrollments WHERE member_id = m.id) AS totalCountEnrollments,
+        m.`name` AS `name`, m.birth AS birth, m.email AS email, m.gender AS gender, m.grade AS grade,
+        m.signup_date AS signup_date, m.last_pwd_date AS last_pwd_date, m.`status`, m.file_name AS file_name,
+        m.file_path AS file_path, m.file_ext, m.file_size AS file_size, m.status_changed_at AS status_changed_date
+        FROM tbl_member AS m
+        WHERE m.id = #{id};
+    </select>
+    <select id="memberCreatePost">
+        SELECT
+        p.id AS post_id,p.title AS post_title, p.created_at AS created_at,
+        p.view_count AS view_count, p.member_id AS id, p.updated_at AS updated_at,
+        COUNT(l.post_id) AS like_count
+        FROM
+        tbl_post p
+        LEFT JOIN
+        tbl_post_like l ON p.id = l.post_id
+        WHERE
+        p.member_id = #{id}
+        GROUP BY
+        p.id
+    </select>
+    <select id="memberEnrollments">
+        SELECT id AS enrollments_id, member_id AS id, pay_id, class_id,
+        progress, review, midterm_score,final_score, final_grade_score,
+        feedback_score
+        FROM tbl_enrollments
+        WHERE member_id = #{id}
     </select>
 </mapper>
     

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.inquiry.InquiryMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="search_category != null ">
+                <if test="search_category == 'member_id'.toString()">
+                    ti.member_id like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'title'.toString()">
+                    ti.title like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'content'.toString()">
+                    ti.content like concat('%', #{search_word}, '%')
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="getInquiryTotalCount" >
+        select count(*)
+        FROM tbl_inquiry AS ti
+                 LEFT JOIN tbl_inquiry_resolution AS tir ON ti.id = tir.inquiry_id
+        <include refid="whereCondition" />
+    </select>
+
+    <select id="getInquiryList" resultType="com.ssanai.jumplearn.dto.InquiryDTO">
+        SELECT
+            ti.id AS 'inquiry_id', ti.member_id AS 'member_id', ti.title AS 'inquiry_title',
+            ti.content AS 'inquiry_content', ti.created_at AS 'inquiry_created_at', ti.updated_at AS 'inquiry_updated_at',
+            ti.inquiry_status AS 'inquiry_status', ti.visibility AS 'visibility',
+            tir.id AS 'resolution_id', tir.admin_id AS 'admin_id', tir.content AS 'resolution_content',
+            tir.created_at AS 'resolution_created_at', tir.updated_at AS 'resolution_updated_at'
+        FROM tbl_inquiry AS ti
+                 LEFT JOIN tbl_inquiry_resolution AS tir ON ti.id = tir.inquiry_id
+        <include refid="whereCondition" />
+        order by ti.id desc
+        LIMIT #{page_skip_count}, #{page_size};
+    </select>
+
+    <select id="getInquiry" resultType="com.ssanai.jumplearn.dto.InquiryDTO">
+        SELECT
+            ti.id AS 'inquiry_id', ti.member_id AS 'member_id', ti.title AS 'inquiry_title',
+            ti.content AS 'inquiry_content', ti.created_at AS 'inquiry_created_at', ti.updated_at AS 'inquiry_updated_at',
+            ti.inquiry_status AS 'inquiry_status', ti.visibility AS 'visibility',
+            tir.id AS 'resolution_id', tir.admin_id AS 'admin_id', tir.content AS 'resolution_content',
+            tir.created_at AS 'resolution_created_at', tir.updated_at AS 'resolution_updated_at',
+            tic.id AS 'comment_id', tic.commenter AS 'inquiry_commenter', tic.comment_id_type AS 'inquiry_comment_id_type',
+            tic.content AS 'inquiry_comment_content', tic.created_at AS 'inquiry_comment_created_at', tic.updated_at AS 'inquiry_comment_updated_at'
+        FROM tbl_inquiry AS ti
+                 LEFT JOIN tbl_inquiry_resolution AS tir ON ti.id = tir.inquiry_id
+                 LEFT JOIN tbl_inquiry_comment AS tic ON ti.id = tic.inquiry_id
+        where ti.id = #{id};
+    </select>
+
+    <insert id="register">
+        INSERT INTO tbl_inquiry(member_id, title, content, visibility) VALUES
+        (#{member_id}, #{title}, #{content}, #{visibility});
+    </insert>
+
+    <update id="modify">
+        update tbl_inquiry
+        set
+            title = #{title},
+            content = #{content},
+            visibility = #{visibility},
+            updated_at = NOW()
+        where id = #{id};
+    </update>
+
+    <delete id="delete">
+        delete from tbl_inquiry
+        where id = #{id}
+    </delete>
+</mapper>
+ 

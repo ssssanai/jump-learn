@@ -39,7 +39,7 @@ public class AdminLoginController {
             log.info(aDto.toString());
             return "redirect:/admin/memberList";
         }else {
-            rAttribute.addFlashAttribute("errors", "로그인 실패");
+            rAttribute.addFlashAttribute("msg", "로그인 실패");
             return "redirect:/admin/login";
         }
     }

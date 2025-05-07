@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssanai.jumplearn.mapper.admin.AdminListMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="search_category != null ">
+                <if test="search_category == 'id'.toString()">
+                    id like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'name'.toString()">
+                    name like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'status'.toString()">
+                    status like concat('%', #{search_word}, '%')
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="adminTotalCount">
+        select count(*) AS total_count
+        from tbl_admin
+        <include refid="whereCondition"></include>
+    </select>
+    <select id="searchList">
+        select id, name, status, email
+        from tbl_admin
+        <include refid="whereCondition"></include>
+        order by status ASC, signup_date desc
+        limit #{page_skip_count}, #{page_size}
+    </select>
+    <delete id="adminDelete">
+        delete from tbl_admin
+        where id = #{id}
+    </delete>
+    <update id="adminChange">
+        update tbl_admin
+        set status = #{status}
+        where id = #{id}
+    </update>
+    <insert id="adminCreate">
+        INSERT INTO tbl_admin(`id`,`password`, `name`,`email`, `status`)
+        values(#{id},SHA2(#{password},256),#{name},#{email}, #{status})
+    </insert>
+</mapper>
+    

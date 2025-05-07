@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssanai.jumplearn.mapper.admin.TeacherListMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="search_category != null ">
+                <if test="search_category == 'id'.toString()">
+                    id like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'name'.toString()">
+                    name like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'status'.toString()">
+                    status like concat('%', #{search_word}, '%')
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="teacherTotalCount">
+        select count(*) AS total_count
+        from tbl_teacher
+        <include refid="whereCondition"></include>
+    </select>
+    <select id="searchList">
+        select id,name,status,email,gender
+        from tbl_teacher
+        <include refid="whereCondition"></include>
+        order by signup_date DESC
+        limit #{page_skip_count}, #{page_size}
+    </select>
+    <insert id="teacherCreate">
+        INSERT INTO tbl_teacher(`id`,`password`, `name`, `birth`, `email`, `gender`, `status`)
+        VALUES(#{id}, SHA2(#{password},256), #{name}, #{birth}, #{email}, #{gender}, #{status})
+    </insert>
+    <update id="teacherChange">
+        UPDATE tbl_teacher
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
+    <delete id="teacherDelete">
+        delete from tbl_teacher
+        where id = #{id}
+    </delete>
+</mapper>
+    

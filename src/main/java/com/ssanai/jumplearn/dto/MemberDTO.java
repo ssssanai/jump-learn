@@ -48,4 +48,6 @@ public class MemberDTO {
     @Pattern(regexp = "^(?i)(jpg|jpeg|png)$", message = "이미지 확장자는 jpg, jpeg, png, gif만 허용됩니다.")
     private String file_ext;
     private LocalDateTime status_changed_date;
+    private int totalCountBbs; //총 게시물 작성 개수
+    private int totalCountEnrollments; //총 구매 강좌 개수
 }

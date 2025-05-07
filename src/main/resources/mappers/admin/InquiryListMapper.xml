@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssanai.jumplearn.mapper.admin.InquiryListMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="search_category != null ">
+                <if test="search_category == 'member_id'.toString()">
+                    member_id like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'inquiry_status'.toString()">
+                    inquiry_status like concat('%', #{search_word}, '%')
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="searchList">
+        select id as inquiry_id,member_id, title as inquiry_title, created_at as inquiry_created_at, inquiry_status
+        from tbl_inquiry
+        <include refid="whereCondition"></include>
+        order by id desc
+        limit #{page_skip_count}, #{page_size}
+    </select>
+    <select id="inquiryTotalCount">
+        select count(*) from tbl_inquiry
+        <include refid="whereCondition"></include>
+    </select>
+    <delete id="inquiryDelete">
+        delete from tbl_inquiry
+        where id = #{inquiry_id}
+    </delete>
+    <insert id="inquiryResolution">
+        insert into tbl_inquiry_resolution(inquiry_id,admin_id,content)
+        values(#{inquiry_id}, #{admin_id}, #{content}
+    </insert>
+</mapper>
+    

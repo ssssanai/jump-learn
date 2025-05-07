@@ -4,7 +4,6 @@ import com.ssanai.jumplearn.dto.MemberDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.mapper.mainpage.MainPageMapper;
 import com.ssanai.jumplearn.vo.MemberVO;
-import com.sun.tools.javac.Main;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;

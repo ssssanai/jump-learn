@@ -4,7 +4,6 @@ import com.ssanai.jumplearn.dto.MemberDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface MainPageServiceIf {
 	public MemberDTO getMemberInfo(String id); // 멤버 정보 가져오기

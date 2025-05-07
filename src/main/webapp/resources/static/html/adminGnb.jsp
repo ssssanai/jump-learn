@@ -8,20 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="../../../resources/static/css/adminGnbStyle.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../resources/static/css/admin/adminGnbStyle.css" rel="stylesheet" type="text/css"/>
     <title>Title</title>
 </head>
 <body>
 <header class="gnb">
-    <div class="logo">Jump Learn 관리자페이지</div>
+    <div class="logo"> <a href="/admin/memberList">Jump Learn 관리자페이지</a></div>
     <nav class="menu">
-        <a href="#">회원조회</a>
-        <a href="#">관리자조회</a>
-        <a href="#">선생님조회</a>
-        <a href="#">강좌조회</a>
-        <a href="#">신고조회</a>
-        <a href="#">문의조회</a>
-        <a href="#">매출조회</a>
+        <a href="/admin/memberList">회원조회</a>
+        <a href="/admin/adminList">관리자조회</a>
+        <a href="/admin/teacherList">선생님조회</a>
+        <a href="/admin/classList">강좌조회</a>
+        <a href="/admin/reportList">신고조회</a>
+        <a href="/admin/inquiryList">문의조회</a>
+        <a href="/admin/saleList">매출조회</a>
     </nav>
 </header>
 </body>
