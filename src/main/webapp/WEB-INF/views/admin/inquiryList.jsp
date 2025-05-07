@@ -51,7 +51,7 @@
             <c:forEach var="list" items="${dtoList}" varStatus="loop">
                 <tr>
                     <td>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</td>
-                    <td><a href="/admin/report?id=${list.inquiry_id}">${list.inquiry_id}</a></td>
+                    <td><a href="/admin/inquiry?id=${list.inquiry_id}">${list.inquiry_id}</a></td>
                     <td>${list.member_id}</td>
                     <td>${list.inquiry_title}</td>
                     <td>${list.inquiry_created_at}</td>
@@ -78,7 +78,7 @@
            </c:when>
            <c:otherwise>1</c:otherwise>
          </c:choose>"
-               href="/admin/report_search_list?"
+               href="/admin/inquiry_search_list?"
             <c:choose>
                     <c:when test='${pageInfo.prev_page_flag}'>
                         ${pageInfo.linkParams}&page_no=${pageInfo.page_block_start - 1}
@@ -94,7 +94,7 @@
                 <a class="page-link" data-num="${page_num}"
                    href="<c:choose>
                  <c:when test='${pageInfo.page_no == page_num}'>#</c:when>
-                 <c:otherwise>/admin/report_search_list?${pageInfo.linkParams}&page_no=${page_num}</c:otherwise>
+                 <c:otherwise>/admin/inquiry_search_list?${pageInfo.linkParams}&page_no=${page_num}</c:otherwise>
               </c:choose>">${page_num}</a>
             </li>
         </c:forEach>
@@ -108,7 +108,7 @@
            </c:when>
            <c:otherwise>${pageInfo.page_block_end}</c:otherwise>
          </c:choose>"
-               href="/admin/report_search_list?"
+               href="/admin/inquiry_search_list?"
             <c:choose>
                     <c:when test='${pageInfo.next_page_flag}'>
                         ${pageInfo.linkParams}&page_no=${pageInfo.page_block_end + 1}

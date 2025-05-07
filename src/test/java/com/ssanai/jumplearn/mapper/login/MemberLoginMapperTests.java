@@ -112,4 +112,11 @@ public class MemberLoginMapperTests {
         List<ClassDetailDTO> result = cMapper.searchList(requestDTO);
         log.info(result.toString());
     }
+
+    @Test
+    public void testMemberDetail(){
+        String id = "member001";
+        MemberDTO dto = lMapper.memberDetail(id);
+        log.info(dto.toString());
+    }
 }

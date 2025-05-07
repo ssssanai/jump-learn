@@ -1,8 +1,6 @@
 package com.ssanai.jumplearn.service.admin;
 
-import com.ssanai.jumplearn.dto.MemberDTO;
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.PageResponseDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.mapper.admin.MemberListMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -62,6 +60,26 @@ public class MemberListServiceImpl implements MemberListServiceIf {
                         .total_count(totalCount)
                         .build();
         return responseDTO;
+    }
+
+    @Override
+    public MemberDTO memberDetail(String id) {
+        log.info(id);
+        MemberDTO dto = memberListMapper.memberDetail(id);
+        return dto;
+    }
+
+    @Override
+    public List<MemberCreateDetail> memberCreatePost(String id) {
+        List<MemberCreateDetail> memberList = memberListMapper.memberCreatePost(id);
+
+        return memberList;
+    }
+
+    @Override
+    public List<EnrollmentsDTO> memberEnrollments(String id) {
+        List<EnrollmentsDTO> dtoList = memberListMapper.memberEnrollments(id);
+        return dtoList;
     }
 
     @Override
