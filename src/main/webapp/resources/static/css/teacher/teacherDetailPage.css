@@ -1,0 +1,444 @@
+@charset "utf-8";
+* {
+    margin:0; padding:0;
+    box-sizing: border-box;
+    font-family: 'KakaoSmallSans-Bold';
+}
+a {
+    display:block;
+    text-decoration: none;
+    color:#222222;
+}
+ul li {
+    list-style-type:none;
+}
+
+@font-face {
+    font-family: 'KakaoSmallSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoSmallSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+#modal {
+    position:absolute;
+    display:none;
+    width:100%; height:100vh;
+    background-color: #00000080;
+    align-items: center;
+    justify-content: center;
+}
+.modalPopup {
+    width:400px; height:300px;
+    background-color: #fff;
+    border:3px solid #a5b5ff;
+    border-radius: 3px;
+}
+.modalPopup > h3 {
+    width:100%; height:70px;
+    padding: 0 15px;
+    background-color: #4d61bb;
+    line-height:68px;
+    font-size:22px;
+    color: #ececec;
+}
+.mpCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100%; height:200px;
+    font-size:13px;
+    color: #4d4d4d;
+}
+.mc {
+    width:100%; height:30px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 15px;
+}
+.leftp {
+    float: left;
+    width:50%; height:30px;
+    line-height:28px;
+}
+.rightp {
+    float: left;
+    width:50%; height:30px;
+    text-align: right;
+    line-height:28px;
+}
+.modalPopup > a {
+    float: right;
+    width:70px; height:20px;
+    padding: 0 15px;
+    font-size:13px;
+    background-color: #ffffff;
+    text-align: center;
+    line-height:19px;
+}
+.modalPopup > a:hover {
+    background-color: #d3d3d3;
+}
+
+#modal:target {
+    display:flex;
+}
+
+.wrap {
+    margin: 20px auto;
+    flex-direction: column;
+    width:60%; height:100%;
+}
+.tcBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width:100%; height:120px;
+    background-color: #222222;
+    margin-bottom: 20px;
+    background-image: url('/resources/static/images/teacherPage/mainImg.jpg');
+    background-size: auto;
+    border-radius: 5px;
+}
+.dp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:90%; height:120px;
+    padding-left: 20px;
+}
+.dp > p {
+    width:100%; height:40px;
+    padding: 15px;
+    font-size:16px;
+    color:#bdd5f5
+}
+.dp > h1 {
+    width:100%; height:40px;
+    padding: 0 15px;
+    font-size:26px;
+    color:#ffffff
+}
+.tcMo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:10%; height:120px;
+}
+.tcMo > a {
+    width:80px; height:30px;
+    border: 1px solid #fff;
+    color:#fff;
+    text-align: center;
+    line-height:28px;
+    font-size:13px;
+}
+.tcMo > a:hover {
+    text-decoration: underline;
+}
+.review {
+    float: left;
+    width:35%; height:570px;
+    margin-right: 20px;
+}
+.review > h2 {
+    float: left;
+    width:90%; height:40px;
+    line-height:38px;
+    font-size:19px;
+    margin-bottom: 15px;
+}
+.cumu {
+    display: flex;
+    float: left;
+    width:10%; height:40px;
+    align-items: center;
+    justify-content: end;
+    padding-right: 10px;
+    color:#4d6bf1;
+    font-weight: bold;
+}
+.cumu2 {
+    float:right;
+    width:80px; height:25px;
+    text-align: center;
+    background-color: #bcc7f5;
+    border: 0.5px solid #a0a0a0b3;
+    color:#474747;
+    line-height:23px;
+    font-size: 13px;
+    border-radius: 3px;
+}
+.cumu2:hover {
+    background-color: #7f91e2;
+    color:#f8f8f8
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem auto;
+    background-color: white;
+}
+
+/* 테이블 행 */
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    color: #434a59;
+}
+
+th {
+    background: #fafafa;
+    color: #434a59;
+    font-size:14px;
+}
+td {
+    font-size:12px;
+}
+
+tbody tr:hover {
+    opacity: 0.9;
+}
+
+/* 테이블 비율 */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 15%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 45%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 25%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 15%;
+}
+
+tr:nth-child(even) {
+    background-color: #e1e7ff;
+}
+.tcStudyList {
+    float: left;
+    width:60%; height:570px;
+}
+.tcb {
+    width:100%; height:calc(100% - 110px);
+    overflow: scroll;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    border:3px solid #a5b5ff;
+}
+.tcStudyList > h2 {
+    width:100%; height:40px;
+    line-height:38px;
+    font-size:19px;
+    margin-bottom: 15px;
+}
+.searchBox {
+    width:100%; height:40px;
+    margin-bottom: 15px;
+}
+.searchBox2 {
+    float:right;
+    width: calc(100% - 200px); height:40px;
+}
+.chkStyle {
+    width:50px;
+    font-size:12px;
+    margin:0px 5px 0px 2px;
+
+}
+.chkStyle [type="checkbox"] {
+    display:none;
+}
+.chkStyle span {
+    text-align:center;
+    height:40px;
+    width:80px;
+    margin-right:5px;
+    float: left;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:3px solid #a5b5ff;
+    background-color: #ffffff;
+    font-weight:bold;
+    border-radius: 4px;
+}
+.chkStyle [type="checkbox"]:checked + span {
+    background-color: #c9daff;
+    color:#FFFFFF;
+}
+.serchIn {
+    padding: 0 10px;
+    width:calc(100% - 85px); height:40px;
+    border:3px solid #a5b5ff;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+.serchIn:focus {
+    border-color:#607cfa;
+    outline:none;
+}
+.serchBtn {
+    width:80px; height:40px;
+    border:3px solid #d6d6d6b3;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+.serchBtn:hover {
+    background-color: #d3d3d3;
+    border-radius: 4px;
+}
+.tcBox {
+    width:100%; height:80px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #d6d6d6b3;
+}
+.lb1 {
+    float: left;
+    display: flex;
+    width:100px; height:80px;
+    align-items: center;
+}
+.lb1 > p {
+    width:100%; height:50px;
+    text-align: center;
+    line-height:48px;
+}
+.lb2 {
+    float: left;
+    width:calc(100% - 340px); height:80px;
+}
+.lb2 > a {
+    width:100%; height:35px;
+    line-height:30px;
+    padding: 5px 10px;
+    font-size:17px;
+}
+.lb2 > a:hover {
+    color:#4d6bf1;
+}
+
+.lb2 > p {
+    width:100%; height:20px;
+    line-height:18px;
+    padding: 0px 10px;
+}
+.cal1 {
+    font-size:12px;
+}
+.cal2 {
+    font-size:9px;
+}
+
+.lb3 {
+    float: left;
+    width:240px; height:80px;
+}
+.lb3 > p {
+    float: left;
+    width:calc(100% - 120px); height:80px;
+    text-align: center;
+    line-height:78px;
+}
+.buyBtn {
+    float: left;
+    display: flex;
+    width:120px; height:80px;
+    background-color: none;
+    padding: 10px;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+.buyBtn > a {
+    display: flex;
+    float: right;
+    width:40px; height:40px;
+    border-radius: 0%;
+    font-size: 17px;
+    color:#e4e4e4;
+    background-color: #4d6bf1;
+    border: none;
+    border-radius: 15%;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.buyBtn > a:hover {
+    color:#777777;
+    background-color: #2240c4;
+    border: none;
+    border-radius: 70%;
+}
+
+@media (max-width: 1360px) {
+.review {
+    width:100%; height:400px;
+    margin-bottom: 50px;
+}
+    .tcBar {
+        padding-right: 50px;
+    }
+    .tcStudyList {
+        width:100%;
+    }
+}
+
+@media (max-width: 1190px) {
+
+}
+
+@media (max-width: 800px) {
+    .header  {
+        width:90%; height:350px;
+        flex-direction: column;
+    }
+    .mainmenu  {
+        width:100%;
+        flex-direction: column;
+        margin-bottom: 20px;
+        gap:0;
+    }
+    .mainmenu > li {
+        width:100%;
+    }
+    .mainmenu > li > a {
+        width:100%;
+        text-align: center;
+    }
+    .lsMenu {
+        border-radius: 0 0 0 0;
+        border:none;
+    }
+    .mainmenu > li:hover {
+        background-color: #a2b3ff;
+    }
+    .submenu > li > a {
+        border:none;
+    }
+    .logo > img {
+        width:100%;
+        height:200px;
+    }
+
+}
