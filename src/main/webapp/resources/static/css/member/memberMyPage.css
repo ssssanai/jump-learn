@@ -1,0 +1,688 @@
+@charset "utf-8";
+* {
+    margin:0; padding:0;
+    box-sizing: border-box;
+    font-family: 'KakaoSmallSans-Bold';
+}
+a {
+    display:block;
+    text-decoration: none;
+    color:#222222;
+}
+ul li {
+    list-style-type:none;
+}
+
+@font-face {
+    font-family: 'KakaoSmallSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoSmallSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.wrap {
+    display: flex;
+    margin: 40px auto;
+    width:80%; height:1250px;
+}
+
+.aside {
+    display: flex;
+    flex-direction: column;
+    float:left;
+    width:400px; height:100%;
+    margin-right: 1%;
+}
+.myInfo1 {
+    width:100%; height:240px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+}
+.myInfoHead1 {
+    float: left;
+    width:100%; height:110px;
+    padding:5px 0;
+}
+.radiusProfile {
+    float:left;
+    width:130px; height:100%;
+    padding-left: 15px;
+}
+.radiusProfile > img {
+    width:100px; height:100px;
+    border-radius:70%;
+    overflow: hidden;
+    object-fit: cover;
+    border:5px solid #2d3d70;
+}
+.myInfop {
+    float:left;
+    width:calc(100% - 130px); height:100%;
+    padding: 0 10px;
+}
+.myInfop > p {
+    display: block;
+    width:100%; height:50px;
+    line-height:50px;
+    font-size:16px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.myInfop > h2 {
+    display: block;
+    width:100%; height:50px;
+    line-height:30px;
+    font-size:19px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.logoutBtn {
+    float: left;
+    display: flex;
+    width:100%; height:30px;
+    padding: 5px 0px;
+    gap:15px;
+    justify-content: center;
+}
+.logoutBtn > a {
+    display: block;
+    width:100px;
+    height:100%;
+    background-color: #d6d6d6b3;
+    border: 0.5px solid #a0a0a0b3;
+    color:#838383;
+    text-align: center;
+    line-height:19px;
+    font-size:12px;
+    font-weight:100;
+    border-radius: 2px;
+
+}
+.logoutBtn > a:hover {
+    background-color: #bbbbbbb3;
+}
+.myInfoMenu {
+    float: left;
+    display: flex;
+    width:100%; height:calc(100% - 140px);
+    gap: 10px;
+    padding: 0 10px 10px 10px;
+}
+.infoMenu {
+    width:80px; height:100%;
+}
+.infoMenuHead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%; height:60px;
+}
+.menuBox {
+    width:55px; height:55px;
+    text-align: center;
+    font-size: 15px;
+    background-color: none;
+    border: 0.5px solid #bbbbbbb3;
+    border-radius: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fa-pen, .fa-cart-shopping, .fa-bookmark, .fa-credit-card, .fa-headset {
+    font-size: 20px;
+    color:#2d3d70;
+
+}
+.infoMenuBody {
+    width:100%; height:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.noCnt {
+    width:100%; height:100%;
+    font-size:11px;
+    text-align: center;
+    line-height:20px;
+}
+.cnt1 {
+    float:left;
+    width:calc(100% - 20px); height:100%;
+    font-size:11px;
+    text-align: center;
+    line-height:20px;
+}
+.cnt2 {
+    float:left;
+    width:15px; height:15px;
+    text-align: center;
+    line-height:17px;
+    background-color: #2d3d70;
+    border-radius:100%;
+    color:#fff;
+    font-size:8px;
+    font-family: 'LINESeedKR-Bd';
+}
+.myInfo2 {
+    float: left;
+    width:100%; height:330px;
+    margin-top: 10px;
+}
+.myInfoHead2 {
+    width:100%; height:60px;
+    border-bottom: 3px solid #d6d6d6b3;
+}
+.myInfoHead2 > h2 {
+    float: left;
+    display: flex;
+    align-items: end;
+    width:70%; height:100%;
+    text-align: left;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+.myInfoHead2 > a {
+    float: left;
+    width:30%; height:100%;
+    display: flex;
+    align-items: end;
+    text-align: right;
+    justify-content: end;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    font-size: 12px;
+}
+.myInfoBody1 {
+    width:100%; height:270px;
+    background-color: #f1f1f1;
+    border-radius: 0 0 8px 8px;
+    padding: 10px 15px 10px 15px;
+}
+.testScore {
+    width:100%; height:75px;
+    background-color: #e9e9e9;
+    margin-bottom: 10px;
+}
+.tsHead {
+    width:100%; height:30px;
+
+}
+.tsHead > h2 {
+    float: left;
+    display: flex;
+    align-items: center;
+    width:70%; height:100%;
+    text-align: left;
+    padding-left: 15px;
+    font-size: 13px;
+    color:#3b3a3a;
+}
+.tsBody {
+    width:100%; height:45px;
+}
+.testTitle {
+    float:left;
+    width:70%; height:45px;
+}
+.testTitle > h2 {
+    float: left;
+    width:100%; height:100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    color:#3b3a3a;
+    font-size: 14px;
+}
+.testSc {
+    float:left;
+    width:30%; height:45px;
+}
+.testSc > a {
+    float: left;
+    width:100%; height:100%;
+    font-size: 11px;
+    display: flex;
+    color:#3b3a3a;
+    align-items: center;
+    justify-content: end;
+    padding-right: 15px;
+}
+.testSc > a:hover {
+    color: #2240c4;
+}
+.myInfo3 {
+    float: left;
+    width:100%; height:330px;
+    margin-top: 10px;
+}
+.myInfoBody2 {
+    display: flex;
+    flex-direction: row;
+    height:270px;
+    gap:10px;
+    background-color: #f1f1f1;
+    border-radius: 0 0 8px 8px;
+    padding: 10px 15px 10px 15px;
+}
+.testIng {
+    flex: 33%; height:250px;
+    background-color: #e9e9e9;
+    margin-bottom: 10px;
+}
+.ingHead {
+    width:100%; height:30px;
+    border-bottom: 1px solid #bbbbbbb3;
+}
+.ingHead > h2 {
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%; height:100%;
+    text-align: center;
+    font-size: 13px;
+}
+.ingBody {
+    width:100%; height:230px;
+}
+#myChart {
+    width:100%; height:230px;
+}
+.myStudy {
+    width:100%; height:50px;
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    gap: 20px;
+}
+.myStudy > a {
+    width:130px; height:30px;
+    background-color: #d6d6d6b3;
+    border: 0.5px solid #a0a0a0b3;
+    color:#838383;
+    text-align: center;
+    line-height: 28px;
+    border-radius: 3px;
+}
+.myStudy > a:hover {
+    background-color: #bbbbbbb3;
+}
+.main {
+    float:left;
+    width:calc(100% - 400px); height:100%;
+}
+.userInfo {
+    float: left;
+    width:100%; height:380px;
+}
+.userInfoTit {
+    width:100%; height:80px;
+}
+.userInfoTit {
+    display: flex;
+    width:100%; height:50px;
+    font-size:14px;
+    padding:0 15px 15px 15px;
+    align-items: end;
+    border-bottom: 2px solid #d6d6d6b3;
+}
+.userInfoCont {
+    width:100%; height:calc(100% - 80px);
+    display:flex;
+    align-items: center;
+}
+.userProfile {
+    display:flex;
+    float: left;
+    align-items: end;
+    justify-content: center;
+    flex-direction: column;
+    width:300px; height:300px;
+}
+.radiusProfile2 {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:215px; height:200px;
+    padding-left: 15px;
+}
+.radiusProfile2 > img {
+    width:200px; height:200px;
+    border-radius:90%;
+    overflow: hidden;
+    object-fit: cover;
+    border:5px solid #5363f8b3;
+}
+.userInfoP {
+    float: left;
+    display:flex;
+    align-items: end;
+    flex-direction: column;
+    margin-left: 30px;
+    width:calc(100% - 330px); height:100%;
+}
+.userTable {
+    width:100%; height:calc(100% - 30px);
+    padding:20px 55px;
+}
+.lfTd {
+    text-align: left;
+    font-size:16px;
+}
+.rtTd {
+    text-align: right;
+    font-size:14px;
+}
+.tbA {
+    display: flex;
+    width:100%; height:30px;
+    gap:15px;
+    justify-content: end;
+    padding-right:20px;
+}
+.tbA > a {
+    float:left;
+    width:130px; height:30px;
+    background-color: #d6d6d6b3;
+    border: 0.5px solid #a0a0a0b3;
+    color:#838383;
+    text-align: center;
+    line-height: 28px;
+    border-radius: 3px;
+}
+.tbA > a:hover {
+    background-color: #bbbbbbb3;
+}
+.todayBest {
+    float: left;
+    width:100%; height:calc(100% - 380px);
+}
+.boardBox {
+    width:100%; height:100%;
+    display: flex;
+    gap:20px;
+    flex-direction: column;
+}
+.boardTit {
+    display: flex;
+    width:100%; height:50px;
+    font-size:14px;
+    padding:0 15px 15px 15px;
+    align-items: end;
+    border-bottom: 2px solid #d6d6d6b3;
+}
+.boardLine1 {
+    width:100%; height:120px;
+    border-bottom: 2px solid #d6d6d6b3;
+}
+.boardLine1 > h2 {
+    display: flex;
+    float: left;
+    width:70%; height:40px;
+    font-size:17px;
+    padding:0 15px;
+    align-items: center;
+}
+.boardLine1 > a {
+    display: flex;
+    float: left;
+    width:30%; height:40px;
+    font-size:14px;
+    padding:0 15px;
+    align-items: center;
+    justify-content: end;
+}
+.boardLine1 > table {
+    width:100%;
+    padding: 0px;
+    border-spacing:4px;
+}
+.tbH1 {
+    width:100%; height:30px;
+    color:#3b3a3a;
+    background-color: #b8c5fd;
+
+}
+.tbB1 {
+    width:100%;
+    height:40px;
+    color:#3b3a3a;
+    text-align: center;
+}
+.tbNo {
+    width:10%;
+    border-radius: 3px;
+}
+.tbTit {
+    width:400px;
+    border-radius: 3px;
+}
+.tbTit > a {
+    color:#3b3a3a;
+    width:400px; height:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 auto;
+}
+.tbName {
+    width:10%;
+    border-radius: 5px;
+}
+.tbDate {
+    width:20%;
+    border-radius: 5px;
+}
+.tbView {
+    width:10%;
+    border-radius: 5px;
+}
+
+.boardLine2 {
+    display: flex;
+    width:100%; height:50%;
+    justify-content: space-between;
+    border-bottom: 2px solid #d6d6d6b3;
+    gap:10px;
+}
+.boards {
+    width:400px;
+}
+.boards > h2 {
+    display: flex;
+    float: left;
+    width:70%; height:40px;
+    font-size:16px;
+    color:#3b3a3a;
+    padding:0 15px;
+    align-items: center;
+}
+.boards > a {
+    display: flex;
+    float: left;
+    width:30%; height:40px;
+    font-size:12px;
+    padding:0 15px;
+    align-items: center;
+    justify-content: end;
+}
+.boards > a:hover {
+    color: #2240c4;
+}
+.boards > table {
+    width:100%;
+    padding: 0px;
+    border-spacing:4px;
+}
+.tbH2 {
+    width:100%; height:30px;
+    color:#3b3a3a;
+    background-color: #b8c5fd;
+    font-size:14px;
+
+}
+.tbB2 {
+    width:100%; height:40px;
+    text-align: center;
+    font-size:12px;
+    color:#3b3a3a;
+}
+.tbNo1 {
+    width:40px;
+    min-width: 40px;
+}
+.tbName1 {
+    width:60px;
+    min-width: 60px;
+}
+.tbNo1, .tbTit1, .tbName1, .tbDate1 {
+    border-radius: 3px;
+}
+.tbTitP {
+    width:150px; height:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 auto;
+}
+@media (max-width:1658px) {
+    .bs3 {
+        display: none;
+    }
+}
+@media (max-width: 1350px) {
+    .wrap {
+        width:90%;
+        flex-direction: column;
+        margin: 20px auto;
+    }
+    .aside {
+        width:100%; height:350px;
+        flex-direction: row;
+        margin: 40px 0;
+    }
+    .myInfo1 {
+        width:400px;
+    }
+    .myInfo1, .myInfo2, .myInfo3 {
+        height:100%;
+    }
+    .myInfo2, .myInfo3 {
+        width:400px;
+        margin-top:0;
+        margin-left: 10px;
+    }
+    .myInfoHead1 {
+        margin-top: 40px;
+    }
+    .myInfoMenu {
+        float: left;
+        width:100%; height:calc(100% - 250px);
+    }
+    .logoutBtn > a {
+        min-width: 80px;
+    }
+    .myStudy {
+        display: none;
+    }
+    .testTitle {
+        width:70%; height:45px;
+
+
+    }
+    .testTitle > h2 {
+        float: left;
+        display: flex;
+        align-items: center;
+        width: 100%; height:100%;
+        text-align: left;
+        padding-left: 15px;
+        font-size: 12px;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+    .testSc {
+        width:30%;
+    }
+    .main {
+        width:100%;
+    }
+    .todayBest {
+        display: block;
+    }
+    .bs3 {
+        display: block  ;
+    }
+}
+@media (max-width: 1100px) {
+    .myInfo2 {
+        width:100%;
+    }
+    .myInfo3 {
+        display: none;
+    }
+    .boardLine2 {
+        display:none;
+    }
+}
+@media (max-width: 800px) {
+    .aside {
+        flex-wrap: wrap;
+        height:700px;
+        gap:0;
+        margin: 0;
+    }
+    .myInfo1 {
+        width:100%; height:300px;
+    }
+    .myInfoMenu {
+        height:100px;
+    }
+    .myInfo2, .myInfo3 {
+        width:100%;
+        height:300px;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    .logoutBtn > a {
+        max-width: 120px;
+
+    }
+    .myInfoBody {
+        width:100%; height:270px;
+        background-color: #f1f1f1;
+        border-radius: 0 0 7px 7px;
+    }
+    .myInfoMenu {
+        align-items: center;
+        justify-content: center;
+    }
+    .main {
+        margin-top: 20px;
+        width:100%; height:600px;
+    }
+    .userInfo {
+        height:600px;
+    }
+    .todayBest {
+        display: none;
+    }
+    .userTable {
+        padding: 0 10px;
+    }
+    .userProfile {
+        align-items: center;
+    }
+}
