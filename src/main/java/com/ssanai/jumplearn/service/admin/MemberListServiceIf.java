@@ -1,8 +1,6 @@
 package com.ssanai.jumplearn.service.admin;
 
-import com.ssanai.jumplearn.dto.MemberDTO;
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.PageResponseDTO;
+import com.ssanai.jumplearn.dto.*;
 
 import java.util.List;
 
@@ -12,4 +10,7 @@ public interface MemberListServiceIf {
     public int memberDelete(String id);
     public int memberChange(String id, int status);
     public PageResponseDTO<MemberDTO> searchList(PageRequestDTO requestDTO);
+    public MemberDTO memberDetail(String id);
+    public List<MemberCreateDetail> memberCreatePost(String id);
+    public List<EnrollmentsDTO> memberEnrollments(String id);
 }

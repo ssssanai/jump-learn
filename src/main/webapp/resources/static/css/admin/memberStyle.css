@@ -1,0 +1,28 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+td {
+    padding: 10px;
+}
+
+img {
+    width: 150px; /* 작게 조절 */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin-top: 30px;
+}

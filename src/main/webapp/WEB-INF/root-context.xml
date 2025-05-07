@@ -42,5 +42,7 @@
     <context:component-scan base-package="com.ssanai.jumplearn.config"/>
     <context:component-scan base-package="com.ssanai.jumplearn.service"/>
     <context:component-scan base-package="com.ssanai.jumplearn.controller.*"/>
-
+    <bean id="uploadPath" class="java.lang.String">
+        <constructor-arg value="D:/git/jump-learn/src/upload/"/>
+    </bean>
 </beans>
