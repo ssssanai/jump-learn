@@ -36,4 +36,19 @@ public class InquiryListController {
         log.info(resDTO);
         return "admin/inquiryList";
     }
+    @GetMapping("/inquiry_search_list")
+    public String inquiry(
+            HttpSession session,
+            @ModelAttribute("reqDTO") PageRequestDTO reqDTO,
+            Model model
+    ) {
+        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        PageResponseDTO<InquiryDTO> resDTO = inquiryListService.searchList(reqDTO);
+        model.addAttribute("dtoList", resDTO.getDtoList());
+        model.addAttribute("pageInfo", resDTO);
+        model.addAttribute("loginInfo", dto);
+        log.info(resDTO.getDtoList());
+        log.info(resDTO);
+        return "admin/inquiryList";
+    }
 }

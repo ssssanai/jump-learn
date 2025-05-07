@@ -1,9 +1,6 @@
 package com.ssanai.jumplearn.controller.admin;
 
-import com.ssanai.jumplearn.dto.AdminDTO;
-import com.ssanai.jumplearn.dto.MemberDTO;
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.PageResponseDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.service.admin.AdminListServiceIf;
 import com.ssanai.jumplearn.service.admin.MemberListServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
@@ -99,5 +96,40 @@ public class MemberListController {
         }
         return "redirect:/admin/memberList";
     }
-
+    @GetMapping("/member")
+    public String member(
+            HttpSession session,
+            @RequestParam(name="id") String id,
+            RedirectAttributes redirectAttributes,
+            Model model
+    ){
+        AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
+        MemberDTO dto = memberListService.memberDetail(id);
+        log.info(dto.getFile_path()+"/"+dto.getFile_name());
+        model.addAttribute("dto", dto);
+        return "/admin/member";
+    }
+    @GetMapping("/memberCreate")
+    public String memberCreate(
+            @RequestParam(name="id")String id,
+            Model model
+    ){
+        List<MemberCreateDetail> dtoList = memberListService.memberCreatePost(id);
+        model.addAttribute("dtoList", dtoList);
+        model.addAttribute("id",id);
+        log.info(id);
+        log.info(dtoList.toString());
+        return "/admin/memberCreateBbs";
+    }
+    @GetMapping("/memberEnrollments")
+    public String memberEnrollments(
+            @RequestParam(name="id")String id,
+            Model model
+    ){
+        List<EnrollmentsDTO> dtoList = memberListService.memberEnrollments(id);
+        model.addAttribute("dtoList", dtoList);
+        model.addAttribute("id",id);
+        log.info(dtoList.toString());
+        return "/admin/memberEnrollments";
+    }
 }
