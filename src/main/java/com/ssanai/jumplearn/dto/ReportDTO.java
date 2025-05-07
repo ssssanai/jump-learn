@@ -17,7 +17,7 @@ public class ReportDTO {
     private String target_type;  // 대상 타입
     private String member_id;       // 신고자 ID
     private String reason;       // 신고 사유
-    private String report_status; // 신고 상태 (예: 처리 중, 완료 등)
+    private String report_status; // 신고 상태 질문 처리 상태 (예: pending, completed)
     private int resolution_id;   // 해결 ID
     private int admin_id;        // 관리자 ID (해결 처리하는 관리자)
     private String resolution;   // 해결 내용

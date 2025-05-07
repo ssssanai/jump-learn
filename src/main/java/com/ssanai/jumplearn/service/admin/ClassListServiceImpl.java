@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClassListServiceImpl implements ClassListServiceIf {
     private final ClassListMapper classListXmlMapper;
-    private final ModelMapper modelMapper;
 
     @Override
     public int classTotalCount(PageRequestDTO requestDTO) {

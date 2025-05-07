@@ -8,7 +8,7 @@ import java.util.List;
 public interface ReportListMapper {
     public List<ReportDTO> searchList(PageRequestDTO requestDTO);
     public int reportTotalCount(PageRequestDTO requestDTO);
-    public int reportDelete(ReportDTO reportDTO);
+    public int reportDelete(String reportId);
     public int reportResolution(ReportDTO reportDTO);
-    public ReportDTO reportDetail(PageRequestDTO requestDTO);
+    public ReportDTO reportDetail(String reportId);
 }
