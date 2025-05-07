@@ -35,8 +35,8 @@ public class SearchDTO {
 	}
 
 	private String search_word;
-	private String search_condition1;
-	private String search_condition2;
-	private String search_condition3;
+	private String search_condition1; // 입력란
+	private String search_condition2; // 타겟
+	private String search_condition3; // 과목
 	private String sort_condition;
 }
