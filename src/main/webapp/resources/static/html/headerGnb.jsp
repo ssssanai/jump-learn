@@ -13,17 +13,6 @@
   <ul class="mainmenu">
     <li>
       <a href="#">강의</a>
-      <ul class="submenu">
-        <li>
-          <a href="#">국어</a>
-        </li>
-        <li>
-          <a href="#">수학</a>
-        </li>
-        <li>
-          <a href="#" class="lsMenu">영어</a>
-        </li>
-      </ul>
     </li>
     <li>
       <a href="#">나의 학습방</a>
@@ -61,7 +50,7 @@
           <a href="#">뉴스 게시판</a>
         </li>
         <li>
-          <a href="#" class="lsMenu">교육정보 게시판</a>
+          <a href="#" class="lsMenu">공지사항 게시판</a>
         </li>
       </ul>
     </li>
