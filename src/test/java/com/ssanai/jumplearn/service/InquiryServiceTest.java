@@ -25,12 +25,12 @@ public class InquiryServiceTest {
 	public void test() {
 		PageResponseDTO<InquiryDTO> list = inquiryService.getInquiryList(
 				PageRequestDTO.builder()
-				.search_category("title")
-				.search_word("오류")
-				.page_no(1)
-				.page_block_size(10)
-				.page_size(10)
-				.build()
+						.search_category("title")
+						.search_word("오류")
+						.page_no(1)
+						.page_block_size(10)
+						.page_size(10)
+						.build()
 		);
 
 		log.info(list);
@@ -38,7 +38,7 @@ public class InquiryServiceTest {
 
 	@Test
 	public void test2() {
-		List<InquiryDTO> list  =  inquiryService.getInquiry(1);
+		List<InquiryDTO> list = inquiryService.getInquiry(1);
 		log.info(list);
 	}
 
@@ -75,6 +75,18 @@ public class InquiryServiceTest {
 	@Test
 	public void test6() {
 		int result = inquiryService.delete(27);
+		log.info(result);
+	}
+
+	@Test
+	public void test7() {
+		InquiryDTO dto = InquiryDTO.builder()
+				.inquiry_id(29)
+				.inquiry_commenter("member001")
+				.inquiry_comment_id_type("member")
+				.inquiry_comment_content("InquiryServiceTest test7()")
+				.build();
+		int result = inquiryService.addComment(dto);
 		log.info(result);
 	}
 }
