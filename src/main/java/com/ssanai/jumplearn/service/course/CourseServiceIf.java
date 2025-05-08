@@ -15,6 +15,7 @@ public interface CourseServiceIf {
 	public int getListTotalCount(SearchDTO searchDTO);
 	public ClassDetailDTO getClassDetailById(@Param("id") int id);
 	public List<ClassVideoDTO> getClassVideoList(@Param("id") int id);
+	public int checkReviewExist(@Param("id") int id);
 	public double getReviewRate(@Param("id") int id);
 	public List<ReviewDTO> getReviewListById(@Param("id") int id);
 }
