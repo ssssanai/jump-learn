@@ -73,9 +73,27 @@
         Limit #{page_skip_count} , #{page_size}
     </select>
 
-<!--    <delete id="deletesPosts">-->
-<!--        DELETE FROM tbl_edu-->
-<!--        WHERE 1=1 and `id`= #{id}-->
-<!--    </delete>-->
+    <select id="attachedPic" >
+        SELECT
+            bbsfile.id, file_path, file_name, file_size, file_ext, related_table, related_id,created_at
+        FROM
+            tbl_bbs_file AS bbsfile
+        INNER JOIN tbl_edu_file as edufile
+            ON bbsfile.related_id = edufile.file_id
+        WHERE 1=1 and edufile.edu_id =#{id}
+        ORDER BY bbsfile.id
+    </select>
+
+
+    <select id="attachedPdf" >
+        SELECT
+            bbsfile.id, file_path, file_name, file_size, file_ext, related_table, related_id,created_at
+        FROM
+            tbl_bbs_file AS bbsfile
+                INNER JOIN tbl_edu_file as edufile
+                           ON bbsfile.related_id = edufile.file_id
+        WHERE 1=1 and edufile.edu_id =#{id} and bbsfile.file_ext = '.pdf'
+        ORDER BY bbsfile.id
+    </select>
 
 </mapper>
