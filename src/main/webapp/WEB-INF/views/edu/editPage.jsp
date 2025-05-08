@@ -28,6 +28,8 @@
             <p>커뮤니티 게시물 수정</p>
         </div>
     </header>
+<%--    <form method="post" onsubmit="document.getElementById('content').value=document.getElementById('editer').innerHTML;"--%>
+<%--          action="/edu/editPage" enctype="multipart/form-data">--%>
     <form method="post" action="/edu/editPage" enctype="multipart/form-data">
     <main>
         <table>
@@ -49,15 +51,16 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="5">
-                    [본문 시작:
+<%--                수정페이지에서 수정할 때 이미지 출력 상태로 수정 가능--%>
+<%--                <td colspan="5" id="editer" contenteditable="true">--%>
+                <td colspan="5" id="editer" contenteditable="true">
                     <c:forEach var="file" items="${fileDTO}" >
                         <c:if test="${fn:contains(file.file_ext, '.jpg') or fn:contains(file.file_ext, '.jpeg')}">
                             <img src="${file.file_path}" alt="${file.file_name}"/>
                             <br>
                         </c:if>
                     </c:forEach>
-                    ${dto.content} :본문 끝]
+                    ${dto.content}
                 </td>
             </tr>
             <tr>
@@ -81,4 +84,5 @@
     </form>
 </div>
 </body>
+
 </html>
