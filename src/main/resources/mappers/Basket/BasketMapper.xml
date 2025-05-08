@@ -23,5 +23,11 @@
         INSERT INTO tbl_basket (class_id, member_id, created_at)
         VALUES (#{id}, #{member_id}, NOW())
     </insert>
+
+    <delete id="removeBasket">
+        delete
+        from tbl_basket
+        where class_id = #{id} and member_id = #{member_id}
+    </delete>
 </mapper>
  

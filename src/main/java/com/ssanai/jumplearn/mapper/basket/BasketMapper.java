@@ -9,5 +9,5 @@ public interface BasketMapper {
 	public List<BasketDTO> getBasketList(@Param("id") String id); // 목록 출력
 	public int isBasketExist(@Param("id") int id, @Param("member_id") String member_id);
 	public int addBasket(@Param("id") int id, @Param("member_id") String member_id);
-
+	public int removeBasket(@Param("id") int id, @Param("member_id") String member_id);
 }
