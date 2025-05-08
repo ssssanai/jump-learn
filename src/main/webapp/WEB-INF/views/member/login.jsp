@@ -17,6 +17,7 @@
     <title>JL - 로그인</title>
 </head>
 <body>
+<%@ include file="../../../resources/static/html/adminMsg.jsp"%>
 <div class="wrap">
     <header>
         <img class="header_logo" src="../../../resources/static/images/registLogo.jpg" alt="메인로고">
