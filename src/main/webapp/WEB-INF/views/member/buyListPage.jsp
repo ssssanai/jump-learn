@@ -11,8 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../resources/static/css/member/buyListPage.css" rel="stylesheet" type="text/css">
-    <link href="../resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
+    <link href="../../../resources/static/css/member/buyListPage.css" rel="stylesheet" type="text/css">
+    <link href="../../../resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <title>JL - 결제내역</title>
@@ -20,7 +20,7 @@
 <body>
 
 <%--고정 헤더 파일--%>
-<%@include file="../resources/static/html/headerGnb.jsp"%>
+<%@include file="../../../resources/static/html/headerGnb.jsp"%>
 
 <div class="wrap">
     <div class="buyHead">
@@ -45,7 +45,7 @@
         </div>
         <div class="buyMain">
             <div class="buyCont">
-                <img src="../resources/static/images/notProfile.jpg" alt="강의 썸네일">
+                <img src="../../../resources/static/images/notProfile.jpg" alt="강의 썸네일">
                 <div class="bP">
                     <h2>강의 제목입니다.</h2>
                     <h3>강의 내용이 들어갑니다.</h3>
