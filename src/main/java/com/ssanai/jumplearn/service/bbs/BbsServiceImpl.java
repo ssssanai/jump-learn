@@ -1,12 +1,15 @@
 package com.ssanai.jumplearn.service.bbs;
 
 import com.ssanai.jumplearn.dto.BbsDefaultDTO;
+import com.ssanai.jumplearn.dto.BbsFileDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.mapper.BbsMapper;
 import com.ssanai.jumplearn.vo.BbsDefaultVO;
+import com.ssanai.jumplearn.vo.BbsFileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.ibatis.annotations.Param;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,5 +89,23 @@ public class BbsServiceImpl implements BbsServiceInterface {
         return pageResponseDTO;
     }
 
+    @Override
+    public List<BbsFileDTO> attachedPic( int id){
+        List<BbsFileVO> fileVO = bbsMapper.attachedPic(id);
+        List<BbsFileDTO> fileDTO = fileVO.stream().map(
+                vo->modelMapper.map(vo, BbsFileDTO.class)
+        ).collect(Collectors.toList());
 
+        return fileDTO;
+    };
+
+    @Override
+    public List<BbsFileDTO> attachedPdf( int id){
+        List<BbsFileVO> fileVO = bbsMapper.attachedPdf(id);
+        List<BbsFileDTO> pdfFileDTO = fileVO.stream().map(
+                vo->modelMapper.map(vo, BbsFileDTO.class)
+        ).collect(Collectors.toList());
+
+        return pdfFileDTO;
+    };
 }

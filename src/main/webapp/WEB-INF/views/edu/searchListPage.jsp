@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/resources/static/css/writeListPageStyle.css" rel="stylesheet" type="text/css">
+    <link href="../../../resources/static/css/community/writeListPageStyle.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <title>검색 결과 리스트 페이지</title>
 </head>
@@ -106,27 +106,26 @@
         <form class="searchInput" method="GET" action="/edu/searchListPage">
             <input type="hidden" name="page_no"   value="${pageDTO.page_no}" />
             <input type="hidden" name="page_size" value="${pageDTO.page_size}" />
-            <input type="submit" class="serch_btn" value="검색">
             <div class="siReset">
                 <input type="reset" value="검색조건 초기화">
             </div>
             <div>
                 <select id="search_category" name="search_category" class="selectOption">
 <%--                    옵션 value qu0,1,2 에서 변경했음 --%>
-                    <option value=""            ${pageDTO.search_category==''             ? 'selected':''}>전체</option>
+                    <option value="-"           ${pageDTO.search_category==''             ? 'selected':''}>-</option>
                     <option value="title"       ${pageDTO.search_category=='title'        ? 'selected':''}>제목</option>
                     <option value="content"     ${pageDTO.search_category=='content'      ? 'selected':''}>내용</option>
                     <option value="admin_id"    ${pageDTO.search_category=='admin_id'     ? 'selected':''}>작성자</option>
                     <option value="created_at"  ${pageDTO.search_category=='created_at'   ? 'selected':''}>작성일</option>
-
                 </select>
 <%--       검색조건이 작성일일때는 from날짜 to날짜 2개로 검색할 수 있게 UI 전환    --%>
-                <input type="text" id="search_word" name="search_word" class="serch_in" placeholder="검색어를 입력해주세요." value="${pageDTO.search_word}">
-
-                <input type="datetime-local" name="search_date_from" id="search_date_from" value="${pageDTO.search_date_from}" />
-                <p >~</p>
-                <input type="datetime-local" name="search_date_to" id="search_date_to" value="${pageDTO.search_date_to}"/>
-                <input type="submit" class="serch_btn" name="serch_btn" value="검색">
+                <div>
+                    <input type="text" id="search_word" name="search_word" class="serch_in"
+                       placeholder="검색어를 입력해주세요." value="${pageDTO.search_word}">
+                    <input type="date" name="search_date_from" id="search_date_from" value="${pageDTO.search_date_from}" />~
+                    <input type="date" name="search_date_to" id="search_date_to" value="${pageDTO.search_date_to}"/>
+                    <input type="submit" class="serch_btn" name="serch_btn" value="검색">
+                </div>
             </div>
         </form>
 
@@ -150,8 +149,8 @@
                     </p>
                     <p class="listTit"><a href="/edu/viewPage?id=${post.id}">${post.title}</a></p>
                     <p class="listName"><a href="#">${post.admin_id}</a></p>
-<%--                    아이디 눌러서 해당 계정명으로 검색하기 기능 나중에 추가.--%>
-                    <p class="listDate">${post.created_at}</p>
+<%--                    아이디 눌러서 해당 계정명으로 검색하기 기능 나중에 시간나면 추가.--%>
+                    <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
                     <input type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}';}" value="삭제">
                 </div>
