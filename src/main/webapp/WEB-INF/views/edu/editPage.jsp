@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,23 +33,6 @@
         <table>
             <tr>
                 <td>
-                    <p>번호</p>
-                </td>
-                <td>
-                    <p>제목</p>
-                </td>
-                <td>
-                    <p>작성자</p>
-                </td>
-                <td>
-                    <p>등록일</p>
-                </td>
-                <td>
-                    <p>조회수</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <input type="text" name="id" id="id" value="${dto.id}" readonly>
                 </td>
                 <td>
@@ -63,7 +48,25 @@
                     <input type="text" name="view_count" id="view_count" value="${dto.view_count}" readonly>
                 </td>
             </tr>
-
+            <tr>
+                <td colspan="5">
+                    [본문 시작:
+                    <c:forEach var="file" items="${fileDTO}" >
+                        <c:if test="${fn:contains(file.file_ext, '.jpg') or fn:contains(file.file_ext, '.jpeg')}">
+                            <img src="${file.file_path}" alt="${file.file_name}"/>
+                            <br>
+                        </c:if>
+                    </c:forEach>
+                    ${dto.content} :본문 끝]
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <c:forEach var="file" items="${pdfFileDTO}" >
+                        <a href="${file.file_path}" target="_blank">${file.file_name}${file.file_ext}</a>
+                    </c:forEach>
+                </td>
+            </tr>
         </table>
     </main>
         <div class="contentMain">
