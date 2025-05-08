@@ -2,10 +2,12 @@ package com.ssanai.jumplearn.service;
 
 
 import com.ssanai.jumplearn.dto.BbsDefaultDTO;
+import com.ssanai.jumplearn.dto.BbsFileDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.service.bbs.BbsServiceInterface;
 import com.ssanai.jumplearn.vo.BbsDefaultVO;
+import com.ssanai.jumplearn.vo.BbsFileVO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -101,5 +103,25 @@ public class BbsServiceTests {
 //        PageResponseDTO resDTO = bbsService.searchList(pageDTO);
 //        Assertions.assertNotNull(resDTO , "성공");
 //        log.info("BbsTests >> testSearchList >> resDTO : {}", resDTO);
+//    }
+
+//    @Test
+//    public void attachedPic(){
+//        List<BbsFileDTO> files = bbsService.attachedPic(1);
+//
+//        Assertions.assertNotNull(files,"파일 리스트가 없습니다.");
+//        Assertions.assertFalse(files.isEmpty(),"파일이 없습니다.");
+//        files.forEach(f -> log.info("file VO => {}",f));
+//
+//    }
+
+//    @Test
+//    public void attachedPdf(){
+//        List<BbsFileDTO> files = bbsService.attachedPdf(1);
+//
+//        Assertions.assertNotNull(files,"파일 리스트가 없습니다.");
+//        Assertions.assertFalse(files.isEmpty(),"파일이 없습니다.");
+//        files.forEach(f -> log.info("file VO => {}",f));
+//
 //    }
 }
