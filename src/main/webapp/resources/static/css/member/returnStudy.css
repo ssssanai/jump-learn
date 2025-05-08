@@ -1,0 +1,34 @@
+@charset "utf-8";
+* {
+    margin:0; padding:0;
+    box-sizing: border-box;
+    font-family: 'KakaoSmallSans-Bold';
+}
+a {
+    display:block;
+    text-decoration: none;
+    color:#222222;
+}
+ul li {
+    list-style-type:none;
+}
+
+@font-face {
+    font-family: 'KakaoSmallSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoSmallSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+.wrap {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    width:60%; height:950px;
+}

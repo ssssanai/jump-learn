@@ -452,4 +452,7 @@ ul li {
     .course_body {
         width:90%;
     }
+    .course_ls {
+        width:120px;
+    }
 }
