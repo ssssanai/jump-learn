@@ -16,11 +16,11 @@
 <%@ include file="../../../resources/static/html/adminMsg.jsp"%>
 <h2 style="text-align:center;">${id}번 강의 등록</h2>
 
-<form action="/admin/class_ data_create" method="post" enctype="multipart/form-data">
+<form action="/admin/class_data_create" method="post" enctype="multipart/form-data">
   <input type="text" name="class_id" value="${id}" readonly>
 
   <label for="data_order">자료 순서</label>
-  <input type="number" id="data_order" name="data_order" required>
+  <input type="number" id="data_order" name="data_order" value="${order_id}" readonly>
 
   <label for="title">데이터 제목</label>
   <input type="text" id="title" name="title" required>
