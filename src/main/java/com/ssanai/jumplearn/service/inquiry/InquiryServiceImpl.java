@@ -87,4 +87,18 @@ public class InquiryServiceImpl implements InquiryServiceIf {
 		log.info(vo);
 		return inquiryMapper.addComment(vo);
 	}
+
+	@Override
+	public int updateComment(InquiryDTO dto) {
+		InquiryCommentVO vo = InquiryCommentVO.builder()
+				.id(dto.getComment_id())
+				.content(dto.getInquiry_comment_content())
+				.build();
+		return inquiryMapper.updateComment(vo);
+	}
+
+	@Override
+	public int deleteComment(int id) {
+		return inquiryMapper.deleteComment(id);
+	}
 }

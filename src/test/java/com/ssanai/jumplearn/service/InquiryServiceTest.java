@@ -89,4 +89,21 @@ public class InquiryServiceTest {
 		int result = inquiryService.addComment(dto);
 		log.info(result);
 	}
+
+	@Test
+	public void test8() {
+		InquiryDTO dto = InquiryDTO.builder()
+				.comment_id(8)
+				.inquiry_comment_content("InquiryServiceTest test8")
+				.build();
+		log.info(dto);
+		int result = inquiryService.updateComment(dto);
+		log.info(result);
+	}
+
+	@Test
+	public void test9() {
+		int result = inquiryService.deleteComment(28);
+		log.info(result);
+	}
 }

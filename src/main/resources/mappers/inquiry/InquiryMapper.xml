@@ -83,5 +83,19 @@
         insert into tbl_inquiry_comment (inquiry_id, commenter, comment_id_type, content, created_at, updated_at)
         values (#{inquiry_id}, #{commenter}, #{comment_id_type}, #{content}, NOW(), NOW())
     </insert>
+
+    <!-- QnA 댓글 수정 -->
+    <update id="updateComment">
+        update tbl_inquiry_comment
+        set content = #{content}, updated_at = now()
+        where id = #{id}
+    </update>
+
+    <delete id="deleteComment">
+        delete
+        from tbl_inquiry_comment
+        where id = #{id}
+    </delete>
+
 </mapper>
  

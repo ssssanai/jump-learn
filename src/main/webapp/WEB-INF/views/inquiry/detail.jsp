@@ -22,6 +22,7 @@
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
 <h1>Q&A 상세</h1>
 <table>
     <tr>
@@ -74,14 +75,15 @@
 </table>
 <br><br>
 <c:if test="${ loginInfo.status == 1}" var="hasPermission">
-    <form name="inquiry_comment_form" id="inquiry_comment_form" action="/inquiry/comment/${inquiry[0].inquiry_id}"
+    <form name="inquiry_comment_form" id="inquiry_comment_form" action="/inquiry/comment/add/${inquiry[0].inquiry_id}"
           method="post">
         <input type="hidden" name="inquiry_commenter" value="${loginInfo.id}" hidden/>
         <input type="hidden" name="inquiry_comment_id_type" value="member" hidden/>
         <table>
             <tr>
-                <td><textarea id="inquiry_comment_content" name="inquiry_comment_content"
-                              placeholder="댓글을 입력해주세요."></textarea></td>
+                <td>
+                    <textarea id="inquiry_comment_content" name="inquiry_comment_content" placeholder="댓글을 입력해주세요."></textarea>
+                </td>
                 <td><input type="button" value="등록" id="btnSubmit"/></td>
             </tr>
         </table>
@@ -102,16 +104,16 @@
         <c:when test="${inquiry[0].inquiry_commenter != null}">
             <c:forEach items="${inquiry}" var="comment">
                 <tr>
-                    <td>
-                            댓글 작성자 ID: ${comment.inquiry_commenter}
-                            <c:if test="${loginInfo.id.equals(comment.inquiry_commenter)}">
-                                <button id="btnCommentModify">수정</button>
-                                &nbsp;<button id="btnCommentDelete">삭제</button>
-                            </c:if>
-                            <br>${comment.inquiry_comment_id_type}<br>
-                            댓글 내용: ${comment.inquiry_comment_content}<br>
-                            댓글 작성 시간: ${comment.inquiry_comment_created_at}&nbsp;
-                            댓글 수정 시간: ${comment.inquiry_comment_updated_at}<br>
+                    <td class="comment" id="${comment.comment_id}">
+                        댓글 작성자 ID: <span class="commenter_id">${comment.inquiry_commenter}</span>
+                        <c:if test="${loginInfo.id.equals(comment.inquiry_commenter)}">
+                            <button class="btnCommentUpdate">수정</button>
+                            &nbsp;<button class="btnCommentDelete">삭제</button>
+                        </c:if>
+                        <br><span class="commenter_type">${comment.inquiry_comment_id_type}</span>
+                        <br>댓글 내용: <span class="comment_content">${comment.inquiry_comment_content}
+                        <br>댓글 작성 시간: <span class="comment_created_at">${comment.inquiry_comment_created_at}</span>
+                        <br>댓글 수정 시간: <span class="comment_updated_at">${comment.inquiry_comment_updated_at}</span>
                     </td>
                 </tr>
             </c:forEach>
@@ -124,29 +126,21 @@
     </c:choose>
 </table>
 
-<script>
-    document.getElementById('btnList').addEventListener('click', () => location.href = '/inquiry/list');
-    if (document.getElementById('btnModify') != null) {
-        document.getElementById('btnModify').addEventListener('click', () => {
-            location.href = '/inquiry/modify/${inquiry[0].inquiry_id}';
-        });
-    }
 
-    if (document.getElementById('btnDelete') != null) {
-        document.getElementById('btnDelete').addEventListener('click', () => {
-            if (confirm('질문을 삭제하시겠습니까? 삭제한 질문은 복구할 수 없습니다!')) {
-                location.href = '/inquiry/delete/${inquiry[0].inquiry_id}'
-            }
-        });
-    }
+<script>
+    $('#btnList').on('click', () => location.href = '/inquiry/list');
+    $('#btnModify').on('click', () => location.href = '/inquiry/modify/${inquiry[0].inquiry_id}');
+    $('#btnDelete').on('click', () => {
+        if (confirm('질문을 삭제하시겠습니까? 삭제한 질문은 복구할 수 없습니다!')) {
+            location.href = '/inquiry/delete/${inquiry[0].inquiry_id}'
+        }
+    });
 
     $('#btnSubmit').on('click', function (e) {
         let frm = $('#inquiry_comment_form');
         let cmt = $('#inquiry_comment_content');
-
         e.preventDefault();
         e.stopPropagation();
-
         let isValid = true;
         if (!checkSQLInjection(cmt.val()) || cmt.val().length < 9 || cmt.val().length > 101) {
             alert('댓글은 10자 이상 100자 이하여야 하며, \', \", $$, #, --, /* 는 포함할 수 없습니다.');
@@ -154,12 +148,56 @@
             cmt.focus();
             isValid = false;
         }
+        if (isValid) {frm.submit();}
+    });
 
-        if (isValid) {
-            frm.submit();
+    $('.btnCommentUpdate').on('click', function () {
+        let commenter = $(this).siblings()[0].innerText; // 댓글 작성자
+        let comment_id = $(this).parent().attr('id'); // 댓글 ID
+        let commenter_type = $(this).siblings()[3].innerText; // 댓글 작성자 타입
+        let original_comment = $(this).siblings()[4].innerText; // 원래 댓글
+        let url = '/inquiry/comment/update/' + comment_id;
+        console.log($(this).parent());
+        $(this).parent()[0].innerHTML = `
+        <form id="inquiry_comment_update_form" name="inquiry_comment_update_form" action="` + url + `" method="post">
+            <input type="hidden" name="inquiry_id" value="`+ ${inquiry[0].inquiry_id} +`"/>
+            <input type="hidden" name="inquiry_commenter" value="` + commenter + `"/>
+            <input type="hidden" name="inquiry_comment_id_type" value="` + commenter_type + `"/>
+            <textarea id="inquiry_comment_content_update" name="inquiry_comment_content">` + original_comment + `</textarea>
+            <input id="btnCommentModifyDone" type="submit" value="수정 완료"/>
+        </form>`;
+
+        $('#btnCommentModifyDone').on('click', function (e){
+            e.preventDefault();
+            e.stopPropagation();
+            let frm = $('#inquiry_comment_update_form');
+            let cmt = $('#inquiry_comment_content_update');
+            e.preventDefault();
+            e.stopPropagation();
+            let isValid = true;
+            if (!checkSQLInjection(cmt.val()) || cmt.val().length < 9 || cmt.val().length > 101) {
+                alert('댓글은 10자 이상 100자 이하여야 하며, \', \", $$, #, --, /* 는 포함할 수 없습니다.');
+                cmt.val('');
+                cmt.focus();
+                isValid = false;
+            }
+            if (isValid) {
+                frm.submit();
+            }
+        });
+    });
+
+    $('.btnCommentDelete').on('click', function () {
+        let commenter = $(this).siblings()[0].innerText; // 댓글 작성자
+        let comment_id = $(this).parent().attr('id'); // 댓글 ID
+
+        let url = '/inquiry/comment/delete/' + comment_id + "/" + commenter + "/" + ${inquiry[0].inquiry_id};
+        console.log(commenter);
+        console.log(comment_id);
+        if (confirm('댓글을 삭제하시겠습니까?')) {
+            location.href = url;
         }
-    })
-
+    });
 </script>
 </body>
 </html>

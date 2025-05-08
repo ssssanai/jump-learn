@@ -19,5 +19,6 @@ public interface InquiryMapper {
 	public int delete(@Param("id") int id);
 	// QnA 댓글
 	public int addComment(InquiryCommentVO vo);
-
+	public int updateComment(InquiryCommentVO vo);
+	public int deleteComment(@Param("id") int id);
 }

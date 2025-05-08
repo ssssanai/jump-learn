@@ -95,4 +95,18 @@ public class InquiryMapperTest {
 		int result = mapper.addComment(vo);
 		log.info(result);
 	}
+
+	@Test
+	public void test9() {
+		InquiryCommentVO vo = InquiryCommentVO.builder().id(8).content("댓글 수정됨.").build();
+		log.info(vo);
+		int result = mapper.updateComment(vo);
+		log.info(result);
+	}
+
+	@Test
+	public void test10() {
+		int result = mapper.deleteComment(5);
+		log.info(result);
+	}
 }
