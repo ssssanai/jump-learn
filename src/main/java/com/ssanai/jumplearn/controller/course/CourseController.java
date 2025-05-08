@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -47,6 +48,15 @@ public class CourseController {
 		List<ClassDTO> courseList = courseService.getClassList(searchDTO);
 		log.info(courseList);
 
+		// 제외목록
+		List<Integer> exceptList = new ArrayList<>();
+		for(ClassDTO classDTO : courseList){
+			for(BasketDTO basketDTO : basketList){
+				if(basketDTO.getClass_id() == classDTO.getId()){
+					exceptList.add(classDTO.getId());
+				}
+			}
+		}
 		// 검색된 강좌 개수
 		int total_count = courseService.getListTotalCount(searchDTO);
 		log.info(total_count);
@@ -68,11 +78,11 @@ public class CourseController {
 		model.addAttribute("member", memberDTO);
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("courseList", courseList);
+		model.addAttribute("exceptList", exceptList);
 		model.addAttribute("searchDTO", searchDTO);
 		return "course/list";
 	}
 
-	// TODO: course detail GET (진입시)
 	@GetMapping("/detail/{id}")
 	public String detail(@PathVariable("id") int id, Model model){
 		log.info(id);
