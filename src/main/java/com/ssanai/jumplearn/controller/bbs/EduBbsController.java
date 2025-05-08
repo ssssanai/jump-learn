@@ -11,7 +11,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 
 @Log4j2
@@ -20,30 +19,6 @@ import java.util.List;
 @RequestMapping("/edu")
 public class EduBbsController {
     private final BbsServiceInterface bbsService;
-
-    @GetMapping("/writeListPage")
-    public String eduList(			HttpServletRequest req
-            ,@ModelAttribute("pageDTO") PageRequestDTO pageDTO
-//          @RequestParam(name="pageDTO",required = false) PageRequestDTO pageDTO
-            , Model model
-    ) {
-//        if (pageDTO == null) {
-//                 pageDTO = PageRequestDTO.builder()
-//                .page_no(2)
-//                .page_size(10)
-//                .search_category("title")
-//                .search_word("50")
-//                .build();
-//        }
-        List<BbsDefaultDTO> dto = bbsService.listAll(pageDTO);
-        model.addAttribute("dto", dto);
-//        model.addAttribute("pageDTO", pageDTO);
-        int totalCount = bbsService.getTotalCount(pageDTO);
-
-        String paging = BbsPage.pagingArea(totalCount, pageDTO.getPage_no(), pageDTO.getPage_size(), pageDTO.getPage_block_size(), req.getContextPath());
-        model.addAttribute("paging", paging);
-        return "edu/writeListPage";
-    }
 
     @GetMapping("/writePage")
     public String writePageGET(){
@@ -70,6 +45,9 @@ public class EduBbsController {
             , Model model
     ){
         model.addAttribute("dto", bbsService.selectOne(id));
+
+
+
         return "edu/viewPage";
     }
 
@@ -100,12 +78,17 @@ public class EduBbsController {
     }
 
     @GetMapping("/searchListPage")
-    public String searchListGet(
-            @ModelAttribute("pageDTO") PageRequestDTO pageDTO
-            , Model model
+    public String searchListPage(
+            HttpServletRequest req
+            ,@ModelAttribute("pageDTO") PageRequestDTO pageDTO,
+            Model model
     ) {
-        PageResponseDTO<BbsDefaultDTO> searchDTO  = bbsService.searchList(pageDTO);
-        model.addAttribute("searchDTO", searchDTO);
+        PageResponseDTO<BbsDefaultDTO> dto = bbsService.searchList(pageDTO);
+        int totalCount = bbsService.getTotalCount(pageDTO);
+
+        model.addAttribute("dto", dto);
+        String paging = BbsPage.pagingArea(totalCount, pageDTO.getPage_no(), pageDTO.getPage_size(), pageDTO.getPage_block_size(), req.getContextPath());
+        model.addAttribute("paging", paging);
         return "edu/searchListPage";
     }
 
@@ -116,8 +99,5 @@ public class EduBbsController {
         bbsService.searchList(pageDTO);
         return "redirect:/edu/searchListPage";
     }
-
-
-
 
 }
