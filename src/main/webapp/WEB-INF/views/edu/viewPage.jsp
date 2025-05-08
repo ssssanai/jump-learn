@@ -47,6 +47,7 @@
             </tr>
             <tr>
                 <td colspan="5">
+
                     [${dto.content}]
                 </td>
             </tr>
@@ -54,7 +55,7 @@
     </main>
     <form>
         <div class="imgMain">
-            <input type="file" id="file" value="">
+            <input type="file" id="file" />
         </div>
         <input class="endBtn" type="submit" onclick="" value="수정">
         <input class="endBtn" type="button" onclick="" value="삭제">
