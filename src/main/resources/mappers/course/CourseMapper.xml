@@ -58,10 +58,16 @@
         WHERE id = #{id}
     </select>
 
+    <select id="checkReviewExist">
+        select count(*)
+        from tbl_enrollments
+        where class_id = #{id}
+    </select>
+
     <select id="getReviewRate">
         SELECT avg(feedback_score)
         FROM tbl_enrollments
-        WHERE id = #{id}
+        WHERE class_id = #{id}
     </select>
 
     <select id="getClassVideoList" resultType="com.ssanai.jumplearn.dto.ClassVideoDTO">
