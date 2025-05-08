@@ -1,0 +1,323 @@
+@charset "utf-8";
+* {
+    margin:0; padding:0;
+    box-sizing: border-box;
+    font-family: 'KakaoSmallSans-Bold';
+}
+a {
+    display:block;
+    text-decoration: none;
+    color:#222222;
+}
+ul li {
+    list-style-type:none;
+}
+
+@font-face {
+    font-family: 'KakaoSmallSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoSmallSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.wrap {
+    display: flex;
+    margin: 40px auto;
+    width:60%; height:1250px;
+}
+
+.aside {
+    display: flex;
+    flex-direction: column;
+    float:left;
+    width:300px; height:100%;
+    margin-right: 1%;
+}
+.myInfo1 {
+    width:100%; height:240px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.myInfoHead1 {
+    float: left;
+    width:100%; height:110px;
+    padding:5px 0;
+}
+.myInfop {
+    float:left;
+    width:100%; height:100%;
+    padding: 0 20px;
+}
+.myInfop > p {
+    display: block;
+    width:100%; height:50px;
+    line-height:50px;
+    font-size:16px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.myInfop > h2 {
+    display: block;
+    width:100%; height:50px;
+    line-height:30px;
+    font-size:19px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.logoutBtn {
+    float: left;
+    display: flex;
+    width:100%; height:30px;
+    padding: 5px 0px;
+    gap:15px;
+    justify-content: center;
+}
+.logoutBtn > a {
+    display: block;
+    width:100px;
+    height:100%;
+    background-color: #d6d6d6b3;
+    border: 0.5px solid #a0a0a0b3;
+    color:#838383;
+    text-align: center;
+    line-height:19px;
+    font-size:12px;
+    font-weight:100;
+    border-radius: 2px;
+
+}
+.logoutBtn > a:hover {
+    background-color: #bbbbbbb3;
+}
+.myInfoMenu {
+    float: left;
+    display: flex;
+    width:100%; height:calc(100% - 140px);
+    gap: 10px;
+    padding: 10px 10px 0px 10px;
+    justify-content: center;
+}
+.infoMenu {
+    width:80px; height:100%;
+}
+.infoMenuHead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%; height:60px;
+}
+.menuBox {
+    width:55px; height:55px;
+    text-align: center;
+    font-size: 15px;
+    background-color: none;
+    border: 0.5px solid #bbbbbbb3;
+    border-radius: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fa-pen, .fa-cart-shopping, .fa-bookmark, .fa-credit-card, .fa-headset {
+    font-size: 20px;
+    color:#2d3d70;
+
+}
+.infoMenuBody {
+    width:100%; height:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.noCnt {
+    width:100%; height:100%;
+    font-size:11px;
+    text-align: center;
+    line-height:20px;
+}
+.cnt1 {
+    float:left;
+    width:calc(100% - 20px); height:100%;
+    font-size:11px;
+    text-align: center;
+    line-height:20px;
+}
+.cnt2 {
+    float:left;
+    width:15px; height:15px;
+    text-align: center;
+    line-height:17px;
+    background-color: #2d3d70;
+    border-radius:100%;
+    color:#fff;
+    font-size:8px;
+    font-family: 'LINESeedKR-Bd';
+}
+.sideMenu {
+    width:100%; height:120px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+}
+.sideMenu > p {
+    width:100%; height:40px;
+    text-align: center;
+    line-height:38px;
+    font-size:14px;
+}
+.sideMenu > p:hover {
+    background-color: #a4b7ff;
+    cursor: pointer;
+}
+.main {
+    float:left;
+    width:calc(100% - 300px); height:100%;
+}
+#cont1 {
+    display:none;
+    width:100%; height:450px;
+}
+.ht {
+    width:100%; height:40px;
+    line-height:38px;
+    padding-left: 10px;
+    font-size:20px;
+}
+.searchBox {
+    display: flex;
+    width:100%; height:50px;
+    justify-content: space-between;
+    align-items: center;
+}
+.searchBox2 {
+    display: flex;
+    width:50%; height:50px;
+    justify-content: space-between;
+    align-items: center;
+}
+.searchBtn {
+    width:80px; height:35px;
+    border:3px solid #d6d6d6b3;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+.searchBtn:focus {
+    border-color:#607cfa;
+    outline:none;
+}
+.serchIn {
+    padding: 0 10px;
+    width:calc(100% - 85px); height:40px;
+    border:3px solid #d6d6d6b3;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+.serchIn:focus {
+    border-color:#607cfa;
+    outline:none;
+}
+.serchBtn {
+    width:80px; height:40px;
+    border:3px solid #d6d6d6b3;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+.serchBtn:hover {
+    background-color: #d3d3d3;
+    border-radius: 4px;
+}
+.myStudyList1 {
+    display:flex;
+    width:100%; height:35px;
+    background: #fafafa;
+    color: #434a59;
+    font-size: 14px;
+    border-bottom: 1px solid #adadad;
+}
+.myStudyList2 {
+    display: flex;
+    width:100%; height:30px;
+    font-size:13px;
+    color: #434a59;
+    border-color: inherit;
+}
+.myStudyList2:nth-child(odd){
+    background-color: #e1e7ff;
+}
+.studyNo {
+    width:50px; height:35px;
+    text-align: center;
+    line-height:33px;
+}
+.studyTit, .studyTit1 {
+    width:calc(100% - 280px); height:35px;
+    text-align: center;
+    line-height:33px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.studyTit:hover {
+    color:#607cfa;
+}
+.studyTeach {
+    width:100px; height:35px;
+    text-align: center;
+    line-height:33px;
+}
+.studyPrice {
+    width:130px; height:35px;
+    text-align: center;
+    line-height:33px;
+}
+.pageBox {
+    width:100%; height:20px;
+    text-align: center;
+    line-height:18px;
+    margin-top: 10px;
+}
+#cont2 {
+    display:none;
+    width:100%; height:450px;
+}
+#cont3 {
+    display:none;
+    width:100%; height:450px;
+}
+.comuNo {
+    width:50px; height:35px;
+    text-align: center;
+    line-height:33px;
+}
+.comuTit, .comuTit1 {
+    width:calc(50% - 90px); height:35px;
+    text-align: center;
+    line-height:33px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.comuTit1:hover {
+    color:#607cfa;
+}
+.comuCont {
+    width:calc(50% - 90px); height:35px;
+    text-align: center;
+    line-height:33px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.comuRegDate {
+    width:130px; height:35px;
+    text-align: center;
+    line-height:33px;
+}
