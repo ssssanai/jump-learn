@@ -41,6 +41,7 @@
     <th>강의 생성 일자</th>
     <th>강의 수정 일자</th>
     <th>강의 자료 추가</th>
+    <th>강의 자료 수정</th>
     <th>강의 삭제</th>
   </tr>
   </thead>
@@ -49,7 +50,7 @@
     <c:when test="${not empty dtoList}">
       <c:forEach var="list" items="${dtoList}" varStatus="loop">
         <tr>
-          <td>${list.video_order}</td>
+          <td><a href="admin/class_video_update?video_id=?${list.id}">${list.video_order}</a></td>
           <td>${list.teacher_id}</td>
           <td>${list.title}</td>
           <td>
@@ -73,7 +74,14 @@
             </c:choose>
           </td>
           <td>
-<%--            <a href="${list.data_path}" target="_blank">${list.data_name}</a>--%>
+            <c:choose>
+              <c:when test="${not empty list.data_name}">
+                <a href="/upload/${list.data_name}" target="_blank">${list.data_name}</a>
+              </c:when>
+              <c:otherwise>
+                X
+              </c:otherwise>
+            </c:choose>
           </td>
           <td>${list.created_at}</td>
           <td>${list.updated_at}</td>
@@ -84,7 +92,23 @@
           </td>
           <td>
             <button>
-              <a href="/admin/class_data_create?class_id=${list.class_id}" class="button-link">삭제</a>
+              <c:choose>
+                <c:when test="${not empty list.data_name}">
+                  <a href="/admin/class_data_update?data_id=${list.data_id}" class="button-link">자료 수정</a>
+                </c:when>
+                <c:otherwise>
+                  X
+                </c:otherwise>
+              </c:choose>
+            </button>
+          </td>
+          <td>
+            <button>
+              <a href="/admin/class_video_delete?movie_id=${list.id}"
+                 class="button-link"
+                 onclick="return checkDataName('${list.data_name}');">
+                삭제
+              </a>
             </button>
           </td>
         </tr>
@@ -98,4 +122,14 @@
   </c:choose>
   </tbody>
 </table>
+<script>
+  function checkDataName(dataName) {
+    if (!dataName) {
+      return true;
+    }
+    alert('강의 자료를 먼저 삭제하신 후 진행해주세요.');
+    return false;
+  }
+</script>
+</body>
 </html>

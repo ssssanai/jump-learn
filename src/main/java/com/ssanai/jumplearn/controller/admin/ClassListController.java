@@ -1,9 +1,8 @@
 package com.ssanai.jumplearn.controller.admin;
 
 import com.ssanai.jumplearn.dto.*;
-import com.ssanai.jumplearn.dto.mainpage.ClassDataDTO;
+import com.ssanai.jumplearn.dto.ClassDataDTO;
 import com.ssanai.jumplearn.service.admin.ClassListServiceIf;
-import com.ssanai.jumplearn.util.CommonFileUtil;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -192,17 +191,19 @@ public class ClassListController {
     @GetMapping("/class_data_create")
     public String dataCreate(
             @RequestParam("class_id")String id,
+            @RequestParam("order")String order_id,
             Model model
     ){
         model.addAttribute("id", id);
+        model.addAttribute("order_id", order_id);
         return "admin/classDataCreate";
     }
-    @PostMapping("class_data_create")
+    @PostMapping("/class_data_create")
     public String dataCreate(
             ClassDataDTO dto,
             Model model,
             RedirectAttributes redirectAttributes,
-            @RequestParam(name = "video") MultipartFile file
+            @RequestParam(name = "pdf") MultipartFile file
     ) throws Exception {
         try {
             if (file != null && !file.isEmpty()) {
@@ -224,7 +225,7 @@ public class ClassListController {
                 int rs = classListService.createData(dto);
                 if (rs != 1) {
                     redirectAttributes.addAttribute("msg", "영상 생성 실패 했습니다.");
-                    return "redirect:/admin/classVideoCreate";
+                    return "redirect:/admin/class_data_create?class_id="+dto.getClass_id()+"order" + dto.getData_order();
                 } else {
                     redirectAttributes.addAttribute("msg", "영상 생성 성공 했습니다.");
                 }
@@ -232,8 +233,94 @@ public class ClassListController {
         } catch (Exception e) {
             log.info("classCreate >> error : {}", e.getMessage());
             redirectAttributes.addFlashAttribute("msg", "업로드 실패: " + e.getMessage());
-            return "redirect:/admin/classVideoCreate";
+            return "redirect:/admin/class_data_create?class_id="+dto.getClass_id()+"order" + dto.getData_order();
         }
         return "redirect:/admin/class?id="+dto.getClass_id();
+    }
+    @GetMapping("/class_video_delete")
+    public String dataDelete(
+            @RequestParam("movie_id") String id,
+            Model model,
+            @RequestHeader(value = "Referer", required = false) String referer,
+            RedirectAttributes redirectAttributes
+    ){
+        int movie_id = Integer.parseInt(id);
+        int rs = classListService.deleteClass(movie_id);
+        if (rs != 1) {
+            redirectAttributes.addFlashAttribute("msg", "삭제 실패");
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "삭제 성공");
+        }
+        log.info(referer);
+        if (referer != null) {
+            return "redirect:" + referer;
+        } else {
+            return "redirect:/admin/class";
+        }
+    }
+    @GetMapping("/class_data_update")
+    public String dataUpdate(
+            @RequestParam("data_id")String data_id,
+            @RequestHeader(value = "Referer", required = false) String referer,
+            Model model
+    ){
+        int id = Integer.parseInt(data_id);
+        ClassDataDTO dto = classListService.dataDetail(id);
+        log.info(dto.toString());
+        model.addAttribute("dto", dto);
+        return "admin/classDataUpdate";
+    }
+    @PostMapping("/class_data_update")
+    public String dataUpdate(
+            ClassDataDTO dto,
+            @RequestParam("pdf") MultipartFile file,
+            RedirectAttributes redirectAttributes
+    ) throws Exception {
+        try {
+            if (file != null && !file.isEmpty()) {
+                String uploadDir = "D:\\git\\jump-learn\\src\\upload";
+                String newName = file.getOriginalFilename();
+
+                File target = new File(uploadDir, newName);
+                file.transferTo(target);
+
+                dto.setData_path("/upload");
+                dto.setData_name(newName);
+                dto.setData_extension(
+                        file.getOriginalFilename()
+                                .substring(file.getOriginalFilename()
+                                        .lastIndexOf("."))
+                );
+                dto.setData_size(file.getSize());
+                log.info(dto.toString());
+                int rs = classListService.classDataUpdate(dto);
+                if (rs != 1) {
+                    redirectAttributes.addAttribute("msg", "영상 생성 실패 했습니다.");
+                    return "admin/class_data_update?data_id="+dto.getId();
+                } else {
+                    redirectAttributes.addAttribute("msg", "영상 생성 성공 했습니다.");
+                }
+            }
+        } catch (Exception e) {
+            log.info("classCreate >> error : {}", e.getMessage());
+            redirectAttributes.addFlashAttribute("msg", "업로드 실패: " + e.getMessage());
+            return"admin/class_data_update?data_id="+dto.getId();
+        }
+        return "redirect:/admin/class?id=" + dto.getClass_id();
+    }
+    @GetMapping("/class_data_delete")
+    public String dataDelete(
+            @RequestParam("data_id") String id,
+            @RequestParam("class_id") String class_id,
+            RedirectAttributes redirectAttributes
+    ) {
+        log.info("classID: {}", class_id);
+        int rs = classListService.classDataDelete(Integer.parseInt(id));
+        if (rs != 1) {
+            redirectAttributes.addFlashAttribute("msg", "삭제 실패");
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "삭제 성공");
+        }
+        return "redirect:/admin/class?id="+class_id;
     }
 }

@@ -2,17 +2,14 @@ package com.ssanai.jumplearn.service.admin;
 
 
 import com.ssanai.jumplearn.dto.*;
-import com.ssanai.jumplearn.dto.mainpage.ClassDataDTO;
+import com.ssanai.jumplearn.dto.ClassDataDTO;
 import com.ssanai.jumplearn.mapper.admin.ClassListMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -72,4 +69,25 @@ public class ClassListServiceImpl implements ClassListServiceIf {
     public int createData(ClassDataDTO classDataDTO) {
         return classListXmlMapper.createData(classDataDTO);
     }
+
+    @Override
+    public int deleteClass(int id) {
+        return classListXmlMapper.deleteClass(id);
+    }
+
+    @Override
+    public ClassDataDTO dataDetail(int id) {
+        return classListXmlMapper.dataDetail(id);
+    }
+
+    @Override
+    public int classDataUpdate(ClassDataDTO classDataDTO) {
+        return classListXmlMapper.classDataUpdate(classDataDTO);
+    }
+
+    @Override
+    public int classDataDelete(int id) {
+        return classListXmlMapper.classDataDelete(id);
+    }
+
 }
