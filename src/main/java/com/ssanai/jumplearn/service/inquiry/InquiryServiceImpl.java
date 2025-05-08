@@ -4,6 +4,7 @@ import com.ssanai.jumplearn.dto.InquiryDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.mapper.inquiry.InquiryMapper;
+import com.ssanai.jumplearn.vo.InquiryCommentVO;
 import com.ssanai.jumplearn.vo.InquiryVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -73,5 +74,17 @@ public class InquiryServiceImpl implements InquiryServiceIf {
 	@Override
 	public int delete(int id) {
 		return inquiryMapper.delete(id);
+	}
+
+	@Override
+	public int addComment(InquiryDTO dto) {
+		InquiryCommentVO vo = InquiryCommentVO.builder()
+				.inquiry_id(dto.getInquiry_id())
+				.commenter(dto.getInquiry_commenter())
+				.comment_id_type(dto.getInquiry_comment_id_type())
+				.content(dto.getInquiry_comment_content())
+				.build();
+		log.info(vo);
+		return inquiryMapper.addComment(vo);
 	}
 }

@@ -3,6 +3,7 @@ package com.ssanai.jumplearn.mapper;
 import com.ssanai.jumplearn.dto.InquiryDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.mapper.inquiry.InquiryMapper;
+import com.ssanai.jumplearn.vo.InquiryCommentVO;
 import com.ssanai.jumplearn.vo.InquiryVO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -79,6 +80,19 @@ public class InquiryMapperTest {
 	@Test
 	public void test7() {
 		int result = mapper.delete(23);
+		log.info(result);
+	}
+
+	@Test
+	public void test8() {
+		InquiryCommentVO vo = InquiryCommentVO.builder()
+				.inquiry_id(29)
+				.commenter("member001")
+				.content("댓글 테스트 5")
+				.comment_id_type("member")
+				.build();
+		log.info(vo.toString());
+		int result = mapper.addComment(vo);
 		log.info(result);
 	}
 }

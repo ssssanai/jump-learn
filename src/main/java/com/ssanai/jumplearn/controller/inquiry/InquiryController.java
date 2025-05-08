@@ -58,7 +58,7 @@ public class InquiryController {
 		List<InquiryDTO> inquiry = inquiryService.getInquiry(id);
 
 		if (dto != null && inquiry != null) {
-			if(inquiry.get(0).getVisibility() == 0 && !inquiry.get(0).getMember_id().equals(dto.getId())) {
+			if (inquiry.get(0).getVisibility() == 0 && !inquiry.get(0).getMember_id().equals(dto.getId())) {
 				redirectAttributes.addFlashAttribute("msg", "잘못된 접근입니다.");
 				return "redirect:/inquiry/list";
 			} else {
@@ -224,6 +224,49 @@ public class InquiryController {
 			redirectAttributes.addFlashAttribute("msg", "잘못된 접근입니다.");
 			return "redirect:/inquiry/list";
 		}
+	}
+
+	@PostMapping("/comment/{id}")
+	public String addComment(
+			HttpServletRequest req,
+			@PathVariable("id") int id,
+			RedirectAttributes ra,
+			InquiryDTO dto,
+			Model model
+	) {
+		log.info("Inquiry addComment() POST");
+		// TODO: memberInfo에서 status 체크해서 추가되지 않도록 해야함
+		MemberDTO mDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		// 로그인되지 않은 상태인 경우
+		if (mDTO == null) {
+			log.info("Not Logged In Member");
+			ra.addFlashAttribute("msg", "로그인 후 사용 가능한 서비스입니다.");
+			return "member/login";
+		}
+
+		// mDTO는 있으나 status가 1이 아닌 경우
+		if (mDTO.getStatus() != 1) {
+			log.info("Status is not 1");
+			ra.addFlashAttribute("msg", "운영 정책 위반으로 인해 댓글 등록 권한이 없습니다.");
+			return "redirect:/inquiry/detail/" + id;
+		}
+
+		String content = dto.getInquiry_comment_content();
+		// 유효성 검사
+		if (!isValidValue(content) || content.length() < 9 || content.length() > 101) {
+			log.info("Invalid Value");
+			ra.addFlashAttribute("msg", "댓글은 10자 이상 100자 이하여야 하며, ', \", $$, #, --, /* 는 포함할 수 없습니다.");
+			return "redirect:/inquiry/detail/" + id;
+		}
+
+		dto.setInquiry_id(id);
+		log.info(dto);
+		int result = inquiryService.addComment(dto);
+		log.info(result > 0 ? "성공" : "실패");
+		if (result < 0) {
+			ra.addFlashAttribute("msg", "댓글 등록에 실패했습니다.");
+		}
+		return "redirect:/inquiry/detail/" + id;
 	}
 
 	public boolean isValidValue(String s) {
