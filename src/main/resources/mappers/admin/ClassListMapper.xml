@@ -54,11 +54,51 @@
         teacher_id AS class_teacher_id,
         category AS class_category,
         target AS class_target,
-        price AS class_price
+        price AS class_price,
+        file_name AS class_file_name
         from tbl_class
         <include refid="whereCondition"></include>
         order by id desc
         limit #{page_skip_count}, #{page_size}
     </select>
+    <select id="videoList">
+        SELECT
+        v.id as id,
+        v.class_id as class_id,
+        v.video_order as vide,
+        v.video_path as video_path,
+        v.video_url as video_url,
+        v.video_path as video_path,
+        v.video_name as video_name,
+        v.video_extension as video_extension,
+        v.video_size as video_size,
+        v.title as title,
+        v.content as content,
+        v.created_at as created_at,
+        v.updated_at as updated_at,
+        c.teacher_id AS teacher_id,
+        c.category AS category,
+        d.data_name AS data_name
+        FROM tbl_class_video AS v
+        LEFT JOIN tbl_class AS c ON v.class_id = c.id
+        LEFT JOIN tbl_class_data AS d
+        ON v.class_id = d.class_id AND v.video_order = d.data_order
+        WHERE v.class_id = #{class_id};
+    </select>
+    <insert id="createVideo1">
+        INSERT INTO tbl_class_video(
+        class_id, video_order, video_path, video_name,
+        video_size, video_extension, title, content)
+        VALUES (#{class_id}, #{video_order}, #{video_path}, #{video_name}, #{video_size}, #{video_extension}, #{title}, #{content})
+    </insert>
+    <insert id="createVideo2">
+        INSERT INTO tbl_class_video(
+        class_id, video_order, video_url, title, content)
+        VALUES (#{class_id},#{video_order}, #{video_url}, #{title}, #{content})
+    </insert>
+    <insert id="createData">
+        INSERT INTO tbl_class_data(class_id, data_order, title, data_path, data_name, data_size, data_extension)
+        values(#{class_id},#{data_order}, #{title}, #{data_path}, #{data_name}, #{data_size}, #{data_extension})
+    </insert>
 </mapper>
     

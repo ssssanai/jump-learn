@@ -45,4 +45,5 @@ public class TeacherDTO {
     private long file_size;
     @Pattern(regexp = "^(?i)(jpg|jpeg|png)$", message = "이미지 확장자는 jpg, jpeg, png, gif만 허용됩니다.")
     private String file_ext;
+    private int totalCountClass;
 }

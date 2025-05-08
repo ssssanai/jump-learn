@@ -40,6 +40,7 @@
     <thead>
     <tr>
         <th>순서</th>
+        <th>강좌 사진</th>
         <th>강좌 아이디</th>
         <th>강좌  제목</th>
         <th>선생님 아이디</th>
@@ -53,8 +54,20 @@
         <c:when test="${not empty dtoList}">
             <c:forEach var="list" items="${dtoList}" varStatus="loop">
                 <tr>
-                    <td>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</td>
-                    <td><a href="/admin/member?id=${list.class_id}">${list.class_id}</a></td>
+                    <td>
+                        ${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty list.class_file_name}">
+                                <img src="/upload/${list.class_file_name}" alt="강좌 사진" />
+                            </c:when>
+                            <c:otherwise>
+                                <img src="../../../resources/static/images/img.png" alt="기본 강좌 이미지" />
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td><a href="/admin/class?id=${list.class_id}">${list.class_id}</a></td>
                     <td>${list.class_title}</td>
                     <td>${list.class_teacher_id}</td>
                     <td>${list.class_category}</td>
@@ -82,7 +95,7 @@
            </c:when>
            <c:otherwise>1</c:otherwise>
          </c:choose>"
-               href="/admin/teacher_search_list?"
+               href="/admin/class_search_list?"
             <c:choose>
                     <c:when test='${pageInfo.prev_page_flag}'>
                         ${pageInfo.linkParams}&page_no=${pageInfo.page_block_start - 1}
@@ -98,7 +111,7 @@
                 <a class="page-link" data-num="${page_num}"
                    href="<c:choose>
                  <c:when test='${pageInfo.page_no == page_num}'>#</c:when>
-                 <c:otherwise>/admin/teacher_search_list?${pageInfo.linkParams}&page_no=${page_num}</c:otherwise>
+                 <c:otherwise>/admin/class_search_list?${pageInfo.linkParams}&page_no=${page_num}</c:otherwise>
               </c:choose>">${page_num}</a>
             </li>
         </c:forEach>
@@ -112,7 +125,7 @@
            </c:when>
            <c:otherwise>${pageInfo.page_block_end}</c:otherwise>
          </c:choose>"
-               href="/admin/teacher_search_list?"
+               href="/admin/class_search_list?"
             <c:choose>
                     <c:when test='${pageInfo.next_page_flag}'>
                         ${pageInfo.linkParams}&page_no=${pageInfo.page_block_end + 1}

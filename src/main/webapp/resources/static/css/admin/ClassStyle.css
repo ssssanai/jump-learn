@@ -1,0 +1,97 @@
+*{
+    text-decoration : none;
+}
+table {
+    width: 100%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    margin: 30px auto;
+    font-size: 18px;
+}
+th, td {
+    padding: 15px;
+    border: 1px solid #ccc;
+    text-align: center;
+    min-width: 120px;
+}
+button {
+    padding: 10px 20px;
+    background-color: darkolivegreen;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+#list {
+    margin: 0 auto;
+    width: 1200px;
+    height: 900px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+}
+
+#AdminInfo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    font-size: 22px;
+}
+#AdminInfo span {
+    margin-left: 40px;
+}
+
+#total {
+    margin: 0 auto;
+    width: 60%;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+#search {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.button-link {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    width: 70px;
+    height: 35px;
+}
+#pages {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+    font-size: 18px;
+}
+
+.page-item {
+    margin: 0 7px;
+}
+
+.page-item a.page-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: normal;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 18px;
+}
+

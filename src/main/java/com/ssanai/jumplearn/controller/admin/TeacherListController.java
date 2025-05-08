@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Log4j2
 @RequiredArgsConstructor
 @Controller
@@ -22,7 +24,7 @@ public class TeacherListController {
             HttpSession session,
             @ModelAttribute("reqDTO") PageRequestDTO reqDTO,
             Model model
-    ){
+    ) {
         log.info("teacherList시작");
         AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
         PageResponseDTO<TeacherDTO> resDTO = teacherListService.searchList(reqDTO);
@@ -31,72 +33,77 @@ public class TeacherListController {
         model.addAttribute("pageInfo", resDTO);
         return "admin/teacherList";
     }
+
     @GetMapping("/teacher_search_list")
     public String searchList(
-            @ModelAttribute("reqDTO")PageRequestDTO reqDTO,
+            @ModelAttribute("reqDTO") PageRequestDTO reqDTO,
             Model model
-    ){
-        log.info("검색 조건"+reqDTO);
+    ) {
+        log.info("검색 조건" + reqDTO);
         PageResponseDTO<TeacherDTO> resDTO = teacherListService.searchList(reqDTO);
-        model.addAttribute("dtoList",resDTO.getDtoList());
-        model.addAttribute("pageInfo",resDTO);
+        model.addAttribute("dtoList", resDTO.getDtoList());
+        model.addAttribute("pageInfo", resDTO);
         log.info(resDTO);
         return "admin/teacherList";
     }
+
     @GetMapping("/teacher_create")
-    public String teacherCreate(){
+    public String teacherCreate() {
         return "admin/teacherCreate";
     }
+
     @PostMapping("/teacher_create")
     public String teacherCreate(
             TeacherDTO tDTO,
             HttpSession session,
             RedirectAttributes redirectAttributes
-    ){
-        AdminDTO dto= (AdminDTO)session.getAttribute("loginInfo");
-        if(dto==null || (dto.getStatus() != 1 && dto.getStatus() != 2) ){
+    ) {
+        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        if (dto == null || (dto.getStatus() != 1 && dto.getStatus() != 2)) {
             redirectAttributes.addFlashAttribute("msg", "생성 권한이 없습니다.");
             return "redirect:/admin/teacherList";
-        }else{
+        } else {
             int rs = teacherListService.teacherCreate(tDTO);
-            if(rs != 1){
-                redirectAttributes.addAttribute("msg","변경 실패 했습니다.");
+            if (rs != 1) {
+                redirectAttributes.addAttribute("msg", "변경 실패 했습니다.");
                 return "redirect:/admin/teacherCreate";
-            } else{
-                redirectAttributes.addAttribute("msg","변경 성공");
+            } else {
+                redirectAttributes.addAttribute("msg", "변경 성공");
                 return "redirect:/admin/teacherList";
             }
         }
     }
+
     @GetMapping("/teacherDelete")
     public String teacherDelete(
             HttpSession session,
             RedirectAttributes redirectAttributes,
-            @RequestParam(name = "id")String id
-    ){
-        AdminDTO dto = (AdminDTO)session.getAttribute("loginInfo");
+            @RequestParam(name = "id") String id
+    ) {
+        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
         log.info(dto.getStatus());
-        if(dto==null || dto.getStatus() != 1){
-            redirectAttributes.addFlashAttribute("msg","삭제 권한이 없습니다.");
+        if (dto == null || dto.getStatus() != 1) {
+            redirectAttributes.addFlashAttribute("msg", "삭제 권한이 없습니다.");
             return "redirect:/admin/teacherList";
-        }else {
+        } else {
             int rs = teacherListService.teacherDelete(id);
-            if(rs != 1){
-                redirectAttributes.addFlashAttribute("msg","삭제 중 오류 발생");
+            if (rs != 1) {
+                redirectAttributes.addFlashAttribute("msg", "삭제 중 오류 발생");
                 return "redirect:/admin/teacherList";
-            }else {
-                redirectAttributes.addFlashAttribute("msg","삭제 완료");
+            } else {
+                redirectAttributes.addFlashAttribute("msg", "삭제 완료");
                 return "redirect:/admin/teacherList";
             }
         }
     }
+
     @GetMapping("/teacherChange")
     public String teacherChange(
             HttpSession session,
             RedirectAttributes redirectAttributes,
-            @RequestParam(name = "id")String id,
-            @RequestParam(name="s")String s
-    ){
+            @RequestParam(name = "id") String id,
+            @RequestParam(name = "s") String s
+    ) {
         AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
         int status = Integer.parseInt(s);
         int adminStatus = loginInfo.getStatus();
@@ -106,11 +113,33 @@ public class TeacherListController {
             return "redirect:/admin/teacherList";
         }
         int rs = teacherListService.teacherChange(id, status);
-            if (rs > 0) {
+        if (rs > 0) {
             redirectAttributes.addFlashAttribute("msg", "변경 성공");
         } else {
             redirectAttributes.addFlashAttribute("msg", "변경 실패");
         }
-            return "redirect:/admin/teacherList";
+        return "redirect:/admin/teacherList";
+    }
+
+    @GetMapping("/teacher")
+    public String teacher(
+            Model model,
+            @RequestParam("id")String id
+    ){
+        TeacherDTO dto = teacherListService.teacherDetail(id);
+        log.info(dto.toString());
+        model.addAttribute("dto", dto);
+        return "admin/teacher";
+    }
+    @GetMapping("/teacherClass")
+    public String teacherClass(
+            Model model,
+            @RequestParam("id")String id
+    ){
+        List<TeacherClassDTO> dtoList = teacherListService.teacherClass(id);
+        model.addAttribute("dtoList", dtoList);
+        model.addAttribute("id",id);
+        log.info(dtoList.toString());
+        return "admin/teacherClass";
     }
 }
