@@ -24,6 +24,7 @@
         <include refid="whereCondition" />
     </select>
 
+    <!-- QnA 목록 불러오기 -->
     <select id="getInquiryList" resultType="com.ssanai.jumplearn.dto.InquiryDTO">
         SELECT
             ti.id AS 'inquiry_id', ti.member_id AS 'member_id', ti.title AS 'inquiry_title',
@@ -38,6 +39,7 @@
         LIMIT #{page_skip_count}, #{page_size};
     </select>
 
+    <!-- QnA 단건 조회 -->
     <select id="getInquiry" resultType="com.ssanai.jumplearn.dto.InquiryDTO">
         SELECT
             ti.id AS 'inquiry_id', ti.member_id AS 'member_id', ti.title AS 'inquiry_title',
@@ -53,11 +55,13 @@
         where ti.id = #{id};
     </select>
 
+    <!-- QnA 등록 -->
     <insert id="register">
         INSERT INTO tbl_inquiry(member_id, title, content, visibility) VALUES
         (#{member_id}, #{title}, #{content}, #{visibility});
     </insert>
 
+    <!-- QnA 수정 -->
     <update id="modify">
         update tbl_inquiry
         set
@@ -68,9 +72,16 @@
         where id = #{id};
     </update>
 
+    <!-- QnA 삭제 -->
     <delete id="delete">
         delete from tbl_inquiry
         where id = #{id}
     </delete>
+
+    <!-- QnA에 댓글 추가 -->
+    <insert id="addComment">
+        insert into tbl_inquiry_comment (inquiry_id, commenter, comment_id_type, content, created_at, updated_at)
+        values (#{inquiry_id}, #{commenter}, #{comment_id_type}, #{content}, NOW(), NOW())
+    </insert>
 </mapper>
  
