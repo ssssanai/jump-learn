@@ -47,22 +47,24 @@
             <div class="notBuy">
                 <p>아직 강좌가 없습니다!</p>
             </div>
-            <c:forEach items="${basketList}" var="b">
-            <div class="cart">
-                <div class="cartTit1">
-                    <p id="cart_course_title">${b.title}</p>
-                </div>
-                <div class="cartTit2">
-                    <p id="cart_course_teacher">${b.teacher}강사의</p>
-                    <p id="cart_course_introduce">${b.introduce}</p>
-                </div>
-                <div class="cartInfo">
-                    <p id="cart_course_price">${b.price}</p>
-                    <button>X</button>
-                    <c:set var="total_price" value="${total_price + b.price}"/>
-                </div>
+            <div class="buyy">
+                <c:forEach items="${basketList}" var="b">
+                    <div class="cart">
+                        <div class="cartTit1">
+                            <p id="cart_course_title">${b.title}</p>
+                        </div>
+                        <div class="cartTit2">
+                            <p id="cart_course_teacher">${b.teacher}강사의</p>
+                            <p id="cart_course_introduce">${b.introduce}</p>
+                        </div>
+                        <div class="cartInfo">
+                            <p id="cart_course_price">${b.price}</p>
+                            <button>X</button>
+                            <c:set var="total_price" value="${total_price + b.price}"/>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
-            </c:forEach>
         </div>
         <div class="cartHap">
             <p class="hapP">총 합계금액</p>
@@ -108,16 +110,27 @@
                             <c:forEach items="${courseList}" var="course">
                                 <div class="course">
                                         <%-- TODO: 디테일 페이지 링크 걸기 --%>
-                                    <a href="/course/detail/${course.id}">상세보기</a>
-                                    <span class="course_img">${course.file_path} ${course.file_name} ${course.file_ext}</span>
-                                    <span class="course_title">${course.title}</span>
-                                    <span class="course_introduce">${course.introduce}</span>
-                                    <span class="course_teacher">${course.name}</span>
-                                    <span class="course_category">${course.category}</span>
-                                    <span class="course_target">${course.target}</span>
-                                    <span class="course_price">${course.price}</span>
-                                    <button>찜</button>
-                                    <button>장바구니 담기</button>
+                                    <div class="course_img">
+                                            ${course.file_path} ${course.file_name} ${course.file_ext}
+                                    </div>
+                                    <div class="course_body">
+                                        <div class="course_cont">
+                                            <a href="/course/detail/${course.id}" class="course_title">${course.title}</a>
+                                            <p class="course_introduce">${course.introduce}</p>
+                                        </div>
+                                        <div class="course_info">
+                                            <p class="course_teacher">강사명 : ${course.name}</p>
+                                            <p class="course_category">과목 : ${course.category}</p>
+                                            <p class="course_target">학습 수준 : ${course.target}</p>
+                                        </div>
+                                    </div>
+                                    <div class="course_ls">
+                                        <p class="course_price">가격 - ${course.price}원</p>
+                                        <div class="course_btn">
+                                            <button>찜</button>
+                                            <button>장바구니 담기</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </c:forEach>
                         </c:when>
