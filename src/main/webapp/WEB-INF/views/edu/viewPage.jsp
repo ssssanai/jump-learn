@@ -32,6 +32,23 @@
         <table>
             <tr>
                 <td>
+                    번호
+                </td>
+                <td>
+                    제목
+                </td>
+                <td>
+                    작성자
+                </td>
+                <td>
+                    작성일
+                </td>
+                <td>
+                    조회수
+                </td>
+            </tr>
+            <tr>
+                <td>
                     [${dto.id}]
                 </td>
                 <td>
