@@ -20,7 +20,7 @@ public class SearchDTO {
 	@Builder.Default
 	@Positive
 	@Min(value=1)
-	private int page_size=10;
+	private int page_size=5;
 	@Builder.Default
 	@PositiveOrZero
 	@Min(value=0)
