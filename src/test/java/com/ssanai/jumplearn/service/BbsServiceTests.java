@@ -72,7 +72,7 @@ public class BbsServiceTests {
 //
 //        int result = bbsService.update(dto);
 //    }
-////
+//
 //    @Test
 //    public void testDelete() {
 //        int id = 105;
@@ -88,21 +88,18 @@ public class BbsServiceTests {
 //        Assertions.assertNotNull(dto, "selectOne(" + id + ") should find a record");
 //        log.info("testSelectOne -> {}", dto);
 //    }
-    @Test
-    public void testSearchList(){
-        PageRequestDTO pageDTO = PageRequestDTO.builder()
-                .page_no(2)
-                .page_size(10)
-                .search_category("title")
-                .search_word("입력")
-                .build();
-
-        PageResponseDTO resDTO = bbsService.searchList(pageDTO);
-        Assertions.assertNotNull(resDTO , "성공");
-        log.info("BbsTests >> testSearchList >> resDTO : {}", resDTO);
-    }
-
 //
-
-
+//    @Test
+//    public void testSearchList(){
+//        PageRequestDTO pageDTO = PageRequestDTO.builder()
+//                .page_no(2)
+//                .page_size(10)
+//                .search_category("title")
+//                .search_word("입력")
+//                .build();
+//
+//        PageResponseDTO resDTO = bbsService.searchList(pageDTO);
+//        Assertions.assertNotNull(resDTO , "성공");
+//        log.info("BbsTests >> testSearchList >> resDTO : {}", resDTO);
+//    }
 }

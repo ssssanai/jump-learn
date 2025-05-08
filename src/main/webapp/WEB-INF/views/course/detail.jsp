@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: macbookair
@@ -7,107 +6,88 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<html lang="ko_KR">
 <head>
-    <title>강좌 상세</title>
-    <style>
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .teacher_container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        table, tr, th, td {
-            border-collapse: collapse;
-            border: 2px solid black;
-            padding: 10px;
-        }
-
-        table {
-            width: 70%;
-        }
-
-        .thumbnail {
-            width: 300px;
-            height: 200px;
-        }
-
-        .video_detail {
-            border: 1px dashed green;
-            padding: 15px;
-        }
-
-        .class_video_list_container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../resources/static/css/study/studyDetailPage.css" rel="stylesheet" type="text/css">
+    <link href="../../../resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <title>JL - 선생님 정보</title>
 </head>
 <body>
-<div class="container">
-    <h1>${classDetailDTO.class_title}</h1>
-    <table>
-        <tr>
-            <td>
-                <span>강사: ${classDetailDTO.teacher_name}</span>
-                <span>학습수준: ${classDetailDTO.class_target}</span>
-                <span>과목: ${classDetailDTO.class_category}</span>
-                <span>강의 수: ${classDetailDTO.total_video_count}</span>
-            </td>
-            <td>${classDetailDTO.class_title}</td>
-        </tr>
-        <tr>
-            <td class="thumbnail" rowspan="3">
+
+<%--고정 헤더 파일--%>
+<%@include file="../../../resources/static/html/headerGnb.jsp"%>
+
+<div class="wrap">
+    <div class="studyTit">
+        <h1>${classDetailDTO.class_title}</h1>
+    </div>
+    <div class="studyBox1">
+        <div class="study1">
+            <div class="sbH1">
+                <p>강사 : ${classDetailDTO.teacher_name}</p>
+                <p>학습수준 : ${classDetailDTO.class_target}</p>
+                <p>과목 : ${classDetailDTO.class_category}</p>
+                <p>강의 수: ${classDetailDTO.total_video_count}</p>
+            </div>
+            <div class="sbB1">
                 <c:if test="class_file_path != null and class_file_name != null and class_file_ext != null"
                       var="isFileExist">
                     ${class_file_path}/${class_file_name}.${class_file_ext}
                 </c:if>
                 <c:if test="${not isFileExist}">
-                    썸네일 없음
+                    <img src="../../../resources/static/images/memberPage/slide01.jpg" alt="강의 사진">
                 </c:if>
-            </td>
-            <td>${classDetailDTO.class_introduce}</td>
-        </tr>
-        <tr>
-            <td>강의 가격: ${classDetailDTO.class_price} 원</td>
-        </tr>
-        <tr>
-            <td>
-                <button>구매하기</button>
-                <button>찜 하기</button>
-            </td>
-        </tr>
-    </table>
-    <div class="teacher_container">
-        <h2>강사 소개</h2>
-        <ul>
-            <li><h3>${classDetailDTO.teacher_name}</h3></li>
-            <li>${classDetailDTO.teacher_file_path}/${teacher_file_name}.${teacher_file_ext}</li>
-            <li>${classDetailDTO.teacher_introduce1}</li>
-            <li>${classDetailDTO.teacher_introduce2}</li>
-            <li>${classDetailDTO.teacher_introduce3}</li>
-        </ul>
-        <div>
-            <button>수강후기</button>
-            <button>강사 상세</button>
-            <button>질문하기</button>
+            </div>
+        </div>
+        <div class="study2">
+            <div class="sbH2">
+                <h2>${classDetailDTO.class_title}</h2>
+            </div>
+            <div class="sbB2">
+                <p>${classDetailDTO.class_introduce}</p>
+            </div>
+            <div class="price">
+                <p class="priCnt1" style="font-size: 13px; line-height: 28px;">총 강의 가격</p>
+                <p class="priCnt2" style="font-size: 17px; line-height: 28px;">${classDetailDTO.class_price}</p>
+                <p class="priCnt3" style="font-size: 13px; line-height: 28px;">원</p>
+            </div>
+            <div class="buyBtn">
+                <a href="#">구매하기</a>
+                <a href="#">찜 하기</a>
+            </div>
         </div>
     </div>
-    <div class="class_video_list_container">
+    <div class="studyBox2">
+        <div class="studyDetail">
+            <div class="sbH3">
+                <h2>${classDetailDTO.teacher_name}강사님을 소개합니다!</h2>
+                <p>여러분들의 학습을 도와주실 선생님입니다.</p>
+            </div>
+            <div class="sbB3">
+                <div class="teacherPro">
+                    <%--${classDetailDTO.teacher_file_path}/${teacher_file_name}.${teacher_file_ext}--%>
+                    <img src="../../../resources/static/images/memberPage/profileEx.jpg">
+                </div>
+                <div class="teacherIn">
+                    <p>${classDetailDTO.teacher_introduce1}
+                        ${classDetailDTO.teacher_introduce2}
+                        ${classDetailDTO.teacher_introduce3}</p>
+                </div>
+                <div class="tBtn">
+                    <a htef="#">수강후기</a>
+                    <a htef="#">강사 정보 </a>
+                    <a htef="#">질문하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="studyBox3">
         <table>
             <tr>
                 <th>커리큘럼</th>
