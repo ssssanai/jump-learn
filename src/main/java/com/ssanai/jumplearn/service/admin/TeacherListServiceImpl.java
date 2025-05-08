@@ -1,9 +1,6 @@
 package com.ssanai.jumplearn.service.admin;
 
-import com.ssanai.jumplearn.dto.MemberDTO;
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.PageResponseDTO;
-import com.ssanai.jumplearn.dto.TeacherDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.mapper.admin.TeacherListMapper;
 import com.ssanai.jumplearn.vo.TeacherVO;
 import jdk.jfr.Label;
@@ -68,5 +65,16 @@ public class TeacherListServiceImpl implements TeacherListServiceIf{
                         .total_count(totalCount)
                         .build();
         return responseDTO;
+    }
+
+    @Override
+    public TeacherDTO teacherDetail(String id) {
+        return teacherListXmlMapper.teacherDetail(id);
+    }
+
+    @Override
+    public List<TeacherClassDTO> teacherClass(String id) {
+        List<TeacherClassDTO> dtoList = teacherListXmlMapper.teacherClass(id);
+        return dtoList ;
     }
 }

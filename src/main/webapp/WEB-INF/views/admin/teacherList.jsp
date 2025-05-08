@@ -54,7 +54,7 @@
             <c:forEach var="list" items="${dtoList}" varStatus="loop">
                 <tr>
                     <td>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</td>
-                    <td><a href="/admin/member?id=${list.id}">${list.id}</a></td>
+                    <td><a href="/admin/teacher?id=${list.id}">${list.id}</a></td>
                     <td>${list.name}</td>
                     <td>${list.status}</td>
                     <td>${list.email}</td>

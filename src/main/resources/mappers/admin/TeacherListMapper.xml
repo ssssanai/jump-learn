@@ -43,5 +43,22 @@
         delete from tbl_teacher
         where id = #{id}
     </delete>
+    <select id="teacherDetail">
+        SELECT t.id AS id, t.`name` AS `name`, t.birth AS birth, t.email AS email, t.gender AS gender,
+        t.signup_date AS signup_date, t.introduce1 AS introduce1, t.introduce2 AS introduce2, t.introduce3 AS introduce3, t.`status`AS `status`,
+        t.file_name AS file_name,
+        (SELECT COUNT(*) from tbl_class WHERE teacher_id = t.id) AS totalCountClass
+        FROM tbl_teacher AS t
+        WHERE t.id=#{id}
+    </select>
+    <select id="teacherClass">
+        SELECT c.id AS class_id, c.target AS target, c.price AS price,
+        c.introduce AS introduce, c.notice AS notice,file_name AS file_name,
+        c.title AS title , COUNT(p.id) AS pay_count, p.cost, c.teacher_id AS id
+        FROM tbl_class AS c
+        LEFT JOIN tbl_pay AS p ON c.id = p.class_id AND p.complete = 1
+        WHERE c.teacher_id = #{id}
+        GROUP BY c.id;
+    </select>
 </mapper>
     

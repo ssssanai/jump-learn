@@ -27,4 +27,10 @@ public class ClassVideoDTO {
 	private String content;
 	private LocalDateTime created_at;
 	private LocalDateTime updated_at;
+
+	//해당 선생님 필드 추가
+	private String teacher_id;
+	//해당 데이터 필드 추가
+	private String data_name;
+
 }
