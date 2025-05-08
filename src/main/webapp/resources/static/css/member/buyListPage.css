@@ -1,0 +1,315 @@
+@charset "utf-8";
+* {
+    margin:0; padding:0;
+    box-sizing: border-box;
+    font-family: 'KakaoSmallSans-Bold';
+}
+a {
+    display:block;
+    text-decoration: none;
+    color:#222222;
+}
+ul li {
+    list-style-type:none;
+}
+
+@font-face {
+    font-family: 'KakaoSmallSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoSmallSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+.wrap {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    width:60%; height:950px;
+}
+.buyHead {
+    display: flex;
+    width:100%; height:60px;
+    background-image: linear-gradient(to right, #0c1e63, #2757c1, #6b86d8);
+    align-items: center;
+    padding: 0 20px;
+    color:#fff;
+    border-radius: 5px;
+}
+.buyHead > h2 {
+    flex:20%;
+    font-size:20px;
+}
+.buyHead > p {
+    flex:80%;
+    font-size:12px;
+    text-align: left;
+}
+.tit {
+    width:100%; height:40px;
+    line-height:38px;
+    font-size:20px;
+}
+.searchBox {
+    float: left;
+    display: flex;
+    gap:0;
+    width:100%; height:40px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.searchForm {
+    display: flex;
+    width:500px; height:40px;
+}
+.scInput {
+    width:calc(100% - 60px); height:100%;
+    background-color: #ffffffb3;
+    border: 2.5px solid #a0a0a0b3;
+    outline: none;
+    color:#000000;
+    padding-left: 10px;
+}
+.scInput:focus {
+    border:2.5px solid #607ffc;
+
+}
+.scBtn {
+    width:60px; height:40px;
+    border-radius: 0;
+    background-color: #d6d6d6b3;
+    border: 2.5px solid #a0a0a0b3;
+    border-left: 0;
+    color:#838383;
+}
+.scBtn:hover {
+    background-color: #bbbbbbb3;
+    cursor: pointer;
+}
+.buyBtn {
+    display: flex;
+    width:200px; height:40px;
+    gap:10px;
+    align-items: center;
+}
+.buyBtn > a {
+    width:100px; height:30px;
+    text-align: center;
+    background-color: #bcc7f5;
+    border: 0.5px solid #a0a0a0b3;
+    color:#474747;
+    line-height:28px;
+    font-size:12px;
+    border-radius: 5px;
+}
+.buyBtn > a:hover {
+    background-color: #7f91e2;
+}
+.buyList {
+    width:100%; height:200px;
+    border: 2.5px solid #a0a0a0b3;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.buyDate {
+    display: flex;
+    width:100%; height:40px;
+    padding:0 25px;
+    line-height:38px;
+    justify-content: space-between;
+}
+.buyDate > p {
+    font-size:14px;
+}
+.buyDate > a {
+    font-size:12px;
+}
+.buyMain {
+    display: flex;
+    padding: 0 25px;
+    width:100%; height:140px;
+    border-radius: 10px;
+}
+.buyCont {
+    display: flex;
+    width:calc(100% - 200px); height:100%;
+    padding: 0 25px;
+    border: 2.5px solid #a0a0a0b3;
+    align-items: center;
+}
+.buyCont > img {
+    width:120px; height:120px;
+}
+.bP {
+    display: flex;
+    flex-direction: column;
+    width:calc(100% - 120px); height:100%;
+    padding: 10px 20px;
+}
+.bP > h2 {
+    width:100%; height:19%;
+    font-size:20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2%;
+}
+.bP > h3 {
+    width:100%; height:65%;
+    font-size:13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.bP > p {
+    width:100%; height:10%;
+    font-size:13px;
+}
+.blBtn {
+    border: 2.5px solid #a0a0a0b3;
+    padding:10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left:0;
+    width:200px; height:100%;
+    justify-content: space-between;
+}
+.blBtn > a {
+    float: right;
+    width:150px; height:30px;
+    text-align: center;
+    background-color: #bcc7f5;
+    border: 0.5px solid #a0a0a0b3;
+    color:#474747;
+    line-height:28px;
+    font-size:14px;
+    border-radius: 5px;
+}
+.blBtn > a:hover {
+    background-color: #7f91e2;
+}
+.noBuyList {
+    display: none;
+    width:100%; height:50px;
+    border: 2.5px solid #a0a0a0b3;
+    border-radius: 10px;
+    text-align: center;
+    line-height:48px;
+    margin-bottom: 20px;
+}
+.footer {
+    width:100%; height:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.footer > a {
+    width:60px; height:30px;
+    text-align: center;
+    background-color: #bcc7f5;
+    border: 0.5px solid #a0a0a0b3;
+    color:#474747;
+    line-height:28px;
+    font-size:14px;
+    border-radius: 5px;
+}
+.footer > a:hover {
+    background-color: #7f91e2;
+}
+
+@media (max-width: 1518px) {
+    .buyHead > h2 {
+        flex: 35%;
+        font-size: 17px;
+    }
+    .buyHead > p {
+        flex: 65%;
+        font-size: 12px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 1190px) {
+    .wrap {
+        width:70%;
+    }
+    .searchBox {
+        gap:15px;
+    }
+        .buyList {
+            padding: 0 20px 20px 20px;
+            height:240px;
+        }
+        .buyDate {
+            padding: 0;
+        }
+        .buyMain {
+            flex-direction: column;
+            height:180px;
+            border: 2.5px solid #a0a0a0b3;
+        }
+            .buyCont {
+                width:100%;
+                border: 0;
+            }
+            .bP > h2 {
+                height:21%;
+            }
+        .blBtn {
+            width:100%;
+            flex-direction: row;
+            border: 0;
+            gap:15px;
+        }
+        .blBtn > a {
+            width:200px;
+        }
+}
+
+@media (max-width: 800px) {
+    .wrap{
+        width:80%;
+    }
+ .searchBox {
+     gap:15px;
+ }
+    .scInput {
+        width:100%;
+    }
+    .buyBtn {
+        display:none;
+    }
+    .buyHead > h2 {
+        font-size:16px;
+    }
+    .buyHead > p {
+        display: none;
+    }
+    .buyCont > img{
+        display:none;
+    }
+    .buyCont {
+        height:70%;
+    }
+    .blBtn {
+        height:30%;
+        gap:12px;
+    }
+    .blBtn > a {
+        font-size:10px;
+    }
+    .bP {
+        width:100%;
+        padding: 20px 0 0 0 ;
+        height:100%;
+    }
+    .bp > h2 {
+        height:100%;
+    }
+
+}
