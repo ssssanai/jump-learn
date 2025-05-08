@@ -1,10 +1,8 @@
 package com.ssanai.jumplearn.service.admin;
 
 
-import com.ssanai.jumplearn.dto.ClassDetailDTO;
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.PageResponseDTO;
-import com.ssanai.jumplearn.dto.TeacherDTO;
+import com.ssanai.jumplearn.dto.*;
+import com.ssanai.jumplearn.dto.mainpage.ClassDataDTO;
 import com.ssanai.jumplearn.mapper.admin.ClassListMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -51,5 +49,27 @@ public class ClassListServiceImpl implements ClassListServiceIf {
                         .total_count(totalCount)
                         .build();
         return responseDTO;
+    }
+
+    @Override
+    public List<ClassVideoDTO> videoList(int id) {
+        List<ClassVideoDTO> dtoList = classListXmlMapper.videoList(id);
+        log.info("서비스단 "+dtoList.toString());
+        return dtoList;
+    }
+
+    @Override
+    public int createVideo1(ClassVideoDTO classVideoDTO) {
+        return classListXmlMapper.createVideo1(classVideoDTO);
+    }
+
+    @Override
+    public int createVideo2(ClassVideoDTO classVideoDTO) {
+        return classListXmlMapper.createVideo2(classVideoDTO);
+    }
+
+    @Override
+    public int createData(ClassDataDTO classDataDTO) {
+        return classListXmlMapper.createData(classDataDTO);
     }
 }

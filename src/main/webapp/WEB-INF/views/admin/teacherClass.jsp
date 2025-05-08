@@ -37,7 +37,7 @@
           <td>
             <c:choose>
               <c:when test="${not empty list.file_name}">
-                <img src="/upload/${list.file_name}" alt="회원 사진" />
+                <img src="/upload/${list.file_name}" alt="강좌 사진" />
               </c:when>
               <c:otherwise>
                 <img src="../../../resources/static/images/img.png" alt="기본 강좌 이미지" />
