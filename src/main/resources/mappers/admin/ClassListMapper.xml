@@ -65,7 +65,7 @@
         SELECT
         v.id as id,
         v.class_id as class_id,
-        v.video_order as vide,
+        v.video_order as video_order,
         v.video_path as video_path,
         v.video_url as video_url,
         v.video_path as video_path,
@@ -78,12 +78,14 @@
         v.updated_at as updated_at,
         c.teacher_id AS teacher_id,
         c.category AS category,
-        d.data_name AS data_name
+        d.data_name AS data_name,
+        d.id AS data_id
         FROM tbl_class_video AS v
         LEFT JOIN tbl_class AS c ON v.class_id = c.id
         LEFT JOIN tbl_class_data AS d
         ON v.class_id = d.class_id AND v.video_order = d.data_order
-        WHERE v.class_id = #{class_id};
+        WHERE v.class_id = #{class_id}
+        ORDER BY v.video_order
     </select>
     <insert id="createVideo1">
         INSERT INTO tbl_class_video(
@@ -100,5 +102,33 @@
         INSERT INTO tbl_class_data(class_id, data_order, title, data_path, data_name, data_size, data_extension)
         values(#{class_id},#{data_order}, #{title}, #{data_path}, #{data_name}, #{data_size}, #{data_extension})
     </insert>
+    <delete id="deleteClass">
+        delete from tbl_class_video
+        where id = #{id}
+    </delete>
+    <delete id="deleteData">
+        delete from tbl_class_data
+        where id = #{id}
+    </delete>
+    <select id="dataDetail">
+        SELECT id, class_id, data_order, title, data_name, created_at, updated_at
+        FROM tbl_class_data
+        WHERE id = #{id}
+    </select>
+    <update id="classDataUpdate">
+        UPDATE tbl_class_data
+        SET
+        data_order =#{data_order},
+        title = #{title},
+        data_path = #{data_path},
+        data_name = #{data_name},
+        data_size = #{data_size},
+        data_extension = #{data_extension}
+        WHERE id = #{id}
+    </update>
+    <delete id="classDataDelete">
+        delete from tbl_class_data
+        where id = #{id}
+    </delete>
 </mapper>
     

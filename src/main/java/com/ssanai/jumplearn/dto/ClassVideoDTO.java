@@ -32,5 +32,6 @@ public class ClassVideoDTO {
 	private String teacher_id;
 	//해당 데이터 필드 추가
 	private String data_name;
+	private int data_id;
 
 }

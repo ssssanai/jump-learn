@@ -1,4 +1,4 @@
-package com.ssanai.jumplearn.dto.mainpage;
+package com.ssanai.jumplearn.dto;
 
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
