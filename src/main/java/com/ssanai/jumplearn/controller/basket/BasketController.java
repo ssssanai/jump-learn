@@ -29,10 +29,7 @@ public class BasketController {
 			@PathVariable("id") int id, // 강좌 ID
 			@RequestHeader(value = "Referer", required = false) String referer
 	) {
-		// 장바구니에 강좌를 담고 바로 원래 페이지로 이동
-		String from = req.getRequestURI();
 		MemberDTO mDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
-		log.info(from);
 
 		// 로그인되지 않은 상태인 경우
 		if (mDTO == null) {
@@ -55,6 +52,41 @@ public class BasketController {
 			} else {
 				return "redirect:/course/list";
 			}
+		}
+	}
+
+	@GetMapping("/remove/{id}")
+	public String removeBasket(
+			HttpServletRequest req,
+			RedirectAttributes ra,
+			@PathVariable("id") int id, // 강좌 ID
+			@RequestHeader(value = "Referer", required = false) String referer
+	) {
+		MemberDTO mDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		log.info(referer);
+		// 로그인되지 않은 상태인 경우
+		if (mDTO == null) {
+			log.info("Not Logged In Member");
+			ra.addFlashAttribute("msg", "로그인 후 사용 가능한 서비스입니다.");
+			return "member/login";
+		}
+
+		String member_id = mDTO.getId(); // 담은 사람
+		int isExist = basketService.isBasketExist(id, member_id);
+
+		if(isExist == 1) {
+			// 삭제 로직
+			int result = basketService.removeBasket(id, member_id);
+			log.info(result);
+
+			if(referer != null) {
+				return "redirect:" + referer;
+			} else {
+				return "redirect:/course/list";
+			}
+		} else {
+			ra.addAttribute("msg", "장바구니에 없는 강좌입니다.");
+			return "redirect:/course/list";
 		}
 	}
 
