@@ -103,24 +103,29 @@
                 <a href="#">글쓰기</a>
             </div>
         </div>
-        <form class="searchInput" method="POST" action="/edu/searchListPage">
+        <form class="searchInput" method="GET" action="/edu/searchListPage">
+            <input type="hidden" name="page_no"   value="${pageDTO.page_no}" />
+            <input type="hidden" name="page_size" value="${pageDTO.page_size}" />
+            <input type="submit" class="serch_btn" value="검색">
             <div class="siReset">
                 <input type="reset" value="검색조건 초기화">
             </div>
             <div>
                 <select id="search_category" name="search_category" class="selectOption">
-                    <option value="qu0">전체</option>
-                    <option value="qu1">제목</option>
-                    <option value="qu2">내용</option>
-                    <option value="qu3">작성자</option>
-                    <option value="qu4">작성일</option>
+<%--                    옵션 value qu0,1,2 에서 변경했음 --%>
+                    <option value=""            ${pageDTO.search_category==''             ? 'selected':''}>전체</option>
+                    <option value="title"       ${pageDTO.search_category=='title'        ? 'selected':''}>제목</option>
+                    <option value="content"     ${pageDTO.search_category=='content'      ? 'selected':''}>내용</option>
+                    <option value="admin_id"    ${pageDTO.search_category=='admin_id'     ? 'selected':''}>작성자</option>
+                    <option value="created_at"  ${pageDTO.search_category=='created_at'   ? 'selected':''}>작성일</option>
+
                 </select>
 <%--       검색조건이 작성일일때는 from날짜 to날짜 2개로 검색할 수 있게 UI 전환    --%>
-                <input type="text" id="search_word" name="search_word" class="serch_in" placeholder="검색어를 입력해주세요.">
+                <input type="text" id="search_word" name="search_word" class="serch_in" placeholder="검색어를 입력해주세요." value="${pageDTO.search_word}">
 
-                <input type="datetime-local" name="search_date_from" hidden="hidden" id="search_date_from" />
-                <p hidden="hidden">~</p>
-                <input type="datetime-local" name="search_date_to" hidden="hidden" id="search_date_to" />
+                <input type="datetime-local" name="search_date_from" id="search_date_from" value="${pageDTO.search_date_from}" />
+                <p >~</p>
+                <input type="datetime-local" name="search_date_to" id="search_date_to" value="${pageDTO.search_date_to}"/>
                 <input type="submit" class="serch_btn" name="serch_btn" value="검색">
             </div>
         </form>
@@ -135,15 +140,17 @@
                 <p class="listDate">작성일</p>
                 <p class="listCnt">조회수</p>
                 <p><input type="button" value="선택 삭제"></p>
-
             </div>
             <div>
-            <c:forEach var="post" items="${searchDTO.dtoList}">
+            <c:forEach var="post" items="${dto.dtoList}">
                 <div class="wlBody">
-                    <p class="listNo"><input type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">${post.id}</p>
-<%--                    <p class="listTit"><a href="/edu/writePage">${post.title}</a></p>--%>
+                    <p class="listNo">
+                        <input type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
+                        ${post.id}
+                    </p>
                     <p class="listTit"><a href="/edu/viewPage?id=${post.id}">${post.title}</a></p>
                     <p class="listName"><a href="#">${post.admin_id}</a></p>
+<%--                    아이디 눌러서 해당 계정명으로 검색하기 기능 나중에 추가.--%>
                     <p class="listDate">${post.created_at}</p>
                     <p class="listCnt">${post.view_count}</p>
                     <input type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}';}" value="삭제">
@@ -155,5 +162,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

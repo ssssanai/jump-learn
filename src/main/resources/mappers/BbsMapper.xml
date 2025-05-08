@@ -12,7 +12,7 @@
                     content like concat('%', #{search_word}, '%')
                 </if>
                 <if test="search_category == 'admin_id'.toString()">
-                    userId like concat('%', #{search_word}, '%')
+                    admin_id like concat('%', #{search_word}, '%')
                 </if>
                 <if test="search_category == 'created_at'">
                     <![CDATA[
@@ -69,7 +69,13 @@
         SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
         FROM tbl_edu
         <include refid="whereCondition"></include>
+        ORDER BY id desc
+        Limit #{page_skip_count} , #{page_size}
     </select>
 
+<!--    <delete id="deletesPosts">-->
+<!--        DELETE FROM tbl_edu-->
+<!--        WHERE 1=1 and `id`= #{id}-->
+<!--    </delete>-->
 
 </mapper>
