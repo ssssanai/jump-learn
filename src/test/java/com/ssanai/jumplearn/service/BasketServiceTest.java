@@ -25,4 +25,14 @@ public class BasketServiceTest {
 			log.info(basketDTO);
 		}
 	}
+
+	@Test
+	public void addBasketTest() {
+		log.info(basketService.addBasket(1, "member006"));
+	}
+
+	@Test
+	public void isExistBasketTest() {
+		log.info(basketService.isBasketExist(6, "member106"));
+	}
 }

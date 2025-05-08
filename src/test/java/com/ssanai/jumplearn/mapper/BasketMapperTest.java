@@ -28,4 +28,14 @@ public class BasketMapperTest {
 			log.info(basketVO);
 		}
 	}
+
+	@Test
+	public void addBasketTest(){
+		log.info( basketMapper.addBasket(6, "member006"));
+	}
+
+	@Test
+	public void isExistTest(){
+		log.info(basketMapper.isBasketExist(6, "member006"));
+	}
 }
