@@ -36,7 +36,7 @@ public class EduBbsController {
 //                    .created_at(now())
 //                    .build();
         bbsService.insert(dto);
-        return "redirect:/edu/writeListPage";
+        return "redirect:/edu/searchListPage";
     }
 
     @GetMapping("/viewPage")
@@ -45,9 +45,8 @@ public class EduBbsController {
             , Model model
     ){
         model.addAttribute("dto", bbsService.selectOne(id));
-
-
-
+        model.addAttribute("fileDTO", bbsService.attachedPic(id));
+        model.addAttribute("pdfFileDTO", bbsService.attachedPdf(id));
         return "edu/viewPage";
     }
 
@@ -57,6 +56,8 @@ public class EduBbsController {
             , Model model
     ){
         model.addAttribute("dto", bbsService.selectOne(id));
+        model.addAttribute("fileDTO", bbsService.attachedPic(id));
+        model.addAttribute("pdfFileDTO", bbsService.attachedPdf(id));
         return "edu/editPage";
     }
 
@@ -65,7 +66,7 @@ public class EduBbsController {
             BbsDefaultDTO dto
     ){
         bbsService.update(dto);
-        return "redirect:/edu/writeListPage";
+        return "redirect:/edu/searchListPage";
     }
 
     @GetMapping("/delete")
@@ -74,7 +75,7 @@ public class EduBbsController {
     ){
 
         bbsService.delete(id);
-        return "redirect:/edu/writeListPage";
+        return "redirect:/edu/searchListPage";
     }
 
     @GetMapping("/searchListPage")
