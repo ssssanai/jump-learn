@@ -50,7 +50,19 @@ public class CourseServiceImpl implements CourseServiceIf {
 	}
 
 	@Override
+	public int checkReviewExist(int id) {
+		return courseMapper.checkReviewExist(id);
+	}
+
+	@Override
 	public double getReviewRate(int id) {
-		return courseMapper.getReviewRate(id);
+		if (checkReviewExist(id) > 0) {
+			double rate = courseMapper.getReviewRate(id);
+			log.info("Review Rate : {}", rate);
+			return rate;
+		} else {
+			log.info("Review not exist");
+			return 0;
+		}
 	}
 }

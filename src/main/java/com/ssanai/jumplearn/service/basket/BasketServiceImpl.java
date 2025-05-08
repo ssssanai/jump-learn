@@ -23,4 +23,19 @@ public class BasketServiceImpl implements BasketServiceIf{
 		log.info("getBasketList: " + basketList);
 		return basketList;
 	}
+
+	@Override
+	public int addBasket(int id, String member_id) {
+		return basketMapper.addBasket(id, member_id);
+	}
+
+	@Override
+	public int isBasketExist(int id, String member_id) {
+		return basketMapper.isBasketExist(id, member_id);
+	}
+
+	@Override
+	public int removeBasket(int id, String member_id) {
+		return basketMapper.removeBasket(id, member_id);
+	}
 }
