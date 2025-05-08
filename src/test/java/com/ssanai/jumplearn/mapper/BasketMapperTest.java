@@ -38,4 +38,9 @@ public class BasketMapperTest {
 	public void isExistTest(){
 		log.info(basketMapper.isBasketExist(6, "member006"));
 	}
+
+	@Test
+	public void removeBasketTest(){
+		log.info(basketMapper.removeBasket(90, "member006"));
+	}
 }

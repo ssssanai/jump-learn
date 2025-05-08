@@ -134,4 +134,15 @@ public class CourseMapperTest {
 		double rate = courseMapper.getReviewRate(6);
 		log.info(rate);
 	}
+
+	@Test
+	public void getReviewRateTest2(){
+		int review_count = courseMapper.checkReviewExist(105);
+		if(review_count > 0){
+			double rate = courseMapper.getReviewRate(105);
+			log.info(rate);
+		} else {
+			log.info("No Review");
+		}
+	}
 }

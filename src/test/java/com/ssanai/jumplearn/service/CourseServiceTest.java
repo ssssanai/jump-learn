@@ -97,7 +97,7 @@ public class CourseServiceTest {
 	}
 	@Test
 	public void getReviewRateTest(){
-		double rate = courseService.getReviewRate(6);
+		double rate = courseService.getReviewRate(105);
 		log.info(rate);
 	}
 
