@@ -16,7 +16,7 @@
     <link href="../../../resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-    <title>JL - 선생님 정보</title>
+    <title>JL - 강좌 목록</title>
 </head>
 <%--고정 헤더 파일--%>
 <%@include file="../../../resources/static/html/headerGnb.jsp"%>
