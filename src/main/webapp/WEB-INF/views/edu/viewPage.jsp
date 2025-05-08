@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -47,23 +49,35 @@
             </tr>
             <tr>
                 <td colspan="5">
-
-                    [${dto.content}]
+                    [본문 시작:
+                    <c:forEach var="file" items="${fileDTO}" >
+                        <c:if test="${fn:contains(file.file_ext, '.jpg') or fn:contains(file.file_ext, '.jpeg')}">
+                            <img src="${file.file_path}" alt="${file.file_name}"/>
+                            <br>
+                        </c:if>
+                    </c:forEach>
+                    ${dto.content} :본문 끝]
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <c:forEach var="file" items="${pdfFileDTO}" >
+                        <a href="${file.file_path}" target="_blank">${file.file_name}${file.file_ext}</a>
+                    </c:forEach>
                 </td>
             </tr>
         </table>
     </main>
-    <form>
+    <form id="frmView" name="frmView" method="get" action="/edu/editPage">
         <div class="imgMain">
-            <input type="file" id="file" />
+            <input type="file" id="file"/>
         </div>
-        <input class="endBtn" type="submit" onclick="" value="수정">
-        <input class="endBtn" type="button" onclick="" value="삭제">
+        <input class="endBtn" type="submit" value="수정">
+        <input class="endBtn" type="button" value="삭제">
         <input class="endBtn" type="button" value="목록">
+
+        <input type="text" hidden="hidden" id="id" name="id" value=${dto.id}>
     </form>
 </div>
-<script>
-
-</script>
 </body>
 </html>
