@@ -49,31 +49,30 @@
             </tr>
             <tr>
                 <td>
-                    [${dto.id}]
+                    ${dto.id}
                 </td>
                 <td>
-                   [${dto.title}]
+                   ${dto.title}
                 </td>
                 <td>
-                    [${dto.admin_id}]
+                    ${dto.admin_id}
                 </td>
                 <td>
-                    [${dto.created_at}]
+                    ${fn:replace(dto.created_at,'T',' ')}
                 </td>
                 <td>
-                    [${dto.view_count}]
+                    ${dto.view_count}
                 </td>
             </tr>
             <tr>
                 <td colspan="5">
-                    [본문 시작:
                     <c:forEach var="file" items="${fileDTO}" >
                         <c:if test="${fn:contains(file.file_ext, '.jpg') or fn:contains(file.file_ext, '.jpeg')}">
                             <img src="${file.file_path}" alt="${file.file_name}"/>
                             <br>
                         </c:if>
                     </c:forEach>
-                    ${dto.content} :본문 끝]
+                    ${dto.content}
                 </td>
             </tr>
             <tr>
@@ -86,14 +85,20 @@
         </table>
     </main>
     <form id="frmView" name="frmView" method="get" action="/edu/editPage">
-        <div class="imgMain">
-            <input type="file" id="file"/>
-        </div>
-        <input class="endBtn" type="submit" value="수정">
-        <input class="endBtn" type="button" value="삭제">
+        <c:choose>
+            <c:when test="${not empty sessionScope.loginInfo.status}">
+                <div class="imgMain">
+                    <input type="file" id="file" class="adminFn"/>
+                </div>
+                <input class="endBtn adminFn" type="submit" value="수정">
+                <input class="endBtn adminFn" type="button" value="삭제">
+            </c:when>
+        </c:choose>
         <input class="endBtn" type="button" value="목록">
 
         <input type="text" hidden="hidden" id="id" name="id" value=${dto.id}>
+        <input type="text" hidden="hidden" id="id" name="id" value="1">
+
     </form>
 </div>
 </body>
