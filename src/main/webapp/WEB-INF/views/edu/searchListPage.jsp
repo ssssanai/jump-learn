@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/resources/static/css/community/eduListPage.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/community/edu/eduListPage.css" rel="stylesheet" type="text/css">
     <link href="/resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <title>검색 결과 리스트 페이지</title>
