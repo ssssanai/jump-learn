@@ -179,7 +179,7 @@ ul li {
 }
 .main {
     float:left;
-    width:calc(100% - 400px); height:100%;
+    width:calc(100% - 200px); height:100%;
 }
 #cont1 {
     display:none;
@@ -268,12 +268,12 @@ ul li {
     color:#607cfa;
 }
 .studyTeach {
-    width:100px; height:35px;
+    width:60px; height:35px;
     text-align: center;
     line-height:33px;
 }
 .studyRegDate {
-    width:130px; height:35px;
+    width:170px; height:35px;
     text-align: center;
     line-height:33px;
 }
@@ -282,6 +282,10 @@ ul li {
     text-align: center;
     line-height:18px;
     margin-top: 10px;
+}
+.pageBox > p  {
+    width: 100%;
+    display: flex;
 }
 #cont2 {
     display:none;
