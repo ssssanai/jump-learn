@@ -83,29 +83,45 @@
         </form>
         <div class="writeList">
             <div class="wlHeader">
-                <p class="listCk">선택</p>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.loginInfo.status}">
+                        <p class="listCk">선택</p>
+                    </c:when>
+                </c:choose>
                 <p class="listNo">번호</p>
                 <p class="listTit">제목</p>
                 <p class="listName">작성자</p>
                 <p class="listDate">작성일</p>
                 <p class="listCnt">조회수</p>
-                <div class="listDelBtnBox">
-                    <input class="listDelBtn" type="button" value="선택삭제">
-                </div>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.loginInfo.status}">
+                        <div class="listDelBtnBox">
+                            <input class="listDelBtn" type="button" value="선택삭제">
+                        </div>
+                    </c:when>
+                </c:choose>
             </div>
             <c:forEach var="post" items="${dto.dtoList}">
                 <div class="wlBody">
-                    <div class="listCk">
-                        <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
-                    </div>
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.loginInfo.status}">
+                            <div class="listCk">
+                                <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
+                            </div>
+                        </c:when>
+                    </c:choose>
                     <p class="listNo">${post.id}</p>
                     <p class="listTit"><a href="/edu/viewPage?id=${post.id}">${post.title}</a></p>
                     <p class="listName"><a href="#">${post.admin_id}</a></p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
-                    <div class="listDelBtnBox">
-                        <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}';}" value="삭제">
-                    </div>
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.loginInfo.status}">
+                            <div class="listDelBtnBox">
+                                <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}';}" value="삭제">
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </div>
             </c:forEach>
             <div class="pagingBox">
