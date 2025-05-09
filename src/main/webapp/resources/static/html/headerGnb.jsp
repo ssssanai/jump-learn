@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="header">
   <div class="logo">
-    <img src="../resources/static/images/registLogo2.svg" alt="로고"/>
+    <img src="/resources/static/images/registLogo2.svg" alt="로고"/>
   </div>
   <ul class="mainmenu">
     <li>

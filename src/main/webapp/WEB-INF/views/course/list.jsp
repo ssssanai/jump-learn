@@ -114,7 +114,7 @@
                             <div class="course">
                                     <%-- TODO: 디테일 페이지 링크 걸기 --%>
                                 <div class="course_img">
-                                        ${course.file_path} ${course.file_name} ${course.file_ext}
+                                    <img src="/upload/${course.file_name}" style="width: 100%; height: 100%">
                                 </div>
                                 <div class="course_body">
                                     <div class="course_cont">

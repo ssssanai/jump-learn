@@ -17,6 +17,7 @@
             padding: 15px;
         }
     </style>
+    <script src="/resources/static/js/checkModule.js"></script>
 </head>
 <body>
 <form name="frmSearch" action="">
@@ -80,6 +81,8 @@
         </td>
     </tr>
 </table>
+<script>
 
+</script>
 </body>
 </html>

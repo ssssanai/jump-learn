@@ -27,15 +27,17 @@ public class CourseController {
 	private final MainPageServiceIf mainPageService;
 
 	@RequestMapping("/list")
-	public String list(HttpServletRequest req,
-					   @ModelAttribute("frm_search") SearchDTO searchDTO, // 자동 바인딩
-					   Model model){
+	public String list(
+			HttpServletRequest req,
+			@ModelAttribute("frm_search") SearchDTO searchDTO, // 자동 바인딩
+			Model model
+	) {
 		log.info(searchDTO.toString());
-		searchDTO.setSearch_word( searchDTO.getSearch_word() != null ? searchDTO.getSearch_word().trim() : "");
-		searchDTO.setSearch_condition1(searchDTO.getSearch_condition1() != null ? searchDTO.getSearch_condition1().trim(): "");
-		searchDTO.setSearch_condition2(searchDTO.getSearch_condition2() != null ? searchDTO.getSearch_condition2().trim(): "");
-		searchDTO.setSearch_condition3(searchDTO.getSearch_condition3() != null ? searchDTO.getSearch_condition3().trim(): "");
-		searchDTO.setSort_condition(searchDTO.getSort_condition() != null ? searchDTO.getSort_condition().trim(): "");
+		searchDTO.setSearch_word(searchDTO.getSearch_word() != null ? searchDTO.getSearch_word().trim() : "");
+		searchDTO.setSearch_condition1(searchDTO.getSearch_condition1() != null ? searchDTO.getSearch_condition1().trim() : "");
+		searchDTO.setSearch_condition2(searchDTO.getSearch_condition2() != null ? searchDTO.getSearch_condition2().trim() : "");
+		searchDTO.setSearch_condition3(searchDTO.getSearch_condition3() != null ? searchDTO.getSearch_condition3().trim() : "");
+		searchDTO.setSort_condition(searchDTO.getSort_condition() != null ? searchDTO.getSort_condition().trim() : "");
 
 		// 학생 정보
 		MemberDTO reqDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
@@ -50,9 +52,9 @@ public class CourseController {
 
 		// 제외목록
 		List<Integer> exceptList = new ArrayList<>();
-		for(ClassDTO classDTO : courseList){
-			for(BasketDTO basketDTO : basketList){
-				if(basketDTO.getClass_id() == classDTO.getId()){
+		for (ClassDTO classDTO : courseList) {
+			for (BasketDTO basketDTO : basketList) {
+				if (basketDTO.getClass_id() == classDTO.getId()) {
 					exceptList.add(classDTO.getId());
 				}
 			}
@@ -84,7 +86,7 @@ public class CourseController {
 	}
 
 	@GetMapping("/detail/{id}")
-	public String detail(@PathVariable("id") int id, Model model){
+	public String detail(@PathVariable("id") int id, Model model) {
 		log.info(id);
 		ClassDetailDTO classDetailDTO = courseService.getClassDetailById(id);
 		List<ReviewDTO> reviewList = courseService.getReviewListById(id);

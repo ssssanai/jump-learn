@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.course.EnrollmentsMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="search_word != null ">
+                title like concat('%', #{search_word}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="getTotalCount">
+        select count(*)
+        from tbl_enrollments as te
+            inner join tbl_class as tc on te.class_id = tc.id
+        where tc.title like concat('%', #{search_word}, '%')
+    </select>
+
+    <!-- 수강한 강좌의 상세 정보 -->
+    <select id="getEnrollment" resultType="com.ssanai.jumplearn.dto.EnrollmentsDTO" >
+        select
+            te.id as 'id', te.member_id as 'member_id', te.pay_id as 'pay_id', te.class_id as 'class_id',
+            te.progress as 'progress', te.review as 'review', te.feedback_score as 'feedback_score',
+            te.midterm_score as 'midterm_score', te.final_score as 'final_score', te.final_grade_score as 'final_grade_score',
+            tc.title as 'class_title', tc.category as 'class_category',
+            tt.name as 'teacher_name',
+            tp.created_at as 'pay_created_at'
+        from tbl_enrollments as te
+            inner join tbl_class as tc on te.class_id = tc.id
+            inner join tbl_teacher as tt on tc.teacher_id = tt.id
+            inner join tbl_pay as tp on te.pay_id = tp.id
+        where te.id = #{id}
+    </select>
+
+    <!-- 수강한 강좌 리스트 -->
+    <select id="enrollList" resultType="com.ssanai.jumplearn.dto.EnrollmentsDTO">
+        select
+        te.id as 'id', te.class_id as 'class_id',
+        tc.title as 'class_title', tc.category as 'class_category',
+        tt.name as 'teacher_name',
+        tp.created_at as 'pay_created_at'
+        from tbl_enrollments as te
+        inner join tbl_class as tc on te.class_id = tc.id
+        inner join tbl_teacher as tt on tc.teacher_id = tt.id
+        inner join tbl_pay as tp on te.pay_id = tp.id
+            <if test="search_word != null">
+                where tc.title like concat('%', #{search_word}, '%')
+            </if>
+        order by
+        <choose>
+            <when test="sort_order == 'recent'">
+                tp.created_at DESC
+            </when>
+            <when test="sort_order == 'char'">
+                tc.title ASC
+            </when>
+            <otherwise>
+                te.id DESC
+            </otherwise>
+        </choose>
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+</mapper>
+ 

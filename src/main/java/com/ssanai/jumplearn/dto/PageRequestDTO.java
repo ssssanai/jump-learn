@@ -38,6 +38,9 @@ public class PageRequestDTO {
     private String search_date_to;
     private String linkParams;
 
+    private String sort_order; // 정렬 기준
+    private String search_target; // 검색할 게시판
+
     public int getPage_skip_count() {
         return (this.page_no-1)*this.page_size;
     }
