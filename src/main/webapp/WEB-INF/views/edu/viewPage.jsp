@@ -58,7 +58,7 @@
                     ${dto.admin_id}
                 </td>
                 <td>
-                    ${dto.created_at}
+                    ${fn:replace(dto.created_at,'T',' ')}
                 </td>
                 <td>
                     ${dto.view_count}
