@@ -50,7 +50,7 @@
     <c:when test="${not empty dtoList}">
       <c:forEach var="list" items="${dtoList}" varStatus="loop">
         <tr>
-          <td><a href="admin/class_video_update?video_id=?${list.id}">${list.video_order}</a></td>
+          <td><a href="/admin/class_video_update?video_id=${list.id}">${list.video_order}</a></td>
           <td>${list.teacher_id}</td>
           <td>${list.title}</td>
           <td>
@@ -116,7 +116,7 @@
     </c:when>
     <c:otherwise>
       <tr>
-        <td colspan="10">강좌 정보가 없습니다.</td>
+        <td colspan="11">강좌 정보가 없습니다.</td>
       </tr>
     </c:otherwise>
   </c:choose>

@@ -11,9 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Log4j2
 @Controller
@@ -50,5 +49,38 @@ public class ReportLisstController {
         log.info(resDTO.getDtoList());
         log.info(resDTO);
         return "admin/reportList";
+    }
+    @GetMapping("/report")
+    public String reportDetail(
+            @RequestParam("id") String report_id,
+            Model model
+    ) {
+        int id = Integer.parseInt(report_id);
+        ReportDTO dto = reportListService.reportDetail(id);
+        log.info(dto.toString());
+        model.addAttribute("dto", dto);
+        return "admin/report";
+    }
+    @PostMapping("/resolution")
+    public String resolution(
+            HttpSession session,
+            ReportDTO dto,
+            RedirectAttributes redirectAttributes,
+            @RequestHeader(value = "Referer", required = false) String referer
+    ){
+        AdminDTO dtoAdmin = (AdminDTO) session.getAttribute("loginInfo");
+        dto.setAdmin_id(dtoAdmin.getId());
+        log.info("여기까지"+dto.toString());
+        int rs = reportListService.reportResolution(dto);
+        if(rs!=1){
+            redirectAttributes.addFlashAttribute("msg","답변 실패");
+        }else {
+            redirectAttributes.addFlashAttribute("msg","답변 성공");
+        }
+        if (referer != null) {
+            return "redirect:" + referer;
+        } else {
+            return "redirect:/admin/reportList";
+        }
     }
 }

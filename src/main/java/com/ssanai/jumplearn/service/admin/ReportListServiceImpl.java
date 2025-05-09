@@ -43,11 +43,17 @@ public class ReportListServiceImpl implements  ReportListServiceIf{
 
     @Override
     public int reportResolution(ReportDTO reportDTO) {
-        return 0;
+        int rs = reportListXmlMapper.reportResolution(reportDTO);
+        if(rs != 1){
+            return  rs;
+        }else {
+            rs = reportListXmlMapper.reportUpdate(reportDTO.getReport_id());
+        }
+        return rs;
     }
 
     @Override
-    public ReportDTO reportDetail(PageRequestDTO requestDTO) {
-        return null;
+    public ReportDTO reportDetail(int id) {
+        return reportListXmlMapper.reportDetail(id);
     }
 }

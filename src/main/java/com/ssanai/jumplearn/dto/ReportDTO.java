@@ -19,13 +19,13 @@ public class ReportDTO {
     private String reason;       // 신고 사유
     private String report_status; // 신고 상태 질문 처리 상태 (예: pending, completed)
     private int resolution_id;   // 해결 ID
-    private int admin_id;        // 관리자 ID (해결 처리하는 관리자)
+    private String admin_id;        // 관리자 ID (해결 처리하는 관리자)
     private String resolution;   // 해결 내용
 
     //신고 받은 테이블 정보
     private String report_title; //신고 받은 게시물 제목
     private String report_content; //신고 받은 게시물 내용
     private LocalDateTime report_create_date; //신고 받은 게시물 생성 날짜
-    private LocalDateTime report_update_date; //신고 받은 게시물 수정 날짜
-
+    private LocalDateTime resolution_create_date;
 }
+

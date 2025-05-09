@@ -53,7 +53,7 @@
                     <td><a href="/admin/report?id=${list.report_id}">${list.report_id}</a></td>
                     <td>${list.target_type}</td>
                     <td>${list.member_id}</td>
-                    <td>${list.report_status}</td>
+                    <td>${list.report_status.equals("completed") ? "처리 완료" : "처리중"}</td>
                 </tr>
             </c:forEach>
         </c:when>
@@ -117,7 +117,6 @@
             </a>
         </li>
     </ul>
-
 </div>
 </body>
 </html>

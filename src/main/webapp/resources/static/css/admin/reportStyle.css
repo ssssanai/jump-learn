@@ -1,0 +1,68 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    padding: 40px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.report-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    padding: 20px 25px;
+}
+
+.report-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.report-label {
+    width: 150px;
+    font-weight: bold;
+    color: #555;
+}
+
+.report-value {
+    flex: 1;
+    color: #222;
+}
+
+.status-pending {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    font-size: 14px;
+    resize: vertical;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.submit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.submit-button:hover {
+    background-color: #115293;
+}

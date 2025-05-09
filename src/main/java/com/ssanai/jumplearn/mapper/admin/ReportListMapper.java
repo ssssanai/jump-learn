@@ -10,5 +10,6 @@ public interface ReportListMapper {
     public int reportTotalCount(PageRequestDTO requestDTO);
     public int reportDelete(String reportId);
     public int reportResolution(ReportDTO reportDTO);
-    public ReportDTO reportDetail(String reportId);
+    public int reportUpdate(int id);
+    public ReportDTO reportDetail(int reportId);
 }
