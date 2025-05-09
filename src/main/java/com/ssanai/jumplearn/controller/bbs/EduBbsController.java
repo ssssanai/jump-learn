@@ -89,10 +89,9 @@ public class EduBbsController {
     ) {
         PageResponseDTO<BbsDefaultDTO> dto = bbsService.searchList(pageDTO);
         int totalCount = bbsService.getTotalCount(pageDTO);
-
-        AdminDTO adto = (AdminDTO)session.getAttribute("loginInfo");
-        log.info("adto", adto.toString());
-        model.addAttribute("adto", adto);
+//        AdminDTO adto = (AdminDTO)session.getAttribute("loginInfo");
+//        log.info("adto", adto.toString());
+//        model.addAttribute("adto", adto);
         model.addAttribute("dto", dto);
         String paging = BbsPage.pagingArea(totalCount, pageDTO.getPage_no(), pageDTO.getPage_size(), pageDTO.getPage_block_size(), req.getContextPath());
         model.addAttribute("paging", paging);
