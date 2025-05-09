@@ -3,6 +3,7 @@ package com.ssanai.jumplearn.controller.admin;
 import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.dto.ClassDataDTO;
 import com.ssanai.jumplearn.service.admin.ClassListServiceIf;
+import com.ssanai.jumplearn.util.FilePathConfig;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ import java.util.List;
 )
 public class ClassListController {
     private final ClassListServiceIf classListService;
+    private final FilePathConfig filePathConfig;
 
     @GetMapping("/classList")
     public String classList(
@@ -70,7 +72,7 @@ public class ClassListController {
     ) throws Exception {
         try {
             if (file != null && !file.isEmpty()) {
-                String uploadDir = "D:\\git\\jump-learn\\src\\upload";
+                String uploadDir = filePathConfig.getUploadPath();
                 String newName = file.getOriginalFilename();
 
                 File target = new File(uploadDir, newName);
@@ -134,7 +136,7 @@ public class ClassListController {
     ) throws Exception {
         try {
             if (file != null && !file.isEmpty()) {
-                String uploadDir = "D:\\git\\jump-learn\\src\\upload";
+                String uploadDir = filePathConfig.getUploadPath();
                 String newName = file.getOriginalFilename();
 
                 File target = new File(uploadDir, newName);
@@ -207,7 +209,7 @@ public class ClassListController {
     ) throws Exception {
         try {
             if (file != null && !file.isEmpty()) {
-                String uploadDir = "D:\\git\\jump-learn\\src\\upload";
+                String uploadDir = filePathConfig.getUploadPath();
                 String newName = file.getOriginalFilename();
 
                 File target = new File(uploadDir, newName);
@@ -278,7 +280,7 @@ public class ClassListController {
     ) throws Exception {
         try {
             if (file != null && !file.isEmpty()) {
-                String uploadDir = "D:\\git\\jump-learn\\src\\upload";
+                String uploadDir = filePathConfig.getUploadPath();
                 String newName = file.getOriginalFilename();
 
                 File target = new File(uploadDir, newName);
