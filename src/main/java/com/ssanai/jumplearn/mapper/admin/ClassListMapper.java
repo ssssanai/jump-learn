@@ -21,4 +21,6 @@ public interface ClassListMapper {
     public ClassDataDTO dataDetail(int id);
     public int classDataUpdate(ClassDataDTO classDataDTO);
     public int classDataDelete(int id);
+    public int classVideoUpdate(ClassVideoDTO classVideoDTO);
+    public int classVideoDelete(int id);
 }

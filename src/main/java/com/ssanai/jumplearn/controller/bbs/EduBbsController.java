@@ -1,11 +1,13 @@
 package com.ssanai.jumplearn.controller.bbs;
 
+import com.ssanai.jumplearn.dto.AdminDTO;
 import com.ssanai.jumplearn.dto.BbsDefaultDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.service.bbs.BbsServiceInterface;
 import com.ssanai.jumplearn.util.BbsPage;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -82,11 +84,14 @@ public class EduBbsController {
     public String searchListPage(
             HttpServletRequest req
             ,@ModelAttribute("pageDTO") PageRequestDTO pageDTO,
+            HttpSession session,
             Model model
     ) {
         PageResponseDTO<BbsDefaultDTO> dto = bbsService.searchList(pageDTO);
         int totalCount = bbsService.getTotalCount(pageDTO);
-
+//        AdminDTO adto = (AdminDTO)session.getAttribute("loginInfo");
+//        log.info("adto", adto.toString());
+//        model.addAttribute("adto", adto);
         model.addAttribute("dto", dto);
         String paging = BbsPage.pagingArea(totalCount, pageDTO.getPage_no(), pageDTO.getPage_size(), pageDTO.getPage_block_size(), req.getContextPath());
         model.addAttribute("paging", paging);

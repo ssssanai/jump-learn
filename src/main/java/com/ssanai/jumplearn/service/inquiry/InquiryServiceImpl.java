@@ -32,7 +32,11 @@ public class InquiryServiceImpl implements InquiryServiceIf {
 		int totalCount = getInquiryTotalCount(dto);
 		List<InquiryDTO> inquiryList = inquiryMapper.getInquiryList(dto);
 		PageResponseDTO<InquiryDTO> pageResponseDTO =
-				PageResponseDTO.<InquiryDTO>withAll().reqDTO(dto).dtoList(inquiryList).total_count(totalCount).build();
+				PageResponseDTO.<InquiryDTO>withAll()
+						.reqDTO(dto)
+						.dtoList(inquiryList)
+						.total_count(totalCount)
+						.build();
 		return pageResponseDTO;
 	}
 
