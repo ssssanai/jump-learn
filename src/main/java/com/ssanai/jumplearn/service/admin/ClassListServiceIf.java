@@ -21,4 +21,7 @@ public interface ClassListServiceIf {
     public ClassDataDTO dataDetail(int id);
     public int classDataUpdate(ClassDataDTO classDataDTO);
     public int classDataDelete(int id);
+    public ClassVideoDTO videoDetail(int id);
+    public int classVideoUpdate(ClassVideoDTO classVideoDTO);
+    public int classVideoUpdate1(ClassVideoDTO classVideoDTO);
 }

@@ -325,4 +325,72 @@ public class ClassListController {
         }
         return "redirect:/admin/class?id="+class_id;
     }
+    @GetMapping("/class_video_update")
+    public String videoUpdate(
+            @RequestParam("video_id")String video_id,
+            @RequestHeader(value = "Referer", required = false) String referer,
+            Model model
+    ){
+        int id = Integer.parseInt(video_id);
+        ClassVideoDTO dto = classListService.videoDetail(id);
+        log.info(dto.toString());
+        model.addAttribute("dto", dto);
+        return "admin/classVideoUpdate";
+    }
+    //내부 영상
+    @PostMapping("/class_video_update")
+    public String videoUpdate(
+            ClassVideoDTO dto,
+            @RequestParam("video") MultipartFile file,
+            @RequestHeader(value = "Referer", required = false) String referer,
+            RedirectAttributes redirectAttributes
+    ) throws Exception {
+        try {
+            if (file != null && !file.isEmpty()) {
+                log.info("접근");
+                String uploadDir = filePathConfig.getUploadPath();
+                String newName = file.getOriginalFilename();
+
+                File target = new File(uploadDir, newName);
+                file.transferTo(target);
+
+                dto.setVideo_path("/upload");
+                dto.setVideo_name(newName);
+                dto.setVideo_extension(
+                        file.getOriginalFilename()
+                                .substring(file.getOriginalFilename()
+                                        .lastIndexOf("."))
+                );
+                dto.setVideo_size(file.getSize());
+                log.info(dto.toString());
+                int rs = classListService.classVideoUpdate(dto);
+                if (rs != 1) {
+                    redirectAttributes.addAttribute("msg", "영상 생성 실패 했습니다.");
+                    return "admin/class_video_update?video_id="+dto.getId();
+                } else {
+                    redirectAttributes.addAttribute("msg", "영상 생성 성공 했습니다.");
+                }
+            }
+        } catch (Exception e) {
+            log.info("classCreate >> error : {}", e.getMessage());
+            redirectAttributes.addFlashAttribute("msg", "업로드 실패: " + e.getMessage());
+            return"admin/class_video_update?video_id="+dto.getId();
+        }
+        return "redirect:/admin/class?id=" + dto.getClass_id();
+    }
+    //외부영상
+    @PostMapping("/class_video_update1")
+    public String videoUpdate1(
+            ClassVideoDTO dto,
+            @RequestHeader(value = "Referer", required = false) String referer,
+            RedirectAttributes redirectAttributes
+    ){
+        int rs = classListService.classVideoUpdate1(dto);
+        if (rs != 1) {
+            redirectAttributes.addAttribute("msg", "영상 생성 실패 했습니다.");
+            return "admin/class_video_update?video_id="+dto.getId();
+        }
+        redirectAttributes.addAttribute("msg", "영상 생성 성공 했습니다.");
+        return "redirect:/admin/class?id=" + dto.getClass_id();
+    }
 }

@@ -21,6 +21,9 @@ public interface ClassListMapper {
     public ClassDataDTO dataDetail(int id);
     public int classDataUpdate(ClassDataDTO classDataDTO);
     public int classDataDelete(int id);
-    public int classVideoUpdate(ClassVideoDTO classVideoDTO);
-    public int classVideoDelete(int id);
+    public ClassVideoDTO videoDetail(int id);
+    public int classVideoUpdate(ClassVideoDTO classVideoDTO); //내부영상
+    public int classVideoUpdate1(ClassVideoDTO classVideoDTO); //외부영상
+    public int classVideoUrlDelete(int id); //내부 영상 업로드시, 혹시 외부영상 url이 있으면 null변환 로직
+    public int clssUrlVideoDelete(int id); //외부 영상 업로드시, 혹시 내부영상 데이터가 있으면 null반환 로직
 }

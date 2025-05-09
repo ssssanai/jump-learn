@@ -34,14 +34,23 @@
         delete from tbl_report
         where id = #{report_id}
     </delete>
-    <insert id="reportResolution">
-        insert into tbl_report_resolution(report_id,admin_id,resolution)
-        values(#{report_id}, #{admin_id}, #{resolution}
-    </insert>
     <select id="reportDetail">
-        select id as report_id, target_id, target_type, reason, created_at
-        from tbl_report
-        where id = #{report_id}
+        SELECT
+        r.id as report_id, r.target_id AS target_id, r.target_type AS target_type, r.reason AS reason,
+        r.member_id AS member_id, r.created_at AS report_create_date, r.report_status AS report_status,
+        rr.id AS resolution_id , rr.admin_id AS admin_id, rr.resolution AS resolution, rr.created_at AS resolution_create_date
+        from tbl_report AS r LEFT JOIN tbl_report_resolution AS rr
+        ON r.id = rr.report_id
+        WHERE r.id = #{id}
     </select>
+    <insert id="reportResolution">
+        INSERT INTO tbl_report_resolution (report_id, admin_id, resolution)
+        VALUES (#{report_id}, #{admin_id}, #{resolution});
+    </insert>
+    <update id="reportUpdate">
+        UPDATE tbl_report
+        SET report_status = "completed"
+        WHERE id = #{id};
+    </update>
 </mapper>
     

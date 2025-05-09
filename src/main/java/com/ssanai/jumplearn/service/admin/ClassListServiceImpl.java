@@ -90,4 +90,39 @@ public class ClassListServiceImpl implements ClassListServiceIf {
         return classListXmlMapper.classDataDelete(id);
     }
 
+    @Override
+    public ClassVideoDTO videoDetail(int id) {
+        return classListXmlMapper.videoDetail(id);
+    }
+
+    @Override
+    public int classVideoUpdate(ClassVideoDTO classVideoDTO) {
+        int rs = classListXmlMapper.classVideoUpdate(classVideoDTO);
+        int re = 0;
+        if(rs != 1){
+            return rs;
+        }else{
+            ClassVideoDTO dto = classListXmlMapper.videoDetail(classVideoDTO.getId());
+            if(dto.getVideo_url() != null){
+                re = classListXmlMapper.classVideoUrlDelete(classVideoDTO.getId());
+            }
+        }
+        return re;
+    }
+
+    @Override
+    public int classVideoUpdate1(ClassVideoDTO classVideoDTO) {
+        int rs = classListXmlMapper.classVideoUpdate1(classVideoDTO);
+        int re = 0;
+        if(rs != 1){
+            return rs;
+        }else{
+            ClassVideoDTO dto = classListXmlMapper.videoDetail(classVideoDTO.getId());
+            if(dto.getVideo_name() != null){
+                re = classListXmlMapper.clssUrlVideoDelete(classVideoDTO.getId());
+            }
+        }
+        return re;
+    }
+
 }
