@@ -1,10 +1,7 @@
 package com.ssanai.jumplearn.controller.mypage;
 
 
-import com.ssanai.jumplearn.dto.EnrollmentsDTO;
-import com.ssanai.jumplearn.dto.MemberDTO;
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.PageResponseDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.service.course.EnrollmentsServiceIf;
 import com.ssanai.jumplearn.service.mainpage.MainPageServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
@@ -88,7 +85,7 @@ public class MemberMyPageController {
         String EnrollPaging = BbsPage.pagingArea(totalCount, reqDTO.getPage_no(), reqDTO.getPage_size(), reqDTO.getPage_block_size(), req.getContextPath());
 
         // 2. 내가 작성한 글
-
+        PageResponseDTO<PostDTO> PostDTOList = null;
         // 내가 작성한 글 페이징
 
         // 3. 내가 남긴 댓글
