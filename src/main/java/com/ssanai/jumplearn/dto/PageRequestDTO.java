@@ -47,8 +47,36 @@ public class PageRequestDTO {
 
     public String getLinkParams(){
         StringBuffer sb = new StringBuffer();
-        //sb.append("page_no="+this.page_no);
-        sb.append("page_size="+this.page_size);
+        sb.append("page_no="+this.page_no);
+        sb.append("&page_size="+this.page_size);
+        sb.append("&page_skip_count="+this.page_skip_count);
+        sb.append("&page_block_size="+this.page_block_size);
+
+        if ( this.search_category != null ){
+            sb.append("&search_category="+this.search_category);
+        }
+        if ( this.search_word != null ){
+            try{
+                sb.append("&search_word="+ URLEncoder.encode(this.search_word, "UTF-8"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if ( this.search_date_from != null ){
+            sb.append("&search_date_from="+this.search_date_from);
+        }
+        if ( this.search_date_to != null ){
+            sb.append("&search_date_to="+this.search_date_to);
+        }
+
+        return sb.toString();
+    }
+
+    public String getLinkParamsWithoutNo(){
+        StringBuffer sb = new StringBuffer();
+        sb.append("&page_size="+this.page_size);
+        sb.append("&page_skip_count="+this.page_skip_count);
+        sb.append("&page_block_size="+this.page_block_size);
 
         if ( this.search_category != null ){
             sb.append("&search_category="+this.search_category);

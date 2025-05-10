@@ -85,8 +85,14 @@
                     </c:forEach>
                 </div>
                 <div class="formBtn">
-                    <input class="endBtn" type="submit" value="목록">
-                    <input class="endBtn" type="button" value="수정">
+                    <input class="endBtn" type="button" value="목록" onClick="location.href='<c:url value='/edu/searchListPage?${pageDTO.linkParams}'/>'" />
+
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.loginInfo.status}">
+                            <input class="endBtn" type="button" value="수정" onClick="location.href='<c:url value='/edu/editPage?id=${dto.id}&${pageDTO.linkParams}'/>'" />
+                            <input class="endBtn" type="button" value="삭제" onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='<c:url value='/edu/delete'/>?id=${dto.id}&${pageDTO.linkParams}';}" />
+                        </c:when>
+                    </c:choose>
                 </div>
             </form>
         </div>

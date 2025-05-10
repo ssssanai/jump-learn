@@ -15,9 +15,9 @@ public class BbsPage {
 
         int total_page = (int)Math.ceil(total_count/(double)page_size);
         total_page = (total_page > 1 ? total_page : 1);
-        int page_block_start = (int)Math.floor((page_no-1)/(double)page_size)
-                *page_size +1;
-        int page_block_end = (int)Math.ceil(page_no/(double)page_size)*page_size;
+
+        int page_block_start = (int)Math.floor((page_no-1)/(double)page_block_size)*page_block_size +1;
+        int page_block_end = page_block_start + page_block_size - 1;
         page_block_end = (page_block_end>total_page?total_page:page_block_end);
 
         // 첫 페이지 링크 출력 부분
