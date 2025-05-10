@@ -11,5 +11,5 @@ public interface ReportListServiceIf {
     public int reportTotalCount(PageRequestDTO requestDTO);
     public int reportDelete(ReportDTO reportDTO);
     public int reportResolution(ReportDTO reportDTO);
-    public ReportDTO reportDetail(PageRequestDTO requestDTO);
+    public ReportDTO reportDetail(int id);
 }

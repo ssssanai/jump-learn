@@ -12,55 +12,7 @@
   </div>
   <ul class="mainmenu">
     <li>
-      <a href="#">강의</a>
-      <ul class="submenu">
-        <li>
-          <a href="#">국어</a>
-        </li>
-        <li>
-          <a href="#">수학</a>
-        </li>
-        <li>
-          <a href="#" class="lsMenu">영어</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">자료실</a>
-    </li>
-    <li>
-      <a href="#">문의하기</a>
-      <ul class="submenu">
-        <li>
-          <a href="#">1:1 문의</a>
-        </li>
-        <li>
-          <a href="#" class="lsMenu">자주묻는질문</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">커뮤니티</a>
-      <ul class="submenu">
-        <li>
-          <a href="#">자료실 게시판</a>
-        </li>
-        <li>
-          <a href="#">교육정보 게시판</a>
-        </li>
-        <li>
-          <a href="#">대입 정보 게시판</a>
-        </li>
-        <li>
-          <a href="#">대외활동 게시판</a>
-        </li>
-        <li>
-          <a href="#">뉴스 게시판</a>
-        </li>
-        <li>
-          <a href="#" class="lsMenu">공지사항 게시판</a>
-        </li>
-      </ul>
+      <a href="#">로그아웃</a>
     </li>
   </ul>
 </div>

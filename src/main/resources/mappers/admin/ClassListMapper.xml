@@ -130,5 +130,43 @@
         delete from tbl_class_data
         where id = #{id}
     </delete>
+    <select id="videoDetail">
+        SELECT id, class_id, video_order, title, video_name, video_url, content
+        FROM tbl_class_video
+        WHERE id = #{id}
+    </select>
+    <update id="classVideoUpdate">
+        UPDATE tbl_class_video
+        SET
+        video_order =#{video_order},
+        title = #{title},
+        video_path = #{video_path},
+        video_name = #{video_name},
+        video_size = #{video_size},
+        video_extension = #{video_extension}
+        WHERE id = #{id}
+    </update>
+    <update id="classVideoUpdate1">
+        UPDATE tbl_class_video
+        SET
+        video_order =#{video_order},
+        title = #{title},
+        video_url = #{video_url}
+        WHERE id = #{id}
+    </update>
+    <update id="classVideoUrlDelete">
+        UPDATE tbl_class_video
+        SET video_url = NULL
+        WHERE id = #{id}
+    </update>
+    <update id="clssUrlVideoDelete">
+        UPDATE tbl_class_video
+        SET
+        video_path = NULL,
+        video_name = NULL,
+        video_size = NULL,
+        video_extension = NULL
+        WHERE id = #{id}
+    </update>
 </mapper>
     
