@@ -64,3 +64,17 @@ textarea {
 .submit-button:hover {
     background-color: #115293;
 }
+.inquiry-row {
+    display: flex;
+    align-items: center; /* 수직 정렬 */
+    margin-bottom: 8px;  /* 항목 간 간격 */
+}
+
+.inquiry-label {
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.inquiry-value {
+    flex: 1; /* 남은 공간 채움 */
+}

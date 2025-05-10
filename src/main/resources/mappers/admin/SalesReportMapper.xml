@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssanai.jumplearn.mapper.admin.SalesReportMapper">
+    <select id="salesReportList">
+        SELECT
+        p.class_id AS class_id,
+        c.title AS class_name,
+        t.name AS teacher_name,
+        c.target AS class_target,
+        c.category AS class_category,
+        p.cost as class_cost,
+        COUNT(*) AS class_total_count,
+        SUM(cost) AS class_total_cost
+        FROM tbl_pay AS p
+        INNER JOIN tbl_class AS c
+        ON p.class_id = c.id
+        INNER JOIN tbl_teacher AS t
+        ON c.teacher_id = t.id
+        WHERE p.complete = 1
+        GROUP BY p.class_id
+        <if test="orderBy != null">
+            ORDER BY class_total_cost ${orderBy}
+        </if>
+    </select>
+    <select id="salesReportCategory">
+        SELECT c.category AS class_category,
+        SUM(p.cost) AS class_total_cost
+        FROM tbl_class AS c
+        JOIN tbl_pay AS p ON c.id = p.class_id
+        WHERE c.category IN ('KOREAN', 'ENGLISH', 'MATH')
+        AND p.complete = 1
+        GROUP BY c.category;
+    </select>
+    <select id="salesReportMonthCategory">
+        SELECT c.category AS class_category,
+        DATE_FORMAT(p.created_at, '%Y-%m') AS class_month,
+        SUM(p.cost) AS class_total_cost
+        FROM tbl_class AS c
+        JOIN tbl_pay AS p ON c.id = p.class_id
+        WHERE c.category IN ('KOREAN', 'ENGLISH', 'MATH')
+        AND p.complete = 1
+        GROUP BY c.category, class_month
+        ORDER BY class_month;
+    </select>
+</mapper>
+    
