@@ -36,12 +36,12 @@
         </div>
         <div class="sideMenu">
             <h2 class="sideMenuTitle">커뮤니티</h2>
-            <a href="#">자유게시판</a>
-            <a href="#" class="select">교육 정보 게시판</a>
-            <a href="#">대입 정보 게시판</a>
-            <a href="#">대외활동 게시판</a>
-            <a href="#">자료실 게시판</a>
-            <a href="#">뉴스 게시판</a>
+            <a href="/post/searchListPage">자유게시판</a>
+            <a href="/edu/searchListPage" class="select">교육 정보 게시판</a>
+            <a href="/info/searchListPage">대입 정보 게시판</a>
+            <a href="/activity/searchListPage">대외활동 게시판</a>
+            <a href="/lib/searchListPage">자료실 게시판</a>
+            <a href="/news/searchListPage">뉴스 게시판</a>
         </div>
     </div>
     <div class="main">
@@ -51,7 +51,7 @@
             <div class="wtBtn">
                 <c:choose>
                     <c:when test="${not empty sessionScope.loginInfo.status}">
-                        <a href="/edu/viewPage?id=${post.id}">글쓰기</a>
+                        <a href="/edu/writePage">글쓰기</a>
                     </c:when>
                 </c:choose>
 
@@ -59,10 +59,9 @@
             </div>
         </div>
         <form class="searchInput" method="GET" action="/edu/searchListPage">
-            <input type="hidden" name="page_no"   value="${pageDTO.page_no}" />
             <input type="hidden" name="page_size" value="${pageDTO.page_size}" />
             <div class="siReset">
-                <input type="reset" value="검색조건 초기화">
+                <input type="button" onclick="location.href='<c:url value="/edu/searchListPage"/>'"  value="검색조건 초기화">
             </div>
             <div class="searchBoxs">
                 <select id="search_category" name="search_category" class="selectOption">
@@ -111,18 +110,19 @@
                         </c:when>
                     </c:choose>
                     <p class="listNo">${post.id}</p>
-                    <p class="listTit"><a href="/edu/viewPage?id=${post.id}">${post.title}</a></p>
+                    <p class="listTit"><a href="/edu/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
                     <p class="listName"><a href="#">${post.admin_id}</a></p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
                     <c:choose>
-                        <c:when test="${not empty sessionScope.loginInfo.status}">
+                        <c:when test="${not empty sessionScope.loginInfo.status}" >
                             <div class="listDelBtnBox">
-                                <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}';}" value="삭제">
+                                <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}&${pageDTO.getLinkParams()}';}" value="삭제">
                             </div>
                         </c:when>
                     </c:choose>
                 </div>
+
             </c:forEach>
             <div class="pagingBox">
                 ${paging}
