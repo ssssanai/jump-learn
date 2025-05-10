@@ -16,7 +16,7 @@
                 </if>
                 <if test="search_category == 'created_at'">
                     <![CDATA[
-                    created_at BETWEEN #{search_date_from} AND #{search_date_to}
+                    created_at BETWEEN CONCAT(#{search_date_from},' 00:00:00') AND CONCAT(#{search_date_to},' 23:59:59' )
                     ]]>
                 </if>
 
