@@ -3,11 +3,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssanai.jumplearn.mapper.post.PostMapper">
     <select id="list" resultType="com.ssanai.jumplearn.dto.PostDTO">
-        select
-            id, title, content, created_at, updated_at, view_count,
-               member_id
-        from tbl_post
-        where member_id = #{member_id}
+        SELECT
+        p.id AS id,
+        p.title AS title,
+        p.created_at AS created_at,
+        p.view_count AS view_count,
+        p.member_id AS member_id,
+        p.updated_at AS updated_at,
+        COUNT(l.post_id) AS like_count
+        FROM
+        tbl_post p
+        LEFT JOIN
+        tbl_post_like l ON p.id = l.post_id
+        WHERE
+        p.member_id = #{member_id}
+        GROUP BY
+        p.id
+        order by
+        <choose>
+            <when test="sort_order == 'recent'">
+                tp.created_at DESC
+            </when>
+            <when test="sort_order == 'popular'">
+                like_count DESC
+            </when>
+            <otherwise>
+                tp.id DESC
+            </otherwise>
+        </choose>
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="selectById" resultType="com.ssanai.jumplearn.dto.PostDTO">
+
+
+    </select>
+
+    <select id="getTotalCount">
+        select count(*)
+        FROM tbl_post p
+                 LEFT JOIN tbl_post_like l ON p.id = l.post_id
+        WHERE p.member_id = #{member_id}
+        GROUP BY p.id
     </select>
 </mapper>
  

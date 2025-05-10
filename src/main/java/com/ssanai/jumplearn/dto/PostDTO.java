@@ -30,12 +30,13 @@ public class PostDTO {
 	private String member_name; // 게시글 작성자 이름
 
 	// tbl_post_like
-	List<PostLikeVO> postLikeVOList;
+	private List<PostLikeVO> postLikeVOList;
+	private int like_count;
 
 	// tbl_post_comment
-	List<PostCommentVO> postCommentVOList;
+	private List<PostCommentVO> postCommentVOList;
 
 	// tbl_bbs_file
-	List<PostFileVO> postFileVOList;
-	List<BbsFileVO> bbsFileVOList;
+	private List<PostFileVO> postFileVOList;
+	private List<BbsFileVO> bbsFileVOList;
 }
