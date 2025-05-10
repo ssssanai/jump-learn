@@ -138,7 +138,7 @@
     </div>
     <div class="tcStudyList">
         <h2>운영중인 강의</h2>
-        <form class="searchBox" action="" method="">
+        <form class="searchBox" action="" method="get">
             <label class="chkStyle">
                 <input type="checkbox" name="search">
                 <span>최신순</span>
