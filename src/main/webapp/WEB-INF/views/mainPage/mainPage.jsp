@@ -7,60 +7,46 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <html lang="ko_KR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../../resources/static/css/mainStyle.css" rel="stylesheet" type="text/css">
-    <link href="../../../resources/static/css/headerStyle.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/mainStyle.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerStyle.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <title>JL - 메인화면</title>
 </head>
 <body>
-<%@include file="../../../resources/static/html/memberGnb.jsp" %>
-<div id="slider-wrapper">
-    <div class="inner-wrapper">
-        <input checked type="radio" name="slide" class="control" id="Slide1"/>
-        <label for="Slide1" id="s1"></label>
-        <input type="radio" name="slide" class="control" id="Slide2"/>
-        <label for="Slide2" id="s2"></label>
-        <input type="radio" name="slide" class="control" id="Slide3"/>
-        <label for="Slide3" id="s3"></label>
-        <div class="overflow-wrapper">
-            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide01.jpg"
-                                           alt="슬라이드 01"/></a>
-            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide02.jpg"
-                                           alt="슬라이드 02"/></a>
-            <a class="slide" href="#"><img src="../../../resources/static/images/mainPage/slide03.jpg"
-                                           alt="슬라이드 03"/></a>
-        </div>
-    </div>
-</div>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
 <div class="main">
     <%-- TODO: 슬라이드 처리 --%>
-    <c:forEach var="recClass" items="${recommendList}">
-        <div class="buyStudy1">
-
-            <div class="bsTitle">
-                <h1>${recClass.title}</h1>
-            </div>
-            <div class="bsCont">
-                <p>${recClass.introduce}</p>
-            </div>
-            <div class="bsBtn">
-                <a href="#" class="buyLink">구매하기</a>
-                <a href="#" class="review">강의후기</a>
-            </div>
-
-        </div>
-        <div class="buyStudy2">
-            <img src="../../../resources/static/images/mainPage/slide03.jpg" alt="홍보 이미지"/>
-                ${recClass.file_name} ${recClass.file_ext}
-        </div>
-    </c:forEach>
 
     <c:choose>
         <c:when test="${loginInfo eq null}">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <c:forEach var="recClass" items="${recommendList}">
+                        <div class="swiper-slide">
+                            <div class="buyStudy1">
+
+                                <div class="bsTitle">
+                                    <h1>${recClass.title}</h1>
+                                </div>
+                                <div class="bsCont">
+                                    <p>${recClass.introduce}</p>
+                                </div>
+                                <div class="bsBtn">
+                                    <a href="#" class="buyLink">구매하기</a>
+                                    <a href="#" class="review">강의후기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
             <!-- 비로그인 시 -->
             <div class="loginBox1">
                 <div class="loginHead">
@@ -109,11 +95,11 @@
 
             </div>
             <div class="gradeCont">
-                    ${hs1Class.title}
                 <div class="gradeP">
                     <p>고등학교 1학년 강의</p>
                 </div>
                 <div class="gradeA">
+                    <p>${hs1Class.title}</p>
                     <a href="#">바로가기</a>
                 </div>
             </div>
@@ -125,11 +111,11 @@
 
             </div>
             <div class="gradeCont">
-                    ${hs2Class.title}
                 <div class="gradeP">
                     <p>고등학교 2학년 강의</p>
                 </div>
                 <div class="gradeA">
+                    <p>${hs2Class.title}</p>
                     <a href="#">바로가기</a>
                 </div>
             </div>
@@ -141,11 +127,11 @@
 
             </div>
             <div class="gradeCont">
-                    ${hs3Class.title}
                 <div class="gradeP">
                     <p>고등학교 3학년 강의</p>
                 </div>
                 <div class="gradeA">
+                    <p>${hs3Class.title}</p>
                     <a href="#">바로가기</a>
                 </div>
             </div>
@@ -157,17 +143,34 @@
 
             </div>
             <div class="gradeCont">
-                    ${rptClass.title}
+
                 <div class="gradeP">
                     <p>N수생 강의</p>
                 </div>
                 <div class="gradeA">
+                    <p>${rptClass.title}</p>
                     <a href="#">바로가기</a>
                 </div>
             </div>
         </c:forEach>
     </div>
 </article>
+<div class="scBox">
+    <button class="scrollBtn" onclick="scrollDown()">스크롤 내려가기</button>
+</div>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {});
+
+    function scrollDown() {
+        document.querySelector('article').scrollBy({
+            top: 400,
+            behavior: 'smooth'
+        });
+    }
+</script>
 </body>
 </html>

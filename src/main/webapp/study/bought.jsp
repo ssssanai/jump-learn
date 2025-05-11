@@ -20,7 +20,7 @@
 <body>
 
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/memberGnb.jsp" %>
+<%@include file="/resources/static/html/headerGnb.jsp"%>
 
 <div class="wrap">
     <div class="buyHead">

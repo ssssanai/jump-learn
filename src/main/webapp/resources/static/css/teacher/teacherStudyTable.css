@@ -62,17 +62,18 @@ body {
 }
 .modalBox > form {
     display: flex;
-    padding: 0 15px;
+    padding: 0 18px;
     margin-bottom: 5px;
     flex-direction: column;
 }
 .scoreInput {
     height:200px;
-    padding: 10px;
+    padding: 5px;
     font-size:12px;
-    border:2px solid #d6d6d6b3;
-    border-right:0;
     resize: none;
+    outline: none;
+    border:2px solid #d6d6d6b3;
+    border-bottom: 0;
 }
 .scoreInput:focus {
     border:2px solid #607ffc;
@@ -93,15 +94,12 @@ body {
 .modalBox > a {
     float: right;
     height:10px;
-    font-size:11px;
-    margin-right: 15px;
+    font-size:12px;
+    margin-right: 17px;
 }
     .modalBox > a:hover {
         color:#607ffc;
     }
-
-
-
 .wrap {
     margin: 0 auto;
     width:60%;
@@ -149,8 +147,9 @@ body {
     height:30px;
     color:#3b3a3a;
     text-align: center;
-    font-size:14px;
+    font-size:12px;
     line-height:28px;
+    align-items: center;
 }
 .tbB1:nth-child(odd) {
     background-color: #e1e7ff;
@@ -168,7 +167,8 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     margin: 0 auto;
-    line-height:23px;
+    line-height:28px;
+
 }
 
 .tbTitle {
@@ -179,9 +179,12 @@ body {
     border-radius: 5px;
 }
     .tbTitle > a {
-        width:100%; height:25px;
+        width:100%; height:30px;
         border-radius: 5px;
-        line-height:23px;
+        line-height:28px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
     }
         .tbTitle > a:hover {
             color: #607ffc;
@@ -199,6 +202,7 @@ body {
         border:2px solid #d6d6d6b3;
         border-radius: 5px;
         line-height:23px;
+        font-size:12px;
     }
         .tbMediaIn > a:hover {
             color:#fff;
@@ -218,6 +222,7 @@ body {
         border:2px solid #d6d6d6b3;
         border-radius: 5px;
         line-height:23px;
+        font-size:12px;
     }
         .tbMediaOut > a:hover {
             color:#fff;
@@ -237,6 +242,7 @@ body {
         border:2px solid #d6d6d6b3;
         border-radius: 5px;
         line-height:23px;
+        font-size:12px;
     }
         .tbStudyData > a:hover {
             color:#fff;
