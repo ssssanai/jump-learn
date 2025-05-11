@@ -4,7 +4,10 @@ import com.ssanai.jumplearn.dto.BbsDefaultDTO;
 import com.ssanai.jumplearn.dto.BbsFileDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.dto.PageResponseDTO;
-import com.ssanai.jumplearn.mapper.BbsMapper;
+import com.ssanai.jumplearn.mapper.bbs.BbsFileMapper;
+import com.ssanai.jumplearn.mapper.bbs.BbsMapper;
+import com.ssanai.jumplearn.mapper.bbs.EduFileMapper;
+import com.ssanai.jumplearn.util.FilePathConfig;
 import com.ssanai.jumplearn.vo.BbsDefaultVO;
 import com.ssanai.jumplearn.vo.BbsFileVO;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +16,12 @@ import org.apache.ibatis.annotations.Param;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -26,6 +32,9 @@ import java.util.stream.Collectors;
 public class BbsServiceImpl implements BbsServiceInterface {
     private final BbsMapper bbsMapper;
     private final ModelMapper modelMapper;
+    private final FilePathConfig filePathConfig;
+    private final BbsFileMapper fileMapper;
+    private final EduFileMapper eduFileMapper;
 
 
     @Override
@@ -47,7 +56,7 @@ public class BbsServiceImpl implements BbsServiceInterface {
     public int insert(BbsDefaultDTO dto){
         BbsDefaultVO vo = modelMapper.map(dto,BbsDefaultVO.class);
         int result = bbsMapper.insert(vo);
-        int id = vo.getId();
+        dto.setId(vo.getId());
         return result;
     };
 
@@ -108,4 +117,43 @@ public class BbsServiceImpl implements BbsServiceInterface {
 
         return pdfFileDTO;
     };
+
+    @Override
+    public int viewCount(@Param("id") int id){
+        int result = bbsMapper.viewCount(id);
+        return result;
+    };
+
+    @Override
+    public void fileUpload(BbsDefaultDTO postDto, MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty()) {
+            return;
+        }
+
+        String newName = file.getOriginalFilename();
+        String ext     = newName.substring(newName.lastIndexOf("."));
+        File tgt       = new File(filePathConfig.getUploadPath(), newName);
+        file.transferTo(tgt);
+
+        BbsFileDTO fileDto = BbsFileDTO.builder()
+                .filePath    ("/upload")
+                .fileName    (newName)
+                .fileSize    (file.getSize())
+                .fileExt     (ext)
+                .relatedTable("tbl_edu")
+                .relatedId   (postDto.getId())
+                .build();
+        fileMapper.fileUpload(fileDto);
+
+        Map<String,Integer> params = Map.of(
+                "file_id", fileDto.getId(),
+                "edu_id",  postDto.getId()
+        );
+        eduFileMapper.eduFileUpload(params);
+    }
+
+
+
+
+
 }
