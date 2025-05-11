@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface EnrollmentsMapper {
 	// 조회
-	public int getTotalCount(PageRequestDTO dto);
-	public List<EnrollmentsDTO> enrollList(PageRequestDTO dto); // 수강 목록 출력
+	public int getTotalCount(@Param("dto") PageRequestDTO dto, @Param("member_id") String member_id);
+	public List<EnrollmentsDTO> enrollList(@Param("dto") PageRequestDTO dto, @Param("member_id") String member_id); // 수강 목록 출력
 	public EnrollmentsDTO getEnrollment(@Param("id") int id); // 상세 보기
+	public List<EnrollmentsDTO> getScoreList(@Param("member_id") String member_id);
 }

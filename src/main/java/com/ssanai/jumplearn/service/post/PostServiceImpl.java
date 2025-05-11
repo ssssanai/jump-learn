@@ -24,9 +24,9 @@ public class PostServiceImpl implements PostServiceIf {
 	}
 
 	@Override
-	public PageResponseDTO<PostDTO> list(PageRequestDTO dto, String member_id) {
+	public PageResponseDTO<PostDTO> myList(PageRequestDTO dto, String member_id) {
 		int totalCount =getTotalCount(dto, member_id);
-		List<PostDTO> list = postMapper.list(dto, member_id);
+		List<PostDTO> list = postMapper.myList(dto, member_id);
 		PageResponseDTO<PostDTO> pageResponseDTO = PageResponseDTO
 				.<PostDTO>withAll()
 				.reqDTO(dto)

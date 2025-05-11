@@ -2,36 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssanai.jumplearn.mapper.post.PostMapper">
-    <select id="list" resultType="com.ssanai.jumplearn.dto.PostDTO">
+    <select id="myList" resultType="com.ssanai.jumplearn.dto.PostDTO">
         SELECT
-        p.id AS id,
-        p.title AS title,
-        p.created_at AS created_at,
-        p.view_count AS view_count,
-        p.member_id AS member_id,
-        p.updated_at AS updated_at,
+        p.id, p.title, p.content, p.view_count,
+        p.member_id, p.created_at,p.updated_at,
         COUNT(l.post_id) AS like_count
-        FROM
-        tbl_post p
-        LEFT JOIN
-        tbl_post_like l ON p.id = l.post_id
-        WHERE
-        p.member_id = #{member_id}
+        FROM tbl_post p
+            LEFT JOIN tbl_post_like l ON p.id = l.post_id
+        WHERE p.member_id = #{member_id}
+        <if test="dto.search_word != null">
+            and p.title like concat('%', #{dto.search_word}, '%')
+        </if>
         GROUP BY
         p.id
         order by
         <choose>
-            <when test="sort_order == 'recent'">
-                tp.created_at DESC
+            <when test="dto.sort_order == 'recent'">
+                p.created_at DESC
             </when>
-            <when test="sort_order == 'popular'">
+            <when test="dto.sort_order == 'popular'">
                 like_count DESC
             </when>
             <otherwise>
-                tp.id DESC
+                p.id DESC
             </otherwise>
         </choose>
-        LIMIT #{page_skip_count}, #{page_size}
+        LIMIT #{dto.page_skip_count}, #{dto.page_size}
     </select>
 
     <select id="selectById" resultType="com.ssanai.jumplearn.dto.PostDTO">
@@ -42,9 +38,10 @@
     <select id="getTotalCount">
         select count(*)
         FROM tbl_post p
-                 LEFT JOIN tbl_post_like l ON p.id = l.post_id
         WHERE p.member_id = #{member_id}
-        GROUP BY p.id
+        <if test="dto.search_word != null">
+            and p.title like concat('%', #{dto.search_word}, '%')
+        </if>
     </select>
 </mapper>
  

@@ -14,7 +14,10 @@
         select count(*)
         from tbl_enrollments as te
             inner join tbl_class as tc on te.class_id = tc.id
-        where tc.title like concat('%', #{search_word}, '%')
+        where te.member_id = #{member_id}
+        <if test="dto.search_word != null">
+            and tc.title like concat('%', #{dto.search_word}, '%')
+        </if>
     </select>
 
     <!-- 수강한 강좌의 상세 정보 -->
@@ -44,22 +47,38 @@
         inner join tbl_class as tc on te.class_id = tc.id
         inner join tbl_teacher as tt on tc.teacher_id = tt.id
         inner join tbl_pay as tp on te.pay_id = tp.id
-            <if test="search_word != null">
-                where tc.title like concat('%', #{search_word}, '%')
+        where te.member_id = #{member_id}
+            <if test="dto.search_word != null">
+                and tc.title like concat('%', #{dto.search_word}, '%')
             </if>
         order by
         <choose>
-            <when test="sort_order == 'recent'">
+            <when test="dto.sort_order == 'recent'">
                 tp.created_at DESC
             </when>
-            <when test="sort_order == 'char'">
+            <when test="dto.sort_order == 'chars'">
                 tc.title ASC
             </when>
             <otherwise>
                 te.id DESC
             </otherwise>
         </choose>
-        LIMIT #{page_skip_count}, #{page_size}
+        LIMIT #{dto.page_skip_count}, #{dto.page_size}
+    </select>
+
+    <select id="getScoreList" resultType="com.ssanai.jumplearn.dto.EnrollmentsDTO" >
+        select
+            te.id as 'id', te.member_id as 'member_id', te.pay_id as 'pay_id', te.class_id as 'class_id',
+            te.progress as 'progress', te.review as 'review', te.feedback_score as 'feedback_score',
+            te.midterm_score as 'midterm_score', te.final_score as 'final_score', te.final_grade_score as 'final_grade_score',
+            tc.title as 'class_title', tc.category as 'class_category',
+            tt.name as 'teacher_name',
+            tp.created_at as 'pay_created_at'
+        from tbl_enrollments as te
+                 inner join tbl_class as tc on te.class_id = tc.id
+                 inner join tbl_teacher as tt on tc.teacher_id = tt.id
+                 inner join tbl_pay as tp on te.pay_id = tp.id
+        where te.member_id = #{member_id}
     </select>
 </mapper>
  
