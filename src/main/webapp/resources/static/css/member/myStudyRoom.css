@@ -286,6 +286,7 @@ ul li {
 .pageBox > p  {
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 #cont2 {
     display:none;
@@ -345,7 +346,7 @@ ul li {
     color:#607cfa;
 }
 .sc3 {
-    width:100px; height:35px;
+    width:230px; height:35px;
     text-align: center;
     line-height:33px;
 }
@@ -368,26 +369,70 @@ ul li {
     display:none;
     width:100%; height:450px;
 }
-#calendar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width:700px; height:700px;
-    background-color: #ebebeb80;
+/* 달력 */
+.calendarBox {
+    color: white;
+}
+
+#month {
+    display: inline-block;
+    position: relative;
+    float: left;
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#month h2 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0px;
+}
+
+.icon1 {
+    display: inline-block;
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    width: 20px;
+    margin-top: 23px;
+    margin-bottom: 20px;
+}
+
+.calendarBox  table {
+    border-collapse: collapse;
+    width: 100%;
+    color:black;
+    background-color: #f1f1f1;
     border-radius: 10px;
-    padding:30px;
+    border: 3px solid #d6d6d6b3;
 }
-#calendar > h2 {
-    font-size:20px;
+#month {
+    color:black;
 }
-#calendar > table {
-    width:600px; height:600px;
-    background-color: #ffffffdc;
-    margin-top: 10px;
-    padding: 15px;
-    border-radius: 10px;
-}
-td {
+.calendarBox th {
+    border: none;
+    height: 30px;
+    padding: 8px;
+    font-weight: normal;
     text-align: center;
+    color:black;
+}
+
+.calendarBox td {
+    border: none;
+    height: 70px;
+    padding: 8px;
+    text-align: center;
+    color:black;
+}
+.calendarTag:hover {
+    color:#607ffc;
+}
+
+/* 오늘 날짜 배경색 지정 */
+.calendarBox #today {
+    background-color: #acb9ef;
+    border-radius: 5%;
+    color: #fff;
 }

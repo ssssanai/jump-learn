@@ -36,199 +36,469 @@ ul li {
     justify-content: center;
     align-items: center;
 }
-.studyTit {
-    width:60%; height:50px;
-    margin-bottom: 25px;
-}
-.studyTit > h1 {
-    width:100%; height:100%;
-    line-height:48px;
-    font-size:20px;
-    padding-left: 10px;
-    border-bottom: 2px solid #d6d6d6b3;
-    color: #3b3a3a;
-}
-.studyBox1 {
-    width:60%; height:330px;
-    margin-bottom: 25px;
-}
-.study1 {
-    float: left;
-    width:calc(40% - 20px); height:100%;
-    margin-right: 20px;
-}
-.sbH1 {
-    display: flex;
-    width:100%; height:40px;
-    gap:15px;
-    font-size:13px;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 4px 4px 0 0;
-    padding: 0 15px;
-}
-.sbH1 > a, p {
-    color: #272727;
-}
-.sbH1 > a:hover {
-    color:#2346e2;
-    font-weight: bolder;
-}
-.sbB1 {
-    width:100%; height:290px;
-}
-.sbB1 > img {
-    width:100%; height:100%;
-    border: 4px solid #bcc7f5;
-}
-.study2 {
-    float: left;
-    width:60%; height:100%;
-}
-.sbH2 {
-    width:100%;  height:45px;
-    font-size:11px;
-    border-top: 2px solid #d6d6d6b3;
-    border-bottom: 2px solid #d6d6d6b3;
-    line-height:43px;
-    padding: 0 10px;
-}
-.sbB2 {
-    width:100%; height:210px;
-    padding: 10px;
-    text-align: justify;
-    line-height:30px;
-    overflow:scroll;
-    text-overflow:ellipsis;
-    border-bottom: 2px solid #d6d6d6b3;
-    font-size: 14px;
-    color: #3b3a3a;
-}
-.price {
-    display: flex;
-    width:100%; height:30px;
-    justify-content: end;
-    gap:12px;
-    padding: 0 10px;
-    margin-top:15px;
-}
-.price > p {
-    height:30px;
-    color: #3b3a3a;
-}
-.buyBtn {
-    display: flex;
-    width:100%; height:35px;
-    align-items: end;
-    justify-content: end;
-    gap:15px;
-    padding: 0 10px;
-}
-.buyBtn > a {
-    width:130px; height:35px;
-    text-align: center;
-    background-color: #bcc7f5;
-    border: 0.5px solid #a0a0a0b3;
-    color:#474747;
-    line-height:32px;
-}
-.buyBtn > a:hover {
-    background-color: #7f91e2;
-}
-.studyBox2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width:100%;
-    background-color: #f7f7f7;
-}
-.studyDetail {
-    float: left;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width:50%;
-}
-.sbH3 {
-    width:100%; height:66px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-.sbH3 > h2 {
-    width:200px; height:33px;
-    line-height:33px;
-    padding: 0 10px;
-    font-size:18px;
-    text-align: center;
-    color: #3b3a3a;
-}
-.sbH3 > p {
-    width:250px; height:23px;
-    line-height:21px;
-    padding: 0 10px;
-    font-size:12px;
-    text-align: center;
-    color: #3b3a3a;
-}
-.sbB3 {
-    width:100%; height:380px;
-}
-.teacherPro {
-    width:100%; height:160px;
-    display: flex;
-    justify-content: center;
-}
-.teacherPro > img {
-    width:160px; height:160px;
-    border-radius:70%;
-    overflow: hidden;
-    object-fit: cover;
-    border:4px solid #bcc7f5;
-}
-.teacherIn {
-    display: flex;
-    width:100%; height:150px;
-    padding:20px 20px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    align-items: center;
-    border: 4px solid #bcc7f5;
-}
-.teacherIn > p {
-    width:100%; height:80%;
-    text-align: justify;
-    line-height:25px;
-    overflow:scroll;
-    text-overflow:ellipsis;
-    font-size:13px;
-}
-.tBtn {
-    display: flex;
-    width:100%; height:20%;
-    justify-content: center;
-    gap:15px;
-    padding-bottom: 40px;
-}
-.tBtn > a {
-    width:120px; height:30px;
-    text-align: center;
-    background-color: #bcc7f5;
-    border: 0.5px solid #a0a0a0b3;
-    color:#474747;
-    line-height:28px;
-    margin-top: -10px;
-}
-.tBtn > a:hover {
-    background-color: #7f91e2;
-}
+    .studyTitle {
+        width:60%; height:50px;
+        margin-bottom: 25px;
+    }
+        .studyTitle > h1 {
+            width:100%; height:100%;
+            line-height:48px;
+            font-size:20px;
+            padding-left: 10px;
+            border-bottom: 2px solid #d6d6d6b3;
+            color: #3b3a3a;
+        }
 
+    .studyBox1 {
+        width:60%; height:330px;
+        margin-bottom: 25px;
+    }
+        .study1 {
+            float: left;
+            width:calc(40% - 20px); height:100%;
+            margin-right: 20px;
+        }
+            .sbH1 {
+                display: flex;
+                width:100%; height:40px;
+                gap:15px;
+                font-size:13px;
+                align-items: center;
+                justify-content: space-between;
+                border-radius: 4px 4px 0 0;
+                padding: 0 15px;
+            }
+                .sbH1 > a, p {
+                    color: #272727;
+                }
+                    .sbH1 > a:hover {
+                        color:#2346e2;
+                        font-weight: bolder;
+                    }
+                .sbB1 {
+                    width:100%; height:290px;
+                }
+                    .sbB1 > img {
+                        width:100%; height:100%;
+                        border: 4px solid #607ffc;
+                    }
+
+        .study2 {
+            float: left;
+            width:60%; height:100%;
+        }
+            .sbH2 {
+                width:100%;  height:45px;
+                font-size:11px;
+                border-top: 2px solid #d6d6d6b3;
+                border-bottom: 2px solid #d6d6d6b3;
+                line-height:43px;
+                padding: 0 10px;
+            }
+            .sbB2 {
+                width:100%; height:210px;
+                padding: 10px;
+                text-align: justify;
+                line-height:30px;
+                overflow:scroll;
+                text-overflow:ellipsis;
+                border-bottom: 2px solid #d6d6d6b3;
+                font-size: 14px;
+                color: #3b3a3a;
+            }
+            .price {
+                display: flex;
+                width:100%; height:30px;
+                justify-content: end;
+                gap:12px;
+                padding: 0 10px;
+                margin-top:15px;
+            }
+                .price > p {
+                    height:30px;
+                    color: #3b3a3a;
+                }
+            .buyBtn {
+                display: flex;
+                width:100%; height:35px;
+                align-items: end;
+                justify-content: end;
+                gap:15px;
+                padding: 0 10px;
+            }
+                .buyBtn > a {
+                    width:130px; height:35px;
+                    text-align: center;
+                    background-color: #f0f0f0;
+                    border: 2px solid #d6d6d6b3;
+                    color:#474747;
+                    line-height:32px;
+                    font-size:14px;
+                }
+                    .buyBtn > a:hover {
+                        background-color: #607ffc;
+                        color:#fff;
+                        border-color:#607ffc;
+                    }
+    .studyBox2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+        background-color: #f7f7f7;
+    }
+        .studyDetail {
+            float: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width:50%;
+        }
+            .sbH3 {
+                width:100%; height:66px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+                .sbH3 > h2 {
+                    width:50%; height:33px;
+                    line-height:33px;
+                    padding: 0 10px;
+                    font-size:18px;
+                    text-align: center;
+                    color: #3b3a3a;
+                }
+                .sbH3 > p {
+                    width:250px; height:23px;
+                    line-height:21px;
+                    padding: 0 10px;
+                    font-size:12px;
+                    text-align: center;
+                    color: #3b3a3a;
+                }
+
+            .sbB3 {
+                width:100%; height:380px;
+            }
+                .teacherPro {
+                    width:100%; height:160px;
+                    display: flex;
+                    justify-content: center;
+                }
+                    .teacherPro > img {
+                        width:160px; height:160px;
+                        border-radius:70%;
+                        overflow: hidden;
+                        object-fit: cover;
+                        border:4px solid #607ffc;
+                    }
+                .teacherIn {
+                    display: flex;
+                    width:100%; height:150px;
+                    padding:0px 20px;
+                    background-color: #ffffff;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    align-items: center;
+                    border: 4px solid #607ffc;
+                }
+                    .teacherIn > p {
+                        width:100%; height:80%;
+                        text-align: justify;
+                        line-height:25px;
+                        overflow:scroll;
+                        text-overflow:ellipsis;
+                        font-size:13px;
+                    }
+                .tBtn {
+                    display: flex;
+                    width:100%; height:20%;
+                    justify-content: center;
+                    gap:15px;
+                    padding-bottom: 40px;
+                }
+                    .tBtn > a {
+                        width:120px; height:30px;
+                        text-align: center;
+                        background-color: #f0f0f0;
+                        border: 2px solid #d6d6d6b3;
+                        color:#474747;
+                        line-height:28px;
+                        margin-top: -10px;
+                        font-size:14px;
+                    }
+                        .tBtn > a:hover {
+                            background-color: #607ffc;
+                            color:#fff;
+                            border-color:#607ffc;
+                        }
+    .studyBox3 {
+        width:60%;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+        .studyBox3 > h2 {
+            width:100%; height:30px;
+            text-align: center;
+            font-size:18px;
+        }
+        .reviewList1 {
+            display: flex;
+            justify-content: center;
+            width:100%; height:35px;
+            background: #607cfa;
+            color: #ffffff;
+            font-size:15px;
+        }
+            .studyNo1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width:100px; height:35px;
+                text-align: center;
+                color: #ffffff;
+            }
+            .studyCate1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width:80px; height:35px;
+                text-align: center;
+                color: #ffffff;
+            }
+            .studyTit1, .studyContent1 {
+                width:calc(100% - 360px); height:35px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                color: #ffffff;
+            }
+            .studyUploadDate1 {
+                width:280px; height:35px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+            }
+        .reviewListBox {
+            overflow: scroll;
+            height:350px;
+        }
+        .reviewList2 {
+            display: flex;
+            justify-content: center;
+            width:100%; height:35px;
+            background: #fafafa;
+            font-size:14px;
+        }
+        .reviewList2:nth-child(odd) {
+            background-color: #dfe1e8;
+        }
+            .studyNo2 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width:100px; height:35px;
+                text-align: center;
+                color: #333333;
+            }
+            .studyCate2 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width:80px; height:35px;
+                text-align: center;
+                color: #333333;
+            }
+            .studyTit2, .studyContent2 {
+                width:calc(100% - 360px); height:35px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                color: #333333;
+            }
+            .studyUploadDate2 {
+                width:280px; height:35px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #333333;
+            }
+
+            .studyNo3 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width:150px; height:35px;
+                text-align: center;
+                color: #333333;
+            }
+            .studyTit3, .studyContent3 {
+                width:calc(100% - 360px); height:35px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                color: #333333;
+            }
+            .studyNo4 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width:150px; height:35px;
+                text-align: center;
+                color: #fff;
+            }
+            .studyTit4, .studyContent4 {
+                width:calc(100% - 360px); height:35px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                color: #fff;
+            }
+            .main {
+                display:flex;
+                flex-direction: row;
+                width:70%; gap:50px;
+            }
+    .reviewBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+        padding:15px;
+    }
+        .reviewBox > form {
+            border-left:2px solid #607ffc;
+            border-right:2px solid #607ffc;
+            border-bottom:2px solid #607ffc;
+        }
+        .reviewBox > h2 {
+            width:100%; height:30px;
+            text-align: center;
+            font-size:20px;
+        }
+            .review1 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width:700px; height:90px;
+                border-bottom: 0;
+                margin-bottom: 10px;
+            }
+                .review1 > h2 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width:100%; height:50px;
+                    background-color: #607ffc;
+                    color:#fff;
+                    font-size:15px;
+                }
+
+                .feedbackSc {
+                    width:100%; height:40px;
+                    text-align: center;
+                    line-height:50px;
+                    color:#333333;
+                    font-size:14px;
+                }
+                .review1 > input {
+                    width:30%; height:50px;
+                    text-align: center;
+                    line-height:18px;
+                    color:#333333;
+                    font-size:12px;
+                    border: 3px solid #d6d6d6b3;
+                }
+                    .review1 > input:focus {
+                        outline: none;
+                        border: 3px solid #607ffc;
+                    }
+            .review2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width:700px; height:200px;
+                border-bottom: 0;
+            }
+                .review2 > h2 {
+                    width:100%; height:30px;
+                    background-color: #607ffc;
+                    text-align: center;
+                    line-height:28px;
+                    color:#fff;
+                    font-size:15px;
+                }
+                .reviewComment {
+                    width:100%; height:20px;
+                    text-align: center;
+                    line-height:18px;
+                    color:#333333;
+                    font-size:12px;
+                    margin: 4px 0;
+                }
+                .review2 > textarea {
+                    display: flex;
+                    width:80%; height:160px;
+                    text-align: left;
+                    line-height:18px;
+                    color:#333333;
+                    font-size:12px;
+                    border-radius: 5px;
+                    padding:10px;
+                    margin-bottom: 10px;
+                    border: 3px solid #d6d6d6b3;
+                }
+                .reviewContent {
+                    display: flex;
+                    width:80%; height:160px;
+                    text-align: left;
+                    line-height:18px;
+                    color:#333333;
+                    font-size:12px;
+                    border-radius: 5px;
+                    padding:10px;
+                    margin: 10px 0;
+                    border: 3px solid #d6d6d6b3;
+                }
+                .review2 > textarea:focus {
+                    outline: none;
+                    border: 3px solid #607ffc;
+                }
+                .reviewBtn {
+                    width:100%; height:30px;
+                    border: 0;
+                }
+                    .reviewBtn:hover {
+                        background-color: #607ffc;
+                        color:#fff;
+                    }
 @media (max-width: 1674px) {
 
     .study1 {

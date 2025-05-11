@@ -30,7 +30,7 @@
         <div class="myInfo1">
             <div class="myInfoHead1">
                 <div class="myInfop">
-                    <p>${member.grade}</p>
+                    <p>회원등급 ${member.grade}</p>
                     <h2>환영합니다 ${member.name}님!</h2>
                 </div>
             </div>

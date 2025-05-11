@@ -21,8 +21,7 @@
             <li>
                 <a href="/inquiry/list">문의하기</a>
                 <ul class="submenu">
-                    <li><a href="/inquiry/list">1:1 문의</a></li>
-                    <li><a href="#" class="lsMenu">자주묻는질문</a></li>
+                    <li><a href="/inquiry/list" class="lsMenu">1:1 문의</a></li>
                 </ul>
             </li>
             <li>
@@ -53,8 +52,7 @@
             <li>
                 <a href="/member/login">문의하기</a>
                 <ul class="submenu">
-                    <li><a href="/member/login">1:1 문의</a></li>
-                    <li><a href="/member/login" class="lsMenu">자주묻는질문</a></li>
+                    <li><a href="/member/login" class="lsMenu">1:1 문의</a></li>
                 </ul>
             </li>
             <li>

@@ -12,8 +12,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../resources/static/css/member/myStudyRoom.css" rel="stylesheet" type="text/css">
-    <link href="../resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/member/myStudyRoom.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <title>JL - 나의 학습방</title>
@@ -346,136 +346,45 @@
             <div class="myStudyList1">
                 <p class="sc1">번호</p>
                 <p class="sc">과목</p>
-                <p class="sc3">수강 점수</p>
-                <p class="sc4">미수강 강의</p>
-                <p class="sc5">시험 결과</p>
-                <p class="sc6">총점</p>
+                <p class="sc3">중간고사</p>
+                <p class="sc3">기말고사</p>
+                <p class="sc3">전체</p>
             </div>
             <div class="myStudyList2">
                 <p class="sc1">1</p>
                 <p class="sc2">수학</p>
                 <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
+                <p class="sc3">32/40</p>
+                <p class="sc3">86점</p>
             </div>
             <div class="myStudyList2">
                 <p class="sc1">1</p>
                 <p class="sc2">수학</p>
                 <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
+                <p class="sc3">32/40</p>
+                <p class="sc3">86점</p>
             </div>
             <div class="myStudyList2">
                 <p class="sc1">1</p>
                 <p class="sc2">수학</p>
                 <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
+                <p class="sc3">32/40</p>
+                <p class="sc3">86점</p>
             </div>
-            <div class="myStudyList2">
-                <p class="sc1">1</p>
-                <p class="sc2">수학</p>
-                <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="sc1">1</p>
-                <p class="sc2">수학</p>
-                <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
-            </div>
+
             <div class="pageBox">
                 <p>< 1 2 3 4 5 ></p>
             </div>
         </div>
         <div id="cont5">
             <h2 class="ht">학습 계획표</h2>
-            <div class="calHeader">
-
-            </div>
-            <div id="calendar">
-
+            <div class="calendarBox">
+                <div id="month"></div>
+                <div id="calendar"></div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    function menuDisplay(num) {
-        const contents = document.querySelectorAll('.main > div');
-
-        contents.forEach(function(content) {
-            content.style.display = 'none';
-        });
-
-        const selectedContentId = 'cont' + num;
-        const selectedContent = document.getElementById(selectedContentId);
-
-        if (selectedContent) {
-
-            selectedContent.style.display = 'block';
-        }
-    }
-
-    //기본 값은 나의 강의실
-    document.addEventListener('DOMContentLoaded', function() {
-        menuDisplay(1);
-    });
-
-    function generateCalendar() {
-        var calendarContainer = document.getElementById("calendar");
-        var currentDate = new Date();
-        var year = currentDate.getFullYear();
-        var month = currentDate.getMonth();
-        var calendarHTML = `<h2>${year}년 ${month + 1}월</h2>`;
-
-        calendarHTML += '<table>';
-        calendarHTML += '<tr>';
-        const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-        for (let day of daysOfWeek) {
-            calendarHTML += `<th>${day}</th>`;
-        }
-        calendarHTML += '</tr>';
-
-        // 각 주와 날짜 표시
-        const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDayOfMonth = new Date(year, month, 1).getDay();
-
-        let dayCounter = 1;
-
-        for (let i = 0; i < 6; i++) {
-            calendarHTML += '<tr>';
-
-            for (let j = 0; j < 7; j++) {
-                if (i === 0 && j < firstDayOfMonth) {
-                    calendarHTML += '<td></td>';
-                } else if (dayCounter > totalDaysInMonth) {
-                    calendarHTML += '<td></td>';
-                } else {
-                    calendarHTML += `<td>${dayCounter}</td>`;
-                    dayCounter++;
-                }
-            }
-
-            calendarHTML += '</tr>';
-
-            if (dayCounter > totalDaysInMonth) {
-                break;
-            }
-        }
-
-        calendarHTML += '</table>';
-        calendarContainer.innerHTML = calendarHTML;
-    }
-    window.onload = function () {
-        generateCalendar();
-    };
-</script>
+<script src="/resources/static/js/calendar.js"></script>
 </body>
 </html>

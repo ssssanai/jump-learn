@@ -11,8 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../resources/static/css/member/memberMyPage.css" rel="stylesheet" type="text/css">
-    <link href="../resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/member/memberMyPage.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <title>JL - 마이페이지</title>
@@ -85,71 +85,6 @@
 
                 </div>
             </div>
-        </div>
-        <div class="myInfo2">
-            <div class="myInfoHead2">
-                <h2>응시 가능 시험</h2>
-                <a href="#">더보기</a>
-            </div>
-            <div class="myInfoBody1">
-                <div class="testScore">
-                    <div class="tsHead">
-                        <h2>국어</h2>
-                    </div>
-                    <div class="tsBody">
-                        <div class="testTitle">
-                            <h2>[고1 중간고사 대비] 국어 내신 기출</h2>
-                        </div>
-                        <div class="testSc">
-                            <a href="#">시험응시</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="testScore">
-                    <div class="tsHead">
-                        <h2>국어</h2>
-                    </div>
-                    <div class="tsBody">
-                        <div class="testTitle">
-                            <h2>[고1 중간고사 대비] 영어 내신 기출</h2>
-                        </div>
-                        <div class="testSc">
-                            <a href="#">시험응시</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="testScore">
-                    <div class="tsHead">
-                        <h2>국어</h2>
-
-                    </div>
-                    <div class="tsBody">
-                        <div class="testTitle">
-                            <h2>[고1 중간고사 대비] 수학 내신 기출</h2>
-                        </div>
-                        <div class="testSc">
-                            <a href="#">시험응시</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="myInfo3">
-            <div class="myInfoHead2">
-                <h2>학습 진척도</h2>
-                <a href="#">더보기</a>
-            </div>
-            <div class="myInfoBody2">
-                <div class="testIng">
-                    <div class="ingBody">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="myStudy">
-            <a href="#">나의 학습방</a>
-            <a href="#">강의</a>
         </div>
     </div>
     <div class="main">
@@ -237,26 +172,6 @@
                                 <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
                                 <td class="tbDate1">2025.05.01</td>
                             </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">2</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">3</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">4</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">5</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
                         </table>
                     </div>
                     <div class="boards bs2">
@@ -271,30 +186,6 @@
                             </tr>
                             <tr class="tbB2">
                                 <td class="tbNo1">1</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">2</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">3</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">4</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">5</td>
                                 <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
                                 <td class="tbName1">홍길동</td>
                                 <td class="tbDate1">2025.05.01</td>
@@ -317,30 +208,6 @@
                                 <td class="tbName1">홍길동</td>
                                 <td class="tbDate1">2025.05.01</td>
                             </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">2</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">3</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">4</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">5</td>
-                                <td class="tbTit1"><a href="#"p class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
                         </table>
                     </div>
                 </div>
@@ -356,26 +223,6 @@
                             </tr>
                             <tr class="tbB2">
                                 <td class="tbNo1">1</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">2</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">3</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">4</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">5</td>
                                 <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
                                 <td class="tbDate1">2025.05.01</td>
                             </tr>
@@ -397,30 +244,6 @@
                                 <td class="tbName1">홍길동</td>
                                 <td class="tbDate1">2025.05.01</td>
                             </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">2</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">3</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">4</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">5</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
                         </table>
                     </div>
                     <div class="boards bs3">
@@ -435,30 +258,6 @@
                             </tr>
                             <tr class="tbB2">
                                 <td class="tbNo1">1</td>
-                                <td class="tbTit1"><p class="tbTitP">제목입니다 테스트ddd</p></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">2</td>
-                                <td class="tbTit1"><p class="tbTitP">제목입니다 테스트ddd</p></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">3</td>
-                                <td class="tbTit1"><p class="tbTitP">제목입니다 테스트ddd</p></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">4</td>
-                                <td class="tbTit1"><p class="tbTitP">제목입니다 테스트ddd</p></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
-                            </tr>
-                            <tr class="tbB2">
-                                <td class="tbNo1">5</td>
                                 <td class="tbTit1"><p class="tbTitP">제목입니다 테스트ddd</p></td>
                                 <td class="tbName1">홍길동</td>
                                 <td class="tbDate1">2025.05.01</td>
