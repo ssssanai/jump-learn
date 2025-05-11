@@ -7,7 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../../../resources/static/html/adminMsg.jsp" %>
+<%@ include file="/resources/static/html/adminMsg.jsp" %>
 <html>
 <head>
     <title>Detail Page</title>
@@ -22,7 +22,7 @@
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
-<%@include file="/resources/static/html/memberGnb.jsp" %>
+<%@include file="/resources/static/html/adminMsg.jsp" %>
 <h1>Q&A 상세</h1>
 <table>
     <tr>

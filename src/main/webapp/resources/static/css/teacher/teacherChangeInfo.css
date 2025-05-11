@@ -1,0 +1,265 @@
+@charset "utf-8";
+body {
+    margin:0; padding:0;
+}
+* {
+    margin:0; padding:0;
+    box-sizing: border-box;
+}
+a {
+    display:block;
+    text-decoration: none;
+}
+ul li {
+    list-style-type:none;
+}
+
+@font-face {
+    font-family: 'KakaoSmallSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoSmallSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+body {
+    background-color: #e6e6e6;
+}
+.registBox {
+    position:relative;
+    width:650px;
+    margin:30px auto;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px #00000080, 0 0 15px #00000080, 0 0 15px #1a1a1a80;
+}
+.registImg {
+    float:left;
+    width:100%; height:20%;
+    border-radius: 15px 15px 0 0 ;
+    background-image: linear-gradient(125deg, #484ae680 , rgb(124, 133, 255));
+}
+.registLogo {
+    width:100%; height:100%;
+    border-radius: 15px 15px 0 0 ;
+}
+.registContent {
+    float:left;
+    width:100%; height:50%;
+    background-color: #ffffff;
+    padding:0 30px;
+    border-radius: 0 0 15px 15px;
+}
+.regi_form {
+    float:left;
+    width:100%; height:100%;
+    font-family: 'KakaoSmallSans-Bold';
+}
+.regi_input_box {
+    position:relative;
+    width:100%; height:75px;
+    margin-top: 25px;
+}
+/* 회원가입 공통 css */
+.regi_input {
+    width:70%; height:50px;
+    margin: 0;
+    padding:0 10px;
+    font-family: 'KakaoSmallSans-Bold';
+    border:3px solid #D6D6D6;
+}
+.regi_tit {
+    float:left;
+    width:20%; height:50px;
+    line-height:48px;
+}
+
+/* id 입력 css */
+.regi_input1 {
+    width:66%; height:50px;
+    margin: 0;
+    padding:0 10px;
+    font-family: 'KakaoSmallSans-Bold';
+    border:3px solid #D6D6D6;
+}
+
+
+/* 비밀번호 입력 css */
+.regi_input2 {
+    width:80%; height:50px;
+    padding:0 10px;
+    font-family: 'KakaoSmallSans-Bold';
+    border:3px solid #D6D6D6;
+}
+#togglePassword {
+    position:absolute;
+    left:90%; top:5%;
+    width:9%; height:40px;
+    border:none;
+    background-color: #fff;
+}
+
+/* 비밀번호 확인 입력 css */
+
+/* 이메일 입력 css */
+.select_email {
+    float:left;
+    width:34%; height:50px;
+    border:3px solid #D6D6D6;
+    font-family: 'KakaoSmallSans-Bold';
+    padding:0 10px;
+}
+.email_between {
+    float:left;
+    width:3%; height:50px;
+    margin: 0 2%;
+    line-height:48px;
+}
+#select_email1 {
+    float:left;
+    width:25%; height:50px;
+    border:3px solid #D6D6D6;
+}
+#confirmEmailError {
+    width:100%; height:25px;
+}
+.emailCheck {
+    float:right;
+    width:13%; height:50px;
+    border:none;
+    background-color: #4d6bf1;
+    border-radius: 2px;
+    color:#fff;
+    border:3px solid #D6D6D6;
+}
+
+/* 성별 선택 css */
+.regi_input_box1 {
+    width:100%; height:50px;
+    font-family: 'KakaoSmallSans-Bold';
+    margin-top: 15px;
+}
+.sex_choice {
+    width:100%; height:40px;
+}
+.radio_style {
+    float:left;
+    width:50%;
+    font-size:17px;
+    justify-items: center;
+}
+.radio_style [type="radio"] {
+    display:none;
+}
+.radio_style span {
+    text-align:center;
+    height:40px;
+    width:95%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:3px solid #D6D6D6;
+    background-color: #ffffff;
+    font-weight:bold;
+}
+.radio_style [type="radio"]:checked + span {
+    background-color: #4d6bf1;
+    color:#FFFFFF;
+}
+
+/* 학년 선택 css */
+.grade_choice {
+    width:100%; height:50px;
+}
+.radio_style1 {
+    float:left;
+    width:25%;
+    font-size:17px;
+    justify-items: center;
+}
+.radio_style1 [type="radio"] {
+    display:none;
+}
+.radio_style1 span {
+    text-align:center;
+    height:40px;
+    width:95%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:3px solid #D6D6D6;
+    background-color: #ffffff;
+    font-weight:bold;
+}
+.radio_style1 [type="radio"]:checked + span {
+    background-color: #4d6bf1;
+    color:#FFFFFF;
+}
+
+/* 회원정보수정 버튼 css */
+.regi_btn1 {
+    float: left;
+    margin-right: 4%;
+    width:48%; height:50px;
+    background-color: #4d6bf1;
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size:18px;
+    border:0px;
+    border-radius: 3px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+.regi_btn:hover {
+    background-color:#2240c4;
+    color:#FFFFFF;
+    cursor: pointer;
+}
+.regi_btn2 {
+    float: right;
+    width:48%; height:50px;
+    background-color: #4d6bf1;
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size:18px;
+    border:0px;
+    border-radius: 3px;
+    margin-top: 25px;
+}
+
+.error_id, .error_mail {
+    width:100%; height:25px;
+}
+.regi_input1:focus, .regi_input2:focus, .select_email:focus, #select_email1:focus, .regi_input3:focus {
+    border:3px solid #4d6bf1;
+    border-radius: 0;
+    outline: none;
+}
+
+.introduceBox {
+    width:100%; height:150px;
+}
+.regi_tit3 {
+    float:left;
+    width:20%; height:150px;
+    line-height:148px;
+}
+.regi_input3 {
+    width:80%; height:40px;
+    padding:0 10px;
+    font-family: 'KakaoSmallSans-Bold';
+    border:3px solid #D6D6D6;
+    margin-bottom: 10px;
+}
+.profileImage {
+    margin-bottom: 10px;
+}
+.profileImage > input {
+    padding:10px
+}
+
+/* 입력 안했을 시 경고 문구 css */
+.error {
+    display: block;
+    font-size: 12px;
+    width:100%; height:25px;
+    color:#ff000090;
+    line-height:23px;
+}

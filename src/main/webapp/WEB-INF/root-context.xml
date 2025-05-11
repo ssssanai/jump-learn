@@ -34,19 +34,19 @@
     <!-- 추가 설정: 1. 인터페이스 정의 , 2. XML 정의 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>  <!-- ref = 매개변수 -->
-         <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
     </bean>
 
     <aop:aspectj-autoproxy/>
-     <mybatis:scan base-package="com.ssanai.jumplearn.mapper"/>
+    <mybatis:scan base-package="com.ssanai.jumplearn.mapper"/>
     <context:component-scan base-package="com.ssanai.jumplearn.config"/>
     <context:component-scan base-package="com.ssanai.jumplearn.service"/>
     <context:component-scan base-package="com.ssanai.jumplearn.controller.*"/>
     <bean id="filePath" class="com.ssanai.jumplearn.util.FilePathConfig" />
     <bean id="uploadPath" class="java.lang.String">
-<!--        <constructor-arg value="D:/git/jump-learn/src/upload/"/>-->
+        <!--        <constructor-arg value="D:/git/jump-learn/src/upload/"/>-->
 
-<!--        <constructor-arg value="D:\workspace\project\jump-learn\src\upload\"/>-->
+        <!--        <constructor-arg value="D:\workspace\project\jump-learn\src\upload\"/>-->
 
     </bean>
 </beans>

@@ -20,6 +20,8 @@ ul li {
     font-style: normal;
 }
 .header {
+    left: 20%;
+    position: absolute;
     display: flex;
     flex-direction: row;
     margin: 0 auto;

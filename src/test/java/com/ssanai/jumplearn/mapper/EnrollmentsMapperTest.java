@@ -27,7 +27,7 @@ public class EnrollmentsMapperTest {
 						.page_no(1)
 						.page_block_size(10)
 						.page_size(10)
-						.build()
+						.build(), "member006"
 		);
 		log.info(list.size());
 		for(EnrollmentsDTO d : list){

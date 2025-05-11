@@ -19,14 +19,14 @@ public class EnrollmentsServiceImpl implements EnrollmentsServiceIf{
 	private final EnrollmentsMapper enrollmentsMapper;
 
 	@Override
-	public int getTotalCount(PageRequestDTO dto) {
-		return enrollmentsMapper.getTotalCount(dto);
+	public int getTotalCount(PageRequestDTO dto, String id) {
+		return enrollmentsMapper.getTotalCount(dto, id);
 	}
 
 	@Override
-	public PageResponseDTO<EnrollmentsDTO> enrollList(PageRequestDTO dto) {
-		int totalCount = getTotalCount(dto);
-		List<EnrollmentsDTO> list = enrollmentsMapper.enrollList(dto);
+	public PageResponseDTO<EnrollmentsDTO> enrollList(PageRequestDTO dto, String id) {
+		int totalCount = getTotalCount(dto, id);
+		List<EnrollmentsDTO> list = enrollmentsMapper.enrollList(dto, id);
 		PageResponseDTO<EnrollmentsDTO> pageResponseDTO =
 				PageResponseDTO.<EnrollmentsDTO>withAll()
 						.reqDTO(dto)
@@ -40,5 +40,10 @@ public class EnrollmentsServiceImpl implements EnrollmentsServiceIf{
 	@Override
 	public EnrollmentsDTO getEnrollment(int id) {
 		return null;
+	}
+
+	@Override
+	public List<EnrollmentsDTO> getScoreList(String member_id) {
+		return enrollmentsMapper.getScoreList(member_id);
 	}
 }

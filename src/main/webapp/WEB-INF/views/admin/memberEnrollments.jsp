@@ -35,7 +35,7 @@
       <c:forEach var="list" items="${dtoList}" varStatus="loop">
         <tr>
           <td>${loop.index + 1}</td>
-          <td>${list.enrollments_id}</td>
+          <td>${list.id}</td>
           <td>${list.pay_id}</td>
           <td>${list.class_id}</td>
           <td>${list.progress}</td>

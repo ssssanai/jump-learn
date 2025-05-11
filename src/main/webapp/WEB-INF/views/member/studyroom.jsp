@@ -13,8 +13,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../../resources/static/css/member/myStudyRoom.css" rel="stylesheet" type="text/css">
-    <link href="../../../resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/member/myStudyRoom.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <script src="/resources/static/js/checkModule.js"></script>
@@ -23,13 +23,14 @@
 <body>
 
 <%--고정 헤더 파일--%>
-<%@include file="../../../resources/static/html/headerGnb.jsp" %>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
+
 <div class="wrap" id="wrap">
     <div class="aside">
         <div class="myInfo1">
             <div class="myInfoHead1">
                 <div class="myInfop">
-                    <p>${member.grade}</p>
+                    <p>회원등급 ${member.grade}</p>
                     <h2>환영합니다 ${member.name}님!</h2>
                 </div>
             </div>
@@ -88,7 +89,8 @@
     <div class="main">
         <div id="cont1">
             <h2 class="ht">나의 강의실</h2>
-            <form id="frm_search_enroll" name="frmSearch" class="searchBox" method="get" action="/mypage/studyroom">
+            <form id="frm_search_enroll" name="frmSearch" class="searchBox" method="get"
+                  action="/mypage/studyroom/enroll">
                 <input type="hidden" name="search_category" value="title"/>
                 <input type="hidden" id="sort_order_enroll" name="sort_order" value=""/>
                 <div class="btns">
@@ -96,7 +98,8 @@
                     <button name="search_order_chars" id="search_order_chars_enroll" class="searchBtn">글자순</button>
                 </div>
                 <div class="searchBox2">
-                    <input type="text" class="serchIn" id="search_word_enroll" name="search_word" placeholder="검색어를 입력해주세요."
+                    <input type="text" class="serchIn" id="search_word_enroll" name="search_word"
+                           placeholder="검색어를 입력해주세요."
                            value="">
                     <input type="submit" class="serchBtn" id="btnSubmitEnroll" value="검색">
                 </div>
@@ -116,7 +119,7 @@
                             <p class="studyCate">${dto.class_category}</p>
                             <a href="#" class="studyTit">${dto.class_title}</a>
                             <p class="studyTeach">${dto.teacher_name}</p>
-                            <p class="studyRegDate">${dto.pay_created_at.toString().substring(0, 10)}</p>
+                            <p class="studyRegDate">${dto.pay_created_at.toString().split("T")[0]}&nbsp;${dto.pay_created_at.toString().split("T")[1]}</p>
                         </div>
                     </c:forEach>
                 </c:when>
@@ -132,7 +135,7 @@
         </div>
         <div id="cont2">
             <h2 class="ht">내가 작성한 글</h2>
-            <form id="frm_search_post" name="frmSearch" class="searchBox" method="get" action="/mypage/studyroom">
+            <form id="frm_search_post" name="frmSearch" class="searchBox" method="get" action="/mypage/studyroom/post">
                 <input type="hidden" name="search_category" value="title"/>
                 <input type="hidden" id="sort_order_post" name="sort_order" value=""/>
                 <div class="btns">
@@ -140,220 +143,140 @@
                     <button name="search_order_popular" id="search_order_chars_post" class="searchBtn">인기순</button>
                 </div>
                 <div class="searchBox2">
-                    <input type="text" class="serchIn" id="search_word_post" name="search_word" placeholder="검색어를 입력해주세요."
+                    <input type="text" class="serchIn" id="search_word_post" name="search_word"
+                           placeholder="검색어를 입력해주세요."
                            value="">
                     <input type="submit" class="serchBtn" id="btnSubmitPost" value="검색">
                 </div>
             </form>
             <div class="myStudyList1">
                 <p class="studyNo">번호</p>
-                <p class="studyCate">게시판</p>
-                <p class="studyTit1">제목</p>
+                <p class="studyCate">제목</p>
+                <p class="studyTit1">내용</p>
+                <p class="studyTeach">좋아요</p>
                 <p class="studyTeach">조회수</p>
                 <p class="studyRegDate">작성날짜</p>
             </div>
-            <div class="myStudyList2">
-                <p class="studyNo">1</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">1232</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">2</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">12</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">3</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">32</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">4</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">21</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">5</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">234</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">6</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">323</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">7</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">35</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">8</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">12</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">9</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">23</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="studyNo">10</p>
-                <p class="studyCate">국어</p>
-                <a href="#" class="studyTit">강의 제목입니다.</a>
-                <p class="studyTeach">22</p>
-                <p class="studyRegDate">2025.01.03</p>
-            </div>
+            <c:choose>
+                <c:when test="${PostDTOList.dtoList.size() > 0 }">
+                    <c:forEach items="${PostDTOList.dtoList}" var="dto">
+                        <div class="myStudyList2">
+                            <p class="studyNo">${dto.id}</p>
+                            <p class="studyCate">${dto.title}</p>
+                            <a href="#"
+                               class="studyTit">${dto.content.length() >= 26 ? dto.content.substring(0, 30) + "..." : dto.content}</a>
+                            <p class="studyTeach">${dto.like_count}</p>
+                            <p class="studyTeach">${dto.view_count}</p>
+                            <p class="studyRegDate">${dto.created_at.toString().split("T")[0]}&nbsp;${dto.created_at.toString().split("T")[1]}</p>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div class="myStudyList2">
+                        수강중인 강좌가 없습니다.
+                    </div>
+                </c:otherwise>
+            </c:choose>
             <div class="pageBox">
-                <p>< 1 2 3 4 5 ></p>
+                <p>${PostPaging}</p>
             </div>
         </div>
         <div id="cont3">
             <h2 class="ht">내가 남긴 댓글</h2>
-            <div class="searchBox">
+            <form id="frm_search_enroll" name="frmSearch" class="searchBox" method="get"
+                  action="/mypage/studyroom/comment">
+                <input type="hidden" name="search_category" value="title"/>
+                <input type="hidden" id="sort_order_comment" name="sort_order" value=""/>
                 <div class="btns">
-                    <button name="search" class="searchBtn">최신순</button>
-                    <button name="search" class="searchBtn">글자순</button>
+                    <button name="search_order_recent" id="search_order_recent_comment" class="searchBtn">최신순</button>
+                    <button name="search_order_chars" id="search_order_chars_comment" class="searchBtn">글자순</button>
                 </div>
                 <div class="searchBox2">
-                    <input type="text" class="serchIn" placeholder="검색어를 입력해주세요.">
-                    <input type="submit" class="serchBtn" name="serchBtn" value="검색">
+                    <input type="text" class="serchIn" id="search_word_comment" name="search_word"
+                           placeholder="검색어를 입력해주세요."
+                           value="">
+                    <input type="submit" class="serchBtn" id="btnSubmitComment" value="검색">
                 </div>
-            </div>
+            </form>
             <div class="myStudyList1">
                 <p class="comuNo">번호</p>
                 <p class="comuTit">게시글 제목</p>
                 <p class="comuCont">내용</p>
                 <p class="comuRegDate">작성날짜</p>
             </div>
-            <div class="myStudyList2">
-                <p class="comuNo">1</p>
-                <p class="comuTit1">안녕하세요요</p>
-                <p class="comuCont">반가워용용</p>
-                <p class="comuRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="comuNo">1</p>
-                <p class="comuTit1">안녕하세요요</p>
-                <p class="comuCont">반가워용용</p>
-                <p class="comuRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="comuNo">1</p>
-                <p class="comuTit1">안녕하세요요</p>
-                <p class="comuCont">반가워용용</p>
-                <p class="comuRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="comuNo">1</p>
-                <p class="comuTit1">안녕하세요요</p>
-                <p class="comuCont">반가워용용</p>
-                <p class="comuRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="comuNo">1</p>
-                <p class="comuTit1">안녕하세요요</p>
-                <p class="comuCont">반가워용용</p>
-                <p class="comuRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="comuNo">1</p>
-                <p class="comuTit1">안녕하세요요</p>
-                <p class="comuCont">반가워용용</p>
-                <p class="comuRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="comuNo">1</p>
-                <p class="comuTit1">안녕하세요요</p>
-                <p class="comuCont">반가워용용</p>
-                <p class="comuRegDate">2025.01.03</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="comuNo">1</p>
-                <p class="comuTit1">안녕하세요요</p>
-                <p class="comuCont">반가워용용</p>
-                <p class="comuRegDate">2025.01.03</p>
-            </div>
+            <c:choose>
+                <c:when test="${PostCommentVOList.dtoList.size() > 0 }">
+                    <c:forEach items="${PostCommentVOList.dtoList}" var="dto">
+                        <div class="myStudyList2">
+                            <p class="comuNo">${dto.id}</p>
+                            <p class="comuTit1">${dto.post_id}</p>
+                            <a href="#"
+                               class="comuCont">${dto.content.length() >= 26 ? dto.content.substring(0, 30) + "..." : dto.content}</a>
+                            <p class="comuRegDate">${dto.created_at.toString().split("T")[0]}&nbsp;${dto.created_at.toString().split("T")[1]}</p>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div class="myStudyList2">
+                        수강중인 강좌가 없습니다.
+                    </div>
+                </c:otherwise>
+            </c:choose>
             <div class="pageBox">
-                <p>< 1 2 3 4 5 ></p>
+                <p>${PostCommentPaging}</p>
             </div>
         </div>
         <div id="cont4">
             <h2 class="ht">성적표</h2>
             <div class="myStudyList1">
-                <p class="sc1">번호</p>
-                <p class="sc">과목</p>
-                <p class="sc3">수강 점수</p>
-                <p class="sc4">미수강 강의</p>
-                <p class="sc5">시험 결과</p>
-                <p class="sc6">총점</p>
+                <p class="sc">번호</p>
+                <p class="sc2">과목</p>
+                <p class="sc5">강좌명</p>
+                <p class="sc3">학습 진행률</p>
+                <p class="sc2">중간고사 점수</p>
+                <p class="sc2">기말고사 점수</p>
+                <p class="sc2">최종 점수</p>
             </div>
-            <div class="myStudyList2">
-                <p class="sc1">1</p>
-                <p class="sc2">수학</p>
-                <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="sc1">1</p>
-                <p class="sc2">수학</p>
-                <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="sc1">1</p>
-                <p class="sc2">수학</p>
-                <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="sc1">1</p>
-                <p class="sc2">수학</p>
-                <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
-            </div>
-            <div class="myStudyList2">
-                <p class="sc1">1</p>
-                <p class="sc2">수학</p>
-                <p class="sc3">54/60</p>
-                <p class="sc4">16강,19강</p>
-                <p class="sc5">32/40</p>
-                <p class="sc6">86점</p>
-            </div>
-            <div class="pageBox">
-                <p>< 1 2 3 4 5 ></p>
-            </div>
+            <c:choose>
+                <c:when test="${GradeList.size() > 0}">
+                    <c:forEach items="${GradeList}" var="g">
+                        <div class="myStudyList2">
+                            <p class="sc">${g.class_id}</p>
+                            <p class="sc2">${g.class_category}</p>
+                            <p class="sc5">${g.class_title}</p>
+                            <p class="sc3">${g.progress}</p>
+                            <p class="sc2">${g.midterm_score}</p>
+                            <p class="sc2">${g.final_score}</p>
+                            <p class="sc2">${g.final_grade_score}</p>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div class="myStudyList2">
+                        수강한 강좌가 없습니다.
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
         <div id="cont5">
             <h2 class="ht">학습 계획표</h2>
             <div class="calHeader">
-
+                <c:choose>
+                    <c:when test="${PlanList.size() > 0}">
+                        <c:forEach items="${PlanList}" var="p">
+                            <p>${p.id}</p>
+                            <p>${p.member_id}</p>
+                            <p>${p.title}</p>
+                            <p>${p.description}</p>
+                            <p>${p.study_date}</p>
+                            <p>${p.created_at}</p>
+                            <p>${p.updated_at}</p>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        등록된 계획이 없습니다.
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div id="calendar">
 
@@ -453,75 +376,76 @@
     });
 
     document.getElementById('search_order_recent_enroll').addEventListener('click', function () {
-        document.getElementById('sort_order_enroll').value = 'search_order_recent';
+        document.getElementById('sort_order_enroll').value = 'recent';
         document.getElementById('frm_search_enroll').submit();
     });
 
 
     document.getElementById('search_order_chars_enroll').addEventListener('click', function () {
-        document.getElementById('sort_order_enroll').value = 'search_order_chars';
+        document.getElementById('sort_order_enroll').value = 'chars';
         document.getElementById('frm_search_enroll').submit();
     });
 
     // Post 리스트
-    document.getElementById('frm_search_enroll').addEventListener('submit', function (e) {
+    document.getElementById('frm_search_post').addEventListener('submit', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        let search_word = document.getElementById('search_word_enroll');
+        let search_word = document.getElementById('search_word_post');
         if (!checkSQLInjection(search_word.value)) {
             alert('포함할 수 없는 문자가 있습니다.');
             search_word.value = '';
         } else {
-            document.getElementById('frm_search_enroll').submit();
+            document.getElementById('frm_search_post').submit();
         }
     });
 
-    document.getElementById('frm_search_enroll').addEventListener('keydown', function (e) {
+    document.getElementById('frm_search_post').addEventListener('keydown', function (e) {
         if (e.code === "Enter") {
             e.preventDefault();
         }
     });
 
-    document.getElementById('search_order_recent_enroll').addEventListener('click', function () {
-        document.getElementById('sort_order_enroll').value = 'search_order_recent';
-        document.getElementById('frm_search_enroll').submit();
+    document.getElementById('search_order_recent_post').addEventListener('click', function () {
+        document.getElementById('sort_order_post').value = 'recent';
+        document.getElementById('frm_search_post').submit();
     });
 
 
-    document.getElementById('search_order_chars_enroll').addEventListener('click', function () {
-        document.getElementById('sort_order_enroll').value = 'search_order_chars';
-        document.getElementById('frm_search_enroll').submit();
+    document.getElementById('search_order_popular_post').addEventListener('click', function () {
+        document.getElementById('sort_order_post').value = 'popular';
+        document.getElementById('frm_search_post').submit();
     });
+
     // Comment 리스트
-    document.getElementById('frm_search_enroll').addEventListener('submit', function (e) {
+    document.getElementById('frm_search_comment').addEventListener('submit', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        let search_word = document.getElementById('search_word_enroll');
+        let search_word = document.getElementById('search_word_comment');
         if (!checkSQLInjection(search_word.value)) {
             alert('포함할 수 없는 문자가 있습니다.');
             search_word.value = '';
         } else {
-            document.getElementById('frm_search_enroll').submit();
+            document.getElementById('frm_search_comment').submit();
         }
     });
 
-    document.getElementById('frm_search_enroll').addEventListener('keydown', function (e) {
+    document.getElementById('frm_search_comment').addEventListener('keydown', function (e) {
         if (e.code === "Enter") {
             e.preventDefault();
         }
     });
 
-    document.getElementById('search_order_recent_enroll').addEventListener('click', function () {
-        document.getElementById('sort_order_enroll').value = 'search_order_recent';
-        document.getElementById('frm_search_enroll').submit();
+    document.getElementById('search_order_recent_comment').addEventListener('click', function () {
+        document.getElementById('sort_order_comment').value = 'recent';
+        document.getElementById('frm_search_comment').submit();
     });
 
 
-    document.getElementById('search_order_chars_enroll').addEventListener('click', function () {
-        document.getElementById('sort_order_enroll').value = 'search_order_chars';
-        document.getElementById('frm_search_enroll').submit();
+    document.getElementById('search_order_chars_comment').addEventListener('click', function () {
+        document.getElementById('sort_order_comment').value = 'chars';
+        document.getElementById('frm_search_comment').submit();
     });
 </script>
 </body>
