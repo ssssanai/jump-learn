@@ -26,10 +26,17 @@ public class EnrollmentsDTO {
     // tbl_class
     private String class_title; // 강좌명
     private String class_category; // 과목명
+    private String class_introduce; // 강좌 소개
+    private String class_file_path; // 강좌 사진 경로
+    private String class_file_name; // 강좌 사진 이름
+    private String class_file_ext; // 강좌 사진 확장자
 
     // tbl_teacher
     private String teacher_name; // 강사명
 
     // tbl_pay
+    private int pay_cost; // 강좌 가격
     private LocalDateTime pay_created_at; // 강좌 구매일
+    private LocalDateTime pay_canceled_at; // 구매 취소일시
+    private int pay_complete; // 구매 확정 여부 (0: 취소, 1: 확정)
 }

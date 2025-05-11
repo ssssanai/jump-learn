@@ -6,6 +6,7 @@ import com.ssanai.jumplearn.mapper.comment.PostCommentMapper;
 import com.ssanai.jumplearn.service.comment.CommentServiceIf;
 import com.ssanai.jumplearn.service.course.EnrollmentsServiceIf;
 import com.ssanai.jumplearn.service.mainpage.MainPageServiceIf;
+import com.ssanai.jumplearn.service.plan.PlanServiceIf;
 import com.ssanai.jumplearn.service.post.PostServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
 import com.ssanai.jumplearn.util.CommonUtil;
@@ -31,6 +32,7 @@ public class MemberMyPageController {
 	private final PostServiceIf postService;
 	private final EnrollmentsServiceIf enrollmentsService;
 	private final CommentServiceIf commentService;
+	private final PlanServiceIf planService;
 
 	// 마이페이지
 	@GetMapping
@@ -127,11 +129,13 @@ public class MemberMyPageController {
 		List<EnrollmentsDTO> gradeList = enrollmentsService.getScoreList(member_id);
 
 		// 5. 학습계획표
+		List<PlanDTO> planList = planService.getPlanList(member_id);
 
 		log.info("EnrollDTOList: {}", EnrollDTOList.getDtoList().size());
 		log.info("PostDTOList: {}", PostDTOList.getDtoList().size());
 		log.info("PostCommentVOList: {}", PostCommentVOList.getDtoList().size());
 		log.info("gradeList: {}", gradeList);
+		log.info("planList: {}", planList);
 
 		model.addAttribute("member", mDTO);
 		model.addAttribute("EnrollDTOList", EnrollDTOList);
@@ -141,6 +145,7 @@ public class MemberMyPageController {
 		model.addAttribute("PostCommentVOList", PostCommentVOList);
 		model.addAttribute("PostCommentPaging", PostCommentPaging);
 		model.addAttribute("GradeList", gradeList);
+		model.addAttribute("PlanList", planList);
 		return "member/studyroom";
 	}
 
@@ -209,12 +214,15 @@ public class MemberMyPageController {
 		);
 
 		// 4. 성적표 보기
-
+		List<EnrollmentsDTO> gradeList = enrollmentsService.getScoreList(member_id);
 		// 5. 학습계획표
+		List<PlanDTO> planList = planService.getPlanList(member_id);
 
 		log.info("EnrollDTOList: {}", EnrollDTOList.getDtoList().size());
 		log.info("PostDTOList: {}", PostDTOList.getDtoList().size());
 		log.info("PostCommentVOList: {}", PostCommentVOList.getDtoList().size());
+		log.info("gradeList: {}", gradeList);
+		log.info("PostCommentPaging: {}", PostCommentPaging);
 
 		model.addAttribute("member", mDTO);
 		model.addAttribute("EnrollDTOList", EnrollDTOList);
@@ -223,6 +231,8 @@ public class MemberMyPageController {
 		model.addAttribute("PostPaging", PostPaging);
 		model.addAttribute("PostCommentVOList", PostCommentVOList);
 		model.addAttribute("PostCommentPaging", PostCommentPaging);
+		model.addAttribute("GradeList", gradeList);
+		model.addAttribute("PlanList", planList);
 		return "member/studyroom";
 	}
 
@@ -292,8 +302,9 @@ public class MemberMyPageController {
 		);
 
 		// 4. 성적표 보기
-
+		List<EnrollmentsDTO> gradeList = enrollmentsService.getScoreList(member_id);
 		// 5. 학습계획표
+		List<PlanDTO> planList = planService.getPlanList(member_id);
 
 		log.info("EnrollDTOList: {}", EnrollDTOList.getDtoList().size());
 		log.info("PostDTOList: {}", PostDTOList.getDtoList().size());
@@ -306,6 +317,8 @@ public class MemberMyPageController {
 		model.addAttribute("PostPaging", PostPaging);
 		model.addAttribute("PostCommentVOList", PostCommentVOList);
 		model.addAttribute("PostCommentPaging", PostCommentPaging);
+		model.addAttribute("GradeList", gradeList);
+		model.addAttribute("PlanList", planList);
 		return "member/studyroom";
 	}
 
@@ -375,8 +388,9 @@ public class MemberMyPageController {
 		);
 
 		// 4. 성적표 보기
-
+		List<EnrollmentsDTO> gradeList = enrollmentsService.getScoreList(member_id);
 		// 5. 학습계획표
+		List<PlanDTO> planList = planService.getPlanList(member_id);
 
 		log.info("EnrollDTOList: {}", EnrollDTOList.getDtoList().size());
 		log.info("PostDTOList: {}", PostDTOList.getDtoList().size());
@@ -389,16 +403,9 @@ public class MemberMyPageController {
 		model.addAttribute("PostPaging", PostPaging);
 		model.addAttribute("PostCommentVOList", PostCommentVOList);
 		model.addAttribute("PostCommentPaging", PostCommentPaging);
+		model.addAttribute("GradeList", gradeList);
+		model.addAttribute("PlanList", planList);
 		return "member/studyroom";
 	}
-
-
-	@GetMapping("/bought")
-	public String myBought(
-			Model model
-	) {
-		return "member/bought";
-	}
-
 
 }

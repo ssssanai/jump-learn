@@ -192,7 +192,6 @@ ul li {
     background-color: #7f91e2;
 }
 .noBuyList {
-    display: none;
     width:100%; height:50px;
     border: 2.5px solid #a0a0a0b3;
     border-radius: 10px;
