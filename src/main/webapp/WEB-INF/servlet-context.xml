@@ -14,7 +14,7 @@
     <mvc:default-servlet-handler/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
-<!--    <mvc:resources mapping="/upload/**" location="file:#{uploadPath}"/>-->
+    <!--    <mvc:resources mapping="/upload/**" location="file:#{uploadPath}"/>-->
 
     <!-- VIEW 출력 시에 앞에는 prefix의 value를 붙이고 뒤에는 suffix의 value를 붙인다. -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

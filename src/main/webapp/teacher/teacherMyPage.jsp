@@ -11,15 +11,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../resources/static/css/teacher/teacherMyPage.css" rel="stylesheet" type="text/css">
-    <link href="../resources/static/css/headerGnb3.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/teacher/teacherMyPage.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb3.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <title>JL - 강사 마이 페이지</title>
 </head>
 <body>
 
 <%--고정 헤더 파일--%>
-<%@include file="../resources/static/html/tcheaderGnb.jsp"%>
+<%@include file="/resources/static/html/tcheaderGnb.jsp"%>
 
 <div class="wrap">
     <div class="main">
@@ -30,7 +30,7 @@
             <div class="userInfoCont">
                 <div class="userProfile">
                     <div class="radiusProfile2">
-                        <img src="../resources/static/images/teacherPage/profileEx.jpg" alt="프로필 이미지">
+                        <img src="/resources/static/images/teacherPage/profileEx.jpg" alt="프로필 이미지">
                     </div>
                 </div>
                 <div class="userInfoP">

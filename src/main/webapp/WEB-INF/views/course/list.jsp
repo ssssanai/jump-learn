@@ -12,21 +12,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../../resources/static/css/study/studyBuyPage.css" rel="stylesheet" type="text/css">
-    <link href="../../../resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/study/studyBuyPage.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <title>JL - 강좌 목록</title>
 </head>
 <%--고정 헤더 파일--%>
-<%@include file="../../../resources/static/html/headerGnb.jsp" %>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
 <div class="wrap">
     <div class="aside">
         <div class="myInfo">
             <div class="radiusProfile">
                 <span>
                     ${member.file_path} ${member.file_name} ${member.file_ext}
-                    <img src="../../../resources/static/images/notProfile.jpg" alt="프로필 이미지 없을시">
+                    <img src="/resources/static/images/notProfile.jpg" alt="프로필 이미지 없을시">
                 </span>
 
             </div>
