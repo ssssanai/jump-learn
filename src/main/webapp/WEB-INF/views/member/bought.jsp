@@ -16,6 +16,7 @@
     <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <title>JL - 결제내역</title>
 </head>
 <body>
@@ -65,8 +66,8 @@
                                 </div>
                             </c:if>
                             <c:if test="${not isCompleted}">
-                                <a href="/pay/purchase_ok/${p.pay_id}" onclick="confirm('구매를 확정하시겠습니까?')">구매 확정</a>
-                                <a href="/pay/refund/${p.pay_id}">환불 요청</a>
+                                <a id="/pay/purchase_ok/${p.pay_id}" class="confirm">구매 확정</a>
+                                <a href="/pay/refund/${p.class_id}">환불 요청</a>
                             </c:if>
                             <a href="#">후기 작성</a>
                         </div>
@@ -82,7 +83,11 @@
     </c:choose>
 </div>
 <script>
-
+    $('.confirm').on('click', function(e){
+        if(confirm('구매를 확정하시겠습니까?')) {
+            location.href = $(this).attr("id");
+        }
+    })
 </script>
 </body>
 </html>

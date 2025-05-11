@@ -66,6 +66,7 @@ public class PayController {
 	) {
 		log.info("PayController refund GET");
 		EnrollmentsDTO dto = enrollmentsService.getEnrollment(class_id);
+		log.info(dto);
 		model.addAttribute("dto", dto);
 		return "pay/refund";
 	}

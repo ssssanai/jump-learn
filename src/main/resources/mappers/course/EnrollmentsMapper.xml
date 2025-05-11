@@ -28,7 +28,7 @@
             te.midterm_score as 'midterm_score', te.final_score as 'final_score', te.final_grade_score as 'final_grade_score',
             tc.title as 'class_title', tc.category as 'class_category',
             tt.name as 'teacher_name',
-            tp.created_at as 'pay_created_at'
+            tp.created_at as 'pay_created_at', tp.cost as 'pay_cost'
         from tbl_enrollments as te
             inner join tbl_class as tc on te.class_id = tc.id
             inner join tbl_teacher as tt on tc.teacher_id = tt.id

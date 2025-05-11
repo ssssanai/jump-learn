@@ -49,7 +49,7 @@
 <h1>과목별 총 매출액 조회</h1>
 <form action="/admin/category_chart_month" method="get">
     <label for="month">조회할 월:</label>
-    <input type="month" id="month" name="moth" value="2025-05">
+    <input type="month" id="month" name="moth" value="${month != null ? month : '2025-05'}">
     <button type="submit">조회</button>
 </form>
 
