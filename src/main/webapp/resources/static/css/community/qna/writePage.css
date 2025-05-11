@@ -41,7 +41,7 @@ body {
     }
 .wrap {
     margin: 0 auto;
-    width:40%; height:470px;
+    width:30%; height:470px;
     background-color: #fff;
     border:3px solid #C1C1C1B3;
     border-radius:15px;
@@ -55,10 +55,9 @@ body {
     .boardCont {
         display: flex;
         width:100%; height:250px;
-        margin-bottom: 20px;
     }
     .boardTitle > p {
-        flex:20%;
+        flex:15%;
         text-align: center;
         line-height:38px;
     }
@@ -73,14 +72,13 @@ body {
         border:3px solid #607ffc;
     }
     .boardCont > p {
-        flex:20%;
+        flex:15%;
         text-align: center;
         line-height:38px;
     }
     .boardCont > textarea {
         flex:80%; height:250px;
         border:3px solid #d6d6d6b3;
-        padding: 5px;
         border-radius:5px;
         resize: none;
     }
@@ -108,7 +106,51 @@ body {
         padding: 5px;
         border-radius:5px;
     }
+    .radioButtonStyle{
+        display: flex;
+        flex-direction: row;
+    }
 
+    .radioStyle{
+        flex: 50%;
+        font-size: 14px;
+        margin:0px 5px 0px 5px;
+    }
+
+    .radioStyle [type="radio"]{
+        display: none;
+    }
+
+    .radioStyle span{
+        text-align: center;
+        height:40px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border:3px solid #dcdcdc;
+        box-sizing: border-box;
+        border-radius:5px;
+    }
+
+    .radioStyle [type="radio"]:checked + span{
+        border:3px solid #607ffc;
+        color:#607ffc;
+        font-weight: 700;
+    }
+
+    .radioStyle [type="radio"]:disabled + span{
+        text-align: center;
+        height:40px;
+        width:100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border:1px solid #f3f3f3;
+        background-color: #f3f3f3;
+        color:#dcdcdc;
+        box-sizing: border-box;
+    }
     .formBtn {
         display: flex;
         width:100%; height:30px;

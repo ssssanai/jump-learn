@@ -7,22 +7,96 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/resources/static/html/adminMsg.jsp" %>
-<html>
+<!DOCTYPE html>
+<html lang="ko_KR">
 <head>
-    <title>Detail Page</title>
-    <style>
-        table, tr, th, td {
-            border: 1px solid black;
-            padding: 15px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/resources/static/css/community/qna/viewPage.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
+    <title>Q&A 상세보기</title>
     <script src="/resources/static/js/checkModule.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
-<%@include file="/resources/static/html/adminMsg.jsp" %>
+<%--고정 헤더 파일--%>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
+<div class="wrap">
+    <div class="aside">
+        <div class="profile">
+            <div class="myInfo">
+                <p>회원등급  ??</p>
+                <h2>환영합니다 OOO님!</h2>
+            </div>
+            <div class="logoutBtn">
+                <a href="#">로그아웃</a>
+                <a href="#">회원탈퇴</a>
+            </div>
+        </div>
+        <div class="sideMenu">
+            <h2 class="sideMenuTitle">커뮤니티</h2>
+            <a href="#">자유게시판</a>
+            <a href="#" class="select">교육 정보 게시판</a>
+            <a href="#">대입 정보 게시판</a>
+            <a href="#">대외활동 게시판</a>
+            <a href="#">자료실 게시판</a>
+            <a href="#">뉴스 게시판</a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="writeTit">
+            <h2>교육 정보 게시판</h2>
+            <p>회원간 자유로운 주제로 대화를 나누는 게시판입니다.</p>
+        </div>
+        <div class="formBox">
+            <form method="post" action="/edu/editPage" enctype="multipart/form-data">
+                <div class="boardTitle">
+                    <p>${dto.title}</p>
+                </div>
+                <div class="formHead">
+                    <div class="boardId">
+                        <p>번호 : ${dto.id}</p>
+                    </div>
+                    <div class="boardUser">
+                        <p>${dto.admin_id}</p>
+                    </div>
+                    <div class="boardRegDate">
+                        <p>${dto.created_at}</p>
+                    </div>
+                    <div class="boardViewCnt">
+                        <p>조회수 ${dto.view_count}회</p>
+                    </div>
+                </div>
+                <div class="boardCont">
+                    <p>${dto.content}</p>
+                </div>
+                <div class="boardFile">
+                    <c:forEach var="file" items="${pdfFileDTO}" >
+                        <a href="${file.file_path}" target="_blank">${file.file_name}${file.file_ext}</a>
+                    </c:forEach>
+                </div>
+                <div class="boardImage">
+                    <c:forEach var="file" items="${fileDTO}" >
+                        <c:if test="${fn:contains(file.file_ext, '.jpg') or fn:contains(file.file_ext, '.jpeg')}">
+                            <img src="${file.file_path}" alt="${file.file_name}"/>
+                            <br>
+                        </c:if>
+                    </c:forEach>
+                </div>
+                <div class="formBtn">
+                    <input class="endBtn" type="button" value="목록" onClick="location.href='<c:url value='/edu/searchListPage?${pageDTO.linkParams}'/>'" />
+
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.loginInfo.status}">
+                            <input class="endBtn" type="button" value="수정" onClick="location.href='<c:url value='/edu/editPage?id=${dto.id}&${pageDTO.linkParams}'/>'" />
+                            <input class="endBtn" type="button" value="삭제" onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='<c:url value='/edu/delete'/>?id=${dto.id}&${pageDTO.linkParams}';}" />
+                        </c:when>
+                    </c:choose>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <h1>Q&A 상세</h1>
 <table>
     <tr>
