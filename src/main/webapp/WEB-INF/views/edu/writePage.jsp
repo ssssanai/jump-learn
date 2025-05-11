@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +24,7 @@
         <p>커뮤니티 게시물 작성</p>
 </div>
 <div class="wrap">
-    <form id="frmWrite" name="frmWrite" action="/edu/writePage" method="post">
+    <form id="frmWrite" name="frmWrite" action="<c:url value='/edu/writePage'/>" method="post" enctype="multipart/form-data">
         <div class="boardTitle">
             <p>제목</p>
             <input type="text" name="title" id="title" placeholder="글 제목을 입력해주세요.">
@@ -36,13 +37,14 @@
         </div>
         <div class="boardImg">
             <p>이미지 첨부</p>
-            <input type="file" id="file">
+            <input type="file" id="file" name="file" >
             <div id="contentError1" class="error"></div>
         </div>
         <div class="formBtn">
-            <input class="endBtn" type="submit" value="작성완료">
+            <input class="endBtn" type="submit" value="등록">
             <input class="endBtn" type="reset"  value="취소">
             <input class="endBtn" type="button" value="목록">
+            <input type="hidden" name="admin_id" value="${adto.id}" />
         </div>
     </form>
 </div>
