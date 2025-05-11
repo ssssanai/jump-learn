@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.PlanMapper">
+    <insert id="createPlan">
+        insert into tbl_plan (id, member_id, title, description, study_date, created_at, updated_at)
+        values (#{vo.id}, #{vo.member_id}, #{vo.title}, #{vo.description}, #{vo.study_date}, now(), now())
+    </insert>
+
+    <select id="getPlan" resultType="com.ssanai.jumplearn.vo.PlanVO">
+        select id, member_id, title, description, study_date, created_at, updated_at
+        from tbl_plan
+        where id = #{id}
+    </select>
+
+    <select id="getPlanList" resultType="com.ssanai.jumplearn.vo.PlanVO">
+        select id, title, description, study_date, created_at, updated_at
+        from tbl_plan
+        where member_id = #{member_id}
+    </select>
+
+    <select id="getPlanListByDate" resultType="com.ssanai.jumplearn.vo.PlanVO">
+        select id, title, description, study_date, created_at, updated_at
+        from tbl_plan
+        where member_id = #{member_id}
+            and study_date = #{date}
+    </select>
+
+    <update id="updatePlan">
+        update tbl_plan
+        set
+            <if test="vo.title != null and vo.title != ''">
+                title=#{vo.title},
+            </if>
+            <if test="vo.description != null and vo.description != ''">
+                description=#{vo.description},
+            </if>
+            <if test="vo.study_date != null and vo.study_date != ''">
+                study_date=#{vo.study_date},
+            </if>
+            updated_at= now()
+        where id=#{vo.id}
+    </update>
+
+    <delete id="deletePlan">
+        delete from tbl_plan where id = #{id}
+    </delete>
+</mapper>
+ 
