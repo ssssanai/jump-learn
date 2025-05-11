@@ -43,11 +43,27 @@ public class InquiryListServiceImpl implements InquiryListServiceIf{
 
     @Override
     public int inquiryResolution(InquiryDTO inquiryDTO) {
-        return 0;
+        int rs = inquiryListXmlMapper.inquiryResolution(inquiryDTO);
+        if(rs != 1){
+            return rs;
+        }else{
+            rs = inquiryListXmlMapper.inquiryResponseComplete(inquiryDTO.getInquiry_id());
+        }
+        return  rs;
     }
 
     @Override
-    public InquiryDTO inquiryDetail(String inquiryId) {
-        return null;
+    public InquiryDTO inquiryDetail(int inquiryId) {
+        return inquiryListXmlMapper.inquiryDetail(inquiryId);
+    }
+
+    @Override
+    public List<InquiryDTO> inquiryCommnetDetail(int inquiryId) {
+        return inquiryListXmlMapper.inquiryCommnetDetail(inquiryId);
+    }
+
+    @Override
+    public int inquiryCommentInsert(InquiryDTO inquiryDTO) {
+        return inquiryListXmlMapper.inquiryCommentInsert(inquiryDTO);
     }
 }

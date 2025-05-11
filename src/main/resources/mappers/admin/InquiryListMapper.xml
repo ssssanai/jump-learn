@@ -32,7 +32,45 @@
     </delete>
     <insert id="inquiryResolution">
         insert into tbl_inquiry_resolution(inquiry_id,admin_id,content)
-        values(#{inquiry_id}, #{admin_id}, #{content}
+        values(#{inquiry_id}, #{admin_id}, #{resolution_content})
     </insert>
+    <select id="inquiryDetail">
+        SELECT
+        i.id AS inquiry_id,
+        i.member_id AS inquiry_member_id,
+        i.title AS inquiry_title,
+        i.content AS inquiry_content,
+        i.created_at AS inquiry_created_at,
+        i.updated_at AS inquiry_updated_at,
+        i.visibility AS inquiry_visibility,
+        i.inquiry_status AS inquiry_status,
+        r.id AS resolution_id,
+        r.admin_id AS admin_id,
+        r.content AS resolution_content,
+        r.created_at AS resolution_created_at,
+        r.updated_at AS resolution_updated_at
+        FROM tbl_inquiry AS i
+        LEFT JOIN tbl_inquiry_resolution AS r ON i.id = r.inquiry_id
+        WHERE i.id=#{id};
+    </select>
+    <select id="inquiryCommnetDetail">
+        select
+        commenter AS inquiry_commenter,
+        comment_id_type AS inquiry_comment_id_type,
+        content AS inquiry_comment_content,
+        created_at AS inquiry_comment_created_at,
+        updated_at AS inquiry_comment_updated_at
+        FROM tbl_inquiry_comment
+        WHERE inquiry_id =#{id}
+    </select>
+    <insert id="inquiryCommentInsert">
+        insert into tbl_inquiry_comment(inquiry_id,commenter,comment_id_type,content)
+        values(#{inquiry_id},#{admin_id},"tbl_admin", #{resolution_content})
+    </insert>
+    <update id="inquiryResponseComplete">
+        UPDATE tbl_inquiry
+        SET inquiry_status = "completed"
+        WHERE id = #{id};
+    </update>
 </mapper>
     

@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<%--고정 헤더 파일--%>
+<%--고정 헤더 파일--%>q
 <%@include file="../../../resources/static/html/headerGnb.jsp"%>
 
 <div class="wrap">
