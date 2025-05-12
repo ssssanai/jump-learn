@@ -9,4 +9,9 @@
         VALUES
         (#{file_id}, #{edu_id})
     </insert>
+
+    <delete id="eduDelete">
+        DELETE FROM tbl_edu_file
+        WHERE `edu_id` = #{id}
+    </delete>
 </mapper>
