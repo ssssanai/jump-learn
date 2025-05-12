@@ -6,5 +6,5 @@ import com.ssanai.jumplearn.dto.TeacherDTO;
 public interface MemberMyPageMapper {
     public MemberDTO memberMyPageInfo(String memberId);
     public int memberMyPageUpdate(MemberDTO dto);
-    public int memberMyPageDelete(MemberDTO dto);
+    public MemberDTO memberMyPageDelete(MemberDTO dto);
 }
