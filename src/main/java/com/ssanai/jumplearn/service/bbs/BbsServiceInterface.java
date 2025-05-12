@@ -25,6 +25,10 @@ public interface BbsServiceInterface {
 
     public int delete(int id);
 
+    public int eduFileDelete(int id);
+
+    public int fileDelete(int id);
+
     public BbsDefaultDTO selectOne( int id);
 
     public PageResponseDTO<BbsDefaultDTO> searchList(PageRequestDTO pageDTO);
@@ -36,5 +40,11 @@ public interface BbsServiceInterface {
     public int viewCount(@Param("id") int id);
 
     public void fileUpload(BbsDefaultDTO postDto, MultipartFile file) throws IOException;
+
+    public int pageDelete(int id);
+
+
+
+
 
 }
