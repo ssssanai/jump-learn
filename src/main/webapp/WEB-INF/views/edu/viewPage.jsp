@@ -70,40 +70,30 @@
                 </div>
                 <div class="boardCont">
                     <div class="boardImage">
-                        <c:forEach var="file" items="${fileDTO}">
-                            <c:if test="${fn:contains(fn:toLowerCase(file.fileExt), '.jpg')
-                                             or fn:contains(fn:toLowerCase(file.fileExt), '.jpeg')}">
-                                <img src="${file.filePath}/${file.fileName}${file.fileExt}"
-                                     alt="${file.fileName}${file.fileExt}" /><br/>
-                            </c:if>
+                    <c:forEach var="file" items="${fileDTO}">
+                                <c:if test="${fn:contains(fn:toLowerCase(file.fileExt), '.jpg')
+                                                 or fn:contains(fn:toLowerCase(file.fileExt), '.jpeg')}">
+                                    <img src="${file.filePath}/${file.fileName}${file.fileExt}"
+                                         alt="${file.fileName}${file.fileExt}" /><br/>
+                                </c:if>
                         </c:forEach>
                     </div>
                     <p>${dto.content}</p>
                 </div>
-
-                <c:out value="▶ PDF 개수: ${fn:length(pdfFileDTO)}" /><br/>
-                <c:forEach var="p" items="${pdfFileDTO}">
-                    <c:out value="-- 항목: ${p.fileName}${p.fileExt} @ ${p.filePath}" /><br/>
-                </c:forEach>
-                <hr>
-
                 <div class="boardFile">
-                    <c:forEach var="file" items="${pdfFileDTO}">
-                        <a href="${file.filePath}/${file.fileName}${file.fileExt}" target="_blank">
-                                ${file.fileName}${file.fileExt}</a>
+                    <c:forEach var="pdfFile" items="${pdfFileDTO}">
+                        <a href="${pdfFile.filePath}/${pdfFile.fileName}${pdfFile.fileExt}" target="_blank">
+                                ${pdfFile.fileName}${pdfFile.fileExt}</a>
                         <br>
-                        <a href="${file.filePath}" target="_blank">${file.fileName}${file.fileExt}</a>
                     </c:forEach>
                 </div>
-
                 <div class="formBtn">
                     <input class="endBtn" type="button" value="목록" onClick="location.href='<c:url value='/edu/searchListPage?${pageDTO.linkParams}'/>'" />
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.loginInfo.status}">
-                            <input class="endBtn" type="button" value="수정" onClick="location.href='<c:url value='/edu/editPage?id=${dto.id}&${pageDTO.linkParams}'/>'" />
-                            <input class="endBtn" type="button" value="삭제" onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='<c:url value='/edu/delete'/>?id=${dto.id}&${pageDTO.linkParams}';}" />
-                        </c:when>
-                    </c:choose>
+
+                    <c:if test="${isAdmin}">
+                        <input class="endBtn" type="button" value="수정" onClick="location.href='<c:url value='/edu/editPage?id=${dto.id}&${pageDTO.linkParams}'/>'" />
+                        <input class="endBtn" type="button" value="삭제" onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='<c:url value='/edu/delete'/>?id=${dto.id}&${pageDTO.linkParams}';}" />
+                    </c:if>
                 </div>
             </form>
         </div>
