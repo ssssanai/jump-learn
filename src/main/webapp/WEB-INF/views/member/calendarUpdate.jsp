@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/resources/static/css/calendar/calendarWrite.css" rel="stylesheet" type="text/css">
-    <title>JL - 학습계획 작성</title>
+    <title>JL - 학습계획 수정</title>
     <script src="https://kit.fontawesome.com/2d74121aef.js" crossorigin="anonymous"></script>
     <script src="/resources/static/js/checkModule.js"></script>
 </head>
@@ -23,19 +23,20 @@
 <%@ include file="/resources/static/html/adminMsg.jsp" %>
 <div class="header">
     <img src="/resources/static/images/registLogo2.svg" alt="로고">
-    <p>${date.split("-")[0]}/${date.split("-")[1]}/${date.split("-")[2]} 학습계획 작성</p>
+    <p>${date.split("-")[0]}/${date.split("-")[1]}/${date.split("-")[2]} 학습계획 수정</p>
 </div>
 <div class="wrap">
-    <form id="frmWrite" name="frmWrite" action="/plan/create" method="post">
-        <input type="hidden" name="date" value="${date}"/>
+    <form id="frmWrite" name="frmWrite" action="/plan/update" method="post">
+        <input type="hidden" name="id" value="${plan.id}"/>
+        <input type="hidden" name="study_date" value="${date}"/>
         <div class="boardTitle">
             <p>제목</p>
-            <input type="text" name="title" id="title" placeholder="글 제목을 입력해주세요.">
+            <input type="text" name="title" id="title" value="${plan.title}">
             <div id="titleError" class="error"></div>
         </div>
         <div class="boardCont">
             <p>내용</p>
-            <textarea name="content" id="content" placeholder="content값"></textarea>
+            <textarea name="description" id="content">${plan.description}</textarea>
             <div id="contentError" class="error"></div>
         </div>
         <div class="formBtn">
@@ -93,7 +94,7 @@
             return false;
         }
 
-        if(!checkSQLInjection(title)){
+        if (!checkSQLInjection(title)) {
             titleError.textContent = "--, $$, #, /*, ', \" 은 포함될 수 없습니다.";
             return false;
         }
@@ -113,7 +114,7 @@
             return false;
         }
 
-        if(!checkSQLInjection(content)){
+        if (!checkSQLInjection(content)) {
             titleError.textContent = "--, $$, #, /*, ', \" 은 포함될 수 없습니다.";
             return false;
         }
