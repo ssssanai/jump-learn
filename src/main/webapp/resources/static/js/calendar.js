@@ -69,9 +69,9 @@ function printCalendar(y, m) {
             } else {
                 // 오늘 날짜에 대한 스타일 적용
                 if (dNum === nowD) {
-                    calendar += `<td id="today"><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum}">` + dNum + `</a></td>`;
+                    calendar += `<td id="today"><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum < 10 ? '0' + dNum : dNum}">` + dNum + `</a></td>`;
                 } else {
-                    calendar += `<td><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum}">` + dNum + `</a></td>`;
+                    calendar += `<td><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum < 10 ? '0' + dNum : dNum}">` + dNum + `</a></td>`;
                 }
                 dNum++;
             }
