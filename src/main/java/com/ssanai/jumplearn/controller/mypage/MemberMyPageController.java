@@ -131,6 +131,7 @@ public class MemberMyPageController {
 		// 5. 학습계획표
 		List<PlanDTO> planList = planService.getPlanList(member_id);
 
+		log.info(PostDTOList.getDtoList());
 		log.info("EnrollDTOList: {}", EnrollDTOList.getDtoList().size());
 		log.info("PostDTOList: {}", PostDTOList.getDtoList().size());
 		log.info("PostCommentVOList: {}", PostCommentVOList.getDtoList().size());
