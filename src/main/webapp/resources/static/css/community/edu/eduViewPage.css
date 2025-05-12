@@ -146,7 +146,7 @@ ul li {
             margin-bottom: 25px;
         }
         .boardCont {
-            width:100%; height:300px;
+            width:100%; height:400px;
             margin-bottom: 25px;
         }
             .boardCont > p {
@@ -156,8 +156,17 @@ ul li {
                 color:#333;
             }
 
+        .boardImage > img {
+            float:left;
+            width:200px;
+            height:200px;
+
+        }
+
         .boardFile, .boardImage {
-            width:100%;
+            display:flex;
+            width:100%; height:300px;
+            justify-content: space-between;
         }
         .boardImg {
             display: flex;
