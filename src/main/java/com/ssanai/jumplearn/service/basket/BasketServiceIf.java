@@ -12,4 +12,5 @@ public interface BasketServiceIf {
 	public int isBasketExist(@Param("id") int id, @Param("member_id") String member_id);
 	public int addBasket(@Param("id") int id, @Param("member_id") String member_id);
 	public int removeBasket(@Param("id") int id, @Param("member_id") String member_id);
+	public int clearBasket(@Param("member_id") String member_id);
 }

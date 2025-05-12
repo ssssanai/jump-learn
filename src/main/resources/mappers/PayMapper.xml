@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssanai.jumplearn.mapper.pay.PayMapper">
-<!--    <insert id="createPay">-->
-<!--        insert into tbl_pay (class_id, member_id, cost, created_at, canceled_at, complete)-->
-<!--        values ()-->
-<!--    </insert>-->
+    <insert id="createPay">
+        insert into tbl_pay (class_id, member_id, cost, created_at, canceled_at, complete)
+        values (#{dto.class_id}, #{dto.member_id}, #{dto.price}, now(), null, 0)
+    </insert>
 
     <select id="getPayList" resultType="com.ssanai.jumplearn.dto.EnrollmentsDTO">
         select
@@ -31,5 +31,19 @@
         set canceled_at = now(), complete = 0
         where id = #{id}
     </update>
+
+    <select id="getList" resultType="com.ssanai.jumplearn.vo.PayVO">
+        select *
+        from tbl_pay
+        where member_id = #{member_id};
+    </select>
+
+    <select id="getPayIdListFromEnrollDontHave">
+        SELECT tp.id
+        FROM tbl_pay AS tp
+        WHERE member_id=#{member_id} AND tp.id NOT IN (
+            SELECT te.pay_id FROM tbl_enrollments AS te WHERE te.pay_id = tp.id
+        );
+    </select>
 </mapper>
  

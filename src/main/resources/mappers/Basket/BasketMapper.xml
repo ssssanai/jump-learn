@@ -29,5 +29,11 @@
         from tbl_basket
         where class_id = #{id} and member_id = #{member_id}
     </delete>
+
+    <delete id="clearBasket">
+        delete
+        from tbl_basket
+        where member_id = #{member_id}
+    </delete>
 </mapper>
  

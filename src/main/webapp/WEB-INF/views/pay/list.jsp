@@ -66,8 +66,13 @@
                                 </div>
                             </c:if>
                             <c:if test="${not isCompleted}">
-                                <a id="/pay/purchase_ok/${p.pay_id}" class="confirm">구매 확정</a>
-                                <a href="/pay/refund/${p.class_id}">환불 요청</a>
+                                <c:if test="${p.pay_canceled_at != null}" var="isCanceled">
+                                    <div>환불 완료된 강좌</div>
+                                </c:if>
+                                <c:if test="${not isCanceled}">
+                                    <a id="/pay/purchase_ok/${p.pay_id}" class="confirm">구매 확정</a>
+                                    <a href="/pay/refund/${p.class_id}">환불 요청</a>
+                                </c:if>
                             </c:if>
                             <a href="#">후기 작성</a>
                         </div>

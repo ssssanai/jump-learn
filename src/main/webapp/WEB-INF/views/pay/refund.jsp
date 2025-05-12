@@ -39,12 +39,16 @@
     <div class="retrunForm">
         <h2>강의에 대한 어떤 문제가 발생했는지 설명해주세요.</h2>
         <p>작성해주신 내용이 자세할수록 강의 품질 또는 서비스 개선에 도움이 됩니다!</p>
-        <form action="" method="get">
-            <textarea placeholder="250자 내로 작성해주세요."></textarea>
+        <form action="/pay/refund" method="post">
+            <textarea name="reason" placeholder="250자 내로 작성해주세요."></textarea>
+            <input type="hidden" name="pay_id" value="${dto.pay_id}" hidden />
             <input type="submit" value="환불요청">
-            <input type="reset" value="취소하기">
+            <input type="button" id="btnList" value="결제 목록">
         </form>
     </div>
 </div>
+<script>
+    document.getElementById('btnList').addEventListener('click', () => {location.href='/pay/list'})
+</script>
 </body>
 </html>
