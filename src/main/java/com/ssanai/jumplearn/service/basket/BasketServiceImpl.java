@@ -38,4 +38,9 @@ public class BasketServiceImpl implements BasketServiceIf{
 	public int removeBasket(int id, String member_id) {
 		return basketMapper.removeBasket(id, member_id);
 	}
+
+	@Override
+	public int clearBasket(String member_id) {
+		return basketMapper.clearBasket(member_id);
+	}
 }

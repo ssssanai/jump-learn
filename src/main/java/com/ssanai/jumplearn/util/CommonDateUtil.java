@@ -58,4 +58,7 @@ public class CommonDateUtil {
 	public String localDateTimeToString(LocalDateTime dateValue, String pattern) {
 		return dateValue.format(DateTimeFormatter.ofPattern(pattern));
 	}
+	public String dateToString(Date date) {
+		return new SimpleDateFormat("yyyy-MM-dd").format(date);
+	}
 }

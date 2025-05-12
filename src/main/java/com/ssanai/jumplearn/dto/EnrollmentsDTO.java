@@ -19,9 +19,9 @@ public class EnrollmentsDTO {
     private double progress; //진척도
     private String review; //강의 후기
     private String feedback_score; //강의 후기 점수
-    private int midterm_score; // 강의 중간 점수
-    private int final_score; //강의 기말 점수
-    private int final_grade_score; //강의 최종 점수
+    private Integer midterm_score; // 강의 중간 점수
+    private Integer final_score; //강의 기말 점수
+    private Integer final_grade_score; //강의 최종 점수
 
     // tbl_class
     private String class_title; // 강좌명

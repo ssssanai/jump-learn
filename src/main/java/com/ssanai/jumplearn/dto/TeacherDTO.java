@@ -29,6 +29,7 @@ public class TeacherDTO {
     @Past(message = "생일은 과거 날짜여야 합니다.")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
+    private String birthday;
     @NotEmpty
     @Email(message = "이메일 형식이 올바르지 않습니다.")
     private String email;

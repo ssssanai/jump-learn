@@ -163,8 +163,7 @@
                         <div class="myStudyList2">
                             <p class="studyNo">${dto.id}</p>
                             <p class="studyCate">${dto.title}</p>
-                            <a href="#"
-                               class="studyTit">${dto.content.length() >= 26 ? dto.content.substring(0, 30) + "..." : dto.content}</a>
+                            <a href="#" class="studyTit">${dto.content}</a>
                             <p class="studyTeach">${dto.like_count}</p>
                             <p class="studyTeach">${dto.view_count}</p>
                             <p class="studyRegDate">${dto.created_at.toString().split("T")[0]}&nbsp;${dto.created_at.toString().split("T")[1]}</p>

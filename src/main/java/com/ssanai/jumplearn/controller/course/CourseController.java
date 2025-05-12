@@ -5,8 +5,10 @@ import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.service.basket.BasketServiceIf;
 import com.ssanai.jumplearn.service.course.CourseServiceIf;
+import com.ssanai.jumplearn.service.course.EnrollmentsServiceIf;
 import com.ssanai.jumplearn.service.mainpage.MainPageServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
+import com.ssanai.jumplearn.vo.EnrollmentsVO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,8 +24,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/course")
 public class CourseController {
-	private final CourseServiceIf courseService;
 	private final BasketServiceIf basketService;
+	private final CourseServiceIf courseService;
+	private final EnrollmentsServiceIf enrollmentsService;
 	private final MainPageServiceIf mainPageService;
 
 	@RequestMapping("/list")
@@ -43,7 +46,7 @@ public class CourseController {
 		MemberDTO reqDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
 		MemberDTO memberDTO = mainPageService.getMemberInfo(reqDTO.getId());
 		// 장바구니 목록
-		List<BasketDTO> basketList = basketService.getBasketList(reqDTO.getId());
+		List<BasketDTO> basketList = basketService.getBasketList(memberDTO.getId());
 		log.info(basketList);
 
 		// 강좌 목록
@@ -55,6 +58,15 @@ public class CourseController {
 		for (ClassDTO classDTO : courseList) {
 			for (BasketDTO basketDTO : basketList) {
 				if (basketDTO.getClass_id() == classDTO.getId()) {
+					exceptList.add(classDTO.getId());
+				}
+			}
+		}
+		List<EnrollmentsVO> enrollList = enrollmentsService.getList(memberDTO.getId());
+
+		for(ClassDTO classDTO : courseList) {
+			for (EnrollmentsVO vo: enrollList){
+				if(vo.getClass_id() == classDTO.getId()){
 					exceptList.add(classDTO.getId());
 				}
 			}
