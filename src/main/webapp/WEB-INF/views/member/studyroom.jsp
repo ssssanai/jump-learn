@@ -18,6 +18,7 @@
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <script src="/resources/static/js/checkModule.js"></script>
+
     <title>JL - 나의 학습방</title>
 </head>
 <body>
@@ -259,27 +260,26 @@
         </div>
         <div id="cont5">
             <h2 class="ht">학습 계획표</h2>
-            <div class="calHeader">
-                <c:choose>
-                    <c:when test="${PlanList.size() > 0}">
-                        <c:forEach items="${PlanList}" var="p">
-                            <p>${p.id}</p>
-                            <p>${p.member_id}</p>
-                            <p>${p.title}</p>
-                            <p>${p.description}</p>
-                            <p>${p.study_date}</p>
-                            <p>${p.created_at}</p>
-                            <p>${p.updated_at}</p>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        등록된 계획이 없습니다.
-                    </c:otherwise>
-                </c:choose>
+            <div class="calendarBox">
+                <div id="month"></div>
+                <div id="calendar"></div>
             </div>
-            <div id="calendar">
-
-            </div>
+            <c:choose>
+                <c:when test="${PlanList.size() > 0}">
+                    <c:forEach items="${PlanList}" var="p">
+                        <p>${p.id}</p>
+                        <p>${p.member_id}</p>
+                        <p>${p.title}</p>
+                        <p>${p.description}</p>
+                        <p>${p.study_date}</p>
+                        <p>${p.created_at}</p>
+                        <p>${p.updated_at}</p>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    등록된 계획이 없습니다.
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </div>
@@ -303,56 +303,6 @@
     document.addEventListener('DOMContentLoaded', function () {
         menuDisplay(1);
     });
-
-    function generateCalendar() {
-        var calendarContainer = document.getElementById("calendar");
-        var currentDate = new Date();
-        var year = currentDate.getFullYear();
-        var month = currentDate.getMonth();
-        var calendarHTML = `<h2>${year}년 ${month + 1}월</h2>`;
-
-        calendarHTML += '<table>';
-        calendarHTML += '<tr>';
-        const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-        for (let day of daysOfWeek) {
-            calendarHTML += `<th>${day}</th>`;
-        }
-        calendarHTML += '</tr>';
-
-        // 각 주와 날짜 표시
-        const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDayOfMonth = new Date(year, month, 1).getDay();
-
-        let dayCounter = 1;
-
-        for (let i = 0; i < 6; i++) {
-            calendarHTML += '<tr>';
-
-            for (let j = 0; j < 7; j++) {
-                if (i === 0 && j < firstDayOfMonth) {
-                    calendarHTML += '<td></td>';
-                } else if (dayCounter > totalDaysInMonth) {
-                    calendarHTML += '<td></td>';
-                } else {
-                    calendarHTML += `<td>${dayCounter}</td>`;
-                    dayCounter++;
-                }
-            }
-
-            calendarHTML += '</tr>';
-
-            if (dayCounter > totalDaysInMonth) {
-                break;
-            }
-        }
-
-        calendarHTML += '</table>';
-        calendarContainer.innerHTML = calendarHTML;
-    }
-
-    window.onload = function () {
-        generateCalendar();
-    };
 
     // Enroll 리스트
     document.getElementById('frm_search_enroll').addEventListener('submit', function (e) {
@@ -447,5 +397,7 @@
         document.getElementById('frm_search_comment').submit();
     });
 </script>
+<script src="/resources/static/js/calendar.js"></script>
+<script>printMonth();</script>
 </body>
 </html>
