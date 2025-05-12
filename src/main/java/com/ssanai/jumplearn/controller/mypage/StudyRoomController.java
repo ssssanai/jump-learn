@@ -16,9 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @Log4j2
@@ -208,6 +211,7 @@ public class StudyRoomController {
 		// 4. 성적표 보기
 		List<EnrollmentsDTO> gradeList = enrollmentsService.getScoreList(member_id);
 
+		model.addAttribute("member", mDTO);
 		model.addAttribute("GradeList", gradeList);
 		return "member/studyroom";
 	}
@@ -233,10 +237,50 @@ public class StudyRoomController {
 		MemberDTO mDTO = mainPageService.getMemberInfo(member_id);
 		log.info(mDTO);
 		// 5. 학습계획표
-		List<PlanDTO> planList = planService.getPlanList(member_id);
+		List<PlanDTO> planList = planService.getPlanListByDate(member_id, LocalDate.now());
 
+		model.addAttribute("member", mDTO);
 		model.addAttribute("PlanList", planList);
+		model.addAttribute("date", LocalDate.now().toString());
 		return "member/studyroom";
 	}
 
+	@GetMapping("/plan/{date}")
+	public String myStudyRoomPlanList(
+			HttpServletRequest req,
+			RedirectAttributes ra,
+			@ModelAttribute("reqDTO") PageRequestDTO reqDTO,
+			@PathVariable("date") String date,
+			Model model
+	) {
+		log.info("MyPageController MyStudyRoom Enroll");
+		log.info(reqDTO);
+		// 회원 정보
+		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		// 로그인 체크
+		if (loginInfo == null) {
+			log.info("Not Logged In Member");
+			ra.addFlashAttribute("msg", "로그인 후 사용 가능한 서비스입니다.");
+			return "redirect:/member/login";
+		}
+
+		LocalDate lDate = null;
+		// 날짜 체크
+		try {
+			lDate = LocalDate.parse(date);
+		} catch (DateTimeParseException e) {
+			ra.addFlashAttribute("msg", "날짜 형식이 잘못되었습니다.");
+			return "redirect:/studyroom/plan";
+		}
+
+		String member_id = loginInfo.getId();
+		MemberDTO mDTO = mainPageService.getMemberInfo(member_id);
+		log.info(mDTO);
+		// 5. 학습계획표
+		List<PlanDTO> planList = planService.getPlanListByDate(member_id, lDate);
+
+		model.addAttribute("member", mDTO);
+		model.addAttribute("PlanList", planList);
+		return "member/studyroom";
+	}
 }

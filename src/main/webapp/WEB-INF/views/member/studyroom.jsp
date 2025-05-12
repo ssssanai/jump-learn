@@ -25,7 +25,7 @@
 
 <%--고정 헤더 파일--%>
 <%@include file="/resources/static/html/memberGnb.jsp" %>
-
+<%@ include file="/resources/static/html/adminMsg.jsp" %>
 <div class="wrap" id="wrap">
     <div class="aside">
         <div class="myInfo1">
