@@ -48,22 +48,21 @@
         <div class="writeTit">
             <h2>edu 게시판</h2>
             <p>교육 정보 게시판 입니다.</p>
-            <div class="wtBtn">
-                <c:choose>
-                    <c:when test="${not empty sessionScope.loginInfo.status}">
-                        <a href="/edu/writePage">글쓰기</a>
-                    </c:when>
-                </c:choose>
 
+            <div class="wtBtn">
+                <c:if test="${isAdmin}">
+                    <a href="/edu/writePage">글쓰기</a>
+                </c:if>
 
             </div>
         </div>
-        <form class="searchInput" method="GET" action="/edu/searchListPage">
+        <form class="searchInput" name="frmSearch" id="frmSearch" method="GET" action="/edu/searchListPage">
             <input type="hidden" name="page_size" value="${pageDTO.page_size}" />
             <div class="siReset">
                 <input type="button" onclick="location.href='<c:url value="/edu/searchListPage"/>'"  value="검색조건 초기화">
             </div>
             <div class="searchBoxs">
+            ${pageDTO.search_category}
                 <select id="search_category" name="search_category" class="selectOption">
                     <option value="-"           ${pageDTO.search_category==''             ? 'selected':''}>선택</option>
                     <option value="title"       ${pageDTO.search_category=='title'        ? 'selected':''}>제목</option>
@@ -71,8 +70,8 @@
                     <option value="admin_id"    ${pageDTO.search_category=='admin_id'     ? 'selected':''}>작성자</option>
                     <option value="created_at"  ${pageDTO.search_category=='created_at'   ? 'selected':''}>작성일</option>
                 </select>
-                <input type="text" id="search_word" name="search_word" class="search_in" placeholder="검색어를 입력해주세요." value="${pageDTO.search_word}">
-                <div class="searchDate">
+                <input type="text" id="search_word" name="search_word" class="search_in" placeholder="검색어를 입력해주세요." value="${pageDTO.search_word}" style="" >
+                <div class="searchDate" style="display:none">
                     <input type="date" name="search_date_from" id="search_date_from" value="${pageDTO.search_date_from}"/>
                     <p>~</p>
                     <input type="date" name="search_date_to" id="search_date_to" value="${pageDTO.search_date_to}"/>
@@ -82,47 +81,38 @@
         </form>
         <div class="writeList">
             <div class="wlHeader">
-                <c:choose>
-                    <c:when test="${not empty sessionScope.loginInfo.status}">
-                        <p class="listCk">선택</p>
-                    </c:when>
-                </c:choose>
+                <c:if test="${isAdmin}">
+                    <p class="listCk">선택</p>
+                </c:if>
                 <p class="listNo">번호</p>
                 <p class="listTit">제목</p>
                 <p class="listName">작성자</p>
                 <p class="listDate">작성일</p>
                 <p class="listCnt">조회수</p>
-                <c:choose>
-                    <c:when test="${not empty sessionScope.loginInfo.status}">
-                        <div class="listDelBtnBox">
-                            <input class="listDelBtn" type="button" value="선택삭제">
-                        </div>
-                    </c:when>
-                </c:choose>
+                <c:if test="${isAdmin}">
+                    <div class="listDelBtnBox">
+                        <input class="listDelBtn" type="button" value="선택삭제">
+                    </div>
+                </c:if>
             </div>
             <c:forEach var="post" items="${dto.dtoList}">
                 <div class="wlBody">
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.loginInfo.status}">
-                            <div class="listCk">
-                                <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
-                            </div>
-                        </c:when>
-                    </c:choose>
+                    <c:if test="${isAdmin}">
+                        <div class="listCk">
+                            <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
+                        </div>
+                    </c:if>
                     <p class="listNo">${post.id}</p>
                     <p class="listTit"><a href="/edu/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
                     <p class="listName"><a href="#">${post.admin_id}</a></p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.loginInfo.status}" >
-                            <div class="listDelBtnBox">
-                                <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}&${pageDTO.getLinkParams()}';}" value="삭제">
-                            </div>
-                        </c:when>
-                    </c:choose>
+                    <c:if test="${isAdmin}">
+                        <div class="listDelBtnBox">
+                            <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}&${pageDTO.getLinkParams()}';}" value="삭제">
+                        </div>
+                    </c:if>
                 </div>
-
             </c:forEach>
             <div class="pagingBox">
                 ${paging}
@@ -130,5 +120,67 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    const frmSearch = document.getElementById('frmSearch');
+    const search_category = document.getElementById('search_category');
+    const search_word = document.getElementById('search_word');
+    const searchDate = document.querySelector('.searchDate');
+    const search_date_from = document.getElementById('search_date_from');
+    const search_date_to = document.getElementById('search_date_to');
+
+
+
+    search_category.addEventListener('change', function (e) {
+        if( search_category.value == 'created_at'  ) {
+            search_word.value = '';
+            search_word.style.display = 'none';
+            searchDate.style.display = 'block';
+        } else {
+            search_word.style.display = 'block';
+            search_date_from.value = '';
+            search_date_to.value = '';
+            searchDate.style.display = 'none';
+        }
+
+    }, false );
+
+
+    frmSearch.addEventListener('submit', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+
+        if( search_category.value == 'created_at' ) {
+            if (search_date_from.value.length > 0  && search_date_to.value.length > 0) {
+                let date1 = new Date(search_date_from.value);
+                let date2 = new Date(search_date_to.value);
+
+                if (  (date2.getTime() - date1.getTime() )<0 ) {
+                    alert("날짜 값이 올바르지 않습니다1.")
+                    return false;
+                }
+            } else {
+                alert("날짜 값이 올바르지 않습니다2.")
+                return false;
+            }
+        } else {
+            if( search_word.value == '') {
+                alert("검색어를 입력하세요")
+                search_word.focus();
+                return false;
+            }
+        }
+
+        // frmSearch.method="GET";
+        // frmSearch.action="/edu/searchListPage";
+        frmSearch.submit();
+
+
+    })
+
+
+</script>
 </body>
 </html>
