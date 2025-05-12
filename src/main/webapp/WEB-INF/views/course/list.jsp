@@ -16,7 +16,8 @@
     <link href="/resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <title>JL - 강좌 목록</title>
 </head>
 <%--고정 헤더 파일--%>
@@ -44,23 +45,23 @@
             <c:set var="total_price" value="0"/>
             <c:choose>
                 <c:when test="${basketList.size() > 0}">
-                        <div class="buyy">
-                            <c:forEach items="${basketList}" var="b">
-                                <div class="cart">
-                                    <div class="cartTit1">
-                                        <p id="cart_course_title">${b.teacher}강사의 ${b.title}</p>
-                                    </div>
-                                    <div class="cartTit2">
-                                        <p id="cart_course_introduce">${b.introduce}</p>
-                                        <div class="cartTit2Box">
-                                            <p id="cart_course_price">${b.price}원</p>
-                                            <a href="/basket/remove/${b.class_id}"><i class="fa-solid fa-xmark"></i></a>
-                                            <c:set var="total_price" value="${total_price + b.price}"/>
-                                        </div>
+                    <div class="buyy">
+                        <c:forEach items="${basketList}" var="b">
+                            <div class="cart">
+                                <div class="cartTit1">
+                                    <p id="cart_course_title">${b.teacher}강사의 ${b.title}</p>
+                                </div>
+                                <div class="cartTit2">
+                                    <p id="cart_course_introduce">${b.introduce}</p>
+                                    <div class="cartTit2Box">
+                                        <p id="cart_course_price">${b.price}원</p>
+                                        <a href="/basket/remove/${b.class_id}"><i class="fa-solid fa-xmark"></i></a>
+                                        <c:set var="total_price" value="${total_price + b.price}"/>
                                     </div>
                                 </div>
-                            </c:forEach>
-                        </div>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </c:when>
                 <c:otherwise>
                     <div class="notBuy">
@@ -156,22 +157,12 @@
                 </c:choose>
             </div>
             <div id="paging_block">
-                <a href="/course/list?page_no=1
-                    &search_condition1=${searchDTO.search_condition1}
-                    &search_word=${searchDTO.search_word}
-                    &search_condition2=${searchDTO.search_condition2}
-                    &search_condition3=${searchDTO.search_condition3}
-                    &sort_condition=${searchDTO.sort_condition}">
+                <a href="/course/list?page_no=1&search_condition1=${searchDTO.search_condition1}&search_word=${searchDTO.search_word}&search_condition2=${searchDTO.search_condition2}&search_condition3=${searchDTO.search_condition3}&sort_condition=${searchDTO.sort_condition}">
                     <<
                 </a>
 
                 &nbsp;&nbsp;
-                <a href="/course/list?page_no=${searchDTO.page_no - 1 > 1 ? searchDTO.page_no - 1 : 1}
-                    &search_condition1=${searchDTO.search_condition1}
-                    &search_word=${searchDTO.search_word}
-                    &search_condition2=${searchDTO.search_condition2}
-                    &search_condition3=${searchDTO.search_condition3}
-                    &sort_condition=${searchDTO.sort_condition}">
+                <a href="/course/list?page_no=${searchDTO.page_no - 1 > 1 ? searchDTO.page_no - 1 : 1}&search_condition1=${searchDTO.search_condition1}&search_word=${searchDTO.search_word}&search_condition2=${searchDTO.search_condition2}&search_condition3=${searchDTO.search_condition3}&sort_condition=${searchDTO.sort_condition}">
                     <
                 </a>
                 &nbsp;
@@ -181,33 +172,18 @@
                             <p class="pNum">${p}</p>
                         </c:when>
                         <c:otherwise>
-                            <a href="/course/list?page_no=${p}
-                                &search_condition1=${searchDTO.search_condition1}
-                                &search_word=${searchDTO.search_word}
-                                &search_condition2=${searchDTO.search_condition2}
-                                &search_condition3=${searchDTO.search_condition3}
-                                &sort_condition=${searchDTO.sort_condition}">
+                            <a href="/course/list?page_no=${p}&search_condition1=${searchDTO.search_condition1}&search_word=${searchDTO.search_word}&search_condition2=${searchDTO.search_condition2}&search_condition3=${searchDTO.search_condition3}&sort_condition=${searchDTO.sort_condition}">
                                     ${p}
                             </a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 &nbsp;
-                <a href="/course/list?page_no=${searchDTO.page_no + 1 < total_page ? searchDTO.page_no + 1 : total_page}
-                    &search_condition1=${searchDTO.search_condition1}
-                    &search_word=${searchDTO.search_word}
-                    &search_condition2=${searchDTO.search_condition2}
-                    &search_condition3=${searchDTO.search_condition3}
-                    &sort_condition=${searchDTO.sort_condition}">
+                <a href="/course/list?page_no=${searchDTO.page_no + 1 < total_page ? searchDTO.page_no + 1 : total_page}&search_condition1=${searchDTO.search_condition1}&search_word=${searchDTO.search_word}&search_condition2=${searchDTO.search_condition2}&search_condition3=${searchDTO.search_condition3}&sort_condition=${searchDTO.sort_condition}">
                     >
                 </a>
                 &nbsp;&nbsp;
-                <a href="/course/list?page_no=${total_page}
-                    &search_condition1=${searchDTO.search_condition1}
-                    &search_word=${searchDTO.search_word}
-                    &search_condition2=${searchDTO.search_condition2}
-                    &search_condition3=${searchDTO.search_condition3}
-                    &sort_condition=${searchDTO.sort_condition}">
+                <a href="/course/list?page_no=${total_page}&search_condition1=${searchDTO.search_condition1}&search_word=${searchDTO.search_word}&search_condition2=${searchDTO.search_condition2}&search_condition3=${searchDTO.search_condition3}&sort_condition=${searchDTO.sort_condition}">
                     >>
                 </a>
             </div>
@@ -220,9 +196,9 @@
         $('#frm_search').submit();
     });
 
-    $('#purchase_btn').on('click', function (){
-        if(confirm('장바구니에 있는 강좌들을 구매하시겠습니까?')){
-            location.href='/pay/buy';
+    $('#purchase_btn').on('click', function () {
+        if (confirm('장바구니에 있는 강좌들을 구매하시겠습니까?')) {
+            location.href = '/pay/buy';
         }
     })
 </script>
