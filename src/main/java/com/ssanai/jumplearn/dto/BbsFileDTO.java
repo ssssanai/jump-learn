@@ -12,12 +12,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class BbsFileDTO {
-    int id;
-    String file_path;
-    String file_name;
-    int file_size;
-    String file_ext;
-    String related_table;
-    int related_id;
-    LocalDateTime created_at;
+    private Integer id;
+    private String  filePath;
+    private String  fileName;
+    private String  fileExt;
+    private Long    fileSize;
+    private String  relatedTable;
+    private Integer relatedId;
 }

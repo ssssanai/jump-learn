@@ -1,4 +1,4 @@
-package com.ssanai.jumplearn.mapper;
+package com.ssanai.jumplearn.mapper.bbs;
 
 
 import com.ssanai.jumplearn.dto.PageRequestDTO;
@@ -26,4 +26,6 @@ public interface BbsMapper {
     public List<BbsFileVO> attachedPic(@Param("id") int id);
 
     public List<BbsFileVO> attachedPdf(@Param("id") int id);
+
+    public int viewCount(@Param("id") int id);
 }

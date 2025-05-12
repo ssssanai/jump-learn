@@ -7,10 +7,14 @@ import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.vo.BbsDefaultVO;
 import com.ssanai.jumplearn.vo.BbsFileVO;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface BbsServiceInterface {
+
+
     public int getTotalCount(PageRequestDTO requestDTO);
 
     public List<BbsDefaultDTO> listAll(PageRequestDTO pageDTO);
@@ -21,6 +25,10 @@ public interface BbsServiceInterface {
 
     public int delete(int id);
 
+    public int eduFileDelete(int id);
+
+    public int fileDelete(int id);
+
     public BbsDefaultDTO selectOne( int id);
 
     public PageResponseDTO<BbsDefaultDTO> searchList(PageRequestDTO pageDTO);
@@ -28,5 +36,15 @@ public interface BbsServiceInterface {
     public List<BbsFileDTO> attachedPic(@Param("id") int id);
 
     public List<BbsFileDTO> attachedPdf(@Param("id") int id);
+
+    public int viewCount(@Param("id") int id);
+
+    public void fileUpload(BbsDefaultDTO postDto, MultipartFile file) throws IOException;
+
+    public int pageDelete(int id);
+
+
+
+
 
 }
