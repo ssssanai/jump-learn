@@ -46,7 +46,7 @@ public class TeacherMyPageController {
             @RequestParam("id") String id,
             Model model
     ){
-        TeacherDTO dto =teacherMyPageService.teacherMyPageInfo(id);
+        TeacherDTO dto = teacherMyPageService.teacherMyPageInfo(id);
         model.addAttribute("dto", dto);
         return "teacher/teacherChangeInfo";
     }

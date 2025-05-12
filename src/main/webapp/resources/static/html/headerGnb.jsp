@@ -45,6 +45,9 @@
           <a href="#">뉴스 게시판</a>
         </li>
         <li>
+          <a href="#">자유게시판</a>
+        </li>
+        <li>
           <a href="#" class="lsMenu">공지사항 게시판</a>
         </li>
       </ul>

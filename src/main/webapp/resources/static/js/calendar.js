@@ -1,23 +1,4 @@
-function menuDisplay(num) {
-    const contents = document.querySelectorAll('.main > div');
 
-    contents.forEach(function(content) {
-        content.style.display = 'none';
-    });
-
-    const selectedContentId = 'cont' + num;
-    const selectedContent = document.getElementById(selectedContentId);
-
-    if (selectedContent) {
-
-        selectedContent.style.display = 'block';
-    }
-}
-
-//기본 값은 나의 강의실
-document.addEventListener('DOMContentLoaded', function() {
-    menuDisplay(1);
-});
 
 //이번 달 구하기
 month = document.getElementById("month");
