@@ -67,11 +67,43 @@ public class BbsServiceImpl implements BbsServiceInterface {
         return result;
     };
 
+
+
+
     @Override
     public int delete(int id){
         int result = bbsMapper.delete(id);
         return result;
     };
+
+    @Override
+    public int eduFileDelete(int id){
+        int result = eduFileMapper.eduFileDelete(id);
+        return result;
+
+    };
+
+    @Override
+    public int fileDelete(int id){
+        int result = fileMapper.fileDelete(id);
+        return result;
+    };
+
+    @Override
+    @Transactional
+    public int pageDelete(int id) {
+        try {
+            int result1 = eduFileMapper.eduFileDelete(id);
+            int result2 = fileMapper.fileDelete(id);
+            int result3 = bbsMapper.delete(id);
+
+            if (result3 > 0) return 1;
+            else return 0;
+        } catch (Exception e) {
+            log.error("삭제 중 예외 발생: ", e);
+            return 0;
+        }
+    }
 
     @Override
     public BbsDefaultDTO selectOne( int id){
@@ -130,14 +162,18 @@ public class BbsServiceImpl implements BbsServiceInterface {
             return;
         }
 
-        String newName = file.getOriginalFilename();
-        String ext     = newName.substring(newName.lastIndexOf("."));
-        File tgt       = new File(filePathConfig.getUploadPath(), newName);
+        String originalName = file.getOriginalFilename();
+        String ext = originalName.substring(originalName.lastIndexOf('.'));
+        String nameWithoutExt = originalName.substring(0, originalName.lastIndexOf('.'));
+
+        String saveName = nameWithoutExt + ext;
+
+        File tgt = new File(filePathConfig.getUploadPath(), saveName);
         file.transferTo(tgt);
 
         BbsFileDTO fileDto = BbsFileDTO.builder()
                 .filePath    ("/upload")
-                .fileName    (newName)
+                .fileName    (nameWithoutExt)
                 .fileSize    (file.getSize())
                 .fileExt     (ext)
                 .relatedTable("tbl_edu")
