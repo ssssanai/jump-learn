@@ -15,4 +15,11 @@
                  )
         </insert>
 
+    <delete id="fileDelete">
+        DELETE FROM tbl_bbs_file
+        WHERE `related_id` = #{id}
+    </delete>
+
+
+
 </mapper>
