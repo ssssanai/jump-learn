@@ -75,13 +75,34 @@ public class BbsServiceTests {
 //        int result = bbsService.update(dto);
 //    }
 //
+    @Test
+    public void testDelete() {
+        int id = 372;
+        int result = bbsService.delete(id);
+        Assertions.assertEquals(1, result, "delete() should affect 1 row");
+        log.info("testDelete affected rows: {}", result);
+    }
+
+    @Test
+    public void testEduDelete() {
+        int id = 372;
+        int result = bbsService.eduFileDelete(id);
+        Assertions.assertEquals(1, result, "delete() should affect 1 row");
+        log.info("testEduDelete affected rows: {}", result);
+    }
+
+    @Test
+    public void testFileDelete() {
+        int id = 372;
+        int result = bbsService.fileDelete(id);
+        Assertions.assertEquals(1, result, "delete() should affect 1 row");
+        log.info("testFileDelete affected rows: {}", result);
+    }
+
 //    @Test
-//    public void testDelete() {
-//        int id = 105;
-//        int result = bbsService.delete(id);
-//        Assertions.assertEquals(1, result, "delete() should affect 1 row");
-//        log.info("testDelete affected rows: {}", result);
-//    }
+//    public void testPageDelete(){
+//        int result = bbsService.pageDelete(372);
+//        return result;
 //
 //    @Test
 //    public void testSelectOne() {
