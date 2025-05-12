@@ -9,5 +9,54 @@
         FROM tbl_teacher
         WHERE id=#{id}
     </select>
+    <select id="teacherClassInfo">
+        SELECT
+        c.id AS class_id,
+        c.file_name,
+        c.title,
+        c.created_at,
+        (
+        SELECT COUNT(*)
+        FROM tbl_pay p
+        WHERE p.class_id = c.id AND p.complete = 1
+        ) AS pay_count,
+        avg(e.feedback_score) AS feedback_avg
+        FROM tbl_class c
+        LEFT JOIN tbl_enrollments e ON c.id = e.class_id
+        WHERE c.teacher_id = #{teacher_id}
+        GROUP BY c.id
+    </select>
+    <update id="teacherMyPageUpdate">
+        UPDATE tbl_teacher
+        SET birth = #{birth},
+        file_name = #{file_name},
+        file_path = #{file_path},
+        file_size = #{file_size},
+        file_ext = #{file_ext},
+        introduce1 = #{introduce1},
+        introduce2 = #{introduce2},
+        introduce3 = #{introduce3}
+        WHERE id = #{id}
+    </update>
+    <select id="enrollmentsDetail">
+        SELECT e.id, e.member_id, e.midterm_score, e.final_score, e.final_grade_score, e.feedback_score, e.review, p.created_at AS pay_created_at
+        FROM tbl_enrollments AS e INNER JOIN tbl_pay AS p on e.pay_id = p.id
+        WHERE e.class_id = #{id}
+    </select>
+    <update id="enrollmentsMidterm">
+        update tbl_enrollments
+        SET midterm_score = #{midterm_score}
+        WHERE id = #{id}
+    </update>
+    <update id="enrollmentsFinal">
+        update tbl_enrollments
+        SET final_score = #{final_score}
+        WHERE id = #{id}
+    </update>
+    <update id="enrollmentsFinalGrade">
+        update tbl_enrollments
+        SET final_grade_score = #{final_grade_score}
+        WHERE id = #{id}
+    </update>
 </mapper>
     
