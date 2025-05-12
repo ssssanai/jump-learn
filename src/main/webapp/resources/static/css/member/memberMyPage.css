@@ -116,6 +116,7 @@ ul li {
     width:100%; height:calc(100% - 140px);
     gap: 10px;
     padding: 0 10px 10px 10px;
+    justify-content: space-between;
 }
 .infoMenu {
     width:80px; height:100%;

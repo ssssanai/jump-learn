@@ -5,6 +5,7 @@
   Time: 오후 4:34
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <html lang="ko_KR">
@@ -15,23 +16,31 @@
     <link href="/resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script src="/resources/static/js/checkModule.js"></script>
     <title>JL - 마이페이지</title>
 </head>
 <body>
 
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/headerGnb.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
 
 <div class="wrap">
     <div class="aside">
         <div class="myInfo1">
             <div class="myInfoHead1">
                 <div class="radiusProfile">
-                    <img src="/resources/static/images/memberPage/profileEx.jpg" alt="프로필 이미지">
+                    <c:choose>
+                        <c:when test="${not empty member.file_name}">
+                            <img src="/upload/${member.file_name}" alt="기본 이미지">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/resources/static/images/notProfile.jpg" alt="기본 이미지">
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="myInfop">
-                    <p>회원등급  ??</p>
-                    <h2>환영합니다 OOO님!</h2>
+                    <p>회원등급  ${member.grade}</p>
+                    <h2>환영합니다 ${member.name}</h2>
                 </div>
             </div>
             <div class="myInfoMenu">
@@ -48,17 +57,8 @@
                         <div class="menuBox"><i class="fa-solid fa-cart-shopping"></i></div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="cnt1">장바구니</a>
+                        <a href="/course/list" class="cnt1">장바구니</a>
                     </div>
-                </div>
-                <div class="infoMenu">
-                    <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-bookmark"></i></div>
-                    </div>
-                    <div class="infoMenuBody">
-                        <a href="#" class="cnt1">찜 목록</a>
-                    </div>
-
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
@@ -74,7 +74,7 @@
                         <div class="menuBox"><i class="fa-solid fa-headset"></i></div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="noCnt">1:1 문의</a>
+                        <a href="/inquiry/list" class="noCnt">1:1 문의</a>
                     </div>
 
                 </div>
@@ -89,38 +89,41 @@
             <div class="userInfoCont">
                 <div class="userProfile">
                     <div class="radiusProfile2">
-                        <img src="../resources/static/images/memberPage/profileEx.jpg" alt="프로필 이미지">
+                        <c:choose>
+                            <c:when test="${not empty member.file_name}">
+                                <img src="/upload/${member.file_name}" alt="기본 이미지">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="/resources/static/images/notProfile.jpg" alt="기본 이미지">
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="userInfoP">
                     <table class="userTable">
                         <tr>
                             <td class="lfTd">아이디</td>
-                            <td class="rtTd">${dto.id}</td>
-                        </tr>
-                        <tr>
-                            <td class="lfTd">비밀번호</td>
-                            <td class="rtTd">a1234123!</td>
+                            <td class="rtTd">${member.id}</td>
                         </tr>
                         <tr>
                             <td class="lfTd">이름</td>
-                            <td class="rtTd">홍길동</td>
+                            <td class="rtTd">${member.name}</td>
                         </tr>
                         <tr>
                             <td class="lfTd">생일</td>
-                            <td class="rtTd">2005.01.03</td>
+                            <td class="rtTd">${member.birth}</td>
                         </tr>
                         <tr>
                             <td class="lfTd">이메일</td>
-                            <td class="rtTd">test1234@naver.com</td>
+                            <td class="rtTd">${member.email}</td>
                         </tr>
                         <tr>
                             <td class="lfTd">성별</td>
-                            <td class="rtTd">남자</td>
+                            <td class="rtTd">${member.gender}</td>
                         </tr>
                     </table>
                     <div class="tbA">
-                        <a href="#">회원정보수정</a>
+                        <a href="/member/ChangeInfo?id=${member.id}">회원정보수정</a>
                         <a href="#">회원탈퇴</a>
                     </div>
                 </div>

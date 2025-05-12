@@ -70,7 +70,7 @@
             <div class="loginBox2">
                 <div class="profile">
                     <div class="profileImg">
-                            ${member.file_path} ${member.file_name} ${member.file_ext}
+                        <img src="/upload/${member.file_name}" alt="기본 이미지" onerror="this.onerror=null; this.src='/resources/static/images/notProfile.jpg';">
                     </div>
                     <div class="profileInfo">
                         <div class="infoHead">
