@@ -15,6 +15,7 @@ import com.ssanai.jumplearn.vo.PostCommentVO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -101,6 +102,20 @@ public class MemberMyPageController {
 			redirectAttributes.addFlashAttribute("msg", "업로드 실패: " + e.getMessage());
 			return "redirect:/member/ChangeInfo?id=" + dto.getId();
 		}
+	}
+
+
+	// 회원 탈퇴
+	@GetMapping("/delete")
+	public String delete(
+			MemberDTO dto,
+			@RequestParam("id") String id,
+			Model model
+	){
+
+		MemberDTO loginInfo = memberMyPageService.memberMyPageDelete(dto);
+		model.addAttribute("member", loginInfo);
+		return "redirect:/member/mypage";
 	}
 }
 

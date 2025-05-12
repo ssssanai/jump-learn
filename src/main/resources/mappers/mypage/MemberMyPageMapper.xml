@@ -20,7 +20,8 @@
         WHERE id = #{id}
     </update>
     <delete id="memberMyPageDelete">
-        DELETE FROM tbl_member
+        UPDATE tbl_member
+        SET status = 3
         WHERE id = #{id}
     </delete>
 </mapper>

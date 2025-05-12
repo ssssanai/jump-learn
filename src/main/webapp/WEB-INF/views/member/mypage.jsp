@@ -125,7 +125,7 @@
                     </table>
                     <div class="tbA">
                         <a href="/member/ChangeInfo?id=${member.id}">회원정보수정</a>
-                        <a href="#">회원탈퇴</a>
+                        <a href="/member/delete?id=${member.id}">회원탈퇴</a>
                     </div>
                 </div>
             </div>

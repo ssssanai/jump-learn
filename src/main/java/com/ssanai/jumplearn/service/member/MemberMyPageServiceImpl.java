@@ -1,7 +1,6 @@
 package com.ssanai.jumplearn.service.member;
 
 import com.ssanai.jumplearn.dto.MemberDTO;
-import com.ssanai.jumplearn.dto.TeacherDTO;
 import com.ssanai.jumplearn.mapper.member.MemberMyPageMapper;
 import com.ssanai.jumplearn.util.CommonDateUtil;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +29,8 @@ public class MemberMyPageServiceImpl implements MemberMyPageServiceIf {
     }
 
     @Override
-    public int memberMyPageDelete(MemberDTO dto) {
-        int rs = memberMyPageMapper.memberMyPageUpdate(dto);
+    public MemberDTO memberMyPageDelete(MemberDTO memberId) {
+        MemberDTO rs = memberMyPageMapper.memberMyPageDelete(memberId);
         return rs;
     }
 }
