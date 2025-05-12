@@ -19,5 +19,9 @@
         file_ext = #{file_ext}
         WHERE id = #{id}
     </update>
+    <delete id="memberMyPageDelete">
+        DELETE FROM tbl_member
+        WHERE id = #{id}
+    </delete>
 </mapper>
     

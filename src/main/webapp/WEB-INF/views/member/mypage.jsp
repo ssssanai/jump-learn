@@ -5,9 +5,10 @@
   Time: 오후 4:34
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko_KR">
 <head>
     <meta charset="UTF-8">
@@ -91,7 +92,7 @@
                     <div class="radiusProfile2">
                         <c:choose>
                             <c:when test="${not empty member.file_name}">
-                                <img src="/upload/${member.file_name}" alt="기본 이미지">
+                                <img src="../upload/${member.file_name}" alt="기본 이미지">
                             </c:when>
                             <c:otherwise>
                                 <img src="/resources/static/images/notProfile.jpg" alt="기본 이미지">

@@ -28,4 +28,10 @@ public class MemberMyPageServiceImpl implements MemberMyPageServiceIf {
         int rs = memberMyPageMapper.memberMyPageUpdate(dto);
         return rs;
     }
+
+    @Override
+    public int memberMyPageDelete(MemberDTO dto) {
+        int rs = memberMyPageMapper.memberMyPageUpdate(dto);
+        return rs;
+    }
 }
