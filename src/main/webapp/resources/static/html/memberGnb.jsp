@@ -32,6 +32,7 @@
                     <li><a href="#">대입 정보 게시판</a></li>
                     <li><a href="#">대외활동 게시판</a></li>
                     <li><a href="#">뉴스 게시판</a></li>
+                    <li><a href="#">자유게시판</a></li>
                     <li><a href="#" class="lsMenu">공지사항 게시판</a></li>
                 </ul>
             </li>
@@ -63,6 +64,9 @@
                     <li><a href="/member/login">대입 정보 게시판</a></li>
                     <li><a href="/member/login">대외활동 게시판</a></li>
                     <li><a href="/member/login">뉴스 게시판</a></li>
+                    <li>
+                        <a href="/member/login">자유게시판</a>
+                    </li>
                     <li><a href="/member/login" class="lsMenu">공지사항 게시판</a></li>
                 </ul>
             </li>

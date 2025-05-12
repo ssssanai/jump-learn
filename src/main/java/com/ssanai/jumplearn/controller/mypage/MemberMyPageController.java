@@ -41,8 +41,10 @@ public class MemberMyPageController {
 			Model model
 	) {
 		log.info("MyPageController MyPage");
-		// 회원 정보
-		MemberDTO mDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		// 회원 정보 id, status, name, grade
+		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		String member_id = loginInfo.getId();
+		MemberDTO member = mainPageService.getMemberInfo(member_id);
 		// 자유게시판
 
 		// 공지사항
@@ -53,7 +55,11 @@ public class MemberMyPageController {
 
 		// 자료실 게시판
 
-		model.addAttribute("member", mDTO);
+		// 대입정보 게시판
+
+		// 뉴스 게시판
+
+		model.addAttribute("member", member);
 		return "member/mypage";
 	}
 }

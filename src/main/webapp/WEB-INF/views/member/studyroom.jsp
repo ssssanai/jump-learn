@@ -35,10 +35,6 @@
                     <h2>환영합니다 ${member.name}님!</h2>
                 </div>
             </div>
-            <div class="logoutBtn">
-                <a href="#">로그아웃</a>
-                <a href="#">회원탈퇴</a>
-            </div>
             <div class="myInfoMenu">
                 <div class="infoMenu">
                     <div class="infoMenuHead">

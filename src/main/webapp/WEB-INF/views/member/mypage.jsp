@@ -27,16 +27,12 @@
         <div class="myInfo1">
             <div class="myInfoHead1">
                 <div class="radiusProfile">
-                    <img src="../resources/static/images/memberPage/profileEx.jpg" alt="프로필 이미지">
+                    <img src="/resources/static/images/memberPage/profileEx.jpg" alt="프로필 이미지">
                 </div>
                 <div class="myInfop">
                     <p>회원등급  ??</p>
                     <h2>환영합니다 OOO님!</h2>
                 </div>
-            </div>
-            <div class="logoutBtn">
-                <a href="#">로그아웃</a>
-                <a href="#">회원탈퇴</a>
             </div>
             <div class="myInfoMenu">
                 <div class="infoMenu">
@@ -53,7 +49,6 @@
                     </div>
                     <div class="infoMenuBody">
                         <a href="#" class="cnt1">장바구니</a>
-                        <a href="#" class="cnt2">3</a>
                     </div>
                 </div>
                 <div class="infoMenu">
@@ -62,7 +57,6 @@
                     </div>
                     <div class="infoMenuBody">
                         <a href="#" class="cnt1">찜 목록</a>
-                        <a href="#" class="cnt2">10</a>
                     </div>
 
                 </div>
@@ -102,7 +96,7 @@
                     <table class="userTable">
                         <tr>
                             <td class="lfTd">아이디</td>
-                            <td class="rtTd">test1234</td>
+                            <td class="rtTd">${dto.id}</td>
                         </tr>
                         <tr>
                             <td class="lfTd">비밀번호</td>
