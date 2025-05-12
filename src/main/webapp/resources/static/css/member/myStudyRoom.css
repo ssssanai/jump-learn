@@ -167,13 +167,13 @@ ul li {
     background-color: #f1f1f1;
     border-radius: 8px;
 }
-.sideMenu > p {
+.sideMenu > a {
     width:100%; height:40px;
     text-align: center;
     line-height:38px;
     font-size:14px;
 }
-.sideMenu > p:hover {
+.sideMenu > a:hover {
     background-color: #a4b7ff;
     cursor: pointer;
 }
@@ -182,7 +182,7 @@ ul li {
     width:calc(100% - 200px); height:100%;
 }
 #cont1 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 .ht {
@@ -289,11 +289,11 @@ ul li {
     justify-content: center;
 }
 #cont2 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 #cont3 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 .comuNo {
@@ -326,7 +326,7 @@ ul li {
     line-height:33px;
 }
 #cont4 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 .sc1 {
@@ -366,7 +366,7 @@ ul li {
     line-height:33px;
 }
 #cont5 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 /* 달력 */
@@ -412,6 +412,7 @@ ul li {
 }
 .calendarBox th {
     border: none;
+    width: 80px;
     height: 30px;
     padding: 8px;
     font-weight: normal;
@@ -421,6 +422,7 @@ ul li {
 
 .calendarBox td {
     border: none;
+    width: 80px;
     height: 70px;
     padding: 8px;
     text-align: center;
