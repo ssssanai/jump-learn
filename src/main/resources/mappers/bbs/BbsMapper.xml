@@ -19,7 +19,6 @@
                     created_at BETWEEN CONCAT(#{search_date_from},' 00:00:00') AND CONCAT(#{search_date_to},' 23:59:59' )
                     ]]>
                 </if>
-
             </if>
         </where>
     </sql>
@@ -93,13 +92,24 @@
     </select>
 
 
-    <select id="attachedPdf" parameterType="int" resultType="com.ssanai.jumplearn.vo.BbsFileVO">
-        SELECT bbsfile.id, bbsfile.file_path, bbsfile.file_name, bbsfile.file_size, bbsfile.file_ext, bbsfile.related_table, bbsfile.related_id, bbsfile.created_at
-        FROM tbl_bbs_file AS bbsfile
-                 INNER JOIN tbl_edu_file AS edufile
-                            ON bbsfile.id = edufile.file_id
-        WHERE edufile.edu_id = #{id} AND bbsfile.file_ext = ".pdf"
-        ORDER BY bbsfile.id
+    <select id="attachedPdf"
+            parameterType="int"
+            resultType="com.ssanai.jumplearn.vo.BbsFileVO">
+        SELECT
+            b.id            AS id,
+            b.file_path     AS filePath,
+            b.file_name     AS fileName,
+            b.file_size     AS fileSize,
+            b.file_ext      AS fileExt,
+            b.related_table AS relatedTable,
+            b.related_id    AS relatedId,
+            b.created_at    AS createdAt
+        FROM tbl_bbs_file b
+                 INNER JOIN tbl_edu_file e
+                            ON b.id = e.file_id
+        WHERE e.edu_id  = #{id}
+          AND b.file_ext = '.pdf'
+        ORDER BY b.id
     </select>
 
 
