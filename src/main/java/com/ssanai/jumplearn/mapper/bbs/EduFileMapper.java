@@ -9,4 +9,6 @@ import java.util.Map;
 @Mapper
 public interface EduFileMapper {
     public int eduFileUpload(Map<String,Integer> params);
+
+    public int eduFileDelete(int id);
 }
