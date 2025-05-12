@@ -15,7 +15,7 @@
     <link href="/resources/static/css/member/memberChangeInfo.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
 
-    <title>JL - 강사정보수정</title>
+    <title>JL - 회원정보수정</title>
 </head>
 <body>
 <div class="wrap">
@@ -24,51 +24,30 @@
             <img src="/resources/static/images/registLogo.jpg" class="registLogo" alt="홈페이지 로고"/>
         </div>
         <div class="registContent">
-            <form id="registerForm"class="regi_form" action="" method="">
+            <form id="registerForm" class="regi_form" action="/member/ChangeInfo" method="post" enctype="multipart/form-data">
                 <div class="regi_input_box">
                     <p class="regi_tit">아이디</p>
-                    <input type="text" name="id" id="userId" autocomplete="off" class="regi_input2" maxlength="20" readonly>
-                    <input type="hidden" id="idCheck" name="idCheck"  autocomplete="off" value=""/>
+                    <input type="text" name="id" id="userId" autocomplete="off" class="regi_input2" maxlength="20" value="${member.id}" readonly>
+                    <input type="hidden" id="idCheck" name="idCheck"  autocomplete="off"/>
                     <div id="userIdError" class="error"></div>
                 </div>
                 <div class="regi_input_box">
                     <p class="regi_tit">이름</p>
-                    <input id="realName" type="text" name="name" class="regi_input2" maxlength="10" autocomplete="off" maxlength="10" readonly>
+                    <input id="realName" type="text" name="name" class="regi_input2" maxlength="10" autocomplete="off" maxlength="10" value="${member.name}">
                     <div id="realNameError" class="error"></div>
                 </div>
                 <div class="regi_input_box">
                     <p class="regi_tit">생년월일</p>
-                    <input type="date" name="birth" class="regi_input2" id="birthDate" name="birthdate" required min="1950-01-01" readonly>
+                    <input type="date" name="birth" class="regi_input2" id="birthDate" name="birthdate" required min="1950-01-01">
                     <div id="birthDateError" class="error"></div>
                 </div>
-                <div class="regi_input_box1">
+                <div class="regi_input_box">
                     <p class="regi_tit">이메일</p>
-                    <input id="userEmail" class="select_email" type="text" name="email" autocomplete="off" placeholder="ex) textmail01" maxlength="20">
-                    <p class="email_between">@</p>
-                    <select id="select_email1" name="select_email">
-                        <option value="" disabled selected>도메인을 선택하세요</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="hanmail.net">hanmail.net</option>
-                        <option value="hotmail.com">hotmail.com</option>
-                        <option value="nate.com">nate.com</option>
-                        <option value="korea.com">korea.com</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="hanmir.com">hanmir.com</option>
-                        <option value="paran.com">paran.com</option>
-                    </select>
-                    <input type="button" name="" id="emailCheck"  autocomplete="off" class="emailCheck" value="인증">
+                    <input id="userEmail" class="regi_input2" type="text" name="email" autocomplete="off" value="${member.email}" maxlength="20" readonly>
                 </div>
-                <div id="userEmailError" class="error"></div>
-                <div class="regi_input_box1">
-                    <p class="regi_tit">이메일 인증</p>
-                    <input id="userCode" type="text" name="name" class="regi_input1" maxlength="10" autocomplete="off" maxlength="10">
-                    <input type="button" name="emailCheck" id="codeCheck"  autocomplete="off" class="emailCheck" value="확인">
-                    <input type="hidden" id="codeConfirm" value="false" >
-                </div>
-                <div class="error_mail"></div>
                 <div class="profileImage">
                     <p class="regi_tit">프로필 이미지</p>
-                    <input class="regi_input2" type="file" name="">
+                    <input class="regi_input2" type="file" name="file">
                 </div>
                 <input id="checkKey" class="regi_btn1" type="submit" name="regi_btn" value="회원정보 수정하기">
                 <input id="checkKey" class="regi_btn2" type="reset" name="regi_btn" value="취소">
