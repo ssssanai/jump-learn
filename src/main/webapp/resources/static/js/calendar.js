@@ -1,5 +1,3 @@
-
-
 //이번 달 구하기
 month = document.getElementById("month");
 

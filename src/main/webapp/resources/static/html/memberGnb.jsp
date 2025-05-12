@@ -16,8 +16,8 @@
             <li>
                 <a href="/course/list">강의</a>
             </li>
-            <li><a href="/mypage/studyroom">나의 학습방</a></li>
-            <li><a href="#">마이페이지</a></li>
+            <li><a href="/studyroom/enroll">나의 학습방</a></li>
+            <li><a href="/mypage">마이페이지</a></li>
             <li>
                 <a href="/inquiry/list">문의하기</a>
                 <ul class="submenu">
