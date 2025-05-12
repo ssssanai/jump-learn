@@ -18,6 +18,7 @@
     <title>JL - 선생님 정보</title>
 </head>
 <body>
+
 <!--모달 팝업-->
 <div id="modal">
     <div class="modalPopup">

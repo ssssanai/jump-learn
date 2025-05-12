@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="tbA">
-                        <a href="#">강사정보수정</a>
+                        <a href="/teacher/ChangeInfo?id=${dto.id}">강사정보수정</a>
                         <a href="#">비밀번호변경</a>
                     </div>
                 </div>
@@ -96,22 +96,25 @@
                         <div class="tbScore">평점</div>
                     </div>
                     <div class="tbB1">
-                        <div class="tbImg">
-                            <img src="/resources/static/images/teacherPage/profileEx.jpg" alt="썸네일">
-                        </div>
-                        <div class="tbTit"><a href="#">가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창</a></div>
-                        <div class="tbDate">2025.01.03</div>
-                        <div class="tbUserCnt"><a href="#">24명</a></div>
-                        <div class="tbScore">4.5</div>
-                    </div>
-                    <div class="tbB1">
-                        <div class="tbImg">
-                            <img src="/resources/static/images/teacherPage/profileEx.jpg" alt="썸네일">
-                        </div>
-                        <div class="tbTit"><a href="#">가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창</a></div>
-                        <div class="tbDate">2025.01.03</div>
-                        <div class="tbUserCnt"><a href="#">24명</a></div>
-                        <div class="tbScore">4.5</div>
+                        <c:choose>
+                            <c:when test="${not empty dtoClass}">
+                                <c:forEach var="list" items="${dtoClass}" varStatus="loop">
+                                    <div class="tbImg">
+                                        <img src="/upload/${list.file_name}" alt="기본 이미지" onerror="this.onerror=null;  this.src='/resources/static/images/img.png';">
+                                    </div>
+                                    <div class="tbTit"><a href="#">${list.title}</a></div>
+                                    <div class="tbDate">${list.created_at}</div>
+                                    <div class="tbUserCnt"><a href="/teacher/studentList?class_id=${list.class_id}">${list.pay_count}</a></div>
+                                    <div class="tbScore">${list.feedback_avg}</div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div>
+                                    강좌 정보가 없습니다.
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
                 </div>
             </div>
