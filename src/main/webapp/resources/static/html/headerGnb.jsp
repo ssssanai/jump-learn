@@ -23,12 +23,7 @@
     <li>
       <a href="#">문의하기</a>
       <ul class="submenu">
-        <li>
-          <a href="#">1:1 문의</a>
-        </li>
-        <li>
-          <a href="#" class="lsMenu">자주묻는질문</a>
-        </li>
+        <li><a href="#" class="lsMenu">1:1 문의</a></li>
       </ul>
     </li>
     <li>

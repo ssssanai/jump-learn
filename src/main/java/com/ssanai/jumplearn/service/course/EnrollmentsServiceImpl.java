@@ -4,6 +4,8 @@ import com.ssanai.jumplearn.dto.EnrollmentsDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.mapper.course.EnrollmentsMapper;
+import com.ssanai.jumplearn.vo.EnrollmentsVO;
+import com.ssanai.jumplearn.vo.PayVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -19,14 +21,14 @@ public class EnrollmentsServiceImpl implements EnrollmentsServiceIf{
 	private final EnrollmentsMapper enrollmentsMapper;
 
 	@Override
-	public int getTotalCount(PageRequestDTO dto) {
-		return enrollmentsMapper.getTotalCount(dto);
+	public int getTotalCount(PageRequestDTO dto, String id) {
+		return enrollmentsMapper.getTotalCount(dto, id);
 	}
 
 	@Override
-	public PageResponseDTO<EnrollmentsDTO> enrollList(PageRequestDTO dto) {
-		int totalCount = getTotalCount(dto);
-		List<EnrollmentsDTO> list = enrollmentsMapper.enrollList(dto);
+	public PageResponseDTO<EnrollmentsDTO> enrollList(PageRequestDTO dto, String id) {
+		int totalCount = getTotalCount(dto, id);
+		List<EnrollmentsDTO> list = enrollmentsMapper.enrollList(dto, id);
 		PageResponseDTO<EnrollmentsDTO> pageResponseDTO =
 				PageResponseDTO.<EnrollmentsDTO>withAll()
 						.reqDTO(dto)
@@ -39,6 +41,21 @@ public class EnrollmentsServiceImpl implements EnrollmentsServiceIf{
 
 	@Override
 	public EnrollmentsDTO getEnrollment(int id) {
-		return null;
+		return enrollmentsMapper.getEnrollment(id);
+	}
+
+	@Override
+	public List<EnrollmentsDTO> getScoreList(String member_id) {
+		return enrollmentsMapper.getScoreList(member_id);
+	}
+
+	@Override
+	public int createEnrollment(PayVO vo) {
+		return enrollmentsMapper.createEnrollment(vo);
+	}
+
+	@Override
+	public List<EnrollmentsVO> getList(String member_id) {
+		return enrollmentsMapper.getList(member_id);
 	}
 }

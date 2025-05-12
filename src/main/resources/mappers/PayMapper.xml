@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssanai.jumplearn.mapper.pay.PayMapper">
+    <insert id="createPay">
+        insert into tbl_pay (class_id, member_id, cost, created_at, canceled_at, complete)
+        values (#{dto.class_id}, #{dto.member_id}, #{dto.price}, now(), null, 0)
+    </insert>
+
+    <select id="getPayList" resultType="com.ssanai.jumplearn.dto.EnrollmentsDTO">
+        select
+            te.id as 'id', te.member_id as 'member_id', te.pay_id as 'pay_id', te.class_id as 'class_id',
+            te.progress as 'progress', te.review as 'review', te.feedback_score as 'feedback_score',
+            tc.title as 'class_title', tc.category as 'class_category', tc.introduce AS 'class_introduce',
+            tc.file_path AS 'class_file_path', tc.file_name AS 'class_file_name', tc.file_ext AS 'class_file_ext',
+            tp.created_at as 'pay_created_at', tp.canceled_at AS 'pay_canceled_at', tp.cost AS 'pay_cost', tp.complete AS 'pay_complete'
+        from tbl_enrollments as te
+                 inner join tbl_class as tc on te.class_id = tc.id
+                 inner join tbl_pay as tp on te.pay_id = tp.id
+        where te.member_id = #{member_id}
+    </select>
+
+    <update id="confirmPurchase">
+        update tbl_pay
+        set complete = 1
+        where id = #{id}
+    </update>
+
+    <update id="refund">
+        update tbl_pay
+        set canceled_at = now(), complete = 0
+        where id = #{id}
+    </update>
+
+    <select id="getList" resultType="com.ssanai.jumplearn.vo.PayVO">
+        select *
+        from tbl_pay
+        where member_id = #{member_id};
+    </select>
+
+    <select id="getPayIdListFromEnrollDontHave">
+        SELECT tp.id
+        FROM tbl_pay AS tp
+        WHERE member_id=#{member_id} AND tp.id NOT IN (
+            SELECT te.pay_id FROM tbl_enrollments AS te WHERE te.pay_id = tp.id
+        );
+    </select>
+</mapper>
+ 

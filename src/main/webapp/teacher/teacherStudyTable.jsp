@@ -20,7 +20,7 @@
 <div id="noticeModal">
     <div class="modalwrap">
         <div class="modalBox">
-            <h2>중간고사 점수 입력</h2>
+            <h2>공지사항 추가</h2>
             <form method="post" action="">
                 <textarea class="scoreInput" type="text" placeholder="공지사항"></textarea>
                 <input class="submitBtn" type="submit" value="입력하기">
@@ -51,7 +51,9 @@
                         <div class="tbNotice">공지사항</div>
                     </div>
                     <div class="tbB1">
-                        <div class="tbTeacherId">teacher001</div>
+                        <div class="tbTeacherId">
+                            <p>teacher001</p>
+                        </div>
                         <div class="tbTitle">
                             <a href="#">강의제목입니다.</a>
                         </div>

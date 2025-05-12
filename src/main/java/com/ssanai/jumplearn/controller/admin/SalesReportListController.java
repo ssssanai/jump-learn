@@ -87,6 +87,7 @@ public class SalesReportListController {
         model.addAttribute("koreanSales", koreanSales);
         model.addAttribute("englishSales", englishSales);
         model.addAttribute("mathSales", mathSales);
+        model.addAttribute("month", month);
         return "admin/categoryChart";
     }
 }

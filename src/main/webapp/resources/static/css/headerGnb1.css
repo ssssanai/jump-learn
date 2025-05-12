@@ -23,7 +23,7 @@ ul li {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    width:80%;
+    width:70%;
     gap:15px;
 }
 .logo {
