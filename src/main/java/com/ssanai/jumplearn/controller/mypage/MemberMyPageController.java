@@ -115,7 +115,7 @@ public class MemberMyPageController {
 
 		MemberDTO loginInfo = memberMyPageService.memberMyPageDelete(dto);
 		model.addAttribute("member", loginInfo);
-		return "redirect:/member/mypage";
+		return "redirect:/main";
 	}
 }
 
