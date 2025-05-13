@@ -12,23 +12,33 @@
         <div id="month"></div>
         <div id="calendar"></div>
     </div>
-    <button><a href="/plan/create/${date}">학습 계획 등록</a></button>
+    <div class="hb">
+        <a href="/plan/create/${date}" class="writeBtn">학습 계획 등록</a>
+    </div>
     <c:choose>
         <c:when test="${PlanList.size() > 0}">
             <c:forEach items="${PlanList}" var="p">
-                <p>${p.id}</p>
-                <p>${p.member_id}</p>
-                <p>${p.title}</p>
-                <p>${p.description}</p>
-                <p>${p.study_date}</p>
-                <p>${p.created_at}</p>
-                <p>${p.updated_at}</p>
-                <button><a href="/plan/update/${p.id}/${date}">학습 계획 수정</a></button>
-                <button><a class="delete" href="/plan/delete/${p.id}/${date}">학습 계획 삭제</a></button>
+                <div class="planBox">
+                    <div class="pBHead">
+                        <p>제목 : ${p.title}</p>
+                    </div>
+                    <div class="pBBody">
+                        <p>${p.description}</p>
+                    </div>
+                    <div class="pBFooter">
+                        <p>작성일 : ${p.study_date}</p>
+                        <p>생성일 : ${p.created_at}</p>
+                        <p>수정일 : ${p.updated_at}</p>
+                    </div>
+                    <div class="pBBtn">
+                        <a href="/plan/update/${p.id}/${date}">학습 계획 수정</a>
+                        <a class="delete" href="/plan/delete/${p.id}/${date}">학습 계획 삭제</a>
+                    </div>
+                </div>
             </c:forEach>
         </c:when>
         <c:otherwise>
-            등록된 계획이 없습니다.
+            <p class="nullListContent">등록된 계획이 없습니다.</p>
         </c:otherwise>
     </c:choose>
 </div>

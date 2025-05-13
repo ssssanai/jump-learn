@@ -24,7 +24,7 @@
     </form>
     <div class="myStudyList1">
         <p class="studyNo">번호</p>
-        <p class="studyCate">제목</p>
+        <p class="studyTit">제목</p>
         <p class="studyTit1">내용</p>
         <p class="studyTeach">좋아요</p>
         <p class="studyTeach">조회수</p>
@@ -35,8 +35,8 @@
             <c:forEach items="${PostDTOList.dtoList}" var="dto">
                 <div class="myStudyList2">
                     <p class="studyNo">${dto.id}</p>
-                    <p class="studyCate">${dto.title}</p>
-                    <a href="#" class="studyTit">${dto.content}</a>
+                    <a href="#" class="studyTit">${dto.title}</a>
+                    <p class="studyTit1">${dto.content}</p>
                     <p class="studyTeach">${dto.like_count}</p>
                     <p class="studyTeach">${dto.view_count}</p>
                     <p class="studyRegDate">${dto.created_at.toString().split("T")[0]}&nbsp;${dto.created_at.toString().split("T")[1]}</p>
