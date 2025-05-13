@@ -112,16 +112,19 @@
                 <div class="boardTit">
                     <h2>수강중인 학생</h2>
                 </div>
+                <div class="writeList">
                     <c:choose>
                         <c:when test="${not empty dtoList}">
-                            <div class="tbH1">
-                                <div class="tbUserId">학생 ID</div>
-                                <div class="tbMidTest">중간고사</div>
-                                <div class="tbLastTest">기말고사</div>
-                                <div class="tbEndTest">총합 점수</div>
-                                <div class="tbRegDate">수강시작일</div>
-                                <div class="tbRateing">학생평가</div>
-                            </div>
+                            <table class="wlHeader">
+                                <tr>
+                                    <th class="tbImg1"><p>학생ID</p></th>
+                                    <th class="tbTit"><p>중간고사</p></th>
+                                    <th class="tbDate"><p>기말고사</p></th>
+                                    <th class="tbUserCnt"><p>총합 점수</p></th>
+                                    <th class="tbScore"><p>수강시작일</p></th>
+                                    <th class="tbScore"><p>학생평가</p></th>
+                                </tr>
+                            </table>
                             <c:forEach var="list" items="${dtoList}" varStatus="loop">
                                 <div class="boardLine1">
                                     <div class="tbB1">

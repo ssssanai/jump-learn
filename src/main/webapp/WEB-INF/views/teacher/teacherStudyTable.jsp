@@ -41,80 +41,81 @@
                     <h2>강의표</h2>
                 </div>
                 <div class="boardLine1">
-                    <div class="tbH1">
-                        <div class="tbTitle">강의 순서</div>
-                        <div class="tbMediaIn">강의 영상(내부)</div>
-                        <div class="tbMediaOut">강의 영상(외부)</div>
-                        <div class="tbStudyData">강의 자료</div>
-                        <div class="tbCreateDate">생성일자</div>
-                        <div class="tbModifyDate">수정일자</div>
-                        <div class="tbNotice">공지사항</div>
-                    </div>
-                </div>
-                    <div class="tbB1">
-                    <c:choose>
-                        <c:when test="${not empty dtoList}">
-                            <c:forEach var="list" items="${dtoList}" varStatus="loop">
-                                <div class="tbTeacherId">
-                                    <p>${list.video_order}</p>
+                    <table class="tbH1">
+                        <tr>
+                            <th class="tbTeacherId">강의 순서</th>
+                            <th class="tbTitle">강의 제목</th>
+                            <th class="tbMediaIn">강의 영상(내부)</th>
+                            <th class="tbMediaOut">강의 영상(외부)</th>
+                            <th class="tbStudyData">강의 자료</th>
+                            <th class="tbCreateDate">생성일자</th>
+                            <th class="tbModifyDate">수정일자</th>
+                            <th class="tbNotice">공지사항</th>
+                        </tr>
+                    </table>
+                    <table class="tbB1">
+                        <c:choose>
+                            <c:when test="${not empty dtoList}">
+                                <c:forEach var="list" items="${dtoList}" varStatus="loop">
+                                    <tr>
+                                        <td class="tbTeacherId"><p>${list.video_order}</p></td>
+                                        <td class="tbTitle"><p>${list.title}<p></td>
+                                        <td class="tbMediaIn">
+                                            <c:choose>
+                                                <c:when test="${not empty list.video_name}">
+                                                    <a href="/upload/${list.video_name}" target="_blank">${list.video_name}</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    X
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td class="tbMediaOut">
+                                            <c:choose>
+                                                <c:when test="${not empty list.video_url}">
+                                                    <a href="${list.video_url}" target="_blank">외부 영상</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    X
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td class="tbStudyData">
+                                            <c:choose>
+                                                <c:when test="${not empty list.data_name}">
+                                                    <a href="/upload/${list.data_name}" target="_blank">${list.data_name}</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    X
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td class="tbCreateDate">
+                                            <p>${list.created_at}</p>
+                                        </td>
+                                        <td class="tbModifyDate">
+                                            <p>${list.updated_at}</p>
+                                        </td>
+                                        <td class="tbNotice">
+                                            <c:choose>
+                                                <c:when test="${not empty list.notice}">
+                                                    <a href="#" onclick="notice_view_window('${list.notice}')">확인하기</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="#" onclick="notice_add_window('${list.id}')">추가하기</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div>
+                                    등록된 강의가 없습니다.
                                 </div>
-                                <div class="tbTitle">
-                                    <p>${list.title}<p>
-                                </div>
-                                <div class="tbMediaIn">
-                                    <c:choose>
-                                        <c:when test="${not empty list.video_name}">
-                                            <a href="/upload/${list.video_name}" target="_blank">${list.video_name}</a>
-                                        </c:when>
-                                        <c:otherwise>
-                                            X
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                                <div class="tbMediaOut">
-                                    <c:choose>
-                                        <c:when test="${not empty list.video_url}">
-                                            <a href="${list.video_url}" target="_blank">외부 영상</a>
-                                        </c:when>
-                                        <c:otherwise>
-                                            X
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                                <div class="tbStudyData">
-                                    <c:choose>
-                                        <c:when test="${not empty list.data_name}">
-                                            <a href="/upload/${list.data_name}" target="_blank">${list.data_name}</a>
-                                        </c:when>
-                                        <c:otherwise>
-                                            X
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                                <div class="tbCreateDate">
-                                    <p>${list.created_at}</p>
-                                </div>
-                                <div class="tbModifyDate">
-                                    <p>${list.updated_at}</p>
-                                </div>
-                                <div class="tbNotice">
-                                    <c:choose>
-                                        <c:when test="${not empty list.notice}">
-                                            <a href="#" onclick="notice_view_window('${list.notice}')">확인하기</a>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <a href="#" onclick="notice_add_window('${list.id}')">추가하기</a>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <div>
-                                등록된 강의가 없습니다.
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                    </table>
                 </div>
             </div>
         </div>
