@@ -41,14 +41,14 @@ ul li {
     margin-right: 1%;
 }
 .myInfo1 {
-    width:100%; height:240px;
+    width:100%; height:180px;
     background-color: #f1f1f1;
     border-radius: 8px;
     margin-bottom: 15px;
 }
 .myInfoHead1 {
     float: left;
-    width:100%; height:110px;
+    width:100%; height:80px;
     padding:5px 0;
 }
 .myInfop {
@@ -58,7 +58,7 @@ ul li {
 }
 .myInfop > p {
     display: block;
-    width:100%; height:50px;
+    width:100%; height:40px;
     line-height:50px;
     font-size:16px;
     overflow:hidden;
@@ -69,7 +69,7 @@ ul li {
     display: block;
     width:100%; height:50px;
     line-height:30px;
-    font-size:19px;
+    font-size:17px;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
@@ -82,27 +82,11 @@ ul li {
     gap:15px;
     justify-content: center;
 }
-.logoutBtn > a {
-    display: block;
-    width:100px;
-    height:100%;
-    background-color: #d6d6d6b3;
-    border: 0.5px solid #a0a0a0b3;
-    color:#838383;
-    text-align: center;
-    line-height:19px;
-    font-size:12px;
-    font-weight:100;
-    border-radius: 2px;
 
-}
-.logoutBtn > a:hover {
-    background-color: #bbbbbbb3;
-}
 .myInfoMenu {
     float: left;
     display: flex;
-    width:100%; height:calc(100% - 140px);
+    width:100%; height:calc(100% - 80px);
     gap: 10px;
     padding: 10px 10px 0px 10px;
     justify-content: center;
@@ -117,10 +101,9 @@ ul li {
     width:100%; height:60px;
 }
 .menuBox {
-    width:55px; height:55px;
+    width:45px; height:45px;
     text-align: center;
     font-size: 15px;
-    background-color: none;
     border: 0.5px solid #bbbbbbb3;
     border-radius: 70%;
     display: flex;
@@ -167,13 +150,13 @@ ul li {
     background-color: #f1f1f1;
     border-radius: 8px;
 }
-.sideMenu > p {
+.sideMenu > a {
     width:100%; height:40px;
     text-align: center;
     line-height:38px;
     font-size:14px;
 }
-.sideMenu > p:hover {
+.sideMenu > a:hover {
     background-color: #a4b7ff;
     cursor: pointer;
 }
@@ -182,7 +165,7 @@ ul li {
     width:calc(100% - 200px); height:100%;
 }
 #cont1 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 .ht {
@@ -289,11 +272,11 @@ ul li {
     justify-content: center;
 }
 #cont2 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 #cont3 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 .comuNo {
@@ -326,7 +309,7 @@ ul li {
     line-height:33px;
 }
 #cont4 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 .sc1 {
@@ -366,7 +349,7 @@ ul li {
     line-height:33px;
 }
 #cont5 {
-    display:none;
+    /*display:none;*/
     width:100%; height:450px;
 }
 /* 달력 */
@@ -412,6 +395,7 @@ ul li {
 }
 .calendarBox th {
     border: none;
+    width: 80px;
     height: 30px;
     padding: 8px;
     font-weight: normal;
@@ -421,6 +405,7 @@ ul li {
 
 .calendarBox td {
     border: none;
+    width: 80px;
     height: 70px;
     padding: 8px;
     text-align: center;

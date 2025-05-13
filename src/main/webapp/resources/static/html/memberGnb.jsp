@@ -16,8 +16,8 @@
             <li>
                 <a href="/course/list">강의</a>
             </li>
-            <li><a href="/mypage/studyroom">나의 학습방</a></li>
-            <li><a href="#">마이페이지</a></li>
+            <li><a href="/studyroom/enroll">나의 학습방</a></li>
+            <li><a href="/member/mypage">마이페이지</a></li>
             <li>
                 <a href="/inquiry/list">문의하기</a>
                 <ul class="submenu">
@@ -32,6 +32,7 @@
                     <li><a href="#">대입 정보 게시판</a></li>
                     <li><a href="#">대외활동 게시판</a></li>
                     <li><a href="#">뉴스 게시판</a></li>
+                    <li><a href="#">자유게시판</a></li>
                     <li><a href="#" class="lsMenu">공지사항 게시판</a></li>
                 </ul>
             </li>
@@ -63,6 +64,9 @@
                     <li><a href="/member/login">대입 정보 게시판</a></li>
                     <li><a href="/member/login">대외활동 게시판</a></li>
                     <li><a href="/member/login">뉴스 게시판</a></li>
+                    <li>
+                        <a href="/member/login">자유게시판</a>
+                    </li>
                     <li><a href="/member/login" class="lsMenu">공지사항 게시판</a></li>
                 </ul>
             </li>

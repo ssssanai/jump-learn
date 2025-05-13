@@ -1,21 +1,12 @@
 package com.ssanai.jumplearn.mapper;
 
 
-import com.ssanai.jumplearn.dto.BbsFileDTO;
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.mapper.BbsMapper;
-import com.ssanai.jumplearn.vo.BbsDefaultVO;
-import com.ssanai.jumplearn.vo.BbsFileVO;
-import lombok.RequiredArgsConstructor;
+import com.ssanai.jumplearn.mapper.bbs.BbsMapper;
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.List;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)
@@ -122,4 +113,10 @@ public class BbsTests {
 //
 //        files.forEach(f -> log.info("file VO => {}",f));
 //    }
+//
+//    @Test
+//    public void testViewCount(){
+//        int result = bbsMapper.viewCount(1);
+//    }
+
 }

@@ -10,93 +10,76 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html lang="ko_KR">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/resources/static/css/community/edu/eduEditPage.css" rel="stylesheet" type="text/css">
-    <link href="/resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
-    <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
-    <title>검색 결과 리스트 페이지</title>
+    <link href="/resources/static/css/community/edu/eduWritePage.css" rel="stylesheet" type="text/css">
+    <title>JL - 게시글 작성</title>
+    <script src="https://kit.fontawesome.com/2d74121aef.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<%--고정 헤더 파일--%>
-<%@include file="../../../resources/static/html/headerGnb.jsp"%>
+<div class="header">
+        <img src="/resources/static/images/registLogo2.svg" alt="로고">
+        <p>커뮤니티 게시물 작성</p>
+</div>
 <div class="wrap">
-    <div class="aside">
-        <div class="profile">
-            <div class="myInfo">
-                <p>회원등급  ??</p>
-                <h2>환영합니다 OOO님!</h2>
+    <form id="frmWrite" name="frmWrite" action="<c:url value='/edu/writePage'/>" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" id="id" value="${dto.id}" />
+
+        <div class="boardTitle">
+            <p>제목</p>
+            <input type="text" name="title" id="title" value="${dto.title}" placeholder="글 제목을 입력해주세요.">
+            <div id="titleError" class="error"></div>
+        </div>
+        <div class="boardCont">
+            <p>내용</p>
+            <textarea name="content" id="content"  placeholder="content값" >${dto.content}</textarea>
+            <div id="contentError" class="error"></div>
+        </div>
+        <div class="">
+            <c:if test="${fileDTO != null}" >
+                <div>
+                    <div style="margin:10px;">
+                        <c:forEach var="file" items="${fileDTO}" >
+                            <c:if test="${fn:contains(fn:toLowerCase(file.fileExt), '.jpg') or fn:contains(fn:toLowerCase(file.fileExt), '.jpeg')}">
+                                <img src="${file.filePath}/${file.fileName}${file.fileExt}" alt="${file.fileName}" />
+                                <input type="checkbox" name="${file.id}" checked>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+            </c:if>
+        </div>
+        <div class="">
+            <c:if test="${fileDTO != null}" >
+                <div>
+                    <div style="margin:10px;">
+                        <c:forEach var="file" items="${fileDTO}" >
+                            <c:if test="${fn:contains(fn:toLowerCase(file.fileExt), '.pdf')}">
+                                ${file.fileName}${file.fileExt}
+                                <input type="checkbox" name="${file.id}" checked> 삭제
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+            </c:if>
+        </div>
+        <div class="">
+            <div style="margin:10px; clear:both;">
+                <span>이미지 첨부</span>
+                <input type="file" id="files" name="files" multiple >
+                <div id="contentError1" class="error"></div>
             </div>
-            <div class="logoutBtn">
-                <a href="#">로그아웃</a>
-                <a href="#">회원탈퇴</a>
-            </div>
         </div>
-        <div class="sideMenu">
-            <h2 class="sideMenuTitle">커뮤니티</h2>
-            <a href="#">자유게시판</a>
-            <a href="#" class="select">교육 정보 게시판</a>
-            <a href="#">대입 정보 게시판</a>
-            <a href="#">대외활동 게시판</a>
-            <a href="#">자료실 게시판</a>
-            <a href="#">뉴스 게시판</a>
+        <div class="formBtn">
+            <input class="endBtn" type="submit" value="등록">
+            <input class="endBtn" type="reset"  value="취소">
+            <input class="endBtn" type="button" value="목록">
+            <input type="hidden" name="admin_id" value="${adto.id}" />
         </div>
-    </div>
-    <div class="main">
-        <div class="writeTit">
-            <h2>교육 정보 게시판</h2>
-            <p>회원간 자유로운 주제로 대화를 나누는 게시판입니다.</p>
-        </div>
-        <div class="formBox">
-            <form method="post" action="/edu/editPage" enctype="multipart/form-data">
-                <div class="boardTitle">
-                    <input type="text" name="title" id="title" value="${dto.title}"/>
-                </div>
-                <div class="formHead">
-                    <div class="boardId">
-                        <p>번호 : ${dto.id}</p>
-                    </div>
-                    <div class="boardUser">
-                        <p>${dto.admin_id}</p>
-                    </div>
-                    <div class="boardRegDate">
-                        <p>${dto.created_at}</p>
-                    </div>
-                    <div class="boardViewCnt">
-                        <p>조회수 ${dto.view_count}회</p>
-                    </div>
-                </div>
-                <div class="boardCont">
-                    <textarea name="content" id="content" >${dto.content}</textarea>
-                </div>
-                <div class="boardFile">
-                    <c:forEach var="file" items="${pdfFileDTO}" >
-                        <a href="${file.file_path}" target="_blank">${file.file_name}${file.file_ext}</a>
-                    </c:forEach>
-                </div>
-                <div class="boardImage">
-                    <c:forEach var="file" items="${fileDTO}" >
-                        <c:if test="${fn:contains(file.file_ext, '.jpg') or fn:contains(file.file_ext, '.jpeg')}">
-                            <img src="${file.file_path}" alt="${file.file_name}"/>
-                            <br>
-                        </c:if>
-                    </c:forEach>
-                </div>
-                <div class="boardImg">
-                    <p>이미지 첨부</p>
-                    <input type="file" id="file">
-                    <div id="contentError1" class="error"></div>
-                </div>
-                <div class="formBtn">
-                    <input class="endBtn" type="submit" value="수정완료">
-                    <input class="endBtn" type="reset"  value="취소">
-                    <input class="endBtn" type="button" value="목록">
-                </div>
-            </form>
-        </div>
-    </div>
+    </form>
 </div>
 <script>
     const writeForm = document.getElementById('frmWrite');
