@@ -45,7 +45,7 @@
         </c:when>
         <c:otherwise>
             <div class="myStudyList2">
-                수강중인 강좌가 없습니다.
+                내가 작성한 글이 없습니다.
             </div>
         </c:otherwise>
     </c:choose>
