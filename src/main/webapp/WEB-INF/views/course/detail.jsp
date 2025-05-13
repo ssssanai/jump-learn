@@ -80,16 +80,14 @@
                         ${classDetailDTO.teacher_introduce3}</p>
                 </div>
                 <div class="tBtn">
-                    <a htef="#">수강후기</a>
-                    <a htef="#">강사 정보 </a>
-                    <a htef="#">질문하기</a>
+                    <a htef="#">강좌 공지사항</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="main">
         <div class="studyBox3">
-            <h2>커리큘럼</h2>
+            <h2>강좌</h2>
             <div class="reviewList1">
                 <p class="studyNo1">강좌 수</p>
                 <p class="studyTit1">제목</p>

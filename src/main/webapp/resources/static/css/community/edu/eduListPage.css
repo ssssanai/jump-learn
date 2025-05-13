@@ -171,6 +171,7 @@ ul li {
             float: left;
             display: flex;
             align-items: center;
+            justify-content: end;
             gap:10px;
             width:50%; height:100%;
             padding-right: 20px;
@@ -263,7 +264,7 @@ ul li {
             }
             .listTit {
                 float: left;
-                width:40%; height:40px;
+                width: 49%; height:40px;
                 text-align: center;
                 line-height:38px;
                 font-size:14px;

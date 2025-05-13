@@ -33,7 +33,7 @@
         </c:when>
         <c:otherwise>
             <div class="myStudyList2">
-                수강한 강좌가 없습니다.
+                성적표가 존재하지 않습니다.
             </div>
         </c:otherwise>
     </c:choose>
