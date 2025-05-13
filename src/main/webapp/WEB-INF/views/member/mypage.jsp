@@ -92,7 +92,7 @@
                     <div class="radiusProfile2">
                         <c:choose>
                             <c:when test="${not empty member.file_name}">
-                                <img src="../upload/${member.file_name}" alt="기본 이미지">
+                                <img src="/upload/${member.file_name}" alt="기본 이미지">
                             </c:when>
                             <c:otherwise>
                                 <img src="/resources/static/images/notProfile.jpg" alt="기본 이미지">
