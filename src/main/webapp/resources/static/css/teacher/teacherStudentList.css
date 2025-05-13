@@ -309,7 +309,79 @@ body {
             background-color: #607ffc;
             border:2px solid #607ffc;
         }
-
+.writeList {
+    width:100%; height:400px;
+    padding: 0 15px;
+    margin-bottom: 10px;
+}
+.wlHeader {
+    width:100%; height:40px;
+    border-bottom: 1px solid #ddd;
+    background: #fafafa;
+    color: #434a59;
+    border-collapse:collapse;
+    font-size:13px;
+}
+.wlBody {
+    width:100%;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    color: #434a59;
+    border-collapse:collapse;
+    font-size:13px;
+}
+.wlBody tr:nth-child(odd) {
+    background-color: #e1e7ff;
+}
+.tbImg1 {
+    height:30px;
+    text-align: center;
+    line-height:38px;
+}
+.tbImg {
+    height:70px;
+    text-align: center;
+    line-height:38px;
+    font-size:14px;
+}
+.tbImg > img {
+    width:60px; height:60px;
+    border: 4px solid #d6d6d6b3;
+    border-radius: 15%;
+}
+.tbTit {
+    width: 40%;
+}
+.tbTit > a {
+    color:#3b3a3a;
+    width:400px; height:100%;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 auto;
+}
+.tbTit > a:hover {
+    color:#607ffc;
+}
+.tbDate {
+    width:20%;
+    text-align: center;
+}
+.tbUserCnt {
+    width:10%;
+    text-align: center;
+}
+.tbUserCnt > a:hover {
+    color:#607ffc;
+}
+.tbScore {
+    width:10%;
+    text-align: center;
+}
+.tbScore > a:hover {
+    color:#607ffc;
+}
 .paging {
     display: flex;
     align-items: center;

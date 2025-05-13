@@ -38,6 +38,7 @@
             <a href="#">대외활동 게시판</a>
             <a href="#">자료실 게시판</a>
             <a href="#">뉴스 게시판</a>
+            <a href="#">공지사항</a>
         </div>
     </div>
     <div class="main">

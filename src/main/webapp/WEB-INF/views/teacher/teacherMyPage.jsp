@@ -87,25 +87,31 @@
                 <div class="boardTit">
                     <h2>강좌 목록</h2>
                 </div>
-                <div class="boardLine1">
-                    <div class="tbH1">
-                        <div class="tbImg"><p>사진</p></div>
-                        <div class="tbTit">제목</div>
-                        <div class="tbDate">개설날짜</div>
-                        <div class="tbUserCnt">학생 수</div>
-                        <div class="tbScore">평점</div>
-                    </div>
-                    <div class="tbB1">
+                <div class="writeList">
+                    <table class="wlHeader">
+                        <tr>
+                            <th class="tbImg1"><p>사진</p></th>
+                            <th class="tbTit"><p>제목</p></th>
+                            <th class="tbDate"><p>개설날짜</p></th>
+                            <th class="tbUserCnt"><p>학생 수</p></th>
+                            <th class="tbScore"><p>평점</p></th>
+                            <th class="tbScore"><p>QnA 답변</p></th>
+                        </tr>
+                    </table>
+                    <table class="wlBody">
                         <c:choose>
                             <c:when test="${not empty dtoClass}">
                                 <c:forEach var="list" items="${dtoClass}" varStatus="loop">
-                                    <div class="tbImg">
-                                        <img src="/upload/${list.file_name}" alt="기본 이미지" onerror="this.onerror=null;  this.src='/resources/static/images/img.png';">
-                                    </div>
-                                    <div class="tbTit"><a href="/teacher/class_detail?class_id=${list.class_id}">${list.title}</a></div>
-                                    <div class="tbDate">${list.created_at}</div>
-                                    <div class="tbUserCnt"><a href="/teacher/studentList?class_id=${list.class_id}">${list.pay_count}</a></div>
-                                    <div class="tbScore">${list.feedback_avg}</div>
+                                    <tr>
+                                        <td class="tbImg">
+                                            <img src="/upload/${list.file_name}" alt="기본 이미지" onerror="this.onerror=null;  this.src='/resources/static/images/img.png';">
+                                        </td>
+                                        <td class="tbTit"><a href="/teacher/class_detail?class_id=${list.class_id}">${list.title}</a></td>
+                                        <td class="tbDate">${list.created_at}</td>
+                                        <td class="tbUserCnt"><a href="/teacher/studentList?class_id=${list.class_id}">${list.pay_count}</a></td>
+                                        <td class="tbScore">${list.feedback_avg}</td>
+                                        <td class="tbScore"><a href="#">확인하기</a></td>
+                                    </tr>
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
@@ -114,8 +120,7 @@
                                 </div>
                             </c:otherwise>
                         </c:choose>
-
-                    </div>
+                    </table>
                 </div>
             </div>
         </div>
