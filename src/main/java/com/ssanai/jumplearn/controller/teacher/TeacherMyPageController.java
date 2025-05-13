@@ -1,9 +1,6 @@
 package com.ssanai.jumplearn.controller.teacher;
 
-import com.ssanai.jumplearn.dto.ClassVideoDTO;
-import com.ssanai.jumplearn.dto.EnrollmentsDTO;
-import com.ssanai.jumplearn.dto.TeacherClassDTO;
-import com.ssanai.jumplearn.dto.TeacherDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.service.admin.ClassListServiceIf;
 import com.ssanai.jumplearn.service.login.TeacherLoginServiceIf;
 import com.ssanai.jumplearn.service.teacher.TeacherMyPageServiceIf;
@@ -222,5 +219,28 @@ public class TeacherMyPageController {
         }
         log.info("점수 성공"+ rs);
         return "redirect:notice_add_popup?id=" + dto.getId();
+    }
+    @GetMapping("/questionList")
+    public String questionList(
+            @RequestParam("class_id")String id,
+            Model model
+    ){
+        List<TeacherQuestionDTO> dtoList = teacherMyPageService.teacherQuestionList(Integer.parseInt(id));
+        String title = "";
+        if (dtoList != null && !dtoList.isEmpty()) {
+            title = dtoList.get(0).getTitle();
+        }
+        model.addAttribute("dtoList", dtoList);
+        model.addAttribute("title", title);
+        return "teacher/questionList";
+    }
+    @GetMapping("/questionDetail")
+    public String questionDetail(
+            @RequestParam("id")String id,
+            Model model
+    ){
+        TeacherQuestionDTO dto = teacherMyPageService.teacherQuestionDetail(Integer.parseInt(id));
+        model.addAttribute("dto",dto);
+        return "teacher/questionDetail";
     }
 }
