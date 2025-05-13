@@ -58,5 +58,10 @@
         SET final_grade_score = #{final_grade_score}
         WHERE id = #{id}
     </update>
+    <update id="noticeUpdate">
+        update tbl_class_video
+        set notice = #{notice}
+        where id = #{id}
+    </update>
 </mapper>
     
