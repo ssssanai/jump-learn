@@ -222,25 +222,25 @@ ul li {
 .myStudyList2 {
     display: flex;
     width:100%; height:30px;
+    justify-content: center;
+    line-height:28px;
     font-size:13px;
     color: #434a59;
     border-color: inherit;
 }
-.myStudyList2:nth-child(odd){
-    background-color: #e1e7ff;
-}
+
 .studyNo {
     width:50px; height:35px;
     text-align: center;
     line-height:33px;
 }
 .studyCate {
-    width:80px; height:35px;
+    width:60px; height:35px;
     text-align: center;
     line-height:33px;
 }
 .studyTit, .studyTit1 {
-    width:calc(100% - 360px); height:35px;
+    width:calc(100% - 560px); height:35px;
     text-align: center;
     line-height:33px;
     overflow:hidden;
@@ -250,8 +250,16 @@ ul li {
 .studyTit:hover {
     color:#607cfa;
 }
+.studyTit3 {
+    width:calc(100% - 330px); height:35px;
+    text-align: center;
+    line-height:33px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
 .studyTeach {
-    width:60px; height:35px;
+    width:50px; height:35px;
     text-align: center;
     line-height:33px;
 }
@@ -420,4 +428,81 @@ ul li {
     background-color: #acb9ef;
     border-radius: 5%;
     color: #fff;
+}
+.hb {
+    display: flex;
+    width:20%; height:42px;
+    justify-content: start;
+    float: left;
+}
+    .hb > a {
+        width:120px; height:30px;
+        background-color: #f0f0f0;
+        border: 2px solid #d6d6d6b3;
+        border-top:0;
+        text-align: center;
+        line-height:28px;
+        font-size:13px;
+    }
+        .hb > a:hover {
+            background-color: #607ffc;
+            color: #fff;
+            border-color: #607ffc;
+        }
+.planBox {
+    width:75%; height:300px;
+    margin-top: 20px;
+    padding: 8px;
+    border: 3px solid #d6d6d6b3;
+}
+    .pBHead {
+        display: flex;
+        justify-content: start;
+        gap:15px;
+        font-size:13px;
+        height:20px;
+        border-bottom: 2px solid #d6d6d6b3;
+    }
+    .pBBody {
+        width:100%; height:167px;
+        font-size:14px;
+        margin: 8px 0;
+        overflow: scroll;
+    }
+    .pBFooter {
+        display: flex;
+        height:42px;
+        justify-content: space-between;
+        align-items: center;
+        gap:15px;
+        font-size:13px;
+        border-top: 2px solid #d6d6d6b3;
+        border-bottom: 2px solid #d6d6d6b3;
+    }
+    .pBBtn {
+        display: flex;
+        height:42px;
+        align-items: center;
+        gap: 15px;
+    }
+        .pBBtn > a {
+            width:120px; height:30px;
+            background-color: #f0f0f0;
+            border: 2px solid #d6d6d6b3;
+            text-align: center;
+            line-height:28px;
+            font-size:13px;
+        }
+            .pBBtn > a:hover {
+                background-color: #607ffc;
+                color: #fff;
+                border-color: #607ffc;
+            }
+.nullListContent {
+    float: left;
+    text-align: left;
+    height: 32px;
+    line-height: 30px;
+    width: 80%;
+    font-size:14px;
 }
