@@ -45,11 +45,8 @@
     </select>
 
     <insert id="insert" parameterType="com.ssanai.jumplearn.vo.BbsDefaultVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO tbl_edu (
-            `admin_id`, `title` , `content`, `created_at`,`updated_at`
-        ) VALUES (
-                     #{admin_id}, #{title}, #{content}, NOW(), NOW()
-                 )
+        INSERT INTO tbl_edu (`admin_id`, `title`, `content`, `created_at`, `updated_at`)
+        VALUES (#{admin_id}, #{title}, #{content}, NOW(), NOW())
     </insert>
 
     <update id="update">

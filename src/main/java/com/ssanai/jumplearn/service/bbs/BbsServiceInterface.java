@@ -13,18 +13,31 @@ import java.io.IOException;
 import java.util.List;
 
 public interface BbsServiceInterface {
-    public int getTotalCount(PageRequestDTO requestDTO);
-    public List<BbsDefaultDTO> listAll(PageRequestDTO pageDTO);
-    public int insert(BbsDefaultDTO dto);
-    public int update(BbsDefaultDTO dto);
-    public int delete(int id);
-    public int eduFileDelete(int id);
-    public int fileDelete(int id);
-    public BbsDefaultDTO selectOne( int id);
-    public PageResponseDTO<BbsDefaultDTO> searchList(PageRequestDTO pageDTO);
-    public List<BbsFileDTO> attachedPic(@Param("id") int id);
-    public List<BbsFileDTO> attachedPdf(@Param("id") int id);
-    public int viewCount(@Param("id") int id);
-    public void fileUpload(BbsDefaultDTO postDto, MultipartFile file) throws IOException;
-    public int pageDelete(int id);
+	public int getTotalCount(PageRequestDTO requestDTO);
+
+	public List<BbsDefaultDTO> listAll(PageRequestDTO pageDTO);
+
+	public int insert(BbsDefaultDTO dto);
+
+	public int update(BbsDefaultDTO dto);
+
+	public int delete(int id);
+
+	public int eduFileDelete(int id);
+
+	public int fileDelete(int id); // 파일 전체 삭제
+
+	public BbsDefaultDTO selectOne(int id);
+
+	public PageResponseDTO<BbsDefaultDTO> searchList(PageRequestDTO pageDTO);
+
+	public List<BbsFileDTO> attachedPic(@Param("id") int id); // 사진 추가
+
+	public List<BbsFileDTO> attachedPdf(@Param("id") int id); // PDF 추가
+
+	public int viewCount(@Param("id") int id);
+
+	public void fileUpload(BbsDefaultDTO postDto, MultipartFile file) throws IOException; // 파일 업로드 메서드
+
+	public int pageDelete(int id);
 }
