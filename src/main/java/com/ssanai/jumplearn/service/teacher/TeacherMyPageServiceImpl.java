@@ -1,9 +1,6 @@
 package com.ssanai.jumplearn.service.teacher;
 
-import com.ssanai.jumplearn.dto.ClassVideoDTO;
-import com.ssanai.jumplearn.dto.EnrollmentsDTO;
-import com.ssanai.jumplearn.dto.TeacherClassDTO;
-import com.ssanai.jumplearn.dto.TeacherDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.mapper.teacher.TeacherMyPageMapper;
 import com.ssanai.jumplearn.service.login.TeacherLoginServiceIf;
 import com.ssanai.jumplearn.util.CommonDateUtil;
@@ -67,5 +64,15 @@ public class TeacherMyPageServiceImpl implements TeacherMyPageServiceIf {
     @Override
     public int noticeUpdate(ClassVideoDTO dto) {
         return teacherMyPageXmlMapper.noticeUpdate(dto);
+    }
+
+    @Override
+    public List<TeacherQuestionDTO> teacherQuestionList(int class_id) {
+        return teacherMyPageXmlMapper.teacherQuestionList(class_id);
+    }
+
+    @Override
+    public TeacherQuestionDTO teacherQuestionDetail(int question_id) {
+        return teacherMyPageXmlMapper.teacherQuestionDetail(question_id);
     }
 }
