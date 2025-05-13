@@ -108,57 +108,58 @@
 <div class="wrap">
     <div class="main">
         <div class="todayBest">
-            <div class="boardBox">
                 <div class="boardTit">
                     <h2>수강중인 학생</h2>
                 </div>
+                <div class="writeList">
                     <c:choose>
                         <c:when test="${not empty dtoList}">
-                            <div class="tbH1">
-                                <div class="tbUserId">학생 ID</div>
-                                <div class="tbMidTest">중간고사</div>
-                                <div class="tbLastTest">기말고사</div>
-                                <div class="tbEndTest">총합 점수</div>
-                                <div class="tbRegDate">수강시작일</div>
-                                <div class="tbRateing">학생평가</div>
-                            </div>
+                            <table class="wlHeader">
+                                <tr>
+                                    <th class="tbTit"><p>학생ID</p></th>
+                                    <th class="tbTit"><p>중간고사</p></th>
+                                    <th class="tbTit"><p>기말고사</p></th>
+                                    <th class="tbTit"><p>총합 점수</p></th>
+                                    <th class="tbScore"><p>수강시작일</p></th>
+                                    <th class="tbScore"><p>학생평가</p></th>
+                                </tr>
+                            </table>
                             <c:forEach var="list" items="${dtoList}" varStatus="loop">
-                                <div class="boardLine1">
-                                    <div class="tbB1">
-                                        <div class="tbUserId">${list.member_id}</div>
-                                        <div class="tbMidTest">
+                                <table class="wlHeader">
+                                    <tr>
+                                        <td class="tbTit"><p>${list.member_id}</p></td>
+                                        <td class="tbTit">
                                             <c:choose>
                                                 <c:when test="${not empty list.midterm_score and list.midterm_score ne 0}">
-                                                    ${list.midterm_score}
+                                                    <p>${list.midterm_score}</p>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <a href="#" onclick="midterm_score_window('${list.id}','${class_id}')">점수 추가</a>
                                                 </c:otherwise>
                                             </c:choose>
-                                        </div>
-                                        <div class="tbLastTest">
+                                        </td>
+                                        <td class="tbTit">
                                             <c:choose>
                                                 <c:when test="${not empty list.final_score and list.midterm_score ne 0}">
-                                                    ${list.final_score}
+                                                    <p>${list.final_score}</p>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <a href="#" onclick="final_score_window('${list.id}','${class_id}')">점수 추가</a>
                                                 </c:otherwise>
                                             </c:choose>
-                                        </div>
-                                        <div class="tbEndTest">
+                                        </td>
+                                        <td class="tbTit">
                                             <c:choose>
                                                 <c:when test="${not empty list.final_grade_score and list.final_grade_score ne 0}">
-                                                    ${list.final_grade_score}
+                                                    <p>${list.final_grade_score}</p>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <a href="#" onclick="final_grade_score_window('${list.id}','${class_id}')">점수 추가</a>
                                                 </c:otherwise>
                                             </c:choose>
-
-                                        </div>
-                                        <div class="tbRegDate">${list.pay_created_at.toString().substring(0,10)}</div>
-                                        <div class="tbRateing">
+                                        </td>
+                                        <td class="tbScore">${list.pay_created_at.toString().substring(0,10)}</td>
+                                        <td class="tbScore">
                                             <c:choose>
                                                 <c:when test="${not empty list.feedback_score}">
                                                     <a href="#" onclick="review_window('${list.review}','${list.feedback_score}')">상세보기</a>
@@ -167,9 +168,9 @@
                                                     후기 X
                                                 </c:otherwise>
                                             </c:choose>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </td>
+                                    </tr>
+                                </table>
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
