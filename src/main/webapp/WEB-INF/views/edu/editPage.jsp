@@ -18,16 +18,16 @@
     <link href="/resources/static/css/community/edu/eduWritePage.css" rel="stylesheet" type="text/css">
     <title>JL - 게시글 작성</title>
     <script src="https://kit.fontawesome.com/2d74121aef.js" crossorigin="anonymous"></script>
+    <script src="/resources/static/js/checkModule.js"></script>
 </head>
 <body>
 <div class="header">
-        <img src="/resources/static/images/registLogo2.svg" alt="로고">
-        <p>커뮤니티 게시물 작성</p>
+    <img src="/resources/static/images/registLogo2.svg" alt="로고">
+    <p>커뮤니티 게시물 수정</p>
 </div>
 <div class="wrap">
-    <form id="frmWrite" name="frmWrite" action="<c:url value='/edu/writePage'/>" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" id="id" value="${dto.id}" />
-
+    <form id="frmWrite" name="frmWrite" action="/edu/editPage/${dto.id}" method="post">
+        <input type="hidden" name="id" id="id" value="${dto.id}"/>
         <div class="boardTitle">
             <p>제목</p>
             <input type="text" name="title" id="title" value="${dto.title}" placeholder="글 제목을 입력해주세요.">
@@ -35,49 +35,14 @@
         </div>
         <div class="boardCont">
             <p>내용</p>
-            <textarea name="content" id="content"  placeholder="content값" >${dto.content}</textarea>
+            <textarea name="content" id="content" placeholder="content값">${dto.content}</textarea>
             <div id="contentError" class="error"></div>
-        </div>
-        <div class="">
-            <c:if test="${fileDTO != null}" >
-                <div>
-                    <div style="margin:10px;">
-                        <c:forEach var="file" items="${fileDTO}" >
-                            <c:if test="${fn:contains(fn:toLowerCase(file.fileExt), '.jpg') or fn:contains(fn:toLowerCase(file.fileExt), '.jpeg')}">
-                                <img src="${file.filePath}/${file.fileName}${file.fileExt}" alt="${file.fileName}" />
-                                <input type="checkbox" name="${file.id}" checked>
-                            </c:if>
-                        </c:forEach>
-                    </div>
-                </div>
-            </c:if>
-        </div>
-        <div class="">
-            <c:if test="${fileDTO != null}" >
-                <div>
-                    <div style="margin:10px;">
-                        <c:forEach var="file" items="${fileDTO}" >
-                            <c:if test="${fn:contains(fn:toLowerCase(file.fileExt), '.pdf')}">
-                                ${file.fileName}${file.fileExt}
-                                <input type="checkbox" name="${file.id}" checked> 삭제
-                            </c:if>
-                        </c:forEach>
-                    </div>
-                </div>
-            </c:if>
-        </div>
-        <div class="">
-            <div style="margin:10px; clear:both;">
-                <span>이미지 첨부</span>
-                <input type="file" id="files" name="files" multiple >
-                <div id="contentError1" class="error"></div>
-            </div>
         </div>
         <div class="formBtn">
             <input class="endBtn" type="submit" value="등록">
-            <input class="endBtn" type="reset"  value="취소">
-            <input class="endBtn" type="button" value="목록">
-            <input type="hidden" name="admin_id" value="${adto.id}" />
+            <input class="endBtn" type="reset" value="취소">
+            <input class="endBtn" onclick="location.href = '/edu/searchListPage';" type="button" value="목록">
+            <input type="hidden" name="admin_id" value="${adto.id}"/>
         </div>
     </form>
 </div>
@@ -89,11 +54,7 @@
     const titleError = document.getElementById('titleError');
     const contentError = document.getElementById('contentError');
 
-    function validateContentForm(value) {
-        return false;
-    }
-
-    writeForm.addEventListener('submit', function(event) {
+    writeForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
         resetErrors();
@@ -131,8 +92,13 @@
             titleError.textContent = '255자 미만이어야 합니다.';
             return false;
         }
+        if (!checkSQLInjection(trimmedId)) {
+            titleError.textContent = '--, $$, /*, \', ", # 은 포함할 수 없습니다.';
+            return false;
+        }
         return true;
     }
+
     // 내용
     function validateContentForm(content) {
         const trimmedCont = content.trim();
@@ -143,6 +109,10 @@
 
         if (trimmedCont.length < 1 || trimmedCont.length >= 500) {
             contentError.textContent = '500자 미만이어야 합니다.';
+            return false;
+        }
+        if (!checkSQLInjection(trimmedCont)) {
+            contentError.textContent = '--, $$, /*, \', ", # 은 포함할 수 없습니다.';
             return false;
         }
         return true;

@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,24 +23,25 @@
 <body>
 <div class="header">
     <img src="/resources/static/images/registLogo2.svg" alt="로고">
-    <p>커뮤니티 게시물 작성</p>
+    <p>대외활동 게시물 수정</p>
 </div>
 <div class="wrap">
-    <form id="frmWrite" name="frmWrite" action="/edu/writePage" method="post">
+    <form id="frmWrite" name="frmWrite" action="/activity/editPage/${dto.id}" method="post">
+        <input type="hidden" name="id" id="id" value="${dto.id}"/>
         <div class="boardTitle">
             <p>제목</p>
-            <input type="text" name="title" id="title" placeholder="글 제목을 입력해주세요.">
+            <input type="text" name="title" id="title" value="${dto.title}" placeholder="글 제목을 입력해주세요.">
             <div id="titleError" class="error"></div>
         </div>
         <div class="boardCont">
             <p>내용</p>
-            <textarea name="content" id="content" placeholder="content값"></textarea>
+            <textarea name="content" id="content" placeholder="content값">${dto.content}</textarea>
             <div id="contentError" class="error"></div>
         </div>
         <div class="formBtn">
             <input class="endBtn" type="submit" value="등록">
             <input class="endBtn" type="reset" value="취소">
-            <input class="endBtn" type="button" value="목록">
+            <input class="endBtn" onclick="location.href = '/activity/searchListPage';" type="button" value="목록">
             <input type="hidden" name="admin_id" value="${adto.id}"/>
         </div>
     </form>
@@ -90,7 +92,6 @@
             titleError.textContent = '255자 미만이어야 합니다.';
             return false;
         }
-
         if (!checkSQLInjection(trimmedId)) {
             titleError.textContent = '--, $$, /*, \', ", # 은 포함할 수 없습니다.';
             return false;
@@ -110,7 +111,6 @@
             contentError.textContent = '500자 미만이어야 합니다.';
             return false;
         }
-
         if (!checkSQLInjection(trimmedCont)) {
             contentError.textContent = '--, $$, /*, \', ", # 은 포함할 수 없습니다.';
             return false;

@@ -21,35 +21,35 @@
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="../../../resources/static/html/headerGnb.jsp"%>
+<%@include file="../../../resources/static/html/headerGnb.jsp" %>
 <div class="wrap">
     <div class="aside">
         <div class="sideMenu">
             <h2 class="sideMenuTitle">커뮤니티</h2>
             <a href="/post/searchListPage">자유게시판</a>
-            <a href="/edu/searchListPage" class="select">교육 정보 게시판</a>
+            <a href="/edu/searchListPage">교육 정보 게시판</a>
             <a href="/info/searchListPage">대입 정보 게시판</a>
             <a href="/activity/searchListPage">대외활동 게시판</a>
-            <a href="/lib/searchListPage">자료실 게시판</a>
+            <a href="/lib/searchListPage" class="select">자료실 게시판</a>
             <a href="/news/searchListPage">뉴스 게시판</a>
             <a href="/notice/searchListPage">공지사항 게시판</a>
         </div>
     </div>
     <div class="main">
         <div class="writeTit">
-            <h2>교육 정보 게시판</h2>
-            <p>교육 관련 정보를 손쉽게 얻을 수 있는 게시판입니다.</p>
+            <h2>자료실 게시판</h2>
+            <p>수업 관련 링크를 얻을 수 있습니다.</p>
             <div class="wtBtn">
                 <c:if test="${isAdmin}">
-                    <a href="/edu/writePage">글쓰기</a>
+                    <a href="/lib/writePage">글쓰기</a>
                 </c:if>
 
             </div>
         </div>
-        <form class="searchInput" name="frmSearch" id="frmSearch" method="GET" action="/edu/searchListPage">
-            <input type="hidden" name="page_size" value="${pageDTO.page_size}" />
+        <form class="searchInput" name="frmSearch" id="frmSearch" method="GET" action="/lib/searchListPage">
+            <input type="hidden" name="page_size" value="${pageDTO.page_size}"/>
             <div class="siReset">
-                <input type="button" onclick="location.href='<c:url value="/edu/searchListPage"/>'"  value="검색조건 초기화">
+                <input type="button" onclick="location.href='<c:url value="/lib/searchListPage"/>'" value="검색조건 초기화">
             </div>
             <div class="searchBoxs">
                 <select id="search_category" name="search_category" class="selectOption">
@@ -59,9 +59,11 @@
                     <option value="admin_id"    ${pageDTO.search_category=='admin_id'     ? 'selected':''}>작성자</option>
                     <option value="created_at"  ${pageDTO.search_category=='created_at'   ? 'selected':''}>작성일</option>
                 </select>
-                <input type="text" id="search_word" name="search_word" class="search_in" placeholder="검색어를 입력해주세요." value="${pageDTO.search_word}" style="" >
+                <input type="text" id="search_word" name="search_word" class="search_in" placeholder="검색어를 입력해주세요."
+                       value="${pageDTO.search_word}" style="">
                 <div class="searchDate" style="display:none">
-                    <input type="date" name="search_date_from" id="search_date_from" value="${pageDTO.search_date_from}"/>
+                    <input type="date" name="search_date_from" id="search_date_from"
+                           value="${pageDTO.search_date_from}"/>
                     <p>~</p>
                     <input type="date" name="search_date_to" id="search_date_to" value="${pageDTO.search_date_to}"/>
                 </div>
@@ -88,17 +90,21 @@
                 <div class="wlBody">
                     <c:if test="${isAdmin}">
                         <div class="listCk">
-                            <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
+                            <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}"
+                                   name="deleteCheckBox${post.id}">
                         </div>
                     </c:if>
                     <p class="listNo">${post.id}</p>
-                    <p class="listTit"><a href="/edu/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
+                    <p class="listTit"><a
+                            href="/lib/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
                     <p class="listName">${post.admin_id}</p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
                     <c:if test="${isAdmin}">
                         <div class="listDelBtnBox">
-                            <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete/${post.id}'}" value="삭제">
+                            <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}"
+                                   onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/lib/delete/${post.id}'}"
+                                   value="삭제">
                         </div>
                     </c:if>
                 </div>
@@ -120,7 +126,7 @@
     const search_date_to = document.getElementById('search_date_to');
 
     search_category.addEventListener('change', function (e) {
-        if( search_category.value == 'created_at'  ) {
+        if (search_category.value == 'created_at') {
             search_word.value = '';
             search_word.style.display = 'none';
             searchDate.style.display = 'block';
@@ -131,7 +137,7 @@
             searchDate.style.display = 'none';
         }
 
-    }, false );
+    }, false);
 
 
     frmSearch.addEventListener('submit', function (e) {
@@ -139,12 +145,12 @@
         e.stopPropagation();
 
 
-        if( search_category.value == 'created_at' ) {
-            if (search_date_from.value.length > 0  && search_date_to.value.length > 0) {
+        if (search_category.value == 'created_at') {
+            if (search_date_from.value.length > 0 && search_date_to.value.length > 0) {
                 let date1 = new Date(search_date_from.value);
                 let date2 = new Date(search_date_to.value);
 
-                if (  (date2.getTime() - date1.getTime() )<0 ) {
+                if ((date2.getTime() - date1.getTime()) < 0) {
                     alert("날짜 값이 올바르지 않습니다1.")
                     return false;
                 }
@@ -153,7 +159,7 @@
                 return false;
             }
         } else {
-            if( search_word.value == '') {
+            if (search_word.value == '') {
                 alert("검색어를 입력하세요")
                 search_word.focus();
                 return false;

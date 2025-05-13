@@ -3,6 +3,7 @@ package com.ssanai.jumplearn.mapper;
 
 import com.ssanai.jumplearn.mapper.bbs.BbsMapper;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,8 +13,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
 public class BbsTests {
-    @Autowired(required = false)
-    private BbsMapper bbsMapper;
+	@Autowired(required = false)
+	private BbsMapper bbsMapper;
+
+//	@Test
+//	public void test() {
+//		log.info(bbsMapper.attachedPdf(1, "tbl_edu_file", "edu_id"));
+//	}
 
 //    @Test
 //    public void testGetTotalCount(){

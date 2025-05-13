@@ -9,23 +9,20 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface BbsMapper {
-    public int getTotalCount(PageRequestDTO pageDTO);
+	//    (table_name: tbl_*, colName: *_id ) (* = [edu, info, lib, news, notice, activity])
+	public int getTotalCount(@Param("dto") PageRequestDTO pageDTO, @Param("table_name") String table_name);
 
-    public List<BbsDefaultVO> listAll(PageRequestDTO pageDTO);
+	public List<BbsDefaultVO> listAll(@Param("dto") PageRequestDTO pageDTO, @Param("table_name") String table_name);
 
-    public BbsDefaultVO selectOne( int id);
+	public BbsDefaultVO selectOne(@Param("id")int id, @Param("table_name") String table_name);
 
-    public int insert(BbsDefaultVO vo);
+	public int insert(@Param("vo") BbsDefaultVO vo, @Param("table_name") String table_name);
 
-    public int update(BbsDefaultVO vo);
+	public int update(@Param("vo") BbsDefaultVO vo, @Param("table_name") String table_name);
 
-    public int delete(int id);
+	public int delete(@Param("id") int id, @Param("table_name") String table_name);
 
-    public List<BbsDefaultVO> searchList(PageRequestDTO pageDTO);
+	public List<BbsDefaultVO> searchList(@Param("dto") PageRequestDTO pageDTO, @Param("table_name") String table_name);
 
-    public List<BbsFileVO> attachedPic(@Param("id") int id);
-
-    public List<BbsFileVO> attachedPdf(@Param("id") int id);
-
-    public int viewCount(@Param("id") int id);
+	public int viewCount(@Param("id") int id, @Param("table_name") String table_name);
 }
