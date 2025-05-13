@@ -27,21 +27,21 @@
         <div class="sideMenu">
             <h2 class="sideMenuTitle">커뮤니티</h2>
             <a href="/post/searchListPage">자유게시판</a>
-            <a href="/edu/searchListPage" class="select">교육 정보 게시판</a>
-            <a href="/info/searchListPage">대입 정보 게시판</a>
+            <a href="/edu/searchListPage" >교육 정보 게시판</a>
+            <a href="/info/searchListPage" class="select">대입 정보 게시판</a>
             <a href="/activity/searchListPage">대외활동 게시판</a>
             <a href="/lib/searchListPage">자료실 게시판</a>
             <a href="/news/searchListPage">뉴스 게시판</a>
-            <a href="/notice/searchListPage">공지사항 게시판</a>
+            <a href="/notice/searchListPage" >공지사항 게시판</a>
         </div>
     </div>
     <div class="main">
         <div class="writeTit">
-            <h2>교육 정보 게시판</h2>
+            <h2>대입 정보 게시판</h2>
             <p>회원간 자유로운 주제로 대화를 나누는 게시판입니다.</p>
         </div>
         <div class="formBox">
-            <form method="post" action="/edu/editPage" enctype="multipart/form-data">
+            <form method="post" action="/info/editPage" enctype="multipart/form-data">
                 <div class="boardTitle">
                     <p>${dto.title}</p>
                 </div>
@@ -64,12 +64,12 @@
                 </div>
                 <div class="formBtn">
                     <input class="endBtn" type="button" value="목록"
-                           onClick="location.href='/edu/searchListPage?${pageDTO.linkParams}'"/>
+                           onClick="location.href='/info/searchListPage?${pageDTO.linkParams}'"/>
                     <c:if test="${isAdmin}">
                         <input class="endBtn" type="button" value="수정"
-                               onClick="location.href='/edu/editPage/${dto.id}'"/>
+                               onClick="location.href='/info/editPage/${dto.id}'"/>
                         <input class="endBtn" type="button" value="삭제"
-                               onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete/${dto.id}?${pageDTO.linkParams}';}"/>
+                               onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='/info/delete/${dto.id}?${pageDTO.linkParams}';}"/>
                     </c:if>
                 </div>
             </form>
