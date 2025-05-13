@@ -14,16 +14,19 @@
 %>
 <html>
 <head>
+    <link href="/resources/static/css/teacher/popup.css" rel="stylesheet" type="text/css">
     <title>전체 점수 입력</title>
 </head>
 <body>
 <h2>전체 점수 입력</h2>
-<form action="/teacher/final_grade_score_popup" method="post">
-    <input type="text" name="final_grade_score" placeholder="점수를 입력하세요"><br>
+<form class="registBox" action="/teacher/final_grade_score_popup" method="post">
+    <input class="regi_input" type="text" name="final_grade_score" placeholder="점수를 입력하세요"><br>
     <input type="hidden" name="id" value="<%= id %>">
     <input type="hidden" name="class_id" value="<%= classId %>">
-    <input type="submit" value="입력하기">
-    <button type="button" onclick="window.close()">취소</button>
+    <div class="btn">
+        <input type="submit" value="입력하기">
+        <button type="button" onclick="window.close()">취소</button>
+    </div>
 </form>
 <c:if test="${not empty msg}">
     <script>
