@@ -22,7 +22,7 @@
 <body>
 <div class="header">
         <img src="/resources/static/images/registLogo2.svg" alt="로고">
-        <p>커뮤니티 게시물 작성</p>
+        <p>커뮤니티 게시물 수정</p>
 </div>
 <div class="wrap">
     <form id="frmWrite" name="frmWrite" action="<c:url value='/edu/writePage'/>" method="post" enctype="multipart/form-data">

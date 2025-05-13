@@ -38,32 +38,6 @@ public class EduBbsController {
         return "edu/writePage";
     }
 
-
-//    @PostMapping("/writePage")
-//    public String writePagePOST(
-//            BbsDefaultDTO dto,
-//            @ModelAttribute("pageDTO") PageRequestDTO pageDTO,
-//            @RequestParam(value = "file", required = false) MultipartFile file,
-//            RedirectAttributes redirectAttributes
-//    ) {
-//        try {
-//            int result = bbsService.insert(dto);
-//            if (result != 1) {
-//                redirectAttributes.addFlashAttribute("msg", "글 등록에 실패했습니다.");
-//                return "redirect:/edu/writePage?" + pageDTO.getLinkParams();
-//            }
-//
-//            if (file != null && !file.isEmpty()) { bbsService.fileUpload(dto, file); }
-//
-//            redirectAttributes.addFlashAttribute("msg", "등록 성공");
-//        } catch (Exception e) {
-//            redirectAttributes.addFlashAttribute("msg", "등록 실패: " + e.getMessage());
-//            return "redirect:/edu/writePage?" + pageDTO.getLinkParams();
-//        }
-//        return "redirect:/edu/searchListPage?" + pageDTO.getLinkParams();
-//    }
-
-
     @PostMapping("/writePage")
     public String writePagePOST(
             BbsDefaultDTO dto,
@@ -85,7 +59,6 @@ public class EduBbsController {
                     }
                 }
             }
-
             redirectAttributes.addFlashAttribute("msg", "등록 성공");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("msg", "등록 실패: " + e.getMessage());
@@ -93,11 +66,6 @@ public class EduBbsController {
         }
         return "redirect:/edu/searchListPage?" + pageDTO.getLinkParams();
     }
-
-
-
-
-
 
     @GetMapping("/viewPage")
     public String viewPage(
@@ -208,12 +176,5 @@ public class EduBbsController {
         return "edu/searchListPage";
     }
 
-//    @PostMapping("/searchListPage")
-//    public String searchListPOST(
-//            @ModelAttribute("pageDTO") PageRequestDTO pageDTO
-//    ){
-//        bbsService.searchList(pageDTO);
-//        return "redirect:/edu/searchListPage?" + pageDTO.getLinkParams();
-//    }
 
 }

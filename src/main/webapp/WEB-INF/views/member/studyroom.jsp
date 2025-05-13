@@ -38,36 +38,51 @@
             <div class="myInfoMenu">
                 <div class="infoMenu">
                     <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <div class="menuBox">
+                            <a href="/course/list" class="cnt1">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="cnt1">장바구니</a>
+                        장바구니
                     </div>
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-bookmark"></i></div>
+                        <div class="menuBox">
+                            <a href="#" class="cnt1">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="cnt1">찜 목록</a>
+                        찜 목록
                     </div>
 
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-credit-card"></i></div>
+                        <div class="menuBox">
+                            <a href="/pay/list" class="cnt1">
+                                <i class="fa-solid fa-credit-card"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="noCnt">결제내역</a>
+                        결제내역
                     </div>
-
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-headset"></i></div>
+                        <div class="menuBox">
+                            <a href="/inquiry/list" class="cnt1">
+                                <i class="fa-solid fa-headset"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="noCnt">1:1 문의</a>
+                        1:1 문의
                     </div>
 
                 </div>
