@@ -41,7 +41,12 @@ public class InquiryController {
 		log.info(resDTO.getDtoList());
 		log.info(resDTO);
 
-		String paging = BbsPage.pagingArea(totalCount, reqDTO.getPage_no(), reqDTO.getPage_size(), reqDTO.getPage_block_size(), req.getContextPath());
+		StringBuilder URI = new StringBuilder()
+				.append(req.getRequestURI())
+				.append("?")
+				.append(reqDTO.getLinkParamsWithoutNo());
+		log.info("URI"+URI);
+		String paging = BbsPage.pagingArea(resDTO.getTotal_count(), reqDTO.getPage_no(), reqDTO.getPage_size(), reqDTO.getPage_block_size(),URI.toString() );
 		model.addAttribute("paging", paging);
 		return "inquiry/list";
 	}

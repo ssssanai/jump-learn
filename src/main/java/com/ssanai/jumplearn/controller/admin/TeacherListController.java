@@ -2,6 +2,8 @@ package com.ssanai.jumplearn.controller.admin;
 
 import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.service.admin.TeacherListServiceIf;
+import com.ssanai.jumplearn.util.BbsPage;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,27 +24,43 @@ public class TeacherListController {
     @GetMapping("/teacherList")
     public String teacherList(
             HttpSession session,
+            HttpServletRequest req,
             @ModelAttribute("reqDTO") PageRequestDTO reqDTO,
             Model model
     ) {
         log.info("teacherList시작");
         AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
         PageResponseDTO<TeacherDTO> resDTO = teacherListService.searchList(reqDTO);
+        StringBuilder URI = new StringBuilder()
+                .append(req.getRequestURI())
+                .append("?")
+                .append(reqDTO.getLinkParamsWithoutNo());
+        log.info("URI"+URI);
+        String paging = BbsPage.pagingArea(resDTO.getTotal_count(), reqDTO.getPage_no(), reqDTO.getPage_size(), reqDTO.getPage_block_size(),URI.toString() );
         model.addAttribute("loginInfo", dto);
         model.addAttribute("dtoList", resDTO.getDtoList());
         model.addAttribute("pageInfo", resDTO);
+        model.addAttribute("paging", paging);
         return "admin/teacherList";
     }
 
     @GetMapping("/teacher_search_list")
     public String searchList(
+            HttpServletRequest req,
             @ModelAttribute("reqDTO") PageRequestDTO reqDTO,
             Model model
     ) {
         log.info("검색 조건" + reqDTO);
         PageResponseDTO<TeacherDTO> resDTO = teacherListService.searchList(reqDTO);
+        StringBuilder URI = new StringBuilder()
+                .append(req.getRequestURI())
+                .append("?")
+                .append(reqDTO.getLinkParamsWithoutNo());
+        log.info("URI"+URI);
+        String paging = BbsPage.pagingArea(resDTO.getTotal_count(), reqDTO.getPage_no(), reqDTO.getPage_size(), reqDTO.getPage_block_size(),URI.toString() );
         model.addAttribute("dtoList", resDTO.getDtoList());
         model.addAttribute("pageInfo", resDTO);
+        model.addAttribute("paging", paging);
         log.info(resDTO);
         return "admin/teacherList";
     }

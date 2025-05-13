@@ -68,58 +68,7 @@
     </tbody>
 </table>
 <div id="pages">
-    <ul class="pagination justify-content-center">
-        <li class="page-item <c:if test="${pageInfo.prev_page_flag eq false}">disabled</c:if>">
-            <a class="page-link"
-               data-num="
-         <c:choose>
-           <c:when test='${pageInfo.prev_page_flag}'>
-             ${pageInfo.page_block_start - 1}
-           </c:when>
-           <c:otherwise>1</c:otherwise>
-         </c:choose>"
-               href="/admin/inquiry_search_list?"
-            <c:choose>
-                    <c:when test='${pageInfo.prev_page_flag}'>
-                        ${pageInfo.linkParams}&page_no=${pageInfo.page_block_start - 1}
-                    </c:when>
-                    <c:otherwise>#</c:otherwise>
-            </c:choose>">
-            Previous
-            </a>
-        </li>
-
-        <c:forEach begin="${pageInfo.page_block_start}" end="${pageInfo.page_block_end}" var="page_num">
-            <li class="page-item <c:if test='${pageInfo.page_no == page_num}'>active</c:if>'">
-                <a class="page-link" data-num="${page_num}"
-                   href="<c:choose>
-                 <c:when test='${pageInfo.page_no == page_num}'>#</c:when>
-                 <c:otherwise>/admin/inquiry_search_list?${pageInfo.linkParams}&page_no=${page_num}</c:otherwise>
-              </c:choose>">${page_num}</a>
-            </li>
-        </c:forEach>
-
-        <li class="page-item <c:if test="${pageInfo.next_page_flag eq false}">disabled</c:if>">
-            <a class="page-link"
-               data-num="
-         <c:choose>
-           <c:when test='${pageInfo.next_page_flag}'>
-             ${pageInfo.page_block_end + 1}
-           </c:when>
-           <c:otherwise>${pageInfo.page_block_end}</c:otherwise>
-         </c:choose>"
-               href="/admin/inquiry_search_list?"
-            <c:choose>
-                    <c:when test='${pageInfo.next_page_flag}'>
-                        ${pageInfo.linkParams}&page_no=${pageInfo.page_block_end + 1}
-                    </c:when>
-                    <c:otherwise>#</c:otherwise>
-            </c:choose>">
-            Next
-            </a>
-        </li>
-    </ul>
-
+    ${paging}
 </div>
 </body>
 </html>

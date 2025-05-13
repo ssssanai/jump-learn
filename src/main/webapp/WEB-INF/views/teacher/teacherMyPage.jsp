@@ -102,7 +102,7 @@
                                     <div class="tbImg">
                                         <img src="/upload/${list.file_name}" alt="기본 이미지" onerror="this.onerror=null;  this.src='/resources/static/images/img.png';">
                                     </div>
-                                    <div class="tbTit"><a href="#">${list.title}</a></div>
+                                    <div class="tbTit"><a href="/teacher/class_detail?class_id=${list.class_id}">${list.title}</a></div>
                                     <div class="tbDate">${list.created_at}</div>
                                     <div class="tbUserCnt"><a href="/teacher/studentList?class_id=${list.class_id}">${list.pay_count}</a></div>
                                     <div class="tbScore">${list.feedback_avg}</div>

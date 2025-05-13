@@ -4,6 +4,7 @@ import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.service.admin.AdminListServiceIf;
 import com.ssanai.jumplearn.service.admin.MemberListServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,26 +29,41 @@ public class MemberListController {
     @GetMapping("/memberList")
     public String memberList(
             HttpSession session,
+            HttpServletRequest req,
             @ModelAttribute("reqDTO") PageRequestDTO reqDTO,
             Model model
     ){
         log.info("memberList시작");
         AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
         PageResponseDTO<MemberDTO> resDTO = memberListService.searchList(reqDTO);
+        model.addAttribute("pageInfo", resDTO);
+        String paging = BbsPage.pagingArea(resDTO.getTotal_count(), resDTO.getPage_no(), resDTO.getPage_size(), resDTO.getPage_block_size(), req.getContextPath());
         model.addAttribute("loginInfo", dto);
         model.addAttribute("dtoList", resDTO.getDtoList());
-        model.addAttribute("pageInfo", resDTO);
+
+        model.addAttribute("paging", paging);
+        log.info("경"+resDTO);
         return "admin/memberList";
     }
     @GetMapping("member_search_list")
     public String searchList(
+            HttpServletRequest req,
             @ModelAttribute("reqDTO")PageRequestDTO reqDTO,
             Model model
             ){
         log.info("검색 조건"+reqDTO);
         PageResponseDTO<MemberDTO> resDTO = memberListService.searchList(reqDTO);
+        log.info(resDTO.getLinkParams());
+        log.info(req.getRequestURI());
+        StringBuilder URI = new StringBuilder()
+                .append(req.getRequestURI())
+                .append("?")
+                .append(reqDTO.getLinkParamsWithoutNo());
+        log.info("URI"+URI);
+        String paging = BbsPage.pagingArea(resDTO.getTotal_count(), reqDTO.getPage_no(), reqDTO.getPage_size(), reqDTO.getPage_block_size(),URI.toString() );
         model.addAttribute("dtoList", resDTO.getDtoList());
         model.addAttribute("pageInfo", resDTO);
+        model.addAttribute("paging", paging);
         log.info(resDTO);
         return "admin/memberList";
     }
