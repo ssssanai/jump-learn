@@ -1,8 +1,10 @@
 package com.ssanai.jumplearn.controller.teacher;
 
+import com.ssanai.jumplearn.dto.ClassVideoDTO;
 import com.ssanai.jumplearn.dto.EnrollmentsDTO;
 import com.ssanai.jumplearn.dto.TeacherClassDTO;
 import com.ssanai.jumplearn.dto.TeacherDTO;
+import com.ssanai.jumplearn.service.admin.ClassListServiceIf;
 import com.ssanai.jumplearn.service.login.TeacherLoginServiceIf;
 import com.ssanai.jumplearn.service.teacher.TeacherMyPageServiceIf;
 import com.ssanai.jumplearn.util.FilePathConfig;
@@ -25,6 +27,7 @@ import java.util.List;
 public class TeacherMyPageController {
 
     private final TeacherMyPageServiceIf teacherMyPageService;
+    private final ClassListServiceIf classListService;
     private final FilePathConfig filePathConfig;
 
     @GetMapping("/myPage")
@@ -181,5 +184,43 @@ public class TeacherMyPageController {
         }
         log.info("점수 성공"+ rs);
         return "redirect:final_score_popup?id=" + dto.getId()+"&class_id="+dto.getClass_id();
+    }
+    @GetMapping("/class_detail")
+    public String classDetail(
+            @RequestParam("class_id")String class_id,
+            Model model
+    ){
+        log.info("강의 리스트");
+        int id = Integer.parseInt(class_id);
+        List<ClassVideoDTO> dtoList = classListService.videoList(id);
+        model.addAttribute("dtoList", dtoList);
+        model.addAttribute("class_id", class_id);
+        log.info("강의" + dtoList.toString());
+        return "teacher/teacherStudyTable";
+    }
+    //공지사항 받는 창 보여주기
+    @GetMapping("/notice_add_popup")
+    public String noticeViewPopup(
+            @RequestParam("id") String id,
+            Model model
+    ){
+        model.addAttribute("id", id);
+        return "teacher/notice_add_popup";
+    }
+    //공지사항 점수 입력
+    @PostMapping("/notice_add_popup")
+    public String noticeViewPopup(
+            ClassVideoDTO dto,
+            RedirectAttributes redirectAttributes
+    ){
+        log.info("공지사항 입력 받는 폼"+dto.toString());
+        int rs = teacherMyPageService.noticeUpdate(dto);
+        if(rs != 1){
+            redirectAttributes.addFlashAttribute("msg","공지사항 입력 실패");
+        }else{
+            redirectAttributes.addFlashAttribute("msg","공지사항 입력 성공");
+        }
+        log.info("점수 성공"+ rs);
+        return "redirect:notice_add_popup?id=" + dto.getId();
     }
 }

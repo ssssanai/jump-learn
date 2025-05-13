@@ -1,5 +1,6 @@
 package com.ssanai.jumplearn.service.teacher;
 
+import com.ssanai.jumplearn.dto.ClassVideoDTO;
 import com.ssanai.jumplearn.dto.EnrollmentsDTO;
 import com.ssanai.jumplearn.dto.TeacherClassDTO;
 import com.ssanai.jumplearn.dto.TeacherDTO;
@@ -14,4 +15,5 @@ public interface TeacherMyPageServiceIf {
     public int enrollmentsMidterm(EnrollmentsDTO dto);
     public int enrollmentsFinal(EnrollmentsDTO dto);
     public int enrollmentsFinalGrade(EnrollmentsDTO dto);
+    public int noticeUpdate(ClassVideoDTO dto);
 }

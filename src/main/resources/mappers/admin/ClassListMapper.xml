@@ -72,6 +72,7 @@
         v.video_name as video_name,
         v.video_extension as video_extension,
         v.video_size as video_size,
+        v.notice as notice,
         v.title as title,
         v.content as content,
         v.created_at as created_at,

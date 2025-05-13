@@ -1,5 +1,6 @@
 package com.ssanai.jumplearn.service.teacher;
 
+import com.ssanai.jumplearn.dto.ClassVideoDTO;
 import com.ssanai.jumplearn.dto.EnrollmentsDTO;
 import com.ssanai.jumplearn.dto.TeacherClassDTO;
 import com.ssanai.jumplearn.dto.TeacherDTO;
@@ -61,5 +62,10 @@ public class TeacherMyPageServiceImpl implements TeacherMyPageServiceIf {
     @Override
     public int enrollmentsFinalGrade(EnrollmentsDTO dto) {
         return teacherMyPageXmlMapper.enrollmentsFinalGrade(dto);
+    }
+
+    @Override
+    public int noticeUpdate(ClassVideoDTO dto) {
+        return teacherMyPageXmlMapper.noticeUpdate(dto);
     }
 }
