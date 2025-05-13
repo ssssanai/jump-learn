@@ -27,29 +27,29 @@
         <div class="sideMenu">
             <h2 class="sideMenuTitle">커뮤니티</h2>
             <a href="/post/searchListPage">자유게시판</a>
-            <a href="/edu/searchListPage" class="select">교육 정보 게시판</a>
+            <a href="/edu/searchListPage">교육 정보 게시판</a>
             <a href="/info/searchListPage">대입 정보 게시판</a>
             <a href="/activity/searchListPage">대외활동 게시판</a>
             <a href="/lib/searchListPage">자료실 게시판</a>
             <a href="/news/searchListPage">뉴스 게시판</a>
-            <a href="/notice/searchListPage">공지사항 게시판</a>
+            <a href="/notice/searchListPage" class="select">공지사항 게시판</a>
         </div>
     </div>
     <div class="main">
         <div class="writeTit">
-            <h2>교육 정보 게시판</h2>
-            <p>교육 관련 정보를 손쉽게 얻을 수 있는 게시판입니다.</p>
+            <h2>공지사항 게시판</h2>
+            <p>공지사항 게시판입니다.</p>
             <div class="wtBtn">
                 <c:if test="${isAdmin}">
-                    <a href="/edu/writePage">글쓰기</a>
+                    <a href="/notice/writePage">글쓰기</a>
                 </c:if>
 
             </div>
         </div>
-        <form class="searchInput" name="frmSearch" id="frmSearch" method="GET" action="/edu/searchListPage">
+        <form class="searchInput" name="frmSearch" id="frmSearch" method="GET" action="/notice/searchListPage">
             <input type="hidden" name="page_size" value="${pageDTO.page_size}" />
             <div class="siReset">
-                <input type="button" onclick="location.href='<c:url value="/edu/searchListPage"/>'"  value="검색조건 초기화">
+                <input type="button" onclick="location.href='<c:url value="/notice/searchListPage"/>'"  value="검색조건 초기화">
             </div>
             <div class="searchBoxs">
                 <select id="search_category" name="search_category" class="selectOption">
@@ -92,13 +92,13 @@
                         </div>
                     </c:if>
                     <p class="listNo">${post.id}</p>
-                    <p class="listTit"><a href="/edu/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
+                    <p class="listTit"><a href="/notice/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
                     <p class="listName">${post.admin_id}</p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
                     <c:if test="${isAdmin}">
                         <div class="listDelBtnBox">
-                            <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete/${post.id}'}" value="삭제">
+                            <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/notice/delete/${post.id}'}" value="삭제">
                         </div>
                     </c:if>
                 </div>

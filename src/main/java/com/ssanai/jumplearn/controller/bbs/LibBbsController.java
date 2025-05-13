@@ -1,6 +1,9 @@
 package com.ssanai.jumplearn.controller.bbs;
 
-import com.ssanai.jumplearn.dto.*;
+import com.ssanai.jumplearn.dto.AdminDTO;
+import com.ssanai.jumplearn.dto.BbsDefaultDTO;
+import com.ssanai.jumplearn.dto.PageRequestDTO;
+import com.ssanai.jumplearn.dto.PageResponseDTO;
 import com.ssanai.jumplearn.service.bbs.BbsServiceInterface;
 import com.ssanai.jumplearn.util.BbsPage;
 import com.ssanai.jumplearn.util.FilePathConfig;
@@ -18,8 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Log4j2
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/edu")
-public class EduBbsController {
+@RequestMapping("/lib")
+public class LibBbsController {
 	private final BbsServiceInterface bbsService;
 	private final FilePathConfig filePathConfig;
 
@@ -32,7 +35,7 @@ public class EduBbsController {
 		AdminDTO adto = (AdminDTO) session.getAttribute("loginInfo");
 		log.info("adto", adto.toString());
 		model.addAttribute("adto", adto);
-		return "edu/writePage";
+		return "lib/writePage";
 	}
 
 	@PostMapping("/writePage")
@@ -44,11 +47,11 @@ public class EduBbsController {
 			RedirectAttributes redirectAttributes
 	) {
 		try {
-			int result = bbsService.insert(dto, "tbl_edu");
+			int result = bbsService.insert(dto, "tbl_lib");
 			if (result < 0) {
 				log.info("글 등록 실패");
 				redirectAttributes.addFlashAttribute("msg", "글 등록에 실패했습니다.");
-				return "redirect:/edu/writePage?" + pageDTO.getLinkParams();
+				return "redirect:/lib/writePage?" + pageDTO.getLinkParams();
 			}
 
 			redirectAttributes.addFlashAttribute("msg", "등록 성공");
@@ -56,9 +59,9 @@ public class EduBbsController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "등록 실패: " + e.getMessage());
 			log.info(e.getMessage());
-			return "redirect:/edu/writePage?" + pageDTO.getLinkParams();
+			return "redirect:/lib/writePage?" + pageDTO.getLinkParams();
 		}
-		return "redirect:/edu/searchListPage?" + pageDTO.getLinkParams();
+		return "redirect:/lib/searchListPage?" + pageDTO.getLinkParams();
 	}
 
 	@GetMapping("/viewPage")
@@ -68,7 +71,7 @@ public class EduBbsController {
 			Model model
 			, HttpSession session
 	) {
-		bbsService.viewCount(id, "tbl_edu");
+		bbsService.viewCount(id, "tbl_lib");
 
 		Object loginInfo = session.getAttribute("loginInfo");
 
@@ -80,11 +83,11 @@ public class EduBbsController {
 			model.addAttribute("isAdmin", false);
 		}
 
-		BbsDefaultDTO dto = bbsService.selectOne(id, "tbl_edu");
+		BbsDefaultDTO dto = bbsService.selectOne(id, "tbl_lib");
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("pageDTO", pageDTO);
-		return "edu/viewPage";
+		return "lib/viewPage";
 	}
 
 	@GetMapping("/editPage/{id}")
@@ -99,9 +102,9 @@ public class EduBbsController {
 		AdminDTO adto = (AdminDTO) session.getAttribute("loginInfo");
 		log.info("adto", adto.toString());
 		model.addAttribute("adto", adto);
-		model.addAttribute("dto", bbsService.selectOne(id, "tbl_edu")); // 게시글 정보
+		model.addAttribute("dto", bbsService.selectOne(id, "tbl_lib")); // 게시글 정보
 		model.addAttribute("pageDTO", pageDTO);
-		return "edu/editPage";
+		return "lib/editPage";
 	}
 
 	@PostMapping("/editPage/{id}")
@@ -110,8 +113,8 @@ public class EduBbsController {
 			BbsDefaultDTO dto,
 			@ModelAttribute("pageDTO") PageRequestDTO pageDTO
 	) {
-		bbsService.update(dto, "tbl_edu");
-		return "redirect:/edu/searchListPage?" + pageDTO.getLinkParams();
+		bbsService.update(dto, "tbl_lib");
+		return "redirect:/lib/searchListPage?" + pageDTO.getLinkParams();
 	}
 
 	@GetMapping("/delete/{id}")
@@ -119,8 +122,8 @@ public class EduBbsController {
 			@PathVariable("id") int id,
 			@ModelAttribute("pageDTO") PageRequestDTO pageDTO
 	) {
-		bbsService.delete(id, "tbl_edu");
-		return "redirect:/edu/searchListPage?" + pageDTO.getLinkParams();
+		bbsService.delete(id, "tbl_lib");
+		return "redirect:/lib/searchListPage?" + pageDTO.getLinkParams();
 	}
 
 	@GetMapping("/searchListPage")
@@ -131,8 +134,8 @@ public class EduBbsController {
 			Model model
 	) {
 		model.addAttribute("pageDTO", pageDTO);
-		PageResponseDTO<BbsDefaultDTO> dto = bbsService.searchList(pageDTO, "tbl_edu");
-		int totalCount = bbsService.getTotalCount(pageDTO, "tbl_edu");
+		PageResponseDTO<BbsDefaultDTO> dto = bbsService.searchList(pageDTO, "tbl_lib");
+		int totalCount = bbsService.getTotalCount(pageDTO, "tbl_lib");
 
 		Object loginInfo = session.getAttribute("loginInfo");
 
@@ -160,7 +163,7 @@ public class EduBbsController {
 		);
 		model.addAttribute("paging", paging);
 
-		return "edu/searchListPage";
+		return "lib/searchListPage";
 	}
 
 

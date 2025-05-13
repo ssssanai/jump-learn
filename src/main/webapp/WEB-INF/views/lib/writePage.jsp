@@ -22,10 +22,10 @@
 <body>
 <div class="header">
     <img src="/resources/static/images/registLogo2.svg" alt="로고">
-    <p>커뮤니티 게시물 작성</p>
+    <p>자료실 게시물 작성</p>
 </div>
 <div class="wrap">
-    <form id="frmWrite" name="frmWrite" action="/edu/writePage" method="post">
+    <form id="frmWrite" name="frmWrite" action="/lib/writePage" method="post">
         <div class="boardTitle">
             <p>제목</p>
             <input type="text" name="title" id="title" placeholder="글 제목을 입력해주세요.">
