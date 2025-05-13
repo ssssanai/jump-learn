@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="infoMenuBody">
-                        장바구니
+                        <p>장바구니</p>
                     </div>
                 </div>
                 <div class="infoMenu">
