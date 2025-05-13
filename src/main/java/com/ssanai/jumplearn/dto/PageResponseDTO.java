@@ -83,8 +83,8 @@ public class PageResponseDTO<E> {
 
     public String getLinkParams(){
         StringBuffer sb = new StringBuffer();
-        //sb.append("page_no="+this.page_no);
-        sb.append("page_size="+this.page_size);
+        sb.append("page_no="+this.page_no);
+        sb.append("&page_size="+this.page_size);
 
         if ( this.search_category != null ){
             sb.append("&search_category="+this.search_category);

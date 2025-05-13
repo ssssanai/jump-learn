@@ -22,7 +22,7 @@ public class ClassVideoDTO {
 	private String video_name;
 	private String video_extension;
 	private long video_size;
-
+	private String notice;
 	private String title;
 	private String content;
 	private LocalDateTime created_at;
