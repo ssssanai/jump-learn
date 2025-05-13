@@ -66,7 +66,7 @@
                                                     <a href="/upload/${list.video_name}" target="_blank">${list.video_name}</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    X
+                                                    <p>X</p>
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
@@ -76,7 +76,7 @@
                                                     <a href="${list.video_url}" target="_blank">외부 영상</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    X
+                                                    <p>X</p>
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
@@ -86,7 +86,7 @@
                                                     <a href="/upload/${list.data_name}" target="_blank">${list.data_name}</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    X
+                                                    <p>X</p>
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
@@ -110,7 +110,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <div>
+                                <div class="nullTable">
                                     등록된 강의가 없습니다.
                                 </div>
                             </c:otherwise>
