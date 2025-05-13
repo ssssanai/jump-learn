@@ -26,7 +26,7 @@
     <div class="myStudyList1">
         <p class="studyNo">번호</p>
         <p class="studyCate">과목명</p>
-        <p class="studyTit1">제목</p>
+        <p class="studyTit3">제목</p>
         <p class="studyTeach">강사명</p>
         <p class="studyRegDate">구매날짜</p>
     </div>
@@ -36,7 +36,7 @@
                 <div class="myStudyList2">
                     <p class="studyNo">${dto.id}</p>
                     <p class="studyCate">${dto.class_category}</p>
-                    <a href="#" class="studyTit">${dto.class_title}</a>
+                    <a href="#" class="studyTit3">${dto.class_title}</a>
                     <p class="studyTeach">${dto.teacher_name}</p>
                     <p class="studyRegDate">${dto.pay_created_at.toString().split("T")[0]}&nbsp;${dto.pay_created_at.toString().split("T")[1]}</p>
                 </div>
