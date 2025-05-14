@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 public class ClassQuestionCommentVO {
-	private int id;
-	private int comment_id;
-	private String commenter;
-	private String comment_id_type;
-	private String content;
+	private int id; // PK
+	private int question_id; // 답글을 단 질문
+	private String commenter; // 답글 단 사람
+	private String comment_id_type; // 답글 단 사람 유형
+	private String content; // 답글 내용
 	private LocalDateTime created_at;
 	private LocalDateTime updated_at;
 }
