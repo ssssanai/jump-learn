@@ -131,6 +131,44 @@
                     </c:if>
                 </div>
             </div>
+            <%-- 질문 목록 (내가 한 질문만 가져오기) --%>
+        </div>
+        <div>
+            <c:if test="${qList.size() > 0}">
+                <h3>질문</h3>
+                <c:forEach items="${qList}" var="q">
+                    <%--질문--%>
+                    <div>
+                        <p>${q.title}</p>
+                        <p>${q.content}</p>
+                        <p>질문 일시:${q.created_at.toString().replace("T", " ")}</p>
+                        <c:if test="${q.updated_at != null}">
+                            <p>수정 일시: ${q.updated_at.toString().replace("T", " ")}</p>
+                        </c:if>
+                    </div>
+                    <%--답글--%>
+                    <div>
+                        <c:if test="${q.quested_content != null}">
+                            <p>${q.commenter}</p>
+                            <p>${q.quested_content}</p>
+                            <p>질문 일시:${q.quested_created_at.toString().replace("T", " ")}</p>
+                            <c:if test="${q.quested_updated_at != null}">
+                                <p>수정 일시: ${q.quested_updated_at.toString().replace("T", " ")}</p>
+                            </c:if>
+                        </c:if>
+                    </div>
+                </c:forEach>
+            </c:if>
+            <%-- TODO: 질문 폼 CSS 수정 --%>
+            <div>
+                <form name="class_question" action="/studyroom/class_question" method="post">
+                    <input type="hidden" value="${member.id}" name="member_id"/>
+                    <input type="hidden" value="${classDetailDTO.class_id}" name="class_id"/>
+                    질문 제목: <input type="text" name="title"/><br>
+                    질문 내용: <textarea name="content"></textarea>
+                    <input type="submit" value="질문 등록"/>
+                </form>
+            </div>
         </div>
 
         <%--입력된 후기가 없을시--%>
@@ -193,9 +231,7 @@
                 })
             });
 
-            // 강좌 질문
 
-            // 질문 목록
         </script>
 </body>
 </html>

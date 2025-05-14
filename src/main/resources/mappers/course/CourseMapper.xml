@@ -86,6 +86,23 @@
           and member_id = #{member_id}
     </select>
 
+    <select id="getClassQuestionList" resultType="com.ssanai.jumplearn.vo.ClassQuestionVO">
+        SELECT id, class_id, member_id, title, content, created_at, updated_at, visibility, is_answered
+        FROM tbl_class_question
+        WHERE class_id=#{class_id} AND  member_id = #{member_id};
+    </select>
+
+    <select id="getClassQuestionComment" resultType="com.ssanai.jumplearn.vo.ClassQuestionCommentVO">
+        SELECT id, question_id, commenter, comment_id_type, content, created_at, updated_at
+        FROM tbl_class_question_comment
+        WHERE question_id = #{question_id};
+    </select>
+
+    <insert id="createQuestion">
+        insert into tbl_class_question(class_id, member_id, title, content, created_at, visibility, is_answered) values
+        (#{dto.class_id}, #{dto.member_id}, #{dto.title}, #{dto.content}, now(), 1, 0)
+    </insert>
+
     <sql id="whereCondition">
         <where>
             <if test="search_word != null and search_word != '' and search_word != 'null'">

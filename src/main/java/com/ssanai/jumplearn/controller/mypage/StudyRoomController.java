@@ -9,6 +9,8 @@ import com.ssanai.jumplearn.service.plan.PlanServiceIf;
 import com.ssanai.jumplearn.service.post.PostServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
 import com.ssanai.jumplearn.util.CommonUtil;
+import com.ssanai.jumplearn.vo.ClassQuestionCommentVO;
+import com.ssanai.jumplearn.vo.ClassQuestionVO;
 import com.ssanai.jumplearn.vo.PostCommentVO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -113,23 +118,55 @@ public class StudyRoomController {
 		List<ClassVideoDTO> videoList = courseService.getClassVideoList(class_id);
 		boolean isReviewed = false;
 		for (ReviewDTO reviewDTO : reviewList) {
-			if(reviewDTO.getMember_id().equals(member_id)
+			if (reviewDTO.getMember_id().equals(member_id)
 					&& reviewDTO.getReview() != null
 					&& reviewDTO.getFeedback_score() > 0
 			) {
 				isReviewed = true;
 			}
 		}
-		log.info(isReviewed);
-		log.info("필터링 전 리뷰목록" + reviewList);
+//		log.info(isReviewed);
+//		log.info("필터링 전 리뷰목록" + reviewList);
 		reviewList = reviewList.stream().filter(dto -> dto.getReview() != null).toList();
-		log.info("필터링 후 리뷰목록" + reviewList);
+//		log.info("필터링 후 리뷰목록" + reviewList);
+
+		List<ClassQuestionDTO> qList = new ArrayList<>();
+		// 내가 선생님한테 질문한 목록 가져오기
+		List<ClassQuestionVO> questedList = courseService.getClassQuestionList(class_id, member_id);
+		log.info("강좌 ID: {}", class_id);
+		log.info("내가 한 질문: {}", questedList);
+		// 선생님이 답글 단 거 가져오기 -> Map에 담아서 전달
+		if (questedList != null && !questedList.isEmpty()) {
+			for (ClassQuestionVO vo : questedList) {
+				// vo의 ID == tbl_class_question_comment.question_id 로 검사
+				ClassQuestionCommentVO qc = courseService.getClassQuestionComment(vo.getId());
+				if (qc != null) {
+					qList.add(courseService.getQuestionDTO(vo, qc));
+				} else {
+					qList.add(
+							ClassQuestionDTO.builder()
+									.id(vo.getId())
+									.class_id(vo.getClass_id())
+									.member_id(vo.getMember_id())
+									.title(vo.getTitle())
+									.content(vo.getContent())
+									.created_at(vo.getCreated_at())
+									.updated_at(vo.getUpdated_at())
+									.visibility(vo.getVisibility())
+									.is_answered(vo.getIs_answered())
+									.build()
+					);
+				}
+			}
+		}
+		log.info("qList: {}", qList);
 
 		model.addAttribute("member", mDTO);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("classDetailDTO", classDetailDTO);
 		model.addAttribute("videoList", videoList);
 		model.addAttribute("isReviewed", isReviewed);
+		model.addAttribute("qList", qList);
 		return "member/detail";
 	}
 
@@ -159,6 +196,22 @@ public class StudyRoomController {
 			ra.addFlashAttribute("msg", "리뷰를 정상적으로 등록했습니다.");
 		}
 		return "redirect:/studyroom/enroll/" + enrollments.getClass_id();
+	}
+
+	@PostMapping("/class_question")
+	public String classQuestion(
+			@ModelAttribute("class_question") ClassQuestionDTO question,
+			RedirectAttributes ra,
+			Model model
+	) {
+		log.info("question: " + question);
+		int result = courseService.createQuestion(question);
+		if (result > 0) {
+			ra.addFlashAttribute("msg", "질문을 등록했습니다.");
+		} else {
+			ra.addFlashAttribute("msg", "질문 등록에 실패했습니다.");
+		}
+		return "redirect:/studyroom/enroll/" + question.getClass_id();
 	}
 
 	// 내가 작성한 게시글
@@ -356,9 +409,5 @@ public class StudyRoomController {
 		model.addAttribute("PlanList", planList);
 		return "member/studyroom";
 	}
-	// 강좌 공지사항
-
-	// 강의 공지사항
-	// 강의 재생
 	// 강좌 질문
 }
