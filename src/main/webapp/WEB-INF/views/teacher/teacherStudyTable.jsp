@@ -18,6 +18,7 @@
     <title>JL - 강의표 페이지</title>
 </head>
 <body>
+<%@include file="/resources/static/html/tcheaderGnb.jsp"%>
 <div id="noticeModal">
     <div class="modalwrap">
         <div class="modalBox">

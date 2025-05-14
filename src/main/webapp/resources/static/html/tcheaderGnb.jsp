@@ -12,7 +12,7 @@
   </div>
   <ul class="mainmenu">
     <li>
-      <a href="#">로그아웃</a>
+      <a href="/teacher/logout">로그아웃</a>
     </li>
   </ul>
 </div>

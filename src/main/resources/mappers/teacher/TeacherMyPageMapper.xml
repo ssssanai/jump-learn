@@ -105,5 +105,14 @@
         ON q.class_id = cl.id
         WHERE q.id=#{id}
     </select>
+    <insert id="teacherComment">
+        INSERT INTO tbl_class_question_comment(question_id,comment_id_type ,commenter, content, created_at)
+        VALUES(#{id}, #{teacher_id}, "tbl_teacher",#{comment_content}, NOW())
+    </insert>
+    <update id="questionIsAnsweredUpdate">
+        UPDATE tbl_class_question
+        SET is_answered = 1
+        WHERE id = #{id}
+    </update>
 </mapper>
     

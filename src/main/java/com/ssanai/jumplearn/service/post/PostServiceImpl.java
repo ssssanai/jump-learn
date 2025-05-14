@@ -1,8 +1,6 @@
 package com.ssanai.jumplearn.service.post;
 
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.PageResponseDTO;
-import com.ssanai.jumplearn.dto.PostDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.mapper.post.PostMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -10,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -40,4 +39,63 @@ public class PostServiceImpl implements PostServiceIf {
 	public PostDTO selectById(int id) {
 		return null;
 	}
+
+
+
+	//임경근 작품
+	@Override
+	public PageResponseDTO<PostDTO> searchList(PageRequestDTO requestDTO) {
+		int totalCount = postMapper.postTotalCount(requestDTO);
+		List<PostDTO> postList = postMapper.searchList(requestDTO);
+
+		PageResponseDTO<PostDTO> responseDTO =
+				PageResponseDTO
+						.<PostDTO>withAll()
+						.reqDTO(requestDTO)
+						.dtoList(postList)
+						.total_count(totalCount)
+						.build();
+		return responseDTO;
+	}
+	@Override
+	public int postTotalCount(PageRequestDTO requestDTO){
+		return postMapper.postTotalCount(requestDTO);
+	}
+
+	@Override
+	public PostDetailDTO selectDetailById(int id) {
+		PostDetailDTO dto = postMapper.selectDetailById(id);
+		return dto;
+	}
+
+	@Override
+	public List<BbsFileDTO> selectFileById(int id) {
+		return postMapper.selectFileById(id);
+	}
+
+	@Override
+	public int insertFile(BbsFileDTO fileDTO) {
+		int rs = postMapper.insertFile(fileDTO);
+		if(rs > 0) {
+			log.info("tbl_bbs_file ID: "+fileDTO.getId());
+		return fileDTO.getId();
+		}
+		return rs;
+	}
+
+	@Override
+	public int insertPost(PostDTO postDTO) {
+		int rs = postMapper.insertPost(postDTO);
+		if(rs > 0){
+			log.info(postDTO.getId());
+			return postDTO.getId();
+		}
+		return rs;
+	}
+
+	@Override
+	public int bridgeFile(int f_id, int p_id) {
+		return postMapper.bridgeFile(f_id,p_id);
+	}
+
 }
