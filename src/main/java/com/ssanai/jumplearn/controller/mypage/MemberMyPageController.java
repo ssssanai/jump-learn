@@ -51,8 +51,22 @@ public class MemberMyPageController {
 		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
 		loginInfo = memberMyPageService.MemberMyPageInfo(loginInfo.getId());
 		log.info(loginInfo);
-
+		PostDTO postDTO = memberMyPageService.PostMyPageInfo();
+		log.info(postDTO);
+		BbsDefaultDTO noticeDTO = memberMyPageService.noticeMyPageInfo();
+		BbsDefaultDTO eduDTO = memberMyPageService.eduMyPageInfo();
+		BbsDefaultDTO infoDTO = memberMyPageService.infoMyPageInfo();
+		BbsDefaultDTO activityDTO = memberMyPageService.activityMyPageInfo();
+		BbsDefaultDTO libDTO = memberMyPageService.libMyPageInfo();
+		BbsDefaultDTO newsDTO = memberMyPageService.newsMyPageInfo();
+		model.addAttribute("noticeDTO", noticeDTO);
+		model.addAttribute("eduDTO", eduDTO);
+		model.addAttribute("infoDTO", infoDTO);
+		model.addAttribute("activityDTO", activityDTO);
+		model.addAttribute("libDTO", libDTO);
+		model.addAttribute("newsDTO", newsDTO);
 		model.addAttribute("member", loginInfo);
+		model.addAttribute("post", postDTO);
 		return "member/mypage";
 	}
 

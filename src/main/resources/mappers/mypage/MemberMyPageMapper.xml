@@ -24,5 +24,54 @@
         SET status = 3
         WHERE id = #{id}
     </delete>
+    <select id="PostMyPageInfo">
+        SELECT id, title, member_id, created_at, view_count
+        FROM tbl_post
+        WHERE created_at BETWEEN NOW() - INTERVAL 1 DAY AND NOW()
+        ORDER BY view_count DESC
+        LIMIT 1;
+    </select>
+    <select id="noticeMyPageInfo">
+        SELECT id, title, admin_id, created_at, view_count
+        FROM tbl_notice
+        WHERE created_at BETWEEN NOW() - INTERVAL 1 DAY AND NOW()
+        ORDER BY view_count DESC
+        LIMIT 1;
+    </select>
+    <select id="eduMyPageInfo">
+        SELECT id, title, admin_id, created_at, view_count
+        FROM tbl_edu
+        WHERE created_at BETWEEN NOW() - INTERVAL 1 DAY AND NOW()
+        ORDER BY view_count DESC
+        LIMIT 1;
+    </select>
+    <select id="infoMyPageInfo">
+        SELECT id, title, admin_id, created_at, view_count
+        FROM tbl_info
+        WHERE created_at BETWEEN NOW() - INTERVAL 1 DAY AND NOW()
+        ORDER BY view_count DESC
+        LIMIT 1;
+    </select>
+    <select id="activityMyPageInfo">
+        SELECT id, title, admin_id, created_at, view_count
+        FROM tbl_activity
+        WHERE created_at BETWEEN NOW() - INTERVAL 1 DAY AND NOW()
+        ORDER BY view_count DESC
+        LIMIT 1;
+    </select>
+    <select id="libMyPageInfo">
+        SELECT id, title, admin_id, created_at, view_count
+        FROM tbl_lib
+        WHERE created_at BETWEEN NOW() - INTERVAL 1 DAY AND NOW()
+        ORDER BY view_count DESC
+        LIMIT 1;
+    </select>
+    <select id="newsMyPageInfo">
+        SELECT id, title, admin_id, created_at, view_count
+        FROM tbl_news
+        WHERE created_at BETWEEN NOW() - INTERVAL 1 DAY AND NOW()
+        ORDER BY view_count DESC
+        LIMIT 1;
+    </select>
 </mapper>
     

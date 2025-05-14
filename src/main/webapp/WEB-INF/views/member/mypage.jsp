@@ -40,7 +40,7 @@
                     </c:choose>
                 </div>
                 <div class="myInfop">
-                    <p>회원등급  ${member.grade}</p>
+                    <p>회원등급  ${loginInfo.status}</p>
                     <h2>환영합니다 ${member.name}</h2>
                 </div>
             </div>
@@ -137,44 +137,54 @@
                 </div>
                 <div class="boardLine1">
                     <h2>자유게시판</h2>
-                    <a href="#">더보기</a>
+                    <a href="/post/searchListPage">더보기</a>
                     <table>
                         <tr class="tbH1">
                             <th class="tbNo"><p>번호</p></th>
                             <th class="tbTit">제목</th>
                             <th class="tbName">작성자</th>
                             <th class="tbDate">작성일</th>
-                            <th class="tbView">좋아요</th>
+                            <th class="tbView">조회수</th>
                         </tr>
                         <tr class="tbB1">
-                            <td class="tbNo">1</td>
-                            <td class="tbTit"><a href="#">가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창가나다라마다바사자창창</a></td>
-                            <td class="tbName">홍길동</td>
-                            <td class="tbDate">2025.05.01</td>
-                            <td class="tbView">2341</td>
+                            <td class="tbNo">${post.id}</td>
+                            <td class="tbTit"><a href="/post/view?id=${post.id}">${post.title}</a></td>
+                            <td class="tbName">${post.member_id.length() >= 3 ? post.member_id.substring(0, 3).concat("...") : post.member_id}</td>
+                            <td class="tbDate">${post.created_at}</td>
+                            <td class="tbView">${post.view_count}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="boardLine2">
                     <div class="boards bs1">
                         <h2>공지사항</h2>
-                        <a href="#">더보기</a>
+                        <a href="/notice/searchListPage">더보기</a>
                         <table>
                             <tr class="tbH2">
                                 <th class="tbNo1">번호</th>
                                 <th class="tbTit1">제목</th>
-                                <th class="tbDate1">작성일</th>
+                                <th class="tbName1">작성자</th>
                             </tr>
                             <tr class="tbB2">
-                                <td class="tbNo1">1</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
+                                <c:choose>
+                                    <c:when test="${not empty noticeDTO}">
+                                        <td class="tbNo1">${noticeDTO.id}</td>
+                                        <td class="tbTit1"><p class="tbTitP">
+                                                ${noticeDTO.title.length() >= 10 ? noticeDTO.title.substring(0, 10).concat("...") : noticeDTO.title}
+                                        </p></td>
+                                        <td class="tbName1">${noticeDTO.admin_id}</td>
+                                        <td class="tbDate1">${noticeDTO.created_at}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td colspan="3">추천 게시물이 없습니다.</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                         </table>
                     </div>
                     <div class="boards bs2">
                         <h2>교육 정보 게시판</h2>
-                        <a href="#">더보기</a>
+                        <a href="/edu/searchListPage">더보기</a>
                         <table>
                             <tr class="tbH2">
                                 <th class="tbNo1">번호</th>
@@ -183,16 +193,23 @@
                                 <th class="tbDate1">작성일</th>
                             </tr>
                             <tr class="tbB2">
-                                <td class="tbNo1">1</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
+                                <c:choose>
+                                    <c:when test="${not empty eduDTO}">
+                                        <td class="tbNo1">${eduDTO.id}</td>
+                                        <td class="tbTit1"><p class="tbTitP">${eduDTO.title.length() >= 10 ? eduDTO.title.substring(0, 10).concat("...") : eduDTO.title}</p></td>
+                                        <td class="tbName1">${eduDTO.admin_id}</td>
+                                        <td class="tbDate1">${eduDTO.created_at}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td colspan="4">추천 게시물이 없습니다.</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                         </table>
                     </div>
                     <div class="boards bs3">
                         <h2>대입 정보 게시판</h2>
-                        <a href="#">더보기</a>
+                        <a href="/info/searchListPage">더보기</a>
                         <table>
                             <tr class="tbH2">
                                 <th class="tbNo1">번호</th>
@@ -201,10 +218,17 @@
                                 <th class="tbDate1">작성일</th>
                             </tr>
                             <tr class="tbB2">
-                                <td class="tbNo1">1</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
+                                <c:choose>
+                                    <c:when test="${not empty libDTO}">
+                                        <td class="tbNo1">${infoDTO.id}</td>
+                                        <td class="tbTit1"><p class="tbTitP">${infoDTO.title.length() >= 10 ? infoDTO.title.substring(0, 10).concat("...") : infoDTO.title}</p></td>
+                                        <td class="tbName1">${infoDTO.admin_id}</td>
+                                        <td class="tbDate1">${infoDTO.created_at}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td colspan="4">추천 게시물이 없습니다.</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                         </table>
                     </div>
@@ -212,23 +236,30 @@
                 <div class="boardLine2">
                     <div class="boards bs1">
                         <h2>대외활동 게시판</h2>
-                        <a href="#">더보기</a>
+                        <a href="/activity/searchListPage">더보기</a>
                         <table>
                             <tr class="tbH2">
                                 <th class="tbNo1">번호</th>
                                 <th class="tbTit1">제목</th>
-                                <th class="tbDate1">작성일</th>
+                                <th class="tbName1">작성자</th>
                             </tr>
                             <tr class="tbB2">
-                                <td class="tbNo1">1</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbDate1">2025.05.01</td>
+                                <c:choose>
+                                    <c:when test="${not empty activityDTO}">
+                                        <td class="tbNo1">${activityDTO.id}</td>
+                                        <td class="tbTit1"><p class="tbTitP">${activityDTO.title.length() >= 10 ? activityDTO.title.substring(0, 10).concat("...") : activityDTO.title}</p></td>
+                                        <td class="tbName1">${activityDTO.admin_id}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td colspan="3">추천 게시물이 없습니다.</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                         </table>
                     </div>
                     <div class="boards bs2">
                         <h2>자료실 게시판</h2>
-                        <a href="#">더보기</a>
+                        <a href="/lib/searchListPage">더보기</a>
                         <table>
                             <tr class="tbH2">
                                 <th class="tbNo1">번호</th>
@@ -237,16 +268,23 @@
                                 <th class="tbDate1">작성일</th>
                             </tr>
                             <tr class="tbB2">
-                                <td class="tbNo1">1</td>
-                                <td class="tbTit1"><a href="#" class="tbTitP">제목입니다 테스트ddd</a></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
+                                <c:choose>
+                                    <c:when test="${not empty libDTO}">
+                                        <td class="tbNo1">${libDTO.id}</td>
+                                        <td class="tbTit1"><p class="tbTitP">${libDTO.title.length() >= 10 ? libDTO.title.substring(0, 10).concat("...") : libDTO.title}</p></td>
+                                        <td class="tbName1">${libDTO.admin_id}</td>
+                                        <td class="tbDate1">${libDTO.created_at}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td colspan="4">추천 게시물이 없습니다.</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                         </table>
                     </div>
                     <div class="boards bs3">
                         <h2>뉴스 게시판</h2>
-                        <a href="#">더보기</a>
+                        <a href="/news/searchListPage">더보기</a>
                         <table>
                             <tr class="tbH2">
                                 <th class="tbNo1">번호</th>
@@ -255,10 +293,17 @@
                                 <th class="tbDate1">작성일</th>
                             </tr>
                             <tr class="tbB2">
-                                <td class="tbNo1">1</td>
-                                <td class="tbTit1"><p class="tbTitP">제목입니다 테스트ddd</p></td>
-                                <td class="tbName1">홍길동</td>
-                                <td class="tbDate1">2025.05.01</td>
+                                <c:choose>
+                                    <c:when test="${not empty newsDTO}">
+                                        <td class="tbNo1">${newsDTO.id}</td>
+                                        <td class="tbTit1"><p class="tbTitP">${newsDTO.title.length() >= 10 ? newsDTO.title.substring(0, 10).concat("...") : newsDTO.title}</p></td>
+                                        <td class="tbName1">${newsDTO.admin_id}</td>
+                                        <td class="tbDate1">${newsDTO.created_at}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td colspan="4">추천 게시물이 없습니다.</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                         </table>
                     </div>

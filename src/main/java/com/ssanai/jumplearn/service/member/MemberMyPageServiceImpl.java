@@ -1,6 +1,8 @@
 package com.ssanai.jumplearn.service.member;
 
+import com.ssanai.jumplearn.dto.BbsDefaultDTO;
 import com.ssanai.jumplearn.dto.MemberDTO;
+import com.ssanai.jumplearn.dto.PostDTO;
 import com.ssanai.jumplearn.mapper.member.MemberMyPageMapper;
 import com.ssanai.jumplearn.util.CommonDateUtil;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +34,40 @@ public class MemberMyPageServiceImpl implements MemberMyPageServiceIf {
     public MemberDTO memberMyPageDelete(MemberDTO memberId) {
         MemberDTO rs = memberMyPageMapper.memberMyPageDelete(memberId);
         return rs;
+    }
+
+    @Override
+    public PostDTO PostMyPageInfo() {
+        return memberMyPageMapper.PostMyPageInfo();
+    }
+
+    @Override
+    public BbsDefaultDTO noticeMyPageInfo() {
+        return memberMyPageMapper.noticeMyPageInfo();
+    }
+
+    @Override
+    public BbsDefaultDTO eduMyPageInfo() {
+        return memberMyPageMapper.eduMyPageInfo();
+    }
+
+    @Override
+    public BbsDefaultDTO infoMyPageInfo() {
+        return memberMyPageMapper.infoMyPageInfo();
+    }
+
+    @Override
+    public BbsDefaultDTO activityMyPageInfo() {
+        return memberMyPageMapper.activityMyPageInfo();
+    }
+
+    @Override
+    public BbsDefaultDTO libMyPageInfo() {
+        return memberMyPageMapper.libMyPageInfo();
+    }
+
+    @Override
+    public BbsDefaultDTO newsMyPageInfo() {
+        return memberMyPageMapper.newsMyPageInfo();
     }
 }
