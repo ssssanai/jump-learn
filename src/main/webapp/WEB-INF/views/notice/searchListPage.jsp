@@ -15,24 +15,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/resources/static/css/community/edu/eduListPage.css" rel="stylesheet" type="text/css">
-    <link href="/resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <title>검색 결과 리스트 페이지</title>
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="../../../resources/static/html/headerGnb.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp"%>
 <div class="wrap">
     <div class="aside">
-        <div class="sideMenu">
-            <h2 class="sideMenuTitle">커뮤니티</h2>
-            <a href="/post/searchListPage">자유게시판</a>
-            <a href="/edu/searchListPage">교육 정보 게시판</a>
-            <a href="/info/searchListPage">대입 정보 게시판</a>
-            <a href="/activity/searchListPage">대외활동 게시판</a>
-            <a href="/lib/searchListPage">자료실 게시판</a>
-            <a href="/news/searchListPage">뉴스 게시판</a>
-            <a href="/notice/searchListPage" class="select">공지사항 게시판</a>
+        <div class="profile">
+            <div class="sideMenu">
+                <h2 class="sideMenuTitle">커뮤니티</h2>
+                <a href="/post/searchListPage">자유게시판</a>
+                <a href="/edu/searchListPage">교육 정보 게시판</a>
+                <a href="/info/searchListPage">대입 정보 게시판</a>
+                <a href="/activity/searchListPage">대외활동 게시판</a>
+                <a href="/lib/searchListPage">자료실 게시판</a>
+                <a href="/news/searchListPage">뉴스 게시판</a>
+                <a href="/notice/searchListPage" class="select">공지사항 게시판</a>
+            </div>
         </div>
     </div>
     <div class="main">

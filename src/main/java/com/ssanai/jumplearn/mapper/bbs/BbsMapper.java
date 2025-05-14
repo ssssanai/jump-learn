@@ -1,6 +1,7 @@
 package com.ssanai.jumplearn.mapper.bbs;
 
 
+import com.ssanai.jumplearn.dto.MemberDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.vo.BbsDefaultVO;
 import com.ssanai.jumplearn.vo.BbsFileVO;
@@ -25,4 +26,5 @@ public interface BbsMapper {
 	public List<BbsDefaultVO> searchList(@Param("dto") PageRequestDTO pageDTO, @Param("table_name") String table_name);
 
 	public int viewCount(@Param("id") int id, @Param("table_name") String table_name);
+
 }
