@@ -8,6 +8,7 @@ import com.ssanai.jumplearn.vo.EnrollmentsVO;
 import com.ssanai.jumplearn.vo.PayVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EnrollmentsServiceImpl implements EnrollmentsServiceIf{
 	private final EnrollmentsMapper enrollmentsMapper;
+	private final ModelMapper modelMapper;
 
 	@Override
 	public int getTotalCount(PageRequestDTO dto, String id) {
@@ -57,5 +59,16 @@ public class EnrollmentsServiceImpl implements EnrollmentsServiceIf{
 	@Override
 	public List<EnrollmentsVO> getList(String member_id) {
 		return enrollmentsMapper.getList(member_id);
+	}
+
+	@Override
+	public int updateReview(EnrollmentsDTO dto) {
+		EnrollmentsVO vo = EnrollmentsVO.builder()
+				.member_id(dto.getMember_id())
+				.review(dto.getReview())
+				.feedback_score(dto.getFeedback_score())
+				.class_id(dto.getClass_id())
+				.build();
+		return enrollmentsMapper.updateReview(vo);
 	}
 }
