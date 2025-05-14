@@ -42,7 +42,7 @@
                     <div class="buyDate">
                         <c:if test="${p.pay_canceled_at != null}" var="isCanceled"><p>${p.pay_canceled_at.toString().split("T")[0]}&nbsp;${p.pay_canceled_at.toString().split("T")[1]} 취소</p></c:if>
                         <c:if test="${not isCanceled}"><p>${p.pay_created_at.toString().split("T")[0]}&nbsp;${p.pay_created_at.toString().split("T")[1]} 주문</p></c:if>
-                        <a href="/course/detail/${p.class_id}">강의 상세보기 ></a>
+                        <a href="/studyroom/enroll/${p.class_id}">강의 상세보기 ></a>
                     </div>
                     <div class="buyMain">
                         <div class="buyCont">
@@ -69,7 +69,9 @@
                                     <a href="/pay/refund/${p.class_id}">환불 요청</a>
                                 </c:if>
                             </c:if>
-                            <a href="/studyroom/enroll/${p.}">후기 작성</a>
+                            <c:if test="${isCompleted}">
+                                <a href="/studyroom/enroll/${p.class_id}">후기 작성</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>

@@ -27,7 +27,8 @@ public class BasketController {
 			HttpServletRequest req,
 			RedirectAttributes ra,
 			@PathVariable("id") int id, // 강좌 ID
-			@RequestHeader(value = "Referer", required = false) String referer
+			@RequestHeader(value = "Referer", required = false) String referer,
+			Model model
 	) {
 		MemberDTO mDTO = (MemberDTO) req.getSession().getAttribute("loginInfo");
 
@@ -42,12 +43,13 @@ public class BasketController {
 		int isExist = basketService.isBasketExist(id, member_id);
 		log.info(referer);
 		if(isExist == 1) {
-			ra.addAttribute("msg", "이미 장바구니에 담긴 강좌입니다.");
+			ra.addFlashAttribute("msg", "이미 장바구니에 담긴 강좌입니다.");
 			return "redirect:/course/list";
 		} else {
 			int result = basketService.addBasket(id, member_id);
 			log.info(result);
 			if(referer != null) {
+				model.addAttribute("isInBasket", true);
 				return "redirect:" + referer;
 			} else {
 				return "redirect:/course/list";

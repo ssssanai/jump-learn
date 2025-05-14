@@ -17,4 +17,5 @@ public interface CourseMapper {
 	public int checkReviewExist(@Param("id") int id);
 	public double getReviewRate(@Param("id") int id);
 	public List<ReviewDTO> getReviewListById(@Param("id") int id);
+	public int isPurchased(@Param("class_id") int class_id, @Param("member_id") String member_id);
 }

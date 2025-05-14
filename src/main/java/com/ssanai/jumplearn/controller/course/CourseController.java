@@ -9,12 +9,14 @@ import com.ssanai.jumplearn.service.course.EnrollmentsServiceIf;
 import com.ssanai.jumplearn.service.mainpage.MainPageServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
 import com.ssanai.jumplearn.vo.EnrollmentsVO;
+import com.ssanai.jumplearn.vo.PayVO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,22 +99,41 @@ public class CourseController {
 		return "course/list";
 	}
 
-	@GetMapping("/detail/{id}")
+	@GetMapping("/detail/{class_id}")
 	public String detail(
-			@PathVariable("id") int id // 강좌 ID
+			HttpServletRequest req
+			, RedirectAttributes ra
+			, @PathVariable("class_id") int id // 강좌 ID
 			, Model model
 	) {
 		log.info(id);
+		// 회원 정보
+		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		// 로그인 체크
+		if (loginInfo == null) {
+			log.info("Not Logged In Member");
+			ra.addFlashAttribute("msg", "로그인 후 사용 가능한 서비스입니다.");
+			return "redirect:/member/login";
+		}
+		String member_id = loginInfo.getId();
+
+		// pay에 있는 강좌인 경우 수강 목록으로 이동
+		int isPurchased = courseService.isPurchased(id, member_id);
+		if(isPurchased > 0) {
+			return "redirect:/studyroom/enroll/"+id ;
+		}
+
+		int isInBasket = basketService.isBasketExist(id, member_id);
+		if(isInBasket > 0) {
+			model.addAttribute("isInBasket", true);
+		}
+
 		ClassDetailDTO classDetailDTO = courseService.getClassDetailById(id);
 		List<ReviewDTO> reviewList = courseService.getReviewListById(id);
+		reviewList = reviewList.stream().filter(dto -> dto.getReview() != null).toList();
 		List<ClassVideoDTO> videoList = courseService.getClassVideoList(id);
 		double rate = courseService.getReviewRate(id);
 
-		log.info(classDetailDTO);
-		log.info(reviewList);
-
-		log.info(videoList);
-		log.info(rate);
 
 		model.addAttribute("classDetailDTO", classDetailDTO);
 		model.addAttribute("reviewList", reviewList);
@@ -120,5 +141,6 @@ public class CourseController {
 		model.addAttribute("reviewRate", rate);
 		return "course/detail";
 	}
+
 
 }

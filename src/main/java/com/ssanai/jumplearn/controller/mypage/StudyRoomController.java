@@ -114,7 +114,9 @@ public class StudyRoomController {
 		boolean isReviewed = false;
 		for (ReviewDTO reviewDTO : reviewList) {
 			if(reviewDTO.getMember_id().equals(member_id)
-					&& reviewDTO.getReview() != null) {
+					&& reviewDTO.getReview() != null
+					&& reviewDTO.getFeedback_score() > 0
+			) {
 				isReviewed = true;
 			}
 		}
@@ -140,6 +142,7 @@ public class StudyRoomController {
 		log.info("리뷰 업데이트");
 		log.info(model.getAttribute("member"));
 		log.info(enrollments);
+
 		if (!(enrollments.getFeedback_score() >= 1 && enrollments.getFeedback_score() <= 5)) {
 			log.info("리뷰 점수 오류");
 			ra.addFlashAttribute("msg", "평점은 1~5점에서 선택 가능합니다.");
@@ -353,4 +356,9 @@ public class StudyRoomController {
 		model.addAttribute("PlanList", planList);
 		return "member/studyroom";
 	}
+	// 강좌 공지사항
+
+	// 강의 공지사항
+	// 강의 재생
+	// 강좌 질문
 }

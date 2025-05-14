@@ -65,4 +65,9 @@ public class CourseServiceImpl implements CourseServiceIf {
 			return 0;
 		}
 	}
+
+	@Override
+	public int isPurchased(int class_id, String member_id) {
+		return courseMapper.isPurchased(class_id, member_id);
+	}
 }
