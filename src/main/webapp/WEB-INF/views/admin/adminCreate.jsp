@@ -9,7 +9,7 @@
 <html>
 <head>
     <link href="../../../resources/static/css/admin/teacherCreateStyle.css" rel="stylesheet" type="text/css">
-    <title>선생님 계정 생성</title>
+    <title>관리자 계정 생성</title>
 </head>
 <body>
 <%@ include file="../../../resources/static/html/adminGnb.jsp" %>
@@ -21,7 +21,7 @@
             "\n- 이름: 한글 10자 이내\n- 생일: 과거 날짜만 허용\n- 이메일: 정확한 이메일 형식\n\n⚠️ 이후 잘못 생성 시에는 책임지지 않습니다.");
     };
 </script>
-<h2 style="text-align:center;">선생님 등록</h2>
+<h2 style="text-align:center;">관리자 등록</h2>
 
 <form action="/admin/admin_create" method="post">
     <label for="id">아이디</label>
