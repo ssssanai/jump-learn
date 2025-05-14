@@ -52,7 +52,16 @@
                 <div class="boardTitle">
                     <p>제목${dto.post_title}</p>
                     <div class="boardListBtn">
-                        <button><i class="fa-solid fa-heart"></i>♡</button>
+                        <c:if test="${isLiked}">
+<%--                            <button>--%>
+                                <i class="fa-solid fa-heart" onclick="location.href='/post/like/${loginInfo.id}/${dto.post_id}'"></i>
+<%--                            </button>--%>
+                        </c:if>
+                        <c:if test="${not isLiked}">
+<%--                            <button>--%>
+                                <i class="fa-regular fa-heart" style="color: #bebebe" onclick="location.href='/post/like/${loginInfo.id}/${dto.post_id}'"></i>
+<%--                            </button>--%>
+                        </c:if>
                         <button><i class="fa-solid fa-triangle-exclamation"></i></button>
                     </div>
                 </div>
@@ -64,13 +73,13 @@
                         <p>작성자 : ${dto.post_member_id}</p>
                     </div>
                     <div class="boardRegDate">
-                        <p>작성일 : ${dto.post_created_at}</p>
+                        <p>작성일 : ${dto.post_created_at.toString().replace("T", " ")}</p>
                     </div>
                     <div class="boardViewCnt">
                         <p>조회수 ${dto.view_count}회</p>
                     </div>
                     <div class="boardLikeCnt">
-                        <p>좋아요 개</p>
+                        <p>좋아요 ${dto.like_count} 개</p>
                     </div>
                 </div>
                 <div class="boardCont">
