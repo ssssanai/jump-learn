@@ -19,10 +19,10 @@
     <title>JL - 강좌 정보</title>
 </head>
 <body>
-
 <%--고정 헤더 파일--%>
 <%@include file="/resources/static/html/memberGnb.jsp" %>
-
+<%@include file="/resources/static/html/adminMsg.jsp" %>
+<%-- TODO: 후기 작성 + 강좌 질문 --%>
 <div class="wrap">
     <div class="studyTitle">
         <h1>${classDetailDTO.class_title}</h1>
@@ -52,14 +52,6 @@
             <div class="sbB2">
                 <p>${classDetailDTO.class_introduce}</p>
             </div>
-            <div class="price">
-                <p class="priCnt1" style="font-size: 13px; line-height: 28px;">총 강의 가격</p>
-                <p class="priCnt2" style="font-size: 17px; line-height: 28px;">${classDetailDTO.class_price}</p>
-                <p class="priCnt3" style="font-size: 13px; line-height: 28px;">원</p>
-            </div>
-            <div class="buyBtn">
-                <a href="/basket/add/${classDetailDTO.class_id}">장바구니 담기</a>
-            </div>
         </div>
     </div>
     <div class="studyBox2">
@@ -71,7 +63,7 @@
             <div class="sbB3">
                 <div class="teacherPro">
                     <%--${classDetailDTO.teacher_file_path}/${teacher_file_name}.${teacher_file_ext}--%>
-                    <img src="/resources/static/images/memberPage/profileEx.jpg">
+                    <img src="../../../resources/static/images/memberPage/profileEx.jpg">
                 </div>
                 <div class="teacherIn">
                     <p>${classDetailDTO.teacher_introduce1}<br>
@@ -112,16 +104,45 @@
                 <p class="studyNo4">별점</p>
             </div>
             <div class="reviewListBox">
-                <c:forEach items="${reviewList}" var="review">
+                <c:if test="${reviewList.size() > 0}" var="isReviewExist">
+                    <c:forEach items="${reviewList}" var="review">
+                        <div class="reviewList2">
+                            <p class="studyContent3">${review.member_id}</p>
+                            <p class="studyTit3">${review.review}</p>
+                            <p class="studyNo3"> ${review.feedback_score}</p>
+                        </div>
+                    </c:forEach>
+                </c:if>
+                <c:if test="${not isReviewExist}">
                     <div class="reviewList2">
-                        <p class="studyContent3">${review.member_id}</p>
-                        <p class="studyTit3">${review.review}</p>
-                        <p class="studyNo3"> ${review.feedback_score}</p>
+                        아직 후기가 없습니다.
                     </div>
-                </c:forEach>
+                </c:if>
             </div>
         </div>
     </div>
+    <%--입력된 후기가 없을시--%>
+    <c:if test="${not isReviewed}">
+        <div class="reviewBox">
+            <h2>후기작성</h2>
+                <%-- 후기 추가 메소드 --%>
+            <form action="/studyroom/update_review" name="review" method="post">
+                <input type="hidden" name="member_id" value="${member.id}"/>
+                <input type="hidden" name="class_id" value="${classDetailDTO.class_id}"/>
+                <div class="review1">
+                    <h2>별점 입력</h2>
+                    <p class="reviewComment">1 ~ 5점까지 입력가능합니다.</p>
+                    <input type="number" min="1" max="5" step="1" value="별점 1~5점" name="feedback_score">
+                </div>
+                <div class="review2">
+                    <h2>후기 입력</h2>
+                    <p class="reviewComment">최대 255자까지 입력 가능합니다.</p>
+                    <textarea type="text" name="review" placeholder="후기를 작성하세요." maxlength="255"></textarea>
+                </div>
+                <input type="submit" name="" class="reviewBtn" value="후기작성">
+            </form>
+        </div>
+    </c:if>
 </div>
 </body>
 </html>

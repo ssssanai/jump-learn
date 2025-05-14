@@ -107,5 +107,11 @@
         from tbl_enrollments
         where member_id = #{member_id}
     </select>
+
+    <update id="updateReview" >
+        update tbl_enrollments
+        set review = #{vo.review}, feedback_score = #{vo.feedback_score}
+        where member_id = #{vo.member_id} and class_id = #{vo.class_id}
+    </update>
 </mapper>
  

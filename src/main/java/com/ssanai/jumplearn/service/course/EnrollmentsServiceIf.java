@@ -18,4 +18,6 @@ public interface EnrollmentsServiceIf {
 	public List<EnrollmentsVO> getList(@Param("member_id") String member_id);
 	// 데이터 삽입
 	public int createEnrollment(@Param("vo") PayVO vo);
+	// 리뷰 작성
+	public int updateReview(@Param("vo") EnrollmentsDTO dto);
 }
