@@ -22,12 +22,13 @@
 <body>
 <%--고정 헤더 파일--%>
 <%@include file="/resources/static/html/headerGnb.jsp"%>
+<%@ include file="../../../resources/static/html/adminMsg.jsp"%>
 <div class="wrap">
     <div class="aside">
         <div class="profile">
             <div class="myInfo">
-                <p>회원등급  ??</p>
-                <h2>환영합니다 OOO님!</h2>
+                <p>회원등급  ${loginInfo.status}</p>
+                <h2>환영합니다 ${loginInfo.name}님!</h2>
             </div>
         </div>
         <div class="sideMenu">
@@ -90,8 +91,69 @@
 <%--                    </c:choose>--%>
                 </div>
             </form>
+            <div class="qnaCommentList">
+                <c:choose>
+                    <c:when test="${not empty commentList}">
+                        <c:forEach var="list" items="${commentList}" varStatus="loop">
+                            <div class="comment" id="${list.comment_id}">
+                                <p>댓글 작성자 ID:  ${list.comment_member_id}</p>
+                                <div class="commentBtn">
+                                    <c:if test="${loginInfo.id.equals(list.comment_member_id)}">
+                                        <a href=""><button class="btnCommentUpdate" onclick="comment_update_window('${list.comment_id}')">수정</button></a>
+                                        &nbsp;<a href="/post/deleteComment?id=${list.comment_id}"><button class="btnCommentDelete">삭제</button></a>
+                                    </c:if>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <p class="contentPtage">댓글 내용: ${list.comment_content}</p>
+                                <div class="contentDate">
+                                    <c:choose>
+                                        <c:when test="${empty list.updated_at}">
+                                            <p>댓글 작성 시간: ${list.created_at}</p>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p>댓글 수정 시간: ${list.updated_at}</p>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td>댓글이 없습니다.</td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <c:if test="${ loginInfo.status == 1}" var="hasPermission">
+                <form name="inquiry_comment_form" id="inquiry_comment_form" action="/post/insertComment"
+                      method="post">
+                    <div class="qnaCommentWrite">
+                        <input type="hidden" name="comment_member_id" value="${loginInfo.id}" hidden/>
+                        <input type="hidden" name="post_id" value="${dto.post_id}" hidden/>
+                        <textarea id="inquiry_comment_content" name="comment_content" placeholder="댓글을 입력해주세요."></textarea>
+                        <input type="submit" value="등록" id="btnSubmit"/>
+                    </div>
+                </form>
+            </c:if>
+            <c:if test="${not hasPermission}">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <div>운영 정책 위반으로 인해 댓글을 입력할 수 없습니다.</div>
+                        </td>
+                    </tr>
+                </table>
+            </c:if>
         </div>
     </div>
 </div>
+<script>
+    function comment_update_window(comment_id) {
+        const url = '/post/updateComment?comment_id=' + comment_id;
+        window.open(url, '_blank', 'width=400,height=300');
+    }
+</script>
 </body>
 </html>
