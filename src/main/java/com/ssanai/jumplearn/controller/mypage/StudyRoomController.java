@@ -125,6 +125,7 @@ public class StudyRoomController {
 				isReviewed = true;
 			}
 		}
+		log.info(classDetailDTO);
 //		log.info(isReviewed);
 //		log.info("필터링 전 리뷰목록" + reviewList);
 		reviewList = reviewList.stream().filter(dto -> dto.getReview() != null).toList();
