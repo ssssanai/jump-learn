@@ -1,6 +1,7 @@
 package com.ssanai.jumplearn.mapper.post;
 
 import com.ssanai.jumplearn.dto.*;
+import com.ssanai.jumplearn.vo.PostLikeVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,4 +28,8 @@ public interface PostMapper {
 	public int updateComment(CommentDTO commentDTO);
 	public int deleteComment(@Param("id") int id);
 
+	// 게시글 좋아요
+	public Integer isLiked(@Param("post_id") int post_id, @Param("member_id") String member_id);
+	public int cancelLike(@Param("id") int id);
+	public int insertLike(@Param("post_id") int post_id, @Param("member_id") String member_id);
 }
