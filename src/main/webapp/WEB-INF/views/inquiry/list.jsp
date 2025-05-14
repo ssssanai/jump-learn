@@ -25,9 +25,15 @@
 <div class="wrap">
     <div class="aside">
         <div class="profile">
-            <div class="myInfo">
-                <p>회원등급  ??</p>
-                <h2>환영합니다 OOO님!</h2>
+            <div class="sideMenu">
+                <h2 class="sideMenuTitle">커뮤니티</h2>
+                <a href="/post/searchListPage">자유게시판</a>
+                <a href="/edu/searchListPage">교육 정보 게시판</a>
+                <a href="/info/searchListPage">대입 정보 게시판</a>
+                <a href="/activity/searchListPage">대외활동 게시판</a>
+                <a href="/lib/searchListPage">자료실 게시판</a>
+                <a href="/news/searchListPage">뉴스 게시판</a>
+                <a href="/notice/searchListPage">공지사항 게시판</a>
             </div>
         </div>
     </div>
@@ -55,8 +61,8 @@
                 <tr>
                     <th class="listNo"><p>번호</p></th>
                     <th class="listTit"><p>제목</p></th>
-                    <th class="listName"><p>작성자</p></th>
                     <th class="listContent"><p>내용</p></th>
+                    <th class="listName"><p>작성자</p></th>
                     <th class="listDate"><p>작성일</p></th>
                     <th class="listEditDate"><p>수정일</p></th>
                     <th class="listCnt"><p>처리상태</p></th>
@@ -70,8 +76,8 @@
                                 <tr>
                                     <td class="listNo"><a href="/inquiry/detail/${i.inquiry_id}"> ${i.inquiry_id}</a></td>
                                     <td class="listTit"><p>${i.inquiry_title}</p></td>
-                                    <td class="listName"><p>${i.member_id}</p></td>
                                     <td class="listContent"><p>${i.inquiry_content}</p></td>
+                                    <td class="listName"><p>${i.member_id}</p></td>
                                     <td class="listDate"><p>${i.inquiry_created_at}</p></td>
                                     <td class="listEditDate"><p>${i.inquiry_updated_at}</p></td>
                                     <td class="listCnt"><p>${i.inquiry_status}</p></td>
@@ -85,8 +91,8 @@
                                     <tr>
                                         <td class="listNo"><a href="/inquiry/detail/${i.inquiry_id}">${i.inquiry_id}</a></td>
                                         <td class="listTit"><p>${i.inquiry_title}</p></td>
-                                        <td class="listName"><p>${i.member_id}</p></td>
                                         <td class="listContent"><p>${i.inquiry_content}</p></td>
+                                        <td class="listName"><p>${i.member_id}</p></td>
                                         <td class="listDate"><p>${i.inquiry_created_at}</p></td>
                                         <td class="listEditDate"><p>${i.inquiry_updated_at}</p></td>
                                         <td class="listCnt"><p>${i.inquiry_status}</p></td>
