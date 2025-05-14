@@ -38,7 +38,7 @@
         </div>
         <div class="boardImg">
             <p>이미지 첨부</p>
-            <input type="file" id="file" name="file" multiple accept=".png, .jpg, .jpeg">>
+            <input type="file" id="file" name="file" multiple accept=".png, .jpg, .jpeg">
             <div id="contentError1" class="error"></div>
         </div>
         <div class="formBtn">

@@ -18,6 +18,10 @@ public interface PostMapper {
 	public List<CommentDTO> selectCommentById(int id);
 	public int insertFile(BbsFileDTO fileDTO);
 	public int insertPost(PostDTO postDTO);
+	public int deletePost(int id);
+	public int deleteFile(int post_id);
+	public int updateFile(BbsFileDTO fileDTO);
+	public int updatePost(PostDTO postDTO);
 	public int bridgeFile(@Param("file_id") int f_id, @Param("post_id") int p_id);
 	public int insertComment(CommentDTO commentDTO);
 	public int updateComment(CommentDTO commentDTO);
