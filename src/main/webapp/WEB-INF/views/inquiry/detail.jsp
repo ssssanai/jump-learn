@@ -167,7 +167,7 @@
     });
 
     $('.btnCommentUpdate').on('click', function () {
-        let commenter = $(this).parent().siblings()[0].innerText; // 댓글 작성자
+        let commenter = $(this).parent().siblings()[0].innerText.replace("댓글 작성자 ID: ", ""); // 댓글 작성자
         let comment_id = $(this).parent().parent().attr('id'); // 댓글 ID
         let commenter_type = $(this).parent().parent().next().children()[0].innerText; // 댓글 작성자 타입
         let original_comment = $(this).parent().parent().next().children()[1].innerText.replace("댓글 내용: ", ""); // 원래 댓글
@@ -202,12 +202,10 @@
     });
 
     $('.btnCommentDelete').on('click', function () {
-        let commenter = $(this).siblings()[0].innerText; // 댓글 작성자
-        let comment_id = $(this).parent().attr('id'); // 댓글 ID
+        let commenter = $(this).parent().siblings()[0].innerText.replace("댓글 작성자 ID: ", ""); // 댓글 작성자
+        let comment_id = $(this).parent().parent().attr('id'); // 댓글 ID; // 댓글 ID
 
         let url = '/inquiry/comment/delete/' + comment_id + "/" + commenter + "/" + ${inquiry[0].inquiry_id};
-        console.log(commenter);
-        console.log(comment_id);
         if (confirm('댓글을 삭제하시겠습니까?')) {
             location.href = url;
         }

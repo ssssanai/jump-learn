@@ -295,23 +295,23 @@ public class PostController {
 //	}
 //}
 //	}
-//	@PostMapping("/insertComment")
-//	public String insertComment(
-//			CommentDTO commentDTO,
-//			RedirectAttributes redirectAttributes,
-//			@RequestHeader(value = "Referer", required = false) String referer
-//	) {
-//		log.info("댓글 입력"+commentDTO.toString());
-//		int rs = postService.insertComment(commentDTO);
-//		if(rs < 1){
-//			redirectAttributes.addAttribute("msg","답글 실패");
-//		}
-//		if (referer != null) {
-//			return "redirect:" + referer;
-//		} else {
-//			return "redirect:/post/searchListPage";
-//		}
-//	}
+	@PostMapping("/insertComment")
+	public String insertComment(
+			CommentDTO commentDTO,
+			RedirectAttributes redirectAttributes,
+			@RequestHeader(value = "Referer", required = false) String referer
+	) {
+		log.info("댓글 입력"+commentDTO.toString());
+		int rs = postService.insertComment(commentDTO);
+		if(rs < 1){
+			redirectAttributes.addAttribute("msg","답글 실패");
+		}
+		if (referer != null) {
+			return "redirect:" + referer;
+		} else {
+			return "redirect:/post/searchListPage";
+		}
+	}
 	@GetMapping("/deleteComment")
 	public String deleteComment(
 			@RequestHeader(value = "Referer", required = false) String referer,
