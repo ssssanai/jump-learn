@@ -63,7 +63,7 @@
             <div class="sbB3">
                 <div class="teacherPro">
                     <%--${classDetailDTO.teacher_file_path}/${teacher_file_name}.${teacher_file_ext}--%>
-                    <img src="../../../resources/static/images/memberPage/profileEx.jpg">
+                    <img src="/resources/static/images/memberPage/profileEx.jpg">
                 </div>
                 <div class="teacherIn">
                     <p>${classDetailDTO.teacher_introduce1}<br>
@@ -87,6 +87,7 @@
                     <p class="studyContent1">강좌 내용</p>
                     <p class="studyUploadDate1">업로드날짜</p>
                     <p class="studyUploadDate3">강의 시청</p>
+                    <p class="studyUploadDate3">강의 자료</p>
                     <p class="studyUploadDate3">강의 공지사항</p>
                 </div>
                 <div class="reviewListBox">
@@ -102,6 +103,7 @@
                             <c:if test="${not isLocal}">
                                 <button class="btnVideoPlay" id="${video.video_url}">재생</button>
                             </c:if>
+                            <button class="btnDataDownload"><a href="/upload/${cdList.get(video.video_order - 1).data_name}" download="${classDetailDTO.class_title}_강의자료_${video.video_order}강.pdf">다운로드</a> </button>
                             <button class="btnVideoNotice" id="${video.notice}">공지 확인</button>
                         </div>
                     </c:forEach>
