@@ -98,7 +98,10 @@ public class CourseController {
 	}
 
 	@GetMapping("/detail/{id}")
-	public String detail(@PathVariable("id") int id, Model model) {
+	public String detail(
+			@PathVariable("id") int id // 강좌 ID
+			, Model model
+	) {
 		log.info(id);
 		ClassDetailDTO classDetailDTO = courseService.getClassDetailById(id);
 		List<ReviewDTO> reviewList = courseService.getReviewListById(id);

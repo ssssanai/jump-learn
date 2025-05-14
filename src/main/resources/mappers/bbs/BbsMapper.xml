@@ -4,19 +4,19 @@
 <mapper namespace="com.ssanai.jumplearn.mapper.bbs.BbsMapper">
     <sql id="whereCondition">
         <where>
-            <if test="search_category != null ">
-                <if test="search_category == 'title'.toString()">
-                    title like concat('%', #{search_word}, '%')
+            <if test="dto.search_category != null ">
+                <if test="dto.search_category == 'title'.toString()">
+                    title like concat('%', #{dto.search_word}, '%')
                 </if>
-                <if test="search_category == 'content'.toString()">
-                    content like concat('%', #{search_word}, '%')
+                <if test="dto.search_category == 'content'.toString()">
+                    content like concat('%', #{dto.search_word}, '%')
                 </if>
-                <if test="search_category == 'admin_id'.toString()">
-                    admin_id like concat('%', #{search_word}, '%')
+                <if test="dto.search_category == 'admin_id'.toString()">
+                    admin_id like concat('%', #{dto.search_word}, '%')
                 </if>
-                <if test="search_category == 'created_at'">
+                <if test="dto.search_category == 'created_at'">
                     <![CDATA[
-                    created_at BETWEEN CONCAT(#{search_date_from},' 00:00:00') AND CONCAT(#{search_date_to},' 23:59:59' )
+                    created_at BETWEEN CONCAT(#{dto.search_date_from},' 00:00:00') AND CONCAT(#{dto.search_date_to},' 23:59:59' )
                     ]]>
                 </if>
             </if>
@@ -25,99 +25,52 @@
 
     <select id="getTotalCount" resultType="java.lang.Integer">
         SELECT COUNT(*) as total_count
-        FROM tbl_edu
+        FROM ${table_name}
         <include refid="whereCondition"></include>
     </select>
 
     <select id="listAll">
         SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
-        FROM tbl_edu
+        FROM ${table_name}
         <include refid="whereCondition"></include>
         ORDER BY id DESC
-        Limit #{page_skip_count} , #{page_size}
+        Limit #{dto.page_skip_count} , #{dto.page_size}
         <!--TODO Order by 추후 추가 필요 -->
     </select>
 
-    <select id="selectOne" parameterType="int" resultType="com.ssanai.jumplearn.vo.BbsDefaultVO">
+    <select id="selectOne" resultType="com.ssanai.jumplearn.vo.BbsDefaultVO">
         SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
-        FROM tbl_edu
+        FROM ${table_name}
         WHERE `id` = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.ssanai.jumplearn.vo.BbsDefaultVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO tbl_edu (
-            `admin_id`, `title` , `content`, `created_at`,`updated_at`
-        ) VALUES (
-                     #{admin_id}, #{title}, #{content}, NOW(), NOW()
-                 )
+    <insert id="insert" useGeneratedKeys="true" keyProperty="vo.id" keyColumn="id">
+        INSERT INTO ${table_name} (`admin_id`, `title`, `content`, `created_at`, `updated_at`)
+        VALUES (#{vo.admin_id}, #{vo.title}, #{vo.content}, NOW(), null)
     </insert>
 
     <update id="update">
-        UPDATE tbl_edu
-        SET `title`=#{title}, `content`=#{content},`updated_at`= NOW()
-        WHERE `id` = #{id}
+        UPDATE ${table_name}
+        SET `title`=#{vo.title}, `content`=#{vo.content},`updated_at`= NOW()
+        WHERE `id` = #{vo.id}
     </update>
 
-
     <delete id="delete">
-        DELETE FROM tbl_edu
+        DELETE FROM ${table_name}
         WHERE `id` = #{id}
     </delete>
 
     <select id="searchList">
         SELECT `id`, `title`,`content`,`created_at`,`updated_at`,`view_count`,`admin_id`
-        FROM tbl_edu
+        FROM ${table_name}
         <include refid="whereCondition"></include>
         ORDER BY id desc
-        Limit #{page_skip_count} , #{page_size}
+        Limit #{dto.page_skip_count} , #{dto.page_size}
     </select>
-
-    <select id="attachedPic"
-            parameterType="int"
-            resultType="com.ssanai.jumplearn.vo.BbsFileVO">
-        SELECT
-            bbsfile.id           AS id,
-            bbsfile.file_path    AS filePath,
-            bbsfile.file_name    AS fileName,
-            bbsfile.file_size    AS fileSize,
-            bbsfile.file_ext     AS fileExt,
-            bbsfile.related_table AS relatedTable,
-            bbsfile.related_id   AS relatedId,
-            bbsfile.created_at   AS createdAt
-        FROM tbl_bbs_file AS bbsfile
-                 INNER JOIN tbl_edu_file AS edufile
-                            ON bbsfile.id = edufile.file_id
-        WHERE edufile.edu_id = #{id}
-        ORDER BY bbsfile.id
-    </select>
-
-
-    <select id="attachedPdf"
-            parameterType="int"
-            resultType="com.ssanai.jumplearn.vo.BbsFileVO">
-        SELECT
-            b.id            AS id,
-            b.file_path     AS filePath,
-            b.file_name     AS fileName,
-            b.file_size     AS fileSize,
-            b.file_ext      AS fileExt,
-            b.related_table AS relatedTable,
-            b.related_id    AS relatedId,
-            b.created_at    AS createdAt
-        FROM tbl_bbs_file b
-                 INNER JOIN tbl_edu_file e
-                            ON b.id = e.file_id
-        WHERE e.edu_id  = #{id}
-          AND b.file_ext = '.pdf'
-        ORDER BY b.id
-    </select>
-
 
     <update id="viewCount">
-        UPDATE tbl_edu
+        UPDATE ${table_name}
         SET `view_count` = `view_count` + 1
         WHERE `id` = #{id}
     </update>
-
-
 </mapper>

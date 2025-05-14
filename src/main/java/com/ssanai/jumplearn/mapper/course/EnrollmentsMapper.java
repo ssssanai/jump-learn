@@ -1,9 +1,7 @@
 package com.ssanai.jumplearn.mapper.course;
 
-import com.ssanai.jumplearn.dto.BasketDTO;
 import com.ssanai.jumplearn.dto.EnrollmentsDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.vo.EnrollmentsVO;
 import com.ssanai.jumplearn.vo.PayVO;
 import org.apache.ibatis.annotations.Param;
@@ -19,4 +17,6 @@ public interface EnrollmentsMapper {
 	public List<EnrollmentsVO> getList(@Param("member_id") String member_id);
 	// 데이터 삽입
 	public int createEnrollment(@Param("vo") PayVO vo);
+	// 리뷰 작성
+	public int updateReview(@Param("vo") EnrollmentsVO vo);
 }

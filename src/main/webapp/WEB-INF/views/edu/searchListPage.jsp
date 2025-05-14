@@ -24,16 +24,6 @@
 <%@include file="../../../resources/static/html/headerGnb.jsp"%>
 <div class="wrap">
     <div class="aside">
-        <div class="profile">
-            <div class="myInfo">
-                <p>회원등급  ??</p>
-                <h2>환영합니다 OOO님!</h2>
-            </div>
-            <div class="logoutBtn">
-                <a href="#">로그아웃</a>
-                <a href="#">회원탈퇴</a>
-            </div>
-        </div>
         <div class="sideMenu">
             <h2 class="sideMenuTitle">커뮤니티</h2>
             <a href="/post/searchListPage">자유게시판</a>
@@ -42,13 +32,13 @@
             <a href="/activity/searchListPage">대외활동 게시판</a>
             <a href="/lib/searchListPage">자료실 게시판</a>
             <a href="/news/searchListPage">뉴스 게시판</a>
+            <a href="/notice/searchListPage">공지사항 게시판</a>
         </div>
     </div>
     <div class="main">
         <div class="writeTit">
-            <h2>edu 게시판</h2>
-            <p>교육 정보 게시판 입니다.</p>
-
+            <h2>교육 정보 게시판</h2>
+            <p>교육 관련 정보를 손쉽게 얻을 수 있는 게시판입니다.</p>
             <div class="wtBtn">
                 <c:if test="${isAdmin}">
                     <a href="/edu/writePage">글쓰기</a>
@@ -62,7 +52,6 @@
                 <input type="button" onclick="location.href='<c:url value="/edu/searchListPage"/>'"  value="검색조건 초기화">
             </div>
             <div class="searchBoxs">
-            ${pageDTO.search_category}
                 <select id="search_category" name="search_category" class="selectOption">
                     <option value="-"           ${pageDTO.search_category==''             ? 'selected':''}>선택</option>
                     <option value="title"       ${pageDTO.search_category=='title'        ? 'selected':''}>제목</option>
@@ -81,36 +70,24 @@
         </form>
         <div class="writeList">
             <div class="wlHeader">
-                <c:if test="${isAdmin}">
-                    <p class="listCk">선택</p>
-                </c:if>
                 <p class="listNo">번호</p>
                 <p class="listTit">제목</p>
                 <p class="listName">작성자</p>
                 <p class="listDate">작성일</p>
                 <p class="listCnt">조회수</p>
-                <c:if test="${isAdmin}">
-                    <div class="listDelBtnBox">
-                        <input class="listDelBtn" type="button" value="선택삭제">
-                    </div>
-                </c:if>
+                <p class="listDelBtnBox">&nbsp;</p>
             </div>
             <c:forEach var="post" items="${dto.dtoList}">
                 <div class="wlBody">
-                    <c:if test="${isAdmin}">
-                        <div class="listCk">
-                            <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
-                        </div>
-                    </c:if>
                     <p class="listNo">${post.id}</p>
                     <p class="listTit"><a href="/edu/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
-                    <p class="listName"><a href="#">${post.admin_id}</a></p>
+                    <p class="listName">${post.admin_id}</p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
                     <c:if test="${isAdmin}">
-                        <div class="listDelBtnBox">
-                            <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete?id=${post.id}&${pageDTO.getLinkParams()}';}" value="삭제">
-                        </div>
+                        <p class="listDelBtnBox">
+                            <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete/${post.id}'}" value="삭제">
+                        </p>
                     </c:if>
                 </div>
             </c:forEach>
@@ -129,8 +106,6 @@
     const searchDate = document.querySelector('.searchDate');
     const search_date_from = document.getElementById('search_date_from');
     const search_date_to = document.getElementById('search_date_to');
-
-
 
     search_category.addEventListener('change', function (e) {
         if( search_category.value == 'created_at'  ) {

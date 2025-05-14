@@ -31,13 +31,8 @@
     </div>
     <h2 class="tit">구매목록</h2>
     <div class="searchBox">
-        <%--        <form class="searchForm" action="" method="">--%>
-        <%--            <input type=text name="" class="scInput" placeholder="구매한 강의를 검색할 수 있어요!">--%>
-        <%--            <input type="submit" name="" class="scBtn" value="검색"/>--%>
-        <%--        </form>--%>
         <div class="buyBtn">
             <a href="/course/list">장바구니 가기</a>
-            <a href="#">찜 목록</a>
         </div>
     </div>
     <c:choose>
@@ -51,7 +46,7 @@
                     </div>
                     <div class="buyMain">
                         <div class="buyCont">
-                            <img src="../../../resources/static/images/notProfile.jpg" alt="강의 썸네일">
+                            <img src="/resources/static/images/notProfile.jpg" alt="강의 썸네일">
                                 ${p.class_file_name}
                             <div class="bP">
                                 <h2>${p.class_title}</h2>
@@ -74,7 +69,7 @@
                                     <a href="/pay/refund/${p.class_id}">환불 요청</a>
                                 </c:if>
                             </c:if>
-                            <a href="#">후기 작성</a>
+                            <a href="/studyroom/enroll/${p.}">후기 작성</a>
                         </div>
                     </div>
                 </div>

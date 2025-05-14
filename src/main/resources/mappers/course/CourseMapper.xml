@@ -55,7 +55,7 @@
         SELECT
             class_id, member_id , review, feedback_score
         FROM tbl_enrollments
-        WHERE id = #{id}
+        WHERE class_id = #{id}
     </select>
 
     <select id="checkReviewExist">

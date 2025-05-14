@@ -4,15 +4,12 @@ import com.ssanai.jumplearn.dto.BbsDefaultDTO;
 import com.ssanai.jumplearn.dto.BbsFileDTO;
 import com.ssanai.jumplearn.dto.PageRequestDTO;
 import com.ssanai.jumplearn.dto.PageResponseDTO;
-import com.ssanai.jumplearn.mapper.bbs.BbsFileMapper;
-import com.ssanai.jumplearn.mapper.bbs.BbsMapper;
-import com.ssanai.jumplearn.mapper.bbs.EduFileMapper;
+import com.ssanai.jumplearn.mapper.bbs.*;
 import com.ssanai.jumplearn.util.FilePathConfig;
 import com.ssanai.jumplearn.vo.BbsDefaultVO;
 import com.ssanai.jumplearn.vo.BbsFileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.ibatis.annotations.Param;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,166 +27,71 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class BbsServiceImpl implements BbsServiceInterface {
-    private final BbsMapper bbsMapper;
-    private final ModelMapper modelMapper;
-    private final FilePathConfig filePathConfig;
-    private final BbsFileMapper fileMapper;
-    private final EduFileMapper eduFileMapper;
+	private final BbsMapper bbsMapper;
+	private final ModelMapper modelMapper;
 
+	@Override
+	public int getTotalCount(PageRequestDTO requestDTO, String table_name) {
+		return bbsMapper.getTotalCount(requestDTO, table_name);
+	}
 
-    @Override
-    public int getTotalCount(PageRequestDTO requestDTO) {
-        return bbsMapper.getTotalCount(requestDTO);
-    }
+	@Override
+	public List<BbsDefaultDTO> listAll(PageRequestDTO pageDTO, String table_name) {
+		List<BbsDefaultVO> bbsVOList = bbsMapper.listAll(pageDTO, table_name);
+		List<BbsDefaultDTO> bbsDTOList = bbsVOList.stream().map(
+				vo -> modelMapper.map(vo, BbsDefaultDTO.class)
+		).collect(Collectors.toList());
+		return bbsDTOList;
 
-    @Override
-    public  List<BbsDefaultDTO> listAll(PageRequestDTO pageDTO){
-        List<BbsDefaultVO> bbsVOList = bbsMapper.listAll(pageDTO);
-        List<BbsDefaultDTO> bbsDTOList =  bbsVOList.stream().map(
-                vo->modelMapper.map(vo, BbsDefaultDTO.class)
-        ).collect(Collectors.toList());
-        return bbsDTOList;
+	}
 
-    };
+	@Override
+	public int insert(BbsDefaultDTO dto, String table_name) {
+		BbsDefaultVO vo = modelMapper.map(dto, BbsDefaultVO.class);
+		int result = bbsMapper.insert(vo, table_name);
+		return result;
+	}
 
-    @Override
-    public int insert(BbsDefaultDTO dto){
-        BbsDefaultVO vo = modelMapper.map(dto,BbsDefaultVO.class);
-        int result = bbsMapper.insert(vo);
-        dto.setId(vo.getId());
-        return result;
-    };
+	@Override
+	public int update(BbsDefaultDTO dto, String table_name) {
+		BbsDefaultVO vo = modelMapper.map(dto, BbsDefaultVO.class);
+		int result = bbsMapper.update(vo, table_name);
+		return result;
+	}
 
-    @Override
-    public int update(BbsDefaultDTO dto){
-        BbsDefaultVO vo = modelMapper.map(dto,BbsDefaultVO.class);
-        int result = bbsMapper.update(vo);
-        return result;
-    };
+	@Override
+	public int delete(int id, String table_name) {
+		return bbsMapper.delete(id, table_name);
+	}
 
+	@Override
+	public BbsDefaultDTO selectOne(int id, String table_name) {
+		BbsDefaultVO vo = bbsMapper.selectOne(id, table_name);
+		BbsDefaultDTO dto = (vo != null ? modelMapper.map(vo, BbsDefaultDTO.class) : null);
+		return dto;
+	}
 
+	@Override
+	public PageResponseDTO<BbsDefaultDTO> searchList(PageRequestDTO pageDTO, String table_name) {
+		int totalCount = bbsMapper.getTotalCount(pageDTO, table_name);
+		List<BbsDefaultVO> voList = bbsMapper.searchList(pageDTO, table_name);
+		List<BbsDefaultDTO> bbsDefaultDTOList = voList.stream().map(
+				vo -> modelMapper.map(vo, BbsDefaultDTO.class)
+		).collect(Collectors.toList());
 
+		PageResponseDTO<BbsDefaultDTO> pageResponseDTO =
+				PageResponseDTO
+						.<BbsDefaultDTO>withAll()
+						.reqDTO(pageDTO)
+						.dtoList(bbsDefaultDTOList)
+						.total_count(totalCount)
+						.build();
+		return pageResponseDTO;
+	}
 
-    @Override
-    public int delete(int id){
-        int result = bbsMapper.delete(id);
-        return result;
-    };
-
-    @Override
-    public int eduFileDelete(int id){
-        int result = eduFileMapper.eduFileDelete(id);
-        return result;
-
-    };
-
-    @Override
-    public int fileDelete(int id){
-        int result = fileMapper.fileDelete(id);
-        return result;
-    };
-
-    @Override
-    @Transactional
-    public int pageDelete(int id) {
-        try {
-            int result1 = eduFileMapper.eduFileDelete(id);
-            int result2 = fileMapper.fileDelete(id);
-            int result3 = bbsMapper.delete(id);
-
-            if (result3 > 0) return 1;
-            else return 0;
-        } catch (Exception e) {
-            log.error("삭제 중 예외 발생: ", e);
-            return 0;
-        }
-    }
-
-    @Override
-    public BbsDefaultDTO selectOne( int id){
-        BbsDefaultVO vo = bbsMapper.selectOne(id);
-        BbsDefaultDTO dto = (vo != null ? modelMapper.map(vo,BbsDefaultDTO.class) :null);
-        return dto;
-    };
-
-    @Override
-    public PageResponseDTO<BbsDefaultDTO> searchList(PageRequestDTO pageDTO){
-        int totalCount = bbsMapper.getTotalCount(pageDTO);
-        List<BbsDefaultVO> voList = bbsMapper.searchList(pageDTO);
-        List<BbsDefaultDTO> bbsDefaultDTOList = voList.stream().map(
-                vo->modelMapper.map(vo, BbsDefaultDTO.class)
-        ).collect(Collectors.toList());
-
-        PageResponseDTO<BbsDefaultDTO> pageResponseDTO =
-                PageResponseDTO
-                        .<BbsDefaultDTO>withAll()
-                        .reqDTO(pageDTO)
-                        .dtoList(bbsDefaultDTOList)
-                        .total_count(totalCount)
-                        .build();
-        return pageResponseDTO;
-    }
-
-    @Override
-    public List<BbsFileDTO> attachedPic( int id){
-        List<BbsFileVO> fileVO = bbsMapper.attachedPic(id);
-        List<BbsFileDTO> fileDTO = fileVO.stream().map(
-                vo->modelMapper.map(vo, BbsFileDTO.class)
-        ).collect(Collectors.toList());
-
-        return fileDTO;
-    };
-
-    @Override
-    public List<BbsFileDTO> attachedPdf( int id){
-        List<BbsFileVO> fileVO = bbsMapper.attachedPdf(id);
-        List<BbsFileDTO> pdfFileDTO = fileVO.stream().map(
-                vo->modelMapper.map(vo, BbsFileDTO.class)
-        ).collect(Collectors.toList());
-
-        return pdfFileDTO;
-    };
-
-    @Override
-    public int viewCount(@Param("id") int id){
-        int result = bbsMapper.viewCount(id);
-        return result;
-    };
-
-    @Override
-    public void fileUpload(BbsDefaultDTO postDto, MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return;
-        }
-
-        String originalName = file.getOriginalFilename();
-        String ext = originalName.substring(originalName.lastIndexOf('.'));
-        String nameWithoutExt = originalName.substring(0, originalName.lastIndexOf('.'));
-
-        String saveName = nameWithoutExt + ext;
-
-        File tgt = new File(filePathConfig.getUploadPath(), saveName);
-        file.transferTo(tgt);
-
-        BbsFileDTO fileDto = BbsFileDTO.builder()
-                .filePath    ("/upload")
-                .fileName    (nameWithoutExt)
-                .fileSize    (file.getSize())
-                .fileExt     (ext)
-                .relatedTable("tbl_edu")
-                .relatedId   (postDto.getId())
-                .build();
-        fileMapper.fileUpload(fileDto);
-
-        Map<String,Integer> params = Map.of(
-                "file_id", fileDto.getId(),
-                "edu_id",  postDto.getId()
-        );
-        eduFileMapper.eduFileUpload(params);
-    }
-
-
-
-
+	@Override
+	public int viewCount(int id, String table_name) {
+		return bbsMapper.viewCount(id, table_name);
+	}
 
 }

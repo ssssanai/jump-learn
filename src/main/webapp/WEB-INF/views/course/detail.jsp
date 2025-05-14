@@ -58,8 +58,7 @@
                 <p class="priCnt3" style="font-size: 13px; line-height: 28px;">원</p>
             </div>
             <div class="buyBtn">
-                <a href="#">구매하기</a>
-                <a href="#">찜 하기</a>
+                <a href="/basket/add/${classDetailDTO.class_id}">장바구니 담기</a>
             </div>
         </div>
     </div>
@@ -72,7 +71,7 @@
             <div class="sbB3">
                 <div class="teacherPro">
                     <%--${classDetailDTO.teacher_file_path}/${teacher_file_name}.${teacher_file_ext}--%>
-                    <img src="../../../resources/static/images/memberPage/profileEx.jpg">
+                    <img src="/resources/static/images/memberPage/profileEx.jpg">
                 </div>
                 <div class="teacherIn">
                     <p>${classDetailDTO.teacher_introduce1}<br>
@@ -80,16 +79,14 @@
                         ${classDetailDTO.teacher_introduce3}</p>
                 </div>
                 <div class="tBtn">
-                    <a htef="#">수강후기</a>
-                    <a htef="#">강사 정보 </a>
-                    <a htef="#">질문하기</a>
+                    <a htef="#">강좌 공지사항</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="main">
         <div class="studyBox3">
-            <h2>커리큘럼</h2>
+            <h2>강좌</h2>
             <div class="reviewList1">
                 <p class="studyNo1">강좌 수</p>
                 <p class="studyTit1">제목</p>
@@ -124,25 +121,6 @@
                 </c:forEach>
             </div>
         </div>
-    </div>
-
-<%--입력된 후기가 없을시--%>
-
-    <div class="reviewBox">
-        <h2>후기작성</h2>
-        <form action="" method="">
-            <div class="review1">
-                <h2>별점 입력</h2>
-                <p class="reviewComment">1 ~ 5점까지 입력가능합니다.</p>
-                <input type="number" min="1" max="5" step="1" value="별점 1~5점">
-            </div>
-            <div class="review2">
-                <h2>후기 입력</h2>
-                <p class="reviewComment">최대 255자까지 입력 가능합니다.</p>
-                <textarea type="text" name="" placeholder="후기를 작성하세요." maxlength="255"></textarea>
-            </div>
-            <input type="submit" name="" class="reviewBtn" value="후기작성">
-        </form>
     </div>
 </div>
 </body>

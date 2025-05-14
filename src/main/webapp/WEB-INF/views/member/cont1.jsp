@@ -36,7 +36,7 @@
                 <div class="myStudyList2">
                     <p class="studyNo">${dto.id}</p>
                     <p class="studyCate">${dto.class_category}</p>
-                    <a href="#" class="studyTit3">${dto.class_title}</a>
+                    <a href="/studyroom/enroll/${dto.class_id}" class="studyTit3">${dto.class_title}</a>
                     <p class="studyTeach">${dto.teacher_name}</p>
                     <p class="studyRegDate">${dto.pay_created_at.toString().split("T")[0]}&nbsp;${dto.pay_created_at.toString().split("T")[1]}</p>
                 </div>
