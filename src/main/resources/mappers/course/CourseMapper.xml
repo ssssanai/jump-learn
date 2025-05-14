@@ -37,7 +37,7 @@
     <select id="getClassDetailById" resultType="com.ssanai.jumplearn.dto.ClassDetailDTO">
         SELECT DISTINCT
             tc.id AS 'class_id', tc.title AS 'class_title', tc.category AS 'class_category',
-            tc.target AS 'class_target', tc.price AS 'class_price', tc.introduce AS 'class_introduce',
+            tc.target AS 'class_target', tc.price AS 'class_price', tc.introduce AS 'class_introduce', tc.notice as 'class_notice',
             tc.file_path AS 'class_file_path', tc.file_name AS 'class_file_name', tc.file_ext AS 'class_file_ext',
             tt.name AS 'teacher_name', tt.introduce1 AS 'teacher_introduce1', tt.introduce2 AS 'teacher_introduce2', tt.introduce3 AS 'teacher_introduce3',
             tt.file_path AS 'teacher_file_path', tt.file_name AS 'teacher_file_name', tt.file_ext AS 'teacher_file_ext',
@@ -67,16 +67,23 @@
     <select id="getReviewRate">
         SELECT avg(feedback_score)
         FROM tbl_enrollments
-        WHERE class_id = #{id}
+        WHERE class_id = #{id} and feedback_score > 0
     </select>
 
     <select id="getClassVideoList" resultType="com.ssanai.jumplearn.dto.ClassVideoDTO">
         SELECT
-            id, class_id, video_order, video_path, video_url,
+            id, class_id, video_order, video_path, video_url, notice,
             video_name, video_size, video_extension,
             title, content, created_at, updated_at
         FROM tbl_class_video
         WHERE class_id = #{id};
+    </select>
+
+    <select id="isPurchased">
+        select count(*)
+        from tbl_pay
+        where class_id = #{class_id}
+          and member_id = #{member_id}
     </select>
 
     <sql id="whereCondition">
