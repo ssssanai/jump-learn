@@ -22,6 +22,7 @@
         <a href="/admin/reportList">신고조회</a>
         <a href="/admin/inquiryList">문의조회</a>
         <a href="/admin/salesList">매출조회</a>
+        <a href="/admin/logout">로그아웃</a>
     </nav>
 </header>
 </body>

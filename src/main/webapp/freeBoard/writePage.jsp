@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="/resources/static/css/community/freeBoard/writePage.css" rel="stylesheet" type="text/css">
     <title>JL - 게시글 작성</title>
     <script src="https://kit.fontawesome.com/2d74121aef.js" crossorigin="anonymous"></script>

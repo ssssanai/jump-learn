@@ -228,7 +228,7 @@ public class TeacherMyPageController {
         List<TeacherQuestionDTO> dtoList = teacherMyPageService.teacherQuestionList(Integer.parseInt(id));
         String title = "";
         if (dtoList != null && !dtoList.isEmpty()) {
-            title = dtoList.get(0).getTitle();
+            title = dtoList.get(0).getClass_title();
         }
         model.addAttribute("dtoList", dtoList);
         model.addAttribute("title", title);
@@ -242,5 +242,23 @@ public class TeacherMyPageController {
         TeacherQuestionDTO dto = teacherMyPageService.teacherQuestionDetail(Integer.parseInt(id));
         model.addAttribute("dto",dto);
         return "teacher/questionDetail";
+    }
+    @PostMapping("/questionDetail")
+    public String questionDetail(
+            HttpSession session,
+            TeacherQuestionDTO dto,
+            RedirectAttributes redirectAttributes
+    ){
+        log.info("입력받는폼"+dto.toString());
+        TeacherDTO teacherDTO = (TeacherDTO) session.getAttribute("loginInfo");
+        dto.setTeacher_id(teacherDTO.getId());
+        log.info("선생님 아이디 입력"+dto.toString());
+        int rs = teacherMyPageService.teacherComment(dto);
+        if(rs != 1){
+            redirectAttributes.addFlashAttribute("msg","답변 실패");
+        }else{
+            redirectAttributes.addFlashAttribute("msg","답변 성공");
+        }
+        return "redirect:questionDetail?id=" + dto.getId();
     }
 }

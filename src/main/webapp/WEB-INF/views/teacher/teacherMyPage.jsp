@@ -110,7 +110,7 @@
                                         <td class="tbDate">${list.created_at}</td>
                                         <td class="tbUserCnt"><a href="/teacher/studentList?class_id=${list.class_id}">${list.pay_count}</a></td>
                                         <td class="tbScore">${list.feedback_avg}</td>
-                                        <td class="tbScore"><a href="#">확인하기</a></td>
+                                        <td class="tbScore"><a href="/teacher/questionList?class_id=${list.class_id}">확인하기</a></td>
                                     </tr>
                                 </c:forEach>
                             </c:when>
