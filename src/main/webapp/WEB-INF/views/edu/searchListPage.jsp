@@ -25,15 +25,19 @@
 <div class="wrap">
     <div class="aside">
         <div class="profile">
+            <div class="myInfo">
+                <p>회원등급  ${loginInfo.status}</p>
+                <h2>환영합니다 ${loginInfo.name}님!</h2>
+            </div>
             <div class="sideMenu">
                 <h2 class="sideMenuTitle">커뮤니티</h2>
                 <a href="/post/searchListPage">자유게시판</a>
+                <a href="/notice/searchListPage">공지사항 게시판</a>
                 <a href="/edu/searchListPage" class="select">교육 정보 게시판</a>
                 <a href="/info/searchListPage">대입 정보 게시판</a>
                 <a href="/activity/searchListPage">대외활동 게시판</a>
                 <a href="/lib/searchListPage">자료실 게시판</a>
                 <a href="/news/searchListPage">뉴스 게시판</a>
-                <a href="/notice/searchListPage">공지사항 게시판</a>
             </div>
         </div>
     </div>

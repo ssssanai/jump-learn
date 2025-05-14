@@ -27,13 +27,13 @@
             <li>
                 <a href="#">커뮤니티</a>
                 <ul class="submenu">
-                    <li><a href="#">자료실 게시판</a></li>
-                    <li><a href="#">교육정보 게시판</a></li>
-                    <li><a href="#">대입 정보 게시판</a></li>
-                    <li><a href="#">대외활동 게시판</a></li>
-                    <li><a href="#">뉴스 게시판</a></li>
-                    <li><a href="#">자유게시판</a></li>
-                    <li><a href="#" class="lsMenu">공지사항 게시판</a></li>
+                    <li><a href="/post/searchListPage">자유게시판</a></li>
+                    <li><a href="/notice/searchListPage">공지사항 게시판</a></li>
+                    <li><a href="/edu/searchListPage">교육정보 게시판</a></li>
+                    <li><a href="/info/searchListPage">대입 정보 게시판</a></li>
+                    <li><a href="/activity/searchListPage">대외활동 게시판</a></li>
+                    <li><a href="/news/searchListPage">뉴스 게시판</a></li>
+                    <li><a href="/lib/searchListPage" class="lsMenu">자료실 게시판</a></li>
                 </ul>
             </li>
             <li>

@@ -14,20 +14,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/resources/static/css/community/freeBoard/list.css" rel="stylesheet" type="text/css">
-    <link href="/resources/static/css/headerGnb1.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <title>자유게시판 목록</title>
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/headerGnb.jsp"%>
-<%@ include file="../../../resources/static/html/adminMsg.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp"%>
+<%@ include file="/resources/static/html/adminMsg.jsp"%>
 <div class="wrap">
     <div class="aside">
         <div class="profile">
             <div class="myInfo">
-                <p>회원등급  ??</p>
-                <h2>환영합니다 OOO님!</h2>
+                <p>회원등급  ${loginInfo.status}</p>
+                <h2>환영합니다 ${loginInfo.name}님!</h2>
             </div>
         </div>
         <div class="sideMenu">
