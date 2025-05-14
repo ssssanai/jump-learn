@@ -33,6 +33,7 @@
         <div class="sideMenu">
             <h2 class="sideMenuTitle">커뮤니티</h2>
             <a href="/post/searchListPage" class="select">자유게시판</a>
+            <a href="/notice/searchListPage" >공지사항 게시판</a>
             <a href="/edu/searchListPage">교육 정보 게시판</a>
             <a href="/info/searchListPage">대입 정보 게시판</a>
             <a href="/activity/searchListPage">대외활동 게시판</a>
@@ -73,11 +74,11 @@
                     <c:forEach var="list" items="${dtoList}" varStatus="loop">
                         <table class="wlBody">
                             <tr>
-                                <td><p class="listNo">${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</p></td>
-                                <td><a href="/post/view?id=${list.id}"><P class="listTit">${list.title}</P></a></td>
-                                <td><p class="listName">${list.member_id}</p></td>
-                                <td><p class="listDate">${list.created_at}</p></td>
-                                <td><p class="listCnt">${list.view_count}</p></td>
+                                <td class="listNo"><p>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</p></td>
+                                <td class="listTit"><a href="/post/view?id=${list.id}">${list.title}</a></td>
+                                <td class="listName"><p>${list.member_id}</p></td>
+                                <td class="listDate"><p>${list.created_at}</p></td>
+                                <td class="listCnt"><p>${list.view_count}</p></td>
                             </tr>
                         </table>
                     </c:forEach>
