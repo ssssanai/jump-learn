@@ -129,5 +129,17 @@
         DELETE FROM tbl_post
         WHERE id = #{id}
     </delete>
+    <select id="isLiked" resultType="Integer">
+        SELECT id
+        FROM tbl_post_like
+        WHERE member_id = #{member_id} AND post_id = #{post_id}
+    </select>
+    <insert id="insertLike">
+        INSERT INTO tbl_post_like (member_id, post_id, created_at)
+        VALUES (#{member_id}, #{post_id}, now())
+    </insert>
+    <delete id="cancelLike">
+        DELETE FROM tbl_post_like WHERE id = #{id}
+    </delete>
 </mapper>
  

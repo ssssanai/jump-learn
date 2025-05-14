@@ -103,6 +103,12 @@
         (#{dto.class_id}, #{dto.member_id}, #{dto.title}, #{dto.content}, now(), 1, 0)
     </insert>
 
+    <select id="getClassDataList" resultType="com.ssanai.jumplearn.dto.ClassDataDTO">
+        SELECT id, class_id, data_order, title, data_path, data_name, data_size, data_extension, created_at, updated_at
+        FROM tbl_class_data
+        WHERE class_id = #{class_id}
+    </select>
+
     <sql id="whereCondition">
         <where>
             <if test="search_word != null and search_word != '' and search_word != 'null'">
