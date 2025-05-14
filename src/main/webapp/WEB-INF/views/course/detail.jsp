@@ -57,9 +57,11 @@
                 <p class="priCnt2" style="font-size: 17px; line-height: 28px;">${classDetailDTO.class_price}</p>
                 <p class="priCnt3" style="font-size: 13px; line-height: 28px;">원</p>
             </div>
-            <div class="buyBtn">
-                <a href="/basket/add/${classDetailDTO.class_id}">장바구니 담기</a>
-            </div>
+            <c:if test="${not isInBasket}">
+                <div class="buyBtn">
+                    <a href="/basket/add/${classDetailDTO.class_id}">장바구니 담기</a>
+                </div>
+            </c:if>
         </div>
     </div>
     <div class="studyBox2">
@@ -79,7 +81,7 @@
                         ${classDetailDTO.teacher_introduce3}</p>
                 </div>
                 <div class="tBtn">
-                    <a htef="#">강좌 공지사항</a>
+                    <button id="btnClassNotice">강좌 공지사항</button>
                 </div>
             </div>
         </div>
@@ -99,7 +101,7 @@
                         <p class="studyNo2">${video.video_order}강</p>
                         <p class="studyTit2">${video.title}</p>
                         <p class="studyContent2">${video.content}</p>
-                        <p class="studyUploadDate2">${video.created_at}</p>
+                        <p class="studyUploadDate2">${video.created_at.toString().replace("T", " ")}</p>
                     </div>
                 </c:forEach>
             </div>
@@ -123,5 +125,16 @@
         </div>
     </div>
 </div>
+<script>
+    // 강좌 공지사항
+    document.getElementById('btnClassNotice').addEventListener('click', function(){
+        const popup = window.open('', '_blank', 'width=500,height=400, left=-300, top=200');
+        popup.document.write(
+            `<h2>강좌 공지사항</h2>
+             <div>${classDetailDTO.class_notice}</div>
+            `
+        );
+    });
+</script>
 </body>
 </html>

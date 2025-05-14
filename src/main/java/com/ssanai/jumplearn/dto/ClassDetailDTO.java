@@ -16,6 +16,7 @@ public class ClassDetailDTO {
 	private String class_category;
 	private String class_target;
 	private int class_price;
+	private String class_notice;
 	private String class_introduce;
 	private String class_file_path;
 	private String class_file_name;

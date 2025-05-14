@@ -15,4 +15,6 @@ public interface TeacherMyPageMapper {
     public int noticeUpdate(ClassVideoDTO dto);
     public List<TeacherQuestionDTO> teacherQuestionList(int class_id);
     public TeacherQuestionDTO teacherQuestionDetail(int question_id);
+    public int teacherComment(TeacherQuestionDTO dto);
+    public int questionIsAnsweredUpdate(int id);
 }

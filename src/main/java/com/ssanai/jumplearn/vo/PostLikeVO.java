@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 public class PostLikeVO {
-	private int id;
-	private String member_id;
-	private int post_id;
-	private LocalDateTime created_at;
+	private int id; //pk
+	private String member_id; //좋아요 누른 사람 ID
+	private int post_id; //좋아요 눌린 게시물
+	private LocalDateTime created_at; //좋아요 눌린시간
 }

@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssanai.jumplearn.mapper.post.PostMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="search_category != null ">
+                <if test="search_category == 'title'.toString()">
+                    title like concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_category == 'member_id'.toString()">
+                    member_id like concat('%', #{search_word}, '%')
+                </if>
+            </if>
+        </where>
+    </sql>
+
     <select id="myList" resultType="com.ssanai.jumplearn.dto.PostDTO">
         SELECT
         p.id, p.title, p.content, p.view_count,
@@ -43,5 +56,74 @@
             and p.title like concat('%', #{dto.search_word}, '%')
         </if>
     </select>
+    <select id="postTotalCount">
+        select count(*) AS total_count
+        from tbl_post
+        <include refid="whereCondition"></include>
+    </select>
+    <select id="searchList">
+        SELECT
+        id AS id,
+        title AS title,
+        member_id AS member_id,
+        created_at AS created_at,
+        updated_at AS updated_at,
+        view_count AS view_count
+        FROM tbl_post
+        <include refid="whereCondition"></include>
+        order by created_at DESC
+        limit #{page_skip_count}, #{page_size}
+    </select>
+    <select id="selectDetailById">
+        SELECT
+            p.id AS post_id,
+            p.member_id as post_member_id,
+            p.title AS post_title,
+            p.content AS post_content,
+            p.view_count AS view_count,
+            p.created_at AS post_created_at,
+            p.updated_at AS post_updated_at,
+            (SELECT COUNT(*) FROM tbl_post_like WHERE post_id = p.id) AS like_count
+        FROM tbl_post AS p
+                 LEFT JOIN tbl_member AS m ON p.member_id = m.id
+        WHERE p.id = #{id}
+    </select>
+    <select id="selectFileById">
+        SELECT b.file_name AS fileName
+        FROM tbl_post_file AS f
+                 INNER JOIN tbl_bbs_file AS b ON f.file_id = b.id
+                 INNER JOIN tbl_post AS p ON f.post_id = p.id
+        WHERE p.id =#{id}
+    </select>
+    <insert id="insertFile" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO tbl_bbs_file (file_path, file_name, file_size, file_ext, related_table, related_id)
+        VALUES (#{filePath}, #{fileName}, #{fileSize}, #{fileExt}, "tbl_post", #{relatedId});
+    </insert>
+    <insert id="insertPost"  useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO tbl_post(title, content, view_count, member_id, created_at)
+        VALUES(#{title},#{content}, 0, #{member_id}, NOW())
+    </insert>
+    <insert id="bridgeFile">
+        INSERT INTO tbl_post_file(file_id, post_id)
+        VALUES(#{file_id}, #{post_id})
+    </insert>
+    <select id="selectCommentById">
+        SELECT id AS comment_id, member_id as comment_member_id, content AS comment_content, created_at, updated_at
+        FROM tbl_post_comment
+        WHERE post_id = #{post_id}
+    </select>
+    <insert id="insertComment">
+        INSERT INTO tbl_post_comment(member_id, post_id, content, created_at)
+        VALUES(#{comment_member_id}, #{post_id}, #{comment_content}, NOW())
+    </insert>
+    <update id="updateComment">
+        UPDATE tbl_post_comment
+        SET content = #{comment_content}, updated_at = NOW()
+        WHERE id = #{comment_id}
+    </update>
+    <delete id="deleteComment">
+        DELETE FROM tbl_post_comment
+        WHERE id= #{id}
+    </delete>
 </mapper>
  
