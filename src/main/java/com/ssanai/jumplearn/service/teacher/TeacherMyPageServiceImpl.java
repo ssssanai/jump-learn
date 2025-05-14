@@ -75,4 +75,15 @@ public class TeacherMyPageServiceImpl implements TeacherMyPageServiceIf {
     public TeacherQuestionDTO teacherQuestionDetail(int question_id) {
         return teacherMyPageXmlMapper.teacherQuestionDetail(question_id);
     }
+
+    @Override
+    public int teacherComment(TeacherQuestionDTO dto) {
+        int rs = teacherMyPageXmlMapper.teacherComment(dto);
+        if(rs != 1){
+            return rs;
+        }else{
+           rs = teacherMyPageXmlMapper.questionIsAnsweredUpdate(dto.getId());
+        }
+        return rs;
+    }
 }

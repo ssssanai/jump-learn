@@ -49,47 +49,45 @@
         <div class="formBox">
             <form method="post" action="/edu/editPage" enctype="multipart/form-data">
                 <div class="boardTitle">
-                    <p>${dto.title}</p>
+                    <p>제목${dto.post_title}</p>
                 </div>
                 <div class="formHead">
                     <div class="boardId">
-                        <p>번호 : ${dto.id}</p>
+                        <p>번호 : ${dto.post_id}</p>
                     </div>
                     <div class="boardUser">
-                        <p>${dto.admin_id}</p>
+                        <p>${dto.post_member_id}</p>
                     </div>
                     <div class="boardRegDate">
-                        <p>${dto.created_at}</p>
+                        <p>${dto.post_created_at}</p>
                     </div>
                     <div class="boardViewCnt">
                         <p>조회수 ${dto.view_count}회</p>
                     </div>
                 </div>
                 <div class="boardCont">
-                    <p>${dto.content}</p>
-                </div>
-                <div class="boardFile">
-                    <c:forEach var="file" items="${pdfFileDTO}" >
-                        <a href="${file.file_path}" target="_blank">${file.file_name}${file.file_ext}</a>
-                    </c:forEach>
+                    <p>${dto.post_content}</p>
                 </div>
                 <div class="boardImage">
-                    <c:forEach var="file" items="${fileDTO}" >
-                        <c:if test="${fn:contains(file.file_ext, '.jpg') or fn:contains(file.file_ext, '.jpeg')}">
-                            <img src="${file.file_path}" alt="${file.file_name}"/>
-                            <br>
-                        </c:if>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${not empty fileList}">
+                            <c:forEach var="list" items="${fileList}" >
+                                <img src="/upload/${list.fileName}" alt="이미지"/>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="formBtn">
                     <input class="endBtn" type="button" value="목록" onClick="location.href='<c:url value='/edu/searchListPage?${pageDTO.linkParams}'/>'" />
-
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.loginInfo.status}">
-                            <input class="endBtn" type="button" value="수정" onClick="location.href='<c:url value='/edu/editPage?id=${dto.id}&${pageDTO.linkParams}'/>'" />
-                            <input class="endBtn" type="button" value="삭제" onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='<c:url value='/edu/delete'/>?id=${dto.id}&${pageDTO.linkParams}';}" />
-                        </c:when>
-                    </c:choose>
+<%--                    <c:choose>--%>
+<%--                        <c:when test="${not empty sessionScope.loginInfo.status}">--%>
+<%--                            <input class="endBtn" type="button" value="수정" onClick="location.href='<c:url value='/edu/editPage?id=${dto.id}&${pageDTO.linkParams}'/>'" />--%>
+<%--                            <input class="endBtn" type="button" value="삭제" onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='<c:url value='/edu/delete'/>?id=${dto.id}&${pageDTO.linkParams}';}" />--%>
+<%--                        </c:when>--%>
+<%--                    </c:choose>--%>
                 </div>
             </form>
         </div>
