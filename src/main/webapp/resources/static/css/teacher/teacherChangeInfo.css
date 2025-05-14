@@ -101,7 +101,7 @@ body {
 /* 이메일 입력 css */
 .select_email {
     float:left;
-    width:34%; height:50px;
+    width:80%; height:50px;
     border:3px solid #D6D6D6;
     font-family: 'KakaoSmallSans-Bold';
     padding:0 10px;

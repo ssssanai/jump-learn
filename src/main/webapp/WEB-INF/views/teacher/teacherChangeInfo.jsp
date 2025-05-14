@@ -42,7 +42,7 @@
                     <input type="date"class="regi_input2" id="birthDate" name="birth" required min="1950-01-01" value="${dto.birthday}">
                     <div id="birthDateError" class="error"></div>
                 </div>
-                <div class="regi_input_box1">
+                <div class="regi_input_box">
                     <p class="regi_tit">이메일</p>
                     <input id="userEmail" class="select_email" type="text" name="email" autocomplete="off" value="${dto.email}" maxlength="20" readonly>
                 </div>

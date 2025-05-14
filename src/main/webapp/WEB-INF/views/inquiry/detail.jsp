@@ -85,10 +85,11 @@
                     <input type="button" value="질문 삭제" id="btnDelete">
                 </c:if>
             </div>
-            <div class="qnaCommentList">
+
                 <c:choose>
                     <c:when test="${inquiry[0].inquiry_commenter != null}">
                         <c:forEach items="${inquiry}" var="comment">
+                            <div class="qnaCommentList">
                                 <div class="comment" id="${comment.comment_id}">
                                     <p>댓글 작성자 ID:  ${comment.inquiry_commenter}</p>
                                     <div class="commentBtn">
@@ -106,15 +107,13 @@
                                         <p>댓글 수정 시간: ${comment.inquiry_comment_updated_at}</p>
                                     </div>
                                 </div>
+                            </div>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <tr>
-                            <td>댓글이 없습니다.</td>
-                        </tr>
+                        <p class="qnaCommentList2">댓글이없습니다.</p>
                     </c:otherwise>
                 </c:choose>
-            </div>
             <c:if test="${ loginInfo.status == 1}" var="hasPermission">
                 <form name="inquiry_comment_form" id="inquiry_comment_form" action="/inquiry/comment/add/${inquiry[0].inquiry_id}"
                       method="post">

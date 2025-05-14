@@ -78,36 +78,38 @@
         </div>
     </div>
     <div class="main">
-        <div class="studyBox3">
-            <h2>강좌</h2>
-            <div class="reviewList1">
-                <p class="studyNo1">강좌 수</p>
-                <p class="studyTit1">제목</p>
-                <p class="studyContent1">강좌 내용</p>
-                <p class="studyUploadDate1">업로드날짜</p>
-                <p class="studyUploadDate1">강의 시청</p>
-                <p class="studyUploadDate1">강의 공지사항</p>
-            </div>
-            <div class="reviewListBox">
-                <c:forEach items="${videoList}" var="video">
-                    <div class="reviewList2">
-                        <p class="studyNo2">${video.video_order}강</p>
-                        <p class="studyTit2">${video.title}</p>
-                        <p class="studyContent2">${video.content}</p>
-                        <p class="studyUploadDate2">${video.created_at.toString().replace("T", " ")}</p>
-                        <c:if test="${video.video_name != null}" var="isLocal">
-                            <button class="btnVideoPlay" id="${video.video_name}">재생</button>
-                        </c:if>
-                        <c:if test="${not isLocal}">
-                            <button class="btnVideoPlay" id="${video.video_url}">재생</button>
-                        </c:if>
-                        <button class="btnVideoNotice" id="${video.notice}">공지 확인</button>
-                    </div>
-                </c:forEach>
+        <div class="box">
+            <div class="studyBox3">
+                <h2>강좌</h2>
+                <div class="reviewList1">
+                    <p class="studyNo1">강좌 수</p>
+                    <p class="studyTit1">제목</p>
+                    <p class="studyContent1">강좌 내용</p>
+                    <p class="studyUploadDate1">업로드날짜</p>
+                    <p class="studyUploadDate3">강의 시청</p>
+                    <p class="studyUploadDate3">강의 공지사항</p>
+                </div>
+                <div class="reviewListBox">
+                    <c:forEach items="${videoList}" var="video">
+                        <div class="reviewList2">
+                            <p class="studyNo2">${video.video_order}강</p>
+                            <p class="studyTit2">${video.title}</p>
+                            <p class="studyContent2">${video.content}</p>
+                            <p class="studyUploadDate2">${video.created_at.toString().replace("T", " ")}</p>
+                            <c:if test="${video.video_name != null}" var="isLocal">
+                                <button class="btnVideoPlay" id="${video.video_name}">재생</button>
+                            </c:if>
+                            <c:if test="${not isLocal}">
+                                <button class="btnVideoPlay" id="${video.video_url}">재생</button>
+                            </c:if>
+                            <button class="btnVideoNotice" id="${video.notice}">공지 확인</button>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
             <div class="studyBox3">
                 <h2>작성된 후기</h2>
-                <div class="reviewList1">
+                <div class="reviewList3">
                     <p class="studyContent4">학생 ID</p>
                     <p class="studyTit4">후기</p>
                     <p class="studyNo4">별점</p>
@@ -129,7 +131,46 @@
                     </c:if>
                 </div>
             </div>
+            <%-- 질문 목록 (내가 한 질문만 가져오기) --%>
         </div>
+        <div>
+            <c:if test="${qList.size() > 0}">
+                <h3>질문</h3>
+                <c:forEach items="${qList}" var="q">
+                    <%--질문--%>
+                    <div>
+                        <p>${q.title}</p>
+                        <p>${q.content}</p>
+                        <p>질문 일시:${q.created_at.toString().replace("T", " ")}</p>
+                        <c:if test="${q.updated_at != null}">
+                            <p>수정 일시: ${q.updated_at.toString().replace("T", " ")}</p>
+                        </c:if>
+                    </div>
+                    <%--답글--%>
+                    <div>
+                        <c:if test="${q.quested_content != null}">
+                            <p>${q.commenter}</p>
+                            <p>${q.quested_content}</p>
+                            <p>질문 일시:${q.quested_created_at.toString().replace("T", " ")}</p>
+                            <c:if test="${q.quested_updated_at != null}">
+                                <p>수정 일시: ${q.quested_updated_at.toString().replace("T", " ")}</p>
+                            </c:if>
+                        </c:if>
+                    </div>
+                </c:forEach>
+            </c:if>
+            <%-- TODO: 질문 폼 CSS 수정 --%>
+            <div>
+                <form name="class_question" action="/studyroom/class_question" method="post">
+                    <input type="hidden" value="${member.id}" name="member_id"/>
+                    <input type="hidden" value="${classDetailDTO.class_id}" name="class_id"/>
+                    질문 제목: <input type="text" name="title"/><br>
+                    질문 내용: <textarea name="content"></textarea>
+                    <input type="submit" value="질문 등록"/>
+                </form>
+            </div>
+        </div>
+
         <%--입력된 후기가 없을시--%>
         <c:if test="${not isReviewed}">
         <div class="reviewBox">
@@ -157,8 +198,8 @@
             document.getElementById('btnClassNotice').addEventListener('click', function () {
                 const popup = window.open('', '_blank', 'width=500,height=400, left=100, top=200');
                 popup.document.write(
-                    `<h2>강좌 공지사항</h2>
-            <div>${classDetailDTO.class_notice}</div>
+                    `<h2 style="height:55px; line-height:53px; color:#333; text-align: center; border-bottom: 3px solid #d6d6d6b3;">강좌 공지사항</h2>
+            <div style="height:300px; padding:0 15px; color:#333; text-align: left; border-bottom: 3px solid #d6d6d6b3;">${classDetailDTO.class_notice}</div>
             `
                 );
             });
@@ -168,8 +209,8 @@
                 el.addEventListener('click', function () {
                     const popup = window.open('', '_blank', 'width=500,height=400, left=100, top=200');
                     popup.document.write(
-                        `<h2>강의 공지사항</h2>
-                <div>` + notice + `</div>
+                        `<div class="popupBox"><h2 style="height:55px; line-height:53px; color:#333; text-align: center; border-bottom: 3px solid #d6d6d6b3;">강의 공지사항</h2>
+                <div class="body">` + notice + `</div></div>
                 `
                     );
                 })
@@ -190,9 +231,7 @@
                 })
             });
 
-            // 강좌 질문
 
-            // 질문 목록
         </script>
 </body>
 </html>
