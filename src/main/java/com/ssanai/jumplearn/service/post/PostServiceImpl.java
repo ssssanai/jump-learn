@@ -74,6 +74,11 @@ public class PostServiceImpl implements PostServiceIf {
 	}
 
 	@Override
+	public List<CommentDTO> selectCommentById(int id) {
+		return postMapper.selectCommentById(id);
+	}
+
+	@Override
 	public int insertFile(BbsFileDTO fileDTO) {
 		int rs = postMapper.insertFile(fileDTO);
 		if(rs > 0) {
@@ -96,6 +101,21 @@ public class PostServiceImpl implements PostServiceIf {
 	@Override
 	public int bridgeFile(int f_id, int p_id) {
 		return postMapper.bridgeFile(f_id,p_id);
+	}
+
+	@Override
+	public int insertComment(CommentDTO commentDTO) {
+		return postMapper.insertComment(commentDTO);
+	}
+
+	@Override
+	public int updateComment(CommentDTO commentDTO) {
+		return postMapper.updateComment(commentDTO);
+	}
+
+	@Override
+	public int deleteComment(int id) {
+		return postMapper.deleteComment(id);
 	}
 
 }

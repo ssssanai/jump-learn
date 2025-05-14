@@ -1,6 +1,7 @@
 package com.ssanai.jumplearn.controller.post;
 
 import com.ssanai.jumplearn.dto.*;
+import com.ssanai.jumplearn.service.bbs.BbsServiceInterface;
 import com.ssanai.jumplearn.service.post.PostServiceIf;
 import com.ssanai.jumplearn.util.BbsPage;
 import com.ssanai.jumplearn.util.FilePathConfig;
@@ -32,7 +33,7 @@ public class PostController {
 
 	private final PostServiceIf postService;
 	private final FilePathConfig filePathConfig;
-
+	private final BbsServiceInterface bbsService;
 	// 자유 게시판 컨트롤러
 	@GetMapping("/searchListPage")
 	public String list(
@@ -67,13 +68,20 @@ public class PostController {
 	@GetMapping("/view")
 	public String view(
 			@RequestParam("id") String id,
-			Model model
+			Model model,
+			HttpSession session
 	) {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
+		model.addAttribute("loginInfo", memberDTO);
+		bbsService.viewCount(Integer.parseInt(id), "tbl_post");
 		PostDetailDTO dto = postService.selectDetailById(Integer.parseInt(id));
 		model.addAttribute("dto", dto);
 		List<BbsFileDTO> fileList = postService.selectFileById(Integer.parseInt(id));
 		log.info("fileList" + fileList);
 		model.addAttribute("fileList", postService.selectFileById(Integer.parseInt(id)));
+		List<CommentDTO> commentList = postService.selectCommentById(Integer.parseInt(id));
+		model.addAttribute("commentList", commentList);
+		log.info("commentList" + commentList);
 		return "post/viewPage";
 	}
 
@@ -181,5 +189,61 @@ public class PostController {
 			redirectAttributes.addFlashAttribute("msg", "서버 오류: " + e.getMessage());
 			return "redirect:/post/write";
 		}
+	}
+	@PostMapping("/insertComment")
+	public String insertComment(
+			CommentDTO commentDTO,
+			RedirectAttributes redirectAttributes,
+			@RequestHeader(value = "Referer", required = false) String referer
+	) {
+		log.info("댓글 입력"+commentDTO.toString());
+		int rs = postService.insertComment(commentDTO);
+		if(rs < 1){
+			redirectAttributes.addAttribute("msg","답글 실패");
+		}
+		if (referer != null) {
+			return "redirect:" + referer;
+		} else {
+			return "redirect:/post/searchListPage";
+		}
+	}
+	@GetMapping("/deleteComment")
+	public String deleteComment(
+			@RequestHeader(value = "Referer", required = false) String referer,
+			@RequestParam("id") String id,
+			RedirectAttributes redirectAttributes
+	) {
+		int rs = postService.deleteComment(Integer.parseInt(id));
+		if(rs < 1){
+			redirectAttributes.addFlashAttribute("msg","삭제 실패");
+		}else {
+			redirectAttributes.addFlashAttribute("msg", "삭제 성공");
+		}
+		if (referer != null) {
+			return "redirect:" + referer;
+		} else {
+			return "redirect:/post/searchListPage";
+		}
+	}
+	@GetMapping("/updateComment")
+	public String updateComment(
+			@RequestParam("comment_id")String id,
+			Model model
+	){
+		model.addAttribute("id", id);
+		return "post/comment_update_popup";
+	}
+	@PostMapping("/updateComment")
+	public String updateComment(
+			CommentDTO dto,
+			RedirectAttributes redirectAttributes
+	){
+		int rs = postService.updateComment(dto);
+		if(rs < 1){
+			redirectAttributes.addFlashAttribute("msg","수정 실패");
+		}else {
+			redirectAttributes.addFlashAttribute("msg", "수정 성공");
+		}
+		return "redirect:/post/updateComment?comment_id="+dto.getComment_id();
 	}
 }

@@ -17,7 +17,11 @@ public interface PostServiceIf {
 	public int postTotalCount(PageRequestDTO requestDTO);
 	public PostDetailDTO selectDetailById(int id);
 	public List<BbsFileDTO> selectFileById(int id);
+	public List<CommentDTO> selectCommentById(int id);
 	public int insertFile(BbsFileDTO fileDTO);
 	public int insertPost(PostDTO postDTO);
 	public int bridgeFile(int f_id, int p_id);
+	public int insertComment(CommentDTO commentDTO);
+	public int updateComment(CommentDTO commentDTO);
+	public int deleteComment(@Param("id") int id);
 }

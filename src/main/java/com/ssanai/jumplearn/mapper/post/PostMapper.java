@@ -1,9 +1,6 @@
 package com.ssanai.jumplearn.mapper.post;
 
-import com.ssanai.jumplearn.dto.BbsFileDTO;
-import com.ssanai.jumplearn.dto.PageRequestDTO;
-import com.ssanai.jumplearn.dto.PostDTO;
-import com.ssanai.jumplearn.dto.PostDetailDTO;
+import com.ssanai.jumplearn.dto.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,7 +15,12 @@ public interface PostMapper {
 	public int postTotalCount(PageRequestDTO requestDTO);
 	public PostDetailDTO selectDetailById(int id);
 	public List<BbsFileDTO> selectFileById(int id);
+	public List<CommentDTO> selectCommentById(int id);
 	public int insertFile(BbsFileDTO fileDTO);
 	public int insertPost(PostDTO postDTO);
-	int bridgeFile(@Param("file_id") int f_id, @Param("post_id") int p_id);
+	public int bridgeFile(@Param("file_id") int f_id, @Param("post_id") int p_id);
+	public int insertComment(CommentDTO commentDTO);
+	public int updateComment(CommentDTO commentDTO);
+	public int deleteComment(@Param("id") int id);
+
 }

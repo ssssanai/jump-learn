@@ -107,5 +107,23 @@
         INSERT INTO tbl_post_file(file_id, post_id)
         VALUES(#{file_id}, #{post_id})
     </insert>
+    <select id="selectCommentById">
+        SELECT id AS comment_id, member_id as comment_member_id, content AS comment_content, created_at, updated_at
+        FROM tbl_post_comment
+        WHERE post_id = #{post_id}
+    </select>
+    <insert id="insertComment">
+        INSERT INTO tbl_post_comment(member_id, post_id, content, created_at)
+        VALUES(#{comment_member_id}, #{post_id}, #{comment_content}, NOW())
+    </insert>
+    <update id="updateComment">
+        UPDATE tbl_post_comment
+        SET content = #{comment_content}, updated_at = NOW()
+        WHERE id = #{comment_id}
+    </update>
+    <delete id="deleteComment">
+        DELETE FROM tbl_post_comment
+        WHERE id= #{id}
+    </delete>
 </mapper>
  
