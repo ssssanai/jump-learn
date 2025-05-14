@@ -19,7 +19,7 @@
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/memberGnb.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
 <div class="wrap">
     <div class="aside">
         <div class="profile">
@@ -85,43 +85,46 @@
                     <input type="button" value="질문 삭제" id="btnDelete">
                 </c:if>
             </div>
-
+            <div class="qnaCommentList">
                 <c:choose>
                     <c:when test="${inquiry[0].inquiry_commenter != null}">
                         <c:forEach items="${inquiry}" var="comment">
-                            <div class="qnaCommentList">
-                                <div class="comment" id="${comment.comment_id}">
-                                    <p>댓글 작성자 ID:  ${comment.inquiry_commenter}</p>
-                                    <div class="commentBtn">
-                                        <c:if test="${loginInfo.id.equals(comment.inquiry_commenter)}">
-                                            <button class="btnCommentUpdate">수정</button>
-                                            &nbsp;<button class="btnCommentDelete">삭제</button>
-                                        </c:if>
-                                    </div>
+                            <div class="comment" id="${comment.comment_id}">
+                                <p>댓글 작성자 ID: ${comment.inquiry_commenter}</p>
+                                <div class="commentBtn">
+                                    <c:if test="${loginInfo.id.equals(comment.inquiry_commenter)}">
+                                        <button class="btnCommentUpdate">수정</button>
+                                        <button class="btnCommentDelete">삭제</button>
+                                    </c:if>
                                 </div>
-                                <div class="content">
-                                    <p class="commenter_type">${comment.inquiry_comment_id_type}</p>
-                                    <p class="contentPtage">댓글 내용: ${comment.inquiry_comment_content}</p>
-                                    <div class="contentDate">
-                                        <p>댓글 작성 시간: ${comment.inquiry_comment_created_at}</p>
-                                        <p>댓글 수정 시간: ${comment.inquiry_comment_updated_at}</p>
-                                    </div>
+                            </div>
+                            <div class="content">
+                                <p class="commenter_type">${comment.inquiry_comment_id_type}</p>
+                                <p class="contentPage">댓글 내용: ${comment.inquiry_comment_content}</p>
+                                <div class="contentDate">
+                                    <p>댓글 작성 시간: ${comment.inquiry_comment_created_at}</p>
+                                    <p>댓글 수정 시간: ${comment.inquiry_comment_updated_at}</p>
                                 </div>
                             </div>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <p class="qnaCommentList2">댓글이없습니다.</p>
+                        <tr>
+                            <td>댓글이 없습니다.</td>
+                        </tr>
                     </c:otherwise>
                 </c:choose>
+            </div>
             <c:if test="${ loginInfo.status == 1}" var="hasPermission">
-                <form name="inquiry_comment_form" id="inquiry_comment_form" action="/inquiry/comment/add/${inquiry[0].inquiry_id}"
+                <form name="inquiry_comment_form" id="inquiry_comment_form"
+                      action="/inquiry/comment/add/${inquiry[0].inquiry_id}"
                       method="post">
                     <div class="qnaCommentWrite">
-                    <input type="hidden" name="inquiry_commenter" value="${loginInfo.id}" hidden/>
-                    <input type="hidden" name="inquiry_comment_id_type" value="member" hidden/>
-                    <textarea id="inquiry_comment_content" name="inquiry_comment_content" placeholder="댓글을 입력해주세요."></textarea>
-                    <input type="button" value="등록" id="btnSubmit"/>
+                        <input type="hidden" name="inquiry_commenter" value="${loginInfo.id}" hidden/>
+                        <input type="hidden" name="inquiry_comment_id_type" value="member" hidden/>
+                        <textarea id="inquiry_comment_content" name="inquiry_comment_content"
+                                  placeholder="댓글을 입력해주세요."></textarea>
+                        <input type="button" value="등록" id="btnSubmit"/>
                     </div>
                 </form>
             </c:if>
@@ -158,7 +161,9 @@
             cmt.focus();
             isValid = false;
         }
-        if (isValid) {frm.submit();}
+        if (isValid) {
+            frm.submit();
+        }
     });
 
     $('.btnCommentUpdate').on('click', function () {
@@ -170,14 +175,14 @@
         console.log($(this).parent());
         $(this).parent()[0].innerHTML = `
         <form id="inquiry_comment_update_form" name="inquiry_comment_update_form" action="` + url + `" method="post">
-            <input type="hidden" name="inquiry_id" value="`+ ${inquiry[0].inquiry_id} +`"/>
+            <input type="hidden" name="inquiry_id" value="` + ${inquiry[0].inquiry_id} +`"/>
             <input type="hidden" name="inquiry_commenter" value="` + commenter + `"/>
             <input type="hidden" name="inquiry_comment_id_type" value="` + commenter_type + `"/>
             <textarea id="inquiry_comment_content_update" name="inquiry_comment_content">` + original_comment + `</textarea>
             <input id="btnCommentModifyDone" type="submit" value="수정 완료"/>
         </form>`;
 
-        $('#btnCommentModifyDone').on('click', function (e){
+        $('#btnCommentModifyDone').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             let frm = $('#inquiry_comment_update_form');
