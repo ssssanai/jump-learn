@@ -23,14 +23,14 @@ public class MainPageServiceImpl implements MainPageServiceIf {
 
 	@Override
 	public MemberDTO getMemberInfo(String id) {
-		log.info("MainPageService >> getMemberInfo");
+//		log.info("MainPageService >> getMemberInfo");
 
 		MemberVO vo = mainPageMapper.getMemberInfo(id);
 		MemberDTO dto = null;
 		if(vo != null) {
 			 dto = modelMapper.map(mainPageMapper.getMemberInfo(id), MemberDTO.class); ;
 		}
-		log.info(dto);
+//		log.info(dto);
 		return dto;
 	}
 

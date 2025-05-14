@@ -99,6 +99,21 @@ public class PostServiceImpl implements PostServiceIf {
 	}
 
 	@Override
+	public int deletePost(int id) {
+		return postMapper.deletePost(id);
+	}
+
+	@Override
+	public int updateFile(BbsFileDTO fileDTO) {
+		return 0;
+	}
+
+	@Override
+	public int updatePost(PostDTO postDTO) {
+		return 0;
+	}
+
+	@Override
 	public int bridgeFile(int f_id, int p_id) {
 		return postMapper.bridgeFile(f_id,p_id);
 	}
