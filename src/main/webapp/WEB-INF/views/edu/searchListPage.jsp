@@ -70,36 +70,24 @@
         </form>
         <div class="writeList">
             <div class="wlHeader">
-                <c:if test="${isAdmin}">
-                    <p class="listCk">선택</p>
-                </c:if>
                 <p class="listNo">번호</p>
                 <p class="listTit">제목</p>
                 <p class="listName">작성자</p>
                 <p class="listDate">작성일</p>
                 <p class="listCnt">조회수</p>
-                <c:if test="${isAdmin}">
-                    <div class="listDelBtnBox">
-                        <input class="listDelBtn" type="button" value="선택삭제">
-                    </div>
-                </c:if>
+                <p class="listDelBtnBox">&nbsp;</p>
             </div>
             <c:forEach var="post" items="${dto.dtoList}">
                 <div class="wlBody">
-                    <c:if test="${isAdmin}">
-                        <div class="listCk">
-                            <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
-                        </div>
-                    </c:if>
                     <p class="listNo">${post.id}</p>
                     <p class="listTit"><a href="/edu/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
                     <p class="listName">${post.admin_id}</p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
                     <c:if test="${isAdmin}">
-                        <div class="listDelBtnBox">
+                        <p class="listDelBtnBox">
                             <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/edu/delete/${post.id}'}" value="삭제">
-                        </div>
+                        </p>
                     </c:if>
                 </div>
             </c:forEach>

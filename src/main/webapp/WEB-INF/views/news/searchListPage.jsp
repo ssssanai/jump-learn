@@ -43,7 +43,6 @@
                 <c:if test="${isAdmin}">
                     <a href="/news/writePage">글쓰기</a>
                 </c:if>
-
             </div>
         </div>
         <form class="searchInput" name="frmSearch" id="frmSearch" method="GET" action="/news/searchListPage">
@@ -70,27 +69,14 @@
         </form>
         <div class="writeList">
             <div class="wlHeader">
-                <c:if test="${isAdmin}">
-                    <p class="listCk">선택</p>
-                </c:if>
                 <p class="listNo">번호</p>
                 <p class="listTit">제목</p>
                 <p class="listName">작성자</p>
                 <p class="listDate">작성일</p>
                 <p class="listCnt">조회수</p>
-                <c:if test="${isAdmin}">
-                    <div class="listDelBtnBox">
-                        <input class="listDelBtn" type="button" value="선택삭제">
-                    </div>
-                </c:if>
             </div>
             <c:forEach var="post" items="${dto.dtoList}">
                 <div class="wlBody">
-                    <c:if test="${isAdmin}">
-                        <div class="listCk">
-                            <input class="listCkbox" type="checkbox" id="deleteCheckBox${post.id}" name="deleteCheckBox${post.id}">
-                        </div>
-                    </c:if>
                     <p class="listNo">${post.id}</p>
                     <p class="listTit"><a href="/news/viewPage?id=${post.id}&${pageDTO.getLinkParams()}">${post.title}</a></p>
                     <p class="listName">${post.admin_id}</p>

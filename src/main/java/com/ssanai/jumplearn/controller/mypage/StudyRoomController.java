@@ -2,6 +2,7 @@ package com.ssanai.jumplearn.controller.mypage;
 
 import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.service.comment.CommentServiceIf;
+import com.ssanai.jumplearn.service.course.CourseServiceIf;
 import com.ssanai.jumplearn.service.course.EnrollmentsServiceIf;
 import com.ssanai.jumplearn.service.mainpage.MainPageServiceIf;
 import com.ssanai.jumplearn.service.plan.PlanServiceIf;
@@ -14,10 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -34,9 +32,10 @@ public class StudyRoomController {
 	private final EnrollmentsServiceIf enrollmentsService;
 	private final CommentServiceIf commentService;
 	private final PlanServiceIf planService;
+	private final CourseServiceIf courseService;
 
 	// 나의 강좌 리스트
-	@GetMapping("/enroll")
+	@GetMapping(value = {"/enroll", "/"})
 	public String myStudyRoom(
 			HttpServletRequest req,
 			RedirectAttributes ra,
@@ -86,6 +85,77 @@ public class StudyRoomController {
 		model.addAttribute("EnrollDTOList", EnrollDTOList);
 		model.addAttribute("EnrollPaging", EnrollPaging);
 		return "member/studyroom";
+	}
+
+	@GetMapping("/enroll/{class_id}")
+	public String enrollDetail(
+			HttpServletRequest req,
+			@PathVariable("class_id") int class_id,
+			RedirectAttributes ra,
+			@ModelAttribute("reqDTO") PageRequestDTO reqDTO,
+			Model model
+	) {
+		log.info("수강 강좌 상세 화면 > class_id = {}", class_id);
+
+		// 회원 정보
+		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		// 로그인 체크
+		if (loginInfo == null) {
+			log.info("Not Logged In Member");
+			ra.addFlashAttribute("msg", "로그인 후 사용 가능한 서비스입니다.");
+			return "redirect:/member/login";
+		}
+		String member_id = loginInfo.getId();
+		MemberDTO mDTO = mainPageService.getMemberInfo(member_id);
+
+		ClassDetailDTO classDetailDTO = courseService.getClassDetailById(class_id);
+		List<ReviewDTO> reviewList = courseService.getReviewListById(class_id);
+		List<ClassVideoDTO> videoList = courseService.getClassVideoList(class_id);
+		boolean isReviewed = false;
+		for (ReviewDTO reviewDTO : reviewList) {
+			if(reviewDTO.getMember_id().equals(member_id)
+					&& reviewDTO.getReview() != null) {
+				isReviewed = true;
+			}
+		}
+		log.info(isReviewed);
+		log.info("필터링 전 리뷰목록" + reviewList);
+		reviewList = reviewList.stream().filter(dto -> dto.getReview() != null).toList();
+		log.info("필터링 후 리뷰목록" + reviewList);
+
+		model.addAttribute("member", mDTO);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("classDetailDTO", classDetailDTO);
+		model.addAttribute("videoList", videoList);
+		model.addAttribute("isReviewed", isReviewed);
+		return "member/detail";
+	}
+
+	@PostMapping("/update_review")
+	public String updateReview(
+			@ModelAttribute("review") EnrollmentsDTO enrollments,
+			RedirectAttributes ra,
+			Model model
+	) {
+		log.info("리뷰 업데이트");
+		log.info(model.getAttribute("member"));
+		log.info(enrollments);
+		if (!(enrollments.getFeedback_score() >= 1 && enrollments.getFeedback_score() <= 5)) {
+			log.info("리뷰 점수 오류");
+			ra.addFlashAttribute("msg", "평점은 1~5점에서 선택 가능합니다.");
+			return "redirect:/studyroom/enroll/" + enrollments.getClass_id();
+		}
+
+		int result = enrollmentsService.updateReview(enrollments);
+		if (result < 0) {
+			log.info(enrollments);
+			log.info("리뷰 등록 실패");
+			ra.addFlashAttribute("msg", "리뷰 등록에 실패했습니다.");
+		} else {
+			log.info("리뷰 등록 성공");
+			ra.addFlashAttribute("msg", "리뷰를 정상적으로 등록했습니다.");
+		}
+		return "redirect:/studyroom/enroll/" + enrollments.getClass_id();
 	}
 
 	// 내가 작성한 게시글
