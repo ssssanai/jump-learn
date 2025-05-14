@@ -105,4 +105,9 @@ public class CourseServiceImpl implements CourseServiceIf {
 	public int createQuestion(ClassQuestionDTO dto) {
 		return courseMapper.createQuestion(dto);
 	}
+
+	@Override
+	public List<ClassDataDTO> getClassDataList(int class_id) {
+		return courseMapper.getClassDataList(class_id);
+	}
 }

@@ -10,6 +10,7 @@
 <%@ include file="/resources/static/html/adminMsg.jsp" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <link href="/resources/static/css/community/qna/viewPage.css" rel="stylesheet" type="text/css">
     <title>Detail Page</title>
@@ -26,12 +27,12 @@
             <div class="sideMenu">
                 <h2 class="sideMenuTitle">커뮤니티</h2>
                 <a href="/post/searchListPage">자유게시판</a>
+                <a href="/notice/searchListPage">공지사항 게시판</a>
                 <a href="/edu/searchListPage">교육 정보 게시판</a>
                 <a href="/info/searchListPage">대입 정보 게시판</a>
                 <a href="/activity/searchListPage">대외활동 게시판</a>
                 <a href="/lib/searchListPage">자료실 게시판</a>
                 <a href="/news/searchListPage">뉴스 게시판</a>
-                <a href="/notice/searchListPage">공지사항 게시판</a>
             </div>
         </div>
     </div>

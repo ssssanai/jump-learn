@@ -35,7 +35,7 @@
             <c:forEach items="${PostDTOList.dtoList}" var="dto">
                 <div class="myStudyList2">
                     <p class="studyNo">${dto.id}</p>
-                    <a href="#" class="studyTit">${dto.title}</a>
+                    <a href="/post/view?id=${dto.id}" class="studyTit">${dto.title}</a>
                     <p class="studyTit1">${dto.content}</p>
                     <p class="studyTeach">${dto.like_count}</p>
                     <p class="studyTeach">${dto.view_count}</p>
