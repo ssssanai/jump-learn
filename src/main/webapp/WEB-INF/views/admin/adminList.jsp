@@ -129,15 +129,15 @@
 </div>
 <script>
     function changeTeacherStatus(id) {
-        const status = prompt("변경하고자 하는 상태 값을 입력하세요(1: 활성 2:제지 3:장기 미변경 4:유예)");
+        const status = prompt("변경하고자 하는 상태 값을 입력하세요(1: 슈퍼 관리자 2:중간 관리자 )");
 
         if (status !== null && status.trim() !== "") {
-            const pattern = /^[1-4]+$/; // 숫자만 허용
+            const pattern = /^[1-2]+$/; // 숫자만 허용
 
             if (pattern.test(status)) {
                 window.location.href = "/admin/adminChange?id=" + encodeURIComponent(id) + "&s=" + encodeURIComponent(status);
             } else {
-                alert("1~4까지의 숫자만 입력할 수 있습니다.");
+                alert("1~2까지의 숫자만 입력할 수 있습니다.");
             }
         }
     }
