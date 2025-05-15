@@ -121,7 +121,7 @@
                 </c:forEach>
             </table>
             <div class="pagingBox">
-                <p>123456</p>
+                ${paging}
             </div>
         </div>
     </div>
