@@ -37,6 +37,15 @@ public class AdminLoginController {
             session.setMaxInactiveInterval(60 * 60 * 3); //3시간
             log.info("로그인성공");
             log.info(aDto.toString());
+
+            if(session.getAttribute("loginInfo")!=null){
+                session.removeAttribute("loginInfo");
+            }
+
+            if(session.getAttribute("teacherInfo")!=null){
+                session.removeAttribute("teacherInfo");
+            }
+
             return "redirect:/admin/memberList";
         }else {
             rAttribute.addFlashAttribute("msg", "로그인 실패");

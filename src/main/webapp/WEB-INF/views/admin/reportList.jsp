@@ -53,7 +53,15 @@
                     <td><a href="/admin/report?id=${list.report_id}">${list.report_id}</a></td>
                     <td>${list.target_type}</td>
                     <td>${list.member_id}</td>
-                    <td>${list.report_status.equals("completed") ? "처리 완료" : "처리중"}</td>
+                    <td>
+<%--                            ${list.report_status.equals("completed") ? "처리 완료" : "처리중"}--%>
+                        <c:if test="${list.report_status.equals('completed')}" var="isCompleted">
+                            <p style="font-weight: bolder; color: green">처리 완료</p>
+                        </c:if>
+                        <c:if test="${not isCompleted}">
+                            <p style="font-weight: bolder; color: darkred">처리 중</p>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
         </c:when>
