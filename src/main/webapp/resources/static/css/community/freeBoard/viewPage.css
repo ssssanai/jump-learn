@@ -175,6 +175,7 @@ ul li {
                 justify-content: center;
                 align-items: center;
                 gap: 15px;
+                font-size: 25px;
             }
                 .boardListBtn > button {
                     font-size:26px;
@@ -204,31 +205,21 @@ ul li {
                 color:#333;
             }
 
-        .boardFile, .boardImage {
-            width:100%;
-        }
-        .boardImg {
+        .boardImage {
             display: flex;
-            width:100%; height:40px;
-            margin-bottom: 15px;
+            width:100%; height:200px;
+            gap:50px;
+            align-items: center;
+            justify-content: center;
+            padding:10px;
+            border: 2px solid #d6d6d6b3;
         }
-            .boardImg > p {
-                width:15%; height:100%;
-                line-height:38px;
-                padding: 0 15px;
+            .boardImage > img {
+                width:25%;
+                height:150px;
+                object-fit: contain;
             }
-            .boardImg > input {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width:85%; height:100%;
-                border: 3px solid #d6d6d6b3;
-                padding: 4px;
-            }
-            .boardImg > input:focus {
-                border: 3px solid #607ffc;
-                outline: none;
-            }
+
         .formBtn {
             display: flex;
             align-items: center;
@@ -241,6 +232,7 @@ ul li {
             border: 2px solid #d6d6d6b3;
             border-radius: 3px;
             color:#333;
+
             font-size:14px;
         }
             .endBtn:hover {
