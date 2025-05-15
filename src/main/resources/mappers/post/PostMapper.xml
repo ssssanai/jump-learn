@@ -152,5 +152,9 @@
     <update id="viewCountMinus">
         UPDATE tbl_post SET view_count = view_count - 1 WHERE id = #{post_id};
     </update>
+    <insert id="insertReport">
+        INSERT INTO tbl_report(target_id, target_type, member_id, reason)
+        VALUES(#{target_id}, "tbl_post", #{member_id}, #{reason})
+    </insert>
 </mapper>
  
