@@ -139,11 +139,6 @@ public class PostServiceImpl implements PostServiceIf {
 	}
 
 	@Override
-	public int insertReport(ReportDTO reportDTO) {
-		return postMapper.insertReport(reportDTO);
-	}
-
-	@Override
 	public int isLiked(int post_id, String member_id) {
 		Integer result = postMapper.isLiked(post_id,member_id);
 		if(result != null) return result;
@@ -156,5 +151,8 @@ public class PostServiceImpl implements PostServiceIf {
 	@Override
 	public int insertLike(int post_id, String member_id) { return postMapper.insertLike(post_id,member_id); }
 
-
+	@Override
+	public int viewCountMinus(int post_id) {
+		return postMapper.viewCountMinus(post_id);
+	}
 }

@@ -77,7 +77,7 @@
                                 <td class="listNo"><p>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</p></td>
                                 <td class="listTit"><a href="/post/view?id=${list.id}">${list.title}</a></td>
                                 <td class="listName"><p>${list.member_id}</p></td>
-                                <td class="listDate"><p>${list.created_at}</p></td>
+                                <td class="listDate"><p>${list.created_at.toString().replace("T", " ")}</p></td>
                                 <td class="listCnt"><p>${list.view_count}</p></td>
                             </tr>
                         </table>
