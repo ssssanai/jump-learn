@@ -89,7 +89,7 @@
         WHERE p.id = #{id}
     </select>
     <select id="selectFileById">
-        SELECT b.file_name AS fileName
+        SELECT b.file_name AS fileName, f.id as id
         FROM tbl_post_file AS f
                  INNER JOIN tbl_bbs_file AS b ON f.file_id = b.id
                  INNER JOIN tbl_post AS p ON f.post_id = p.id
@@ -128,6 +128,14 @@
     <delete id="deletePost">
         DELETE FROM tbl_post
         WHERE id = #{id}
+    </delete>
+    <delete id="updatePost">
+        UPDATE tbl_post
+        SET title = #{title},content=#{content},updated_at = NOW()
+        WHERE id= #{id}
+    </delete>
+    <delete id="deleteFile">
+        DELETE FROM tbl_post_file WHERE id=#{post_id}
     </delete>
 </mapper>
  

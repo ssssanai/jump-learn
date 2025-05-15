@@ -85,7 +85,8 @@
                    <a href="/post/searchListPage"><input type="button" value="목록"></a>
                     <c:choose>
                         <c:when test="${loginInfo.id.equals(dto.post_member_id)}">
-                            <a href="/post/updatePost?id=${dto.post_id}"><input type="button" value="수정"></a>
+                            <a href="/post/updatePost?id=${dto.post_id}"><input type="button" value="게시글 수정"></a>
+                            <a href="/post/updateFile?id=${dto.post_id}"><input type="button" value="사진 수정"></a>
                             <a href="/post/deletePost?id=${dto.post_id}"><input type="button" value="삭제"></a>
                         </c:when>
                     </c:choose>
