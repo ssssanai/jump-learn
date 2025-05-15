@@ -32,7 +32,7 @@ public class TeacherMyPageController {
             HttpSession session,
             Model model
     ){
-        TeacherDTO dto = (TeacherDTO) session.getAttribute("loginInfo");
+        TeacherDTO dto = (TeacherDTO) session.getAttribute("teacherInfo");
         dto = teacherMyPageService.teacherMyPageInfo(dto.getId());
         List<TeacherClassDTO> dtoClass = teacherMyPageService.teacherClassInfo(dto.getId());
         log.info(dto.toString());
@@ -250,7 +250,7 @@ public class TeacherMyPageController {
             RedirectAttributes redirectAttributes
     ){
         log.info("입력받는폼"+dto.toString());
-        TeacherDTO teacherDTO = (TeacherDTO) session.getAttribute("loginInfo");
+        TeacherDTO teacherDTO = (TeacherDTO) session.getAttribute("teacherInfo");
         dto.setTeacher_id(teacherDTO.getId());
         log.info("선생님 아이디 입력"+dto.toString());
         int rs = teacherMyPageService.teacherComment(dto);
