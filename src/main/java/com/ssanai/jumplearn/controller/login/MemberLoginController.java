@@ -92,6 +92,15 @@ public class MemberLoginController {
         HttpSession session = req.getSession();
         session.setAttribute("loginInfo", dto);
         session.setMaxInactiveInterval(60 * 60 * 3); //3시간
+
+        if(session.getAttribute("adminInfo")!=null){
+            session.removeAttribute("adminInfo");
+        }
+
+        if(session.getAttribute("teacherInfo")!=null){
+            session.removeAttribute("teacherInfo");
+        }
+
         res.sendRedirect("/main");
     }
     @GetMapping("/register")
