@@ -32,4 +32,5 @@ public interface PostMapper {
 	public Integer isLiked(@Param("post_id") int post_id, @Param("member_id") String member_id);
 	public int cancelLike(@Param("id") int id);
 	public int insertLike(@Param("post_id") int post_id, @Param("member_id") String member_id);
+	public int viewCountMinus(@Param("post_id") int post_id);
 }

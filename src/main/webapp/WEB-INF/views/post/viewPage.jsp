@@ -63,8 +63,7 @@
 <%--                            </button>--%>
                         </c:if>
 <%--                        <button>--%>
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-<%--                        </button>--%>
+                            <i class="fa-solid fa-triangle-exclamation" onclick=""></i>
                     </div>
                 </div>
                 <div class="formHead">
@@ -141,7 +140,7 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <p class="qnaCommentList2">댓글이없습니다.</p>
+                        <p class="qnaCommentList2">댓글이 없습니다.</p>
                     </c:otherwise>
                 </c:choose>
             </div>
