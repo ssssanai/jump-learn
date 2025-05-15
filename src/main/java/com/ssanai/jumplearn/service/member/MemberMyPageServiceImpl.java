@@ -3,12 +3,15 @@ package com.ssanai.jumplearn.service.member;
 import com.ssanai.jumplearn.dto.BbsDefaultDTO;
 import com.ssanai.jumplearn.dto.MemberDTO;
 import com.ssanai.jumplearn.dto.PostDTO;
+import com.ssanai.jumplearn.dto.ReportDTO;
 import com.ssanai.jumplearn.mapper.member.MemberMyPageMapper;
 import com.ssanai.jumplearn.util.CommonDateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Log4j2
 @Service
@@ -70,4 +73,7 @@ public class MemberMyPageServiceImpl implements MemberMyPageServiceIf {
     public BbsDefaultDTO newsMyPageInfo() {
         return memberMyPageMapper.newsMyPageInfo();
     }
+
+    @Override
+    public List<ReportDTO> reportList(String member_id) {return memberMyPageMapper.reportList(member_id);}
 }

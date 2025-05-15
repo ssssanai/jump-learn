@@ -27,5 +27,6 @@ public class ReportDTO {
     private String report_content; //신고 받은 게시물 내용
     private LocalDateTime report_create_date; //신고 받은 게시물 생성 날짜
     private LocalDateTime resolution_create_date;
+    private String reported_member_id; // 신고 받은 게시글의 작성자
 }
 
