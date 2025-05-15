@@ -37,7 +37,7 @@
     <select id="inquiryDetail">
         SELECT
         i.id AS inquiry_id,
-        i.member_id AS inquiry_member_id,
+        i.member_id AS member_id,
         i.title AS inquiry_title,
         i.content AS inquiry_content,
         i.created_at AS inquiry_created_at,
