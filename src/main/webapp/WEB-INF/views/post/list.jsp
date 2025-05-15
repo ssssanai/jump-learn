@@ -20,20 +20,23 @@
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/memberGnb.jsp"%>
-<%@ include file="/resources/static/html/adminMsg.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
+<%@ include file="/resources/static/html/adminMsg.jsp" %>
 <div class="wrap">
     <div class="aside">
-        <div class="profile">
-            <div class="myInfo">
-                <p>회원등급  ${loginInfo.status}</p>
-                <h2>환영합니다 ${loginInfo.name}님!</h2>
+            <div class="profile">
+                <div class="myInfo">
+                    <%-- TODO: 이거 어케할까용~~ --%>
+<%--                <c:if test="${not (teacherInfo != null || adminInfo != null)}">--%>
+                    <p>회원등급 ${loginInfo.status}</p>
+                    <h2>환영합니다 ${loginInfo.name}님!</h2>
+<%--                </c:if>--%>
+                </div>
             </div>
-        </div>
         <div class="sideMenu">
             <h2 class="sideMenuTitle">커뮤니티</h2>
             <a href="/post/searchListPage" class="select">자유게시판</a>
-            <a href="/notice/searchListPage" >공지사항 게시판</a>
+            <a href="/notice/searchListPage">공지사항 게시판</a>
             <a href="/edu/searchListPage">교육 정보 게시판</a>
             <a href="/info/searchListPage">대입 정보 게시판</a>
             <a href="/activity/searchListPage">대외활동 게시판</a>
@@ -46,7 +49,9 @@
             <h2>자유 게시판</h2>
             <p>자유롭게 소통하는 공간입니다.</p>
             <div class="wtBtn">
-                <a href="/post/write">글쓰기</a>
+                <c:if test="${not ( teacherInfo != null || adminInfo != null || loginInfo.status != 1 )}">
+                    <a href="/post/write">글쓰기</a>
+                </c:if>
             </div>
         </div>
         <form class="searchInput" method="GET" action="">
@@ -55,18 +60,19 @@
                     <option value="title">제목</option>
                     <option value="member_id">작성자</option>
                 </select>
-                <input type="text" id="search_word" name="search_word" class="search_in" placeholder="검색어를 입력해주세요." value="${pageDTO.search_word}">
+                <input type="text" id="search_word" name="search_word" class="search_in" placeholder="검색어를 입력해주세요."
+                       value="${pageDTO.search_word}">
                 <input type="submit" class="search_btn" name="serch_btn" value="검색">
             </div>
         </form>
         <div class="writeList">
             <table class="wlHeader">
                 <tr>
-                    <th class="listNo"><p >번호</p></th>
-                    <th class="listTit"><p >제목</p></th>
-                    <th class="listName"><p >작성자</p></th>
-                    <th class="listDate"><p >작성일</p></th>
-                    <th class="listCnt"><p >조회수</p></th>
+                    <th class="listNo"><p>번호</p></th>
+                    <th class="listTit"><p>제목</p></th>
+                    <th class="listName"><p>작성자</p></th>
+                    <th class="listDate"><p>작성일</p></th>
+                    <th class="listCnt"><p>조회수</p></th>
                 </tr>
             </table>
             <c:choose>
@@ -74,7 +80,9 @@
                     <c:forEach var="list" items="${dtoList}" varStatus="loop">
                         <table class="wlBody">
                             <tr>
-                                <td class="listNo"><p>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</p></td>
+                                <td class="listNo">
+                                    <p>${pageInfo.total_count - (pageInfo.page_no - 1) * pageInfo.page_size - loop.index}</p>
+                                </td>
                                 <td class="listTit"><a href="/post/view?id=${list.id}">${list.title}</a></td>
                                 <td class="listName"><p>${list.member_id}</p></td>
                                 <td class="listDate"><p>${list.created_at.toString().replace("T", " ")}</p></td>

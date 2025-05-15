@@ -22,7 +22,8 @@ public class LoginCheckFilter implements Filter {
 			"/main", "/edu/searchListPage", "/edu/viewPage", "/post/searchListPage",
 			"/post/view", "/lib/searchListPage", "/lib/viewPage", "/info/searchListPage",
 			"/info/viewPage", "/activity/searchListPage", "/activity/viewPage",
-			"/news/searchListPage", "/news/viewPage", "/notice/searchListPage", "/notice/viewPage"
+			"/news/searchListPage", "/news/viewPage", "/notice/searchListPage", "/notice/viewPage",
+			"/resources/", "/static/", "/css/", "/js/", "/images/"
 	};
 
 	// 관리자 전용 URL 목록
@@ -64,39 +65,54 @@ public class LoginCheckFilter implements Filter {
 		String path = request.getServletPath();
 		HttpSession session = request.getSession(false);
 
+		String referer = request.getHeader("Referer");
+
+
 		// 1. 공개 URL 처리
 		if (isPublicPath(path)) {
 			chain.doFilter(request, response);
 			return;
 		}
 
-		// 2. 관리자 권한 체크
 		if (isAdminPath(path)) {
+			// 2. 관리자 권한 체크
+			log.warn(referer);
 			if (session == null || session.getAttribute("adminInfo") == null) {
-				sendRedirect(response, "/admin/login?error=no_admin");
-				return;
+				if(referer != null){
+					sendRedirect(response, referer);
+					return;
+				} else {
+					sendRedirect(response, "/admin/login");
+					return;
+				}
 			}
-		}
-
-		// 3. 선생님 권한 체크
-		else if (isTeacherPath(path)) {
+		} else if (isTeacherPath(path)) {
+			// 3. 선생님 권한 체크
 			if (session == null || session.getAttribute("teacherInfo") == null) {
-				sendRedirect(response, "/teacher/login?error=no_teacher");
-				return;
+				if(referer != null){
+					sendRedirect(response, referer);
+					return;
+				} else {
+					sendRedirect(response, "/teacher/login");
+					return;
+				}
 			}
-		}
-
-		// 4. 일반 회원 권한 체크
-		else if (isMemberPath(path)) {
+		} else if (isMemberPath(path)) {
+			// 4. 일반 회원 권한 체크
 			if (session == null || session.getAttribute("loginInfo") == null) {
-				sendRedirect(response, "/member/login?error=no_member");
-				return;
+				if(referer != null){
+					sendRedirect(response, referer);
+					return;
+				} else {
+					sendRedirect(response, "/member/login");
+					return;
+				}
 			}
 		}
 
 		// 5. 세션 만료 체크
 		if (session == null) {
-			sendRedirect(response, "/member/login?error=session_expired");
+			sendToMainPage(response, "/main");
 			return;
 		}
 
@@ -126,7 +142,16 @@ public class LoginCheckFilter implements Filter {
 	private void sendRedirect(HttpServletResponse response, String url) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.print("<script>location.href='" + url + "';</script>");
+		out.print("<script>alert('비정상적인 접근입니다.');location.href='" + url + "';</script>");
 		out.close();
 	}
+
+	private void sendToMainPage(HttpServletResponse response, String url) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print("<script>alert('세션이 만료되어 재로그인이 필요합니다.');location.href='" + url + "';</script>");
+		out.close();
+	}
+
+
 }
