@@ -50,7 +50,7 @@
         <div class="formBox">
             <form method="post" action="/edu/editPage" enctype="multipart/form-data">
                 <div class="boardTitle">
-                    <p>제목${dto.post_title}</p>
+                    <p>${dto.post_title}</p>
                     <div class="boardListBtn">
                         <c:if test="${isLiked}">
 <%--                            <button>--%>
