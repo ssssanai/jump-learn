@@ -22,6 +22,7 @@
 <body>
 <%--고정 헤더 파일--%>
 <%@include file="/resources/static/html/headerGnb.jsp" %>
+<%@ include file="../../../resources/static/html/adminMsg.jsp"%>
 <div class="wrap">
     <div class="aside">
         <div class="profile">

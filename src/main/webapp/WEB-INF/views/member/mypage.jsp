@@ -50,7 +50,7 @@
                         <div class="menuBox"><i class="fa-solid fa-pen"></i></div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="noCnt">내 게시물</a>
+                        <a href="/studyroom/post" class="noCnt">내 게시물</a>
                     </div>
                 </div>
                 <div class="infoMenu">
@@ -66,7 +66,7 @@
                         <div class="menuBox"><i class="fa-solid fa-credit-card"></i></div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="noCnt">결제내역</a>
+                        <a href="/pay/list" class="noCnt">결제내역</a>
                     </div>
 
                 </div>
