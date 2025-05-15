@@ -168,19 +168,20 @@
     });
 
     $('.btnCommentUpdate').on('click', function () {
+        let box = document.getElementsByClassName('contentPage');
         let commenter = $(this).parent().siblings()[0].innerText.replace("댓글 작성자 ID: ", ""); // 댓글 작성자
         let comment_id = $(this).parent().parent().attr('id'); // 댓글 ID
         let commenter_type = $(this).parent().parent().next().children()[0].innerText; // 댓글 작성자 타입
         let original_comment = $(this).parent().parent().next().children()[1].innerText.replace("댓글 내용: ", ""); // 원래 댓글
         let url = '/inquiry/comment/update/' + comment_id;
-        $(this).parent()[0].innerHTML = `
+        $(box).parent()[0].innerHTML = `
         <form id="inquiry_comment_update_form" name="inquiry_comment_update_form" action="` + url + `" method="post">
             <input type="hidden" name="inquiry_id" value="` + ${inquiry[0].inquiry_id} +`"/>
             <input type="hidden" name="inquiry_commenter" value="` + commenter + `"/>
             <input type="hidden" name="inquiry_comment_id_type" value="` + commenter_type + `"/>
             <textarea id="inquiry_comment_content_update" placeholder="` + original_comment + `" name="inquiry_comment_content"></textarea>
-            <input id="btnCommentModifyDone" type="submit" value="수정 완료"/>
-            <button onclick="location.href='#'">취소</button>
+            <input id="btnCommentModifyDone" class="btnCommentUpdate" type="submit" value="수정 완료"/>
+            <button class="btnCommentUpdate" onclick="location.href='#'">취소</button>
         </form>`;
 
         $('#btnCommentModifyDone').on('click', function (e) {

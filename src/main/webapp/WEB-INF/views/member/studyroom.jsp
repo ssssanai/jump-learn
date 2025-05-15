@@ -45,21 +45,20 @@
                         </div>
                     </div>
                     <div class="infoMenuBody">
-                        <p>장바구니</p>
+                        <a href="/course/list">장바구니</a>
                     </div>
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
                         <div class="menuBox">
-                            <a href="#" class="cnt1">
-                                <i class="fa-solid fa-bookmark"></i>
+                            <a href="/member/report_list" class="cnt1">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
                             </a>
                         </div>
                     </div>
                     <div class="infoMenuBody">
-                        찜 목록
+                        <a href="/member/report_list">신고내역</a>
                     </div>
-
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
@@ -70,7 +69,7 @@
                         </div>
                     </div>
                     <div class="infoMenuBody">
-                        결제내역
+                        <a href="/pay/list">결제내역</a>
                     </div>
                 </div>
                 <div class="infoMenu">
@@ -82,7 +81,7 @@
                         </div>
                     </div>
                     <div class="infoMenuBody">
-                        1:1 문의
+                        <a href="/inquiry/list">1:1 문의</a>
                     </div>
 
                 </div>

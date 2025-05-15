@@ -21,7 +21,7 @@
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/headerGnb.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp"%>
 <div class="wrap">
     <div class="aside">
         <div class="profile">
@@ -72,7 +72,6 @@
                     <th class="listCnt"><p>처리상태</p></th>
                 </tr>
             </table>
-
                 <c:forEach items="${dtoList}" var="i">
                     <c:choose>
                         <c:when test="${i.visibility == 1}">
@@ -113,16 +112,12 @@
                                 </c:otherwise>
                             </c:choose>
                         </c:otherwise>
-<%--                        <c:otherwise>--%>
-<%--                            <p>${i.inquiry_id}</p>--%>
-<%--                            <p>비밀글입니다.</p>--%>
-<%--                        </c:otherwise>--%>
                     </c:choose>
                 </c:forEach>
             </table>
-            <div class="pagingBox">
-                <p>123456</p>
-            </div>
+<%--            <div class="pagingBox">--%>
+<%--                <p>123456</p>--%>
+<%--            </div>--%>
         </div>
     </div>
 </div>

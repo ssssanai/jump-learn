@@ -47,35 +47,50 @@
             <div class="myInfoMenu">
                 <div class="infoMenu">
                     <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-pen"></i></div>
+                        <div class="menuBox">
+                            <a href="/course/list" class="cnt1">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="noCnt">내 게시물</a>
+                        <a href="/course/list">장바구니</a>
                     </div>
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <div class="menuBox">
+                            <a href="/member/report_list" class="cnt1">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="/course/list" class="cnt1">장바구니</a>
+                        <a href="/member/report_list">신고내역</a>
                     </div>
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-credit-card"></i></div>
+                        <div class="menuBox">
+                            <a href="/pay/list" class="cnt1">
+                                <i class="fa-solid fa-credit-card"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="#" class="noCnt">결제내역</a>
+                        <a href="/pay/list">결제내역</a>
                     </div>
-
                 </div>
                 <div class="infoMenu">
                     <div class="infoMenuHead">
-                        <div class="menuBox"><i class="fa-solid fa-headset"></i></div>
+                        <div class="menuBox">
+                            <a href="/inquiry/list" class="cnt1">
+                                <i class="fa-solid fa-headset"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="infoMenuBody">
-                        <a href="/inquiry/list" class="noCnt">1:1 문의</a>
+                        <a href="/inquiry/list">1:1 문의</a>
                     </div>
 
                 </div>
