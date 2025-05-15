@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="../../../resources/static/css/admin/adminGnbStyle.css" rel="stylesheet" type="text/css"/>
+    <link href="/resources/static/css/admin/adminGnbStyle.css" rel="stylesheet" type="text/css"/>
     <title>Title</title>
 </head>
 <body>
