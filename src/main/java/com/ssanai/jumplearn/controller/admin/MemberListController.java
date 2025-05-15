@@ -34,7 +34,7 @@ public class MemberListController {
             Model model
     ){
         log.info("memberList시작");
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         PageResponseDTO<MemberDTO> resDTO = memberListService.searchList(reqDTO);
         model.addAttribute("pageInfo", resDTO);
         String paging = BbsPage.pagingArea(resDTO.getTotal_count(), resDTO.getPage_no(), resDTO.getPage_size(), resDTO.getPage_block_size(), req.getContextPath());
@@ -73,7 +73,7 @@ public class MemberListController {
             @RequestParam(name = "id") String id,
             RedirectAttributes redirectAttributes) {
 
-        AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO loginInfo = (AdminDTO) session.getAttribute("adminInfo");
         if (loginInfo == null || loginInfo.getStatus() != 1)  {
             redirectAttributes.addFlashAttribute("msg", "삭제 권한이 없습니다.");
             return "redirect:/admin/memberList";
@@ -95,7 +95,7 @@ public class MemberListController {
             @RequestParam(name = "s") String s,
             RedirectAttributes redirectAttributes) {
 
-        AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO loginInfo = (AdminDTO) session.getAttribute("adminInfo");
         int status = Integer.parseInt(s);
         int adminStatus = loginInfo.getStatus();
 
@@ -119,7 +119,7 @@ public class MemberListController {
             RedirectAttributes redirectAttributes,
             Model model
     ){
-        AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO loginInfo = (AdminDTO) session.getAttribute("adminInfo");
         MemberDTO dto = memberListService.memberDetail(id);
         log.info(dto.getFile_path()+"/"+dto.getFile_name());
         model.addAttribute("dto", dto);

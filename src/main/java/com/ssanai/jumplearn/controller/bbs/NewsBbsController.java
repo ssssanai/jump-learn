@@ -32,7 +32,7 @@ public class NewsBbsController {
 			Model model,
 			HttpSession session
 	) {
-		AdminDTO adto = (AdminDTO) session.getAttribute("loginInfo");
+		AdminDTO adto = (AdminDTO) session.getAttribute("adminInfo");
 		log.info("adto", adto.toString());
 		model.addAttribute("adto", adto);
 		return "news/writePage";
@@ -73,7 +73,7 @@ public class NewsBbsController {
 	) {
 		bbsService.viewCount(id, "tbl_news");
 
-		Object loginInfo = session.getAttribute("loginInfo");
+		Object loginInfo = session.getAttribute("adminInfo");
 
 		if (loginInfo instanceof AdminDTO adto) {
 			log.info("관리자 로그인: {}", adto.toString());
@@ -99,7 +99,7 @@ public class NewsBbsController {
 
 	) {
 
-		AdminDTO adto = (AdminDTO) session.getAttribute("loginInfo");
+		AdminDTO adto = (AdminDTO) session.getAttribute("adminInfo");
 		log.info("adto", adto.toString());
 		model.addAttribute("adto", adto);
 		model.addAttribute("dto", bbsService.selectOne(id, "tbl_news")); // 게시글 정보
@@ -137,7 +137,7 @@ public class NewsBbsController {
 		PageResponseDTO<BbsDefaultDTO> dto = bbsService.searchList(pageDTO, "tbl_news");
 		int totalCount = bbsService.getTotalCount(pageDTO, "tbl_news");
 
-		Object loginInfo = session.getAttribute("loginInfo");
+		Object loginInfo = session.getAttribute("adminInfo");
 
 		if (loginInfo instanceof AdminDTO adto) {
 			log.info("관리자 로그인: {}", adto.toString());

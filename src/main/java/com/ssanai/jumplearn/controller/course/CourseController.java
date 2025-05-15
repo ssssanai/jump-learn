@@ -107,8 +107,9 @@ public class CourseController {
 			, Model model
 	) {
 		log.info(id);
-		// 회원 정보
+//		 회원 정보
 		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+
 		// 로그인 체크
 		if (loginInfo == null) {
 			log.info("Not Logged In Member");

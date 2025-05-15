@@ -32,7 +32,7 @@ public class NoticeBbsController {
 			Model model,
 			HttpSession session
 	) {
-		AdminDTO adto = (AdminDTO) session.getAttribute("loginInfo");
+		AdminDTO adto = (AdminDTO) session.getAttribute("adminInfo");
 		log.info("adto", adto.toString());
 		model.addAttribute("adto", adto);
 		return "notice/writePage";
@@ -73,7 +73,7 @@ public class NoticeBbsController {
 	) {
 		bbsService.viewCount(id, "tbl_notice");
 
-		Object loginInfo = session.getAttribute("loginInfo");
+		Object loginInfo = session.getAttribute("adminInfo");
 
 		if (loginInfo instanceof AdminDTO adto) {
 			log.info("관리자 로그인: {}", adto.toString());
@@ -82,6 +82,8 @@ public class NoticeBbsController {
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
+//		AdminDTO adminInfo = (AdminDTO) session.getAttribute("adminInfo");
+//		model.addAttribute("adminInfo", adminInfo);
 
 		BbsDefaultDTO dto = bbsService.selectOne(id, "tbl_notice");
 
@@ -99,7 +101,7 @@ public class NoticeBbsController {
 
 	) {
 
-		AdminDTO adto = (AdminDTO) session.getAttribute("loginInfo");
+		AdminDTO adto = (AdminDTO) session.getAttribute("adminInfo");
 		log.info("adto", adto.toString());
 		model.addAttribute("adto", adto);
 		model.addAttribute("dto", bbsService.selectOne(id, "tbl_notice")); // 게시글 정보
@@ -137,7 +139,7 @@ public class NoticeBbsController {
 		PageResponseDTO<BbsDefaultDTO> dto = bbsService.searchList(pageDTO, "tbl_notice");
 		int totalCount = bbsService.getTotalCount(pageDTO, "tbl_notice");
 
-		Object loginInfo = session.getAttribute("loginInfo");
+		Object loginInfo = session.getAttribute("adminInfo");
 
 		if (loginInfo instanceof AdminDTO adto) {
 			log.info("관리자 로그인: {}", adto.toString());

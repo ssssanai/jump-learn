@@ -54,7 +54,7 @@
                     <td><a href="/admin/inquiry?id=${list.inquiry_id}">${list.inquiry_id}</a></td>
                     <td>${list.member_id}</td>
                     <td>${list.inquiry_title}</td>
-                    <td>${list.inquiry_created_at}</td>
+                    <td>${list.inquiry_created_at.toString().replace("T", " ")}</td>
                     <td>${list.inquiry_status}</td>
                 </tr>
             </c:forEach>

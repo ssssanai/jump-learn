@@ -20,16 +20,34 @@
 //		HttpServletResponse resp = (HttpServletResponse) servletResponse;
 //		HttpSession session = req.getSession();
 //
+//		Object loginInfo = req.getSession().getAttribute("loginInfo");
+//
+//		if(loginInfo instanceof MemberDTO) {
+//
+//		} else if(loginInfo instanceof String) {
+//
+//		}
+//
+//
 //		String reqPath = req.getServletPath();
 //
+//		//	비로그인 시에 접속 가능한 URL
 //		if (reqPath.equals("/member/login")
 //				|| reqPath.equals("/main")
 //				|| reqPath.startsWith("/resources/")
-//				|| reqPath.startsWith("/admin/")
+//				|| reqPath.startsWith("/admin/login")
+//				|| reqPath.startsWith("/teacher/login")
 //		) {
 //			filterChain.doFilter(servletRequest, servletResponse);
 //			return;
 //		}
+////
+////		UserDTO udto = session.getAttribute("loginInfo");
+////
+////		if( udto instanceof MemberDTO) {
+////
+////		}
+////
 //
 //		MemberDTO dto = (MemberDTO) session.getAttribute("loginInfo");
 //		if (dto == null || dto.getId() == null) {

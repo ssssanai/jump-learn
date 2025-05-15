@@ -34,6 +34,7 @@ public class PostController {
 	private final PostServiceIf postService;
 	private final FilePathConfig filePathConfig;
 	private final BbsServiceInterface bbsService;
+
 	// 자유 게시판 컨트롤러
 	@GetMapping("/searchListPage")
 	public String list(
@@ -68,13 +69,21 @@ public class PostController {
 	@GetMapping("/view")
 	public String view(
 			@RequestParam("id") String id,
+			RedirectAttributes ra,
 			Model model,
 			HttpSession session
 	) {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
+		AdminDTO adminDTO = (AdminDTO) session.getAttribute("adminInfo");
 		model.addAttribute("loginInfo", memberDTO);
+		model.addAttribute("adminInfo", adminDTO);
 		bbsService.viewCount(Integer.parseInt(id), "tbl_post");
 		PostDetailDTO dto = postService.selectDetailById(Integer.parseInt(id));
+		if(dto == null) {
+			ra.addFlashAttribute("msg", "존재하지 않는 게시물입니다.");
+			return "redirect:/post/searchListPage";
+		}
+
 		model.addAttribute("dto", dto);
 		List<BbsFileDTO> fileList = postService.selectFileById(Integer.parseInt(id));
 		log.info("fileList" + fileList);
@@ -82,8 +91,11 @@ public class PostController {
 		List<CommentDTO> commentList = postService.selectCommentById(Integer.parseInt(id));
 		model.addAttribute("commentList", commentList);
 		// 좋아요 아이콘 처리를 위해 추가
-		boolean isLiked = postService.isLiked(Integer.parseInt(id), memberDTO.getId()) > 0;
-		model.addAttribute("isLiked", isLiked);
+		if (memberDTO != null) {
+			boolean isLiked = postService.isLiked(Integer.parseInt(id), memberDTO.getId()) > 0;
+			model.addAttribute("isLiked", isLiked);
+		}
+
 		log.info("commentList" + commentList);
 		return "post/viewPage";
 	}
@@ -92,6 +104,7 @@ public class PostController {
 	public String write() {
 		return "post/write";
 	}
+
 	@Transactional
 	@PostMapping("/write")
 	public String write(
@@ -143,14 +156,14 @@ public class PostController {
 							count++;
 							fileDTO.setFileSize(f.getSize());
 							//파일 DB저장
-							int i= postService.insertFile(fileDTO);
-							if (i< 1) {
+							int i = postService.insertFile(fileDTO);
+							if (i < 1) {
 								redirectAttributes.addFlashAttribute("msg", "파일 정보 DB 저장 실패");
 								return "redirect:/post/write";
 							}
 							savedFiles.add(fileDTO);
 							f_id.add(i);
-							log.info("fileDTO저장 성공" + fileDTO) ;
+							log.info("fileDTO저장 성공" + fileDTO);
 						} catch (Exception e) {
 							//실패한 경우 지금까지 저장 파일 삭제
 							for (BbsFileDTO saved : savedFiles) {
@@ -164,7 +177,7 @@ public class PostController {
 			}
 			//게시글 DB 저장
 			int p_id = postService.insertPost(dto);
-			if(p_id < 1){
+			if (p_id < 1) {
 				// 게시글 저장 실패  저장된 파일들 삭제
 				for (BbsFileDTO saved : savedFiles) {
 					new File(uploadDir, saved.getFileName()).delete();
@@ -172,12 +185,12 @@ public class PostController {
 				redirectAttributes.addFlashAttribute("msg", "게시글 저장 실패");
 				return "redirect:/post/write";
 			}
-			log.info("파일 아이디 :"+ f_id.toString());
-			log.info("게시글 아이디 : "+ p_id);
+			log.info("파일 아이디 :" + f_id.toString());
+			log.info("게시글 아이디 : " + p_id);
 
-			for(int i : f_id){
-				int rs = postService.bridgeFile(i,p_id);
-				if(rs < 1){
+			for (int i : f_id) {
+				int rs = postService.bridgeFile(i, p_id);
+				if (rs < 1) {
 					log.error("파일과 게시글 연결 실패, 게시글 ID: " + p_id + ", 파일 ID: " + i);
 					return "redirect:/post/write";
 				}
@@ -193,28 +206,31 @@ public class PostController {
 			return "redirect:/post/write";
 		}
 	}
+
 	@GetMapping("/deletePost")
 	public String deletePost(
-			@RequestParam("id")String id,
+			@RequestParam("id") String id,
 			RedirectAttributes redirectAttributes
-	){
+	) {
 		int rs = postService.deletePost(Integer.parseInt(id));
-		if(rs < 1){
-			redirectAttributes.addFlashAttribute("msg","삭제 실패");
-		}else {
+		if (rs < 1) {
+			redirectAttributes.addFlashAttribute("msg", "삭제 실패");
+		} else {
 			redirectAttributes.addFlashAttribute("msg", "삭제 성공");
 		}
 		return "redirect:/post/searchListPage";
 	}
+
 	@GetMapping("/updatePost")
 	public String updatePost(
 			@RequestParam("id") String id,
 			Model model
-	){
+	) {
 		PostDetailDTO dto = postService.selectDetailById(Integer.parseInt(id));
 		model.addAttribute("dto", dto);
 		return "post/updatePost";
 	}
+
 	@PostMapping("/updatePost")
 	public String updatePost(
 			PostDTO dto,
@@ -222,34 +238,36 @@ public class PostController {
 	) {
 		log.info(dto.toString());
 		int rs = postService.updatePost(dto);
-		if(rs < 1){
-			redirectAttributes.addFlashAttribute("msg","수정 실패");
-			return "redirect:/post/updatePost?id="+dto.getId();
-		}else{
-			redirectAttributes.addFlashAttribute("msg","수정 성공");
+		if (rs < 1) {
+			redirectAttributes.addFlashAttribute("msg", "수정 실패");
+			return "redirect:/post/updatePost?id=" + dto.getId();
+		} else {
+			redirectAttributes.addFlashAttribute("msg", "수정 성공");
 		}
-		return "redirect:/post/view?id="+dto.getId();
+		return "redirect:/post/view?id=" + dto.getId();
 	}
+
 	@GetMapping("/updateFile")
 	public String updateFile(
 			@RequestParam("id") String id,
 			Model model
-	){
+	) {
 		List<BbsFileDTO> fileList = postService.selectFileById(Integer.parseInt(id));
 		log.info("fileList" + fileList);
 		int fileCount = (fileList != null) ? fileList.size() : 0;
 		model.addAttribute("fileCount", fileCount);
-		model.addAttribute("id",id);
+		model.addAttribute("id", id);
 		model.addAttribute("fileList", postService.selectFileById(Integer.parseInt(id)));
 		return "post/updateFile";
 	}
+
 	@PostMapping("/updateFile")
 	public String updateFile(
-			@RequestParam("id")String id,
+			@RequestParam("id") String id,
 			RedirectAttributes redirectAttributes,
 			@RequestParam(value = "file", required = false) MultipartFile[] file,
 			@RequestHeader(value = "Referer", required = false) String referer
-	){
+	) {
 		String uploadDir = filePathConfig.getUploadPath();
 		List<BbsFileDTO> savedFiles = new ArrayList<>();
 		List<Integer> f_id = new ArrayList<>();
@@ -276,14 +294,14 @@ public class PostController {
 						count++;
 						fileDTO.setFileSize(f.getSize());
 						//파일 DB저장
-						int i= postService.insertFile(fileDTO);
-						if (i< 1) {
+						int i = postService.insertFile(fileDTO);
+						if (i < 1) {
 							redirectAttributes.addFlashAttribute("msg", "파일 정보 DB 저장 실패");
 							return "redirect:" + referer;
 						}
 						savedFiles.add(fileDTO);
 						f_id.add(i);
-						log.info("fileDTO저장 성공" + fileDTO) ;
+						log.info("fileDTO저장 성공" + fileDTO);
 					} catch (Exception e) {
 						//실패한 경우 지금까지 저장 파일 삭제
 						for (BbsFileDTO saved : savedFiles) {
@@ -295,43 +313,45 @@ public class PostController {
 				}
 			}
 		}
-		log.info("파일 아이디 :"+ f_id.toString());
-		log.info("게시글 아이디 : "+ id);
+		log.info("파일 아이디 :" + f_id.toString());
+		log.info("게시글 아이디 : " + id);
 
-		for(int i : f_id){
+		for (int i : f_id) {
 			int rs = postService.bridgeFile(i, Integer.parseInt(id));
-			if(rs < 1) {
+			if (rs < 1) {
 				log.error("파일과 게시글 연결 실패, 게시글 ID: " + id + ", 파일 ID: " + i);
 				return "redirect:/post/write";
 			}
 		}
-		redirectAttributes.addFlashAttribute("msg","게시글 수정 성공");
-		return "redirect:/post/view?id="+id;
+		redirectAttributes.addFlashAttribute("msg", "게시글 수정 성공");
+		return "redirect:/post/view?id=" + id;
 	}
+
 	@PostMapping("/deleteFile")
 	public String deleteFile(
 			@RequestParam("file_id") String file_id,
-			@RequestParam("id")String id,
+			@RequestParam("id") String id,
 			RedirectAttributes redirectAttributes,
 			@RequestHeader(value = "Referer", required = false) String referer
-	){
-		log.info("id"+id);
+	) {
+		log.info("id" + id);
 		int rs = postService.deleteFile(Integer.parseInt(file_id));
-		if(rs < 1){
-			redirectAttributes.addFlashAttribute("msg","파일삭제 실패");
+		if (rs < 1) {
+			redirectAttributes.addFlashAttribute("msg", "파일삭제 실패");
 		}
 		return "redirect:" + referer;
 	}
+
 	@PostMapping("/insertComment")
 	public String insertComment(
 			CommentDTO commentDTO,
 			RedirectAttributes redirectAttributes,
 			@RequestHeader(value = "Referer", required = false) String referer
 	) {
-		log.info("댓글 입력"+commentDTO.toString());
+		log.info("댓글 입력" + commentDTO.toString());
 		int rs = postService.insertComment(commentDTO);
-		if(rs < 1){
-			redirectAttributes.addAttribute("msg","답글 실패");
+		if (rs < 1) {
+			redirectAttributes.addAttribute("msg", "답글 실패");
 		}
 		if (referer != null) {
 			return "redirect:" + referer;
@@ -339,6 +359,7 @@ public class PostController {
 			return "redirect:/post/searchListPage";
 		}
 	}
+
 	@GetMapping("/deleteComment")
 	public String deleteComment(
 			@RequestHeader(value = "Referer", required = false) String referer,
@@ -346,9 +367,9 @@ public class PostController {
 			RedirectAttributes redirectAttributes
 	) {
 		int rs = postService.deleteComment(Integer.parseInt(id));
-		if(rs < 1){
-			redirectAttributes.addFlashAttribute("msg","삭제 실패");
-		}else {
+		if (rs < 1) {
+			redirectAttributes.addFlashAttribute("msg", "삭제 실패");
+		} else {
 			redirectAttributes.addFlashAttribute("msg", "삭제 성공");
 		}
 		if (referer != null) {
@@ -357,43 +378,45 @@ public class PostController {
 			return "redirect:/post/searchListPage";
 		}
 	}
+
 	@GetMapping("/updateComment")
 	public String updateComment(
-			@RequestParam("comment_id")String id,
+			@RequestParam("comment_id") String id,
 			Model model
-	){
+	) {
 		model.addAttribute("id", id);
 		return "post/comment_update_popup";
 	}
+
 	@PostMapping("/updateComment")
 	public String updateComment(
 			CommentDTO dto,
 			RedirectAttributes redirectAttributes
-	){
+	) {
 		int rs = postService.updateComment(dto);
-		if(rs < 1){
-			redirectAttributes.addFlashAttribute("msg","수정 실패");
-		}else {
+		if (rs < 1) {
+			redirectAttributes.addFlashAttribute("msg", "수정 실패");
+		} else {
 			redirectAttributes.addFlashAttribute("msg", "수정 성공");
 		}
-		return "redirect:/post/updateComment?comment_id="+dto.getComment_id();
+		return "redirect:/post/updateComment?comment_id=" + dto.getComment_id();
 	}
 
 	@GetMapping("/like/{member_id}/{post_id}")
 	public String likePost(
-		@PathVariable("member_id") String member_id,
-		@PathVariable("post_id") int post_id,
-		RedirectAttributes ra
-	){
+			@PathVariable("member_id") String member_id,
+			@PathVariable("post_id") int post_id,
+			RedirectAttributes ra
+	) {
 		int id = postService.isLiked(post_id, member_id);
 		int result = 0;
-		if(id > 0) {
+		if (id > 0) {
 			result = postService.cancelLike(id);
 		} else {
 			result = postService.insertLike(post_id, member_id);
 		}
 
-		if(result < 1) {
+		if (result < 1) {
 			log.info("좋아요 컨트롤 실패");
 			ra.addFlashAttribute("msg", "처리 중 오류가 발생했습니다.");
 		} else {
@@ -401,29 +424,31 @@ public class PostController {
 		}
 		postService.viewCountMinus(post_id);
 
-		return "redirect:/post/view?id="+post_id;
+		return "redirect:/post/view?id=" + post_id;
 	}
+
 	@GetMapping("/report_insert_popup")
 	public String reportInsertPopup(
-			@RequestParam("post_id")String post_id,
-			@RequestParam("member_id")String member_id,
+			@RequestParam("post_id") String post_id,
+			@RequestParam("member_id") String member_id,
 			Model model
-	){
+	) {
 		model.addAttribute("post_id", post_id);
 		model.addAttribute("member_id", member_id);
 		return "post/report_insert_popup";
 	}
+
 	@PostMapping("/report_insert_popup")
 	public String reportInsertPopup(
 			ReportDTO dto,
 			RedirectAttributes redirectAttributes,
 			@RequestHeader(value = "Referer", required = false) String referer
-	){
+	) {
 		int rs = postService.insertReport(dto);
-		if(rs < 1) {
-			redirectAttributes.addFlashAttribute("msg","신고 실패");
-		}else{
-			redirectAttributes.addFlashAttribute("msg","신고 처리 되었습니다.");
+		if (rs < 1) {
+			redirectAttributes.addFlashAttribute("msg", "신고 실패");
+		} else {
+			redirectAttributes.addFlashAttribute("msg", "신고 처리 되었습니다.");
 		}
 		return "redirect:" + referer;
 	}
