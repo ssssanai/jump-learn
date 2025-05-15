@@ -11,16 +11,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../../resources/static/css/loginStyle.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/loginStyle.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
 
     <title>JL - 로그인</title>
 </head>
 <body>
-<%@ include file="../../../resources/static/html/adminMsg.jsp"%>
+<%@ include file="/resources/static/html/adminMsg.jsp"%>
 <div class="wrap">
     <header>
-        <img class="header_logo" src="../../../resources/static/images/registLogo.jpg" alt="메인로고">
+        <img class="header_logo" src="/resources/static/images/registLogo.jpg" alt="메인로고">
     </header>
     <main>
         <div class="login_content">
@@ -50,12 +50,11 @@
                 <input type="submit" class="btn" value="로그인">
                 <div class="regi_chgpwd_div">
                     <a href="/member/register">회원가입</a>
-                    <a href="#">비밀번호 찾기</a>
                 </div>
             </form>
         </div>
     </main>
 </div>
-<script src="../../../resources/static/js/loginSc.js"></script>
+<script src="/resources/static/js/loginSc.js"></script>
 </body>
 </html>
