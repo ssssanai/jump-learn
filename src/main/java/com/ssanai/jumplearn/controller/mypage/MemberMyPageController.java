@@ -2,6 +2,7 @@ package com.ssanai.jumplearn.controller.mypage;
 
 
 import com.ssanai.jumplearn.dto.*;
+import com.ssanai.jumplearn.service.admin.ReportListServiceIf;
 import com.ssanai.jumplearn.service.comment.CommentServiceIf;
 import com.ssanai.jumplearn.service.course.EnrollmentsServiceIf;
 import com.ssanai.jumplearn.service.mainpage.MainPageServiceIf;
@@ -38,6 +39,7 @@ public class MemberMyPageController {
 	private final PlanServiceIf planService;
 	private final MemberMyPageServiceIf memberMyPageService;
 	private final FilePathConfig filePathConfig;
+	private final ReportListServiceIf reportService;
 
 	// 마이페이지
 	@GetMapping("/mypage")
@@ -131,23 +133,28 @@ public class MemberMyPageController {
 		model.addAttribute("member", loginInfo);
 		return "redirect:/main";
 	}
+
+	@GetMapping("/report_list")
+	public String reportList(
+			HttpServletRequest req,
+			Model model
+	){
+		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		List<ReportDTO> reportList = memberMyPageService.reportList(loginInfo.getId());
+		model.addAttribute("reportList", reportList);
+		model.addAttribute("loginInfo", loginInfo);
+		return "member/report_list";
+	}
+
+	@GetMapping("/report_detail/{report_id}")
+	public void reportDetail(
+			HttpServletRequest req,
+			@PathVariable("report_id") int report_id,
+			Model model
+	) {
+		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		ReportDTO reportDetail = reportService.reportDetail(report_id);
+		model.addAttribute("reportDetail", reportDetail);
+//		return "";
+	}
 }
-
-
-
-
-
-
-// 자유게시판
-
-// 공지사항
-
-// 교육 정보 게시판
-
-// 대외활동 게시판
-
-// 자료실 게시판
-
-// 대입정보 게시판
-
-// 뉴스 게시판
