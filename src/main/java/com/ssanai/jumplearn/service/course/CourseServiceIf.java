@@ -23,4 +23,6 @@ public interface CourseServiceIf {
 	public ClassQuestionCommentVO getClassQuestionComment(@Param("question_id") int id);
 	public ClassQuestionDTO getQuestionDTO(ClassQuestionVO q, ClassQuestionCommentVO qc);
 	public int createQuestion(@Param("dto") ClassQuestionDTO dto);
+	// 강의 자료
+	public List<ClassDataDTO> getClassDataList(@Param("class_id") int class_id);
 }

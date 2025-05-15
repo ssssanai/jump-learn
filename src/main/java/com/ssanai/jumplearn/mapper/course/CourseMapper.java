@@ -1,9 +1,6 @@
 package com.ssanai.jumplearn.mapper.course;
 
-import com.ssanai.jumplearn.dto.ClassDetailDTO;
-import com.ssanai.jumplearn.dto.ClassQuestionDTO;
-import com.ssanai.jumplearn.dto.ClassVideoDTO;
-import com.ssanai.jumplearn.dto.ReviewDTO;
+import com.ssanai.jumplearn.dto.*;
 import com.ssanai.jumplearn.dto.course.SearchDTO;
 import com.ssanai.jumplearn.dto.mainpage.ClassDTO;
 import com.ssanai.jumplearn.vo.ClassQuestionCommentVO;
@@ -25,4 +22,6 @@ public interface CourseMapper {
 	public List<ClassQuestionVO> getClassQuestionList(@Param("class_id") int class_id, @Param("member_id") String member_id);
 	public ClassQuestionCommentVO getClassQuestionComment(@Param("question_id") int id);
 	public int createQuestion(@Param("dto") ClassQuestionDTO dto);
+	// 강의 자료
+	public List<ClassDataDTO> getClassDataList(@Param("class_id") int class_id);
 }

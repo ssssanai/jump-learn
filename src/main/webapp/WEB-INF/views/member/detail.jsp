@@ -22,7 +22,6 @@
 <%--고정 헤더 파일--%>
 <%@include file="/resources/static/html/memberGnb.jsp" %>
 <%@include file="/resources/static/html/adminMsg.jsp" %>
-<%-- TODO: 강좌 질문 --%>
 <div class="wrap">
     <div class="studyTitle">
         <h1>${classDetailDTO.class_title}</h1>
@@ -36,9 +35,8 @@
                 <p>강의 수: ${classDetailDTO.total_video_count}</p>
             </div>
             <div class="sbB1">
-                <c:if test="class_file_path != null and class_file_name != null and class_file_ext != null"
-                      var="isFileExist">
-                    ${class_file_path}/${class_file_name}.${class_file_ext}
+                <c:if test="${classDetailDTO.class_file_name != null}" var="isFileExist">
+                    <img src="/upload/${classDetailDTO.class_file_name}" alt="강좌 사진">
                 </c:if>
                 <c:if test="${not isFileExist}">
                     <img src="/resources/static/images/memberPage/slide01.jpg" alt="강좌 사진">
@@ -62,8 +60,7 @@
             </div>
             <div class="sbB3">
                 <div class="teacherPro">
-                    <%--${classDetailDTO.teacher_file_path}/${teacher_file_name}.${teacher_file_ext}--%>
-                    <img src="../../../resources/static/images/memberPage/profileEx.jpg">
+                    <img src="/upload/${classDetailDTO.teacher_file_name}" alt="강사 프로필 사진">
                 </div>
                 <div class="teacherIn">
                     <p>${classDetailDTO.teacher_introduce1}<br>
@@ -72,7 +69,6 @@
                 </div>
                 <div class="tBtn">
                     <button id="btnClassNotice">강좌 공지사항</button>
-                    <%--                    <button onclick="location.href='#'">질문하기</button>--%>
                 </div>
             </div>
         </div>
@@ -87,6 +83,7 @@
                     <p class="studyContent1">강좌 내용</p>
                     <p class="studyUploadDate1">업로드날짜</p>
                     <p class="studyUploadDate3">강의 시청</p>
+                    <p class="studyUploadDate3">강의 자료</p>
                     <p class="studyUploadDate3">강의 공지사항</p>
                 </div>
                 <div class="reviewListBox">
@@ -102,6 +99,7 @@
                             <c:if test="${not isLocal}">
                                 <button class="btnVideoPlay" id="${video.video_url}">재생</button>
                             </c:if>
+                            <button class="btnDataDownload"><a href="/upload/${cdList.get(video.video_order - 1).data_name}" download="${classDetailDTO.class_title}_강의자료_${video.video_order}강.pdf">다운로드</a> </button>
                             <button class="btnVideoNotice" id="${video.notice}">공지 확인</button>
                         </div>
                     </c:forEach>

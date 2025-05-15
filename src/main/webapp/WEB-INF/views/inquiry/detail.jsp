@@ -10,6 +10,7 @@
 <%@ include file="/resources/static/html/adminMsg.jsp" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <link href="/resources/static/css/community/qna/viewPage.css" rel="stylesheet" type="text/css">
     <title>Detail Page</title>
@@ -19,19 +20,19 @@
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/memberGnb.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
 <div class="wrap">
     <div class="aside">
         <div class="profile">
             <div class="sideMenu">
                 <h2 class="sideMenuTitle">커뮤니티</h2>
                 <a href="/post/searchListPage">자유게시판</a>
+                <a href="/notice/searchListPage">공지사항 게시판</a>
                 <a href="/edu/searchListPage">교육 정보 게시판</a>
                 <a href="/info/searchListPage">대입 정보 게시판</a>
                 <a href="/activity/searchListPage">대외활동 게시판</a>
                 <a href="/lib/searchListPage">자료실 게시판</a>
                 <a href="/news/searchListPage">뉴스 게시판</a>
-                <a href="/notice/searchListPage">공지사항 게시판</a>
             </div>
         </div>
     </div>
@@ -55,8 +56,8 @@
                     <td class="listNo"><p>${inquiry[0].inquiry_id}</p></td>
                     <td class="listTit"><p>${inquiry[0].inquiry_title}</p></td>
                     <td class="listName"><p>${inquiry[0].member_id}</p></td>
-                    <td class="listDate"><p>${inquiry[0].inquiry_updated_at}</p></td>
-                    <td class="listEditDate"><p>${inquiry[0].inquiry_updated_at}</p></td>
+                    <td class="listDate"><p>${inquiry[0].inquiry_updated_at.toString().replace("T", " ")}</p></td>
+                    <td class="listEditDate"><p>${inquiry[0].inquiry_updated_at.toString().replace("T", " ")}</p></td>
                     <td class="listCnt"><p>${inquiry[0].inquiry_status}</p></td>
                     <td class="listCnt"><p>${inquiry[0].visibility == 1 ? "공개" : "비공개"}</p></td>
                 </tr>
@@ -69,7 +70,7 @@
                             <c:when test="${inquiry[0].admin_id != null}">
                                 관리자 ID: ${inquiry[0].admin_id}<br>
                                 답변 내용: ${inquiry[0].resolution_content}<br>
-                                답변 시간: ${inquiry[0].resolution_created_at}
+                                답변 시간: ${inquiry[0].resolution_created_at.toString().replace("T", " ")}
                             </c:when>
                             <c:otherwise>
                                 <p>답변이 없습니다.</p>
@@ -85,43 +86,46 @@
                     <input type="button" value="질문 삭제" id="btnDelete">
                 </c:if>
             </div>
-
+            <div class="qnaCommentList">
                 <c:choose>
                     <c:when test="${inquiry[0].inquiry_commenter != null}">
-                        <c:forEach items="${inquiry}" var="comment">
-                            <div class="qnaCommentList">
-                                <div class="comment" id="${comment.comment_id}">
-                                    <p>댓글 작성자 ID:  ${comment.inquiry_commenter}</p>
-                                    <div class="commentBtn">
-                                        <c:if test="${loginInfo.id.equals(comment.inquiry_commenter)}">
-                                            <button class="btnCommentUpdate">수정</button>
-                                            &nbsp;<button class="btnCommentDelete">삭제</button>
-                                        </c:if>
-                                    </div>
+                        <c:forEach items="${inquiry}" var="comment" varStatus="idx">
+                            <div class="comment" id="${comment.comment_id}">
+                                <p>댓글 작성자 ID: ${comment.inquiry_commenter}</p>
+                                <div class="commentBtn">
+                                    <c:if test="${loginInfo.id.equals(comment.inquiry_commenter)}">
+                                    <button class="btnCommentUpdate">수정</button>
+                                    <button class="btnCommentDelete">삭제</button>
+                                    </c:if>
                                 </div>
-                                <div class="content">
-                                    <p class="commenter_type">${comment.inquiry_comment_id_type}</p>
-                                    <p class="contentPtage">댓글 내용: ${comment.inquiry_comment_content}</p>
-                                    <div class="contentDate">
-                                        <p>댓글 작성 시간: ${comment.inquiry_comment_created_at}</p>
-                                        <p>댓글 수정 시간: ${comment.inquiry_comment_updated_at}</p>
-                                    </div>
+                            </div>
+                            <div class="content">
+                                <p class="commenter_type">${comment.inquiry_comment_id_type}</p>
+                                <p class="contentPage">댓글 내용: ${comment.inquiry_comment_content}</p>
+                                <div class="contentDate">
+                                    <p>댓글 작성 시간: ${comment.inquiry_comment_created_at.toString().replace("T", " ")}</p>
+                                    <p>댓글 수정 시간: ${comment.inquiry_comment_updated_at.toString().replace("T", " ")}</p>
                                 </div>
                             </div>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <p class="qnaCommentList2">댓글이없습니다.</p>
+                        <tr>
+                            <td>댓글이 없습니다.</td>
+                        </tr>
                     </c:otherwise>
                 </c:choose>
+            </div>
             <c:if test="${ loginInfo.status == 1}" var="hasPermission">
-                <form name="inquiry_comment_form" id="inquiry_comment_form" action="/inquiry/comment/add/${inquiry[0].inquiry_id}"
+                <form name="inquiry_comment_form" id="inquiry_comment_form"
+                      action="/inquiry/comment/add/${inquiry[0].inquiry_id}"
                       method="post">
                     <div class="qnaCommentWrite">
-                    <input type="hidden" name="inquiry_commenter" value="${loginInfo.id}" hidden/>
-                    <input type="hidden" name="inquiry_comment_id_type" value="member" hidden/>
-                    <textarea id="inquiry_comment_content" name="inquiry_comment_content" placeholder="댓글을 입력해주세요."></textarea>
-                    <input type="button" value="등록" id="btnSubmit"/>
+                        <input type="hidden" name="inquiry_commenter" value="${loginInfo.id}" hidden/>
+                        <input type="hidden" name="inquiry_comment_id_type" value="member" hidden/>
+                        <textarea id="inquiry_comment_content" name="inquiry_comment_content"
+                                  placeholder="댓글을 입력해주세요."></textarea>
+                        <input type="button" value="등록" id="btnSubmit"/>
                     </div>
                 </form>
             </c:if>
@@ -158,26 +162,27 @@
             cmt.focus();
             isValid = false;
         }
-        if (isValid) {frm.submit();}
+        if (isValid) {
+            frm.submit();
+        }
     });
 
     $('.btnCommentUpdate').on('click', function () {
-        let commenter = $(this).siblings()[0].innerText; // 댓글 작성자
-        let comment_id = $(this).parent().attr('id'); // 댓글 ID
-        let commenter_type = $(this).siblings()[3].innerText; // 댓글 작성자 타입
-        let original_comment = $(this).siblings()[4].innerText; // 원래 댓글
+        let commenter = $(this).parent().siblings()[0].innerText.replace("댓글 작성자 ID: ", ""); // 댓글 작성자
+        let comment_id = $(this).parent().parent().attr('id'); // 댓글 ID
+        let commenter_type = $(this).parent().parent().next().children()[0].innerText; // 댓글 작성자 타입
+        let original_comment = $(this).parent().parent().next().children()[1].innerText.replace("댓글 내용: ", ""); // 원래 댓글
         let url = '/inquiry/comment/update/' + comment_id;
-        console.log($(this).parent());
         $(this).parent()[0].innerHTML = `
         <form id="inquiry_comment_update_form" name="inquiry_comment_update_form" action="` + url + `" method="post">
-            <input type="hidden" name="inquiry_id" value="`+ ${inquiry[0].inquiry_id} +`"/>
+            <input type="hidden" name="inquiry_id" value="` + ${inquiry[0].inquiry_id} +`"/>
             <input type="hidden" name="inquiry_commenter" value="` + commenter + `"/>
             <input type="hidden" name="inquiry_comment_id_type" value="` + commenter_type + `"/>
-            <textarea id="inquiry_comment_content_update" name="inquiry_comment_content">` + original_comment + `</textarea>
+            <textarea id="inquiry_comment_content_update" placeholder="` + original_comment + `" name="inquiry_comment_content"></textarea>
             <input id="btnCommentModifyDone" type="submit" value="수정 완료"/>
         </form>`;
 
-        $('#btnCommentModifyDone').on('click', function (e){
+        $('#btnCommentModifyDone').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             let frm = $('#inquiry_comment_update_form');
@@ -198,12 +203,10 @@
     });
 
     $('.btnCommentDelete').on('click', function () {
-        let commenter = $(this).siblings()[0].innerText; // 댓글 작성자
-        let comment_id = $(this).parent().attr('id'); // 댓글 ID
+        let commenter = $(this).parent().siblings()[0].innerText.replace("댓글 작성자 ID: ", ""); // 댓글 작성자
+        let comment_id = $(this).parent().parent().attr('id'); // 댓글 ID; // 댓글 ID
 
         let url = '/inquiry/comment/delete/' + comment_id + "/" + commenter + "/" + ${inquiry[0].inquiry_id};
-        console.log(commenter);
-        console.log(comment_id);
         if (confirm('댓글을 삭제하시겠습니까?')) {
             location.href = url;
         }
