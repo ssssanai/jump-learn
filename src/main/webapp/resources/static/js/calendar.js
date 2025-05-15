@@ -68,11 +68,20 @@ function printCalendar(y, m) {
                 calendar += "<td> &nbsp; </td>";
             } else {
                 // 오늘 날짜에 대한 스타일 적용
-                if (dNum === nowD) {
-                    calendar += `<td id="today"><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum < 10 ? '0' + dNum : dNum}">` + dNum + `</a></td>`;
+                if(!isNaN(parseInt(document.URL.split("-")[2]))) {
+                    if (dNum === parseInt(document.URL.split("-")[2])) {
+                        calendar += `<td id="today"><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum < 10 ? '0' + dNum : dNum}">` + dNum + `</a></td>`;
+                    } else {
+                        calendar += `<td><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum < 10 ? '0' + dNum : dNum}">` + dNum + `</a></td>`;
+                    }
                 } else {
-                    calendar += `<td><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum < 10 ? '0' + dNum : dNum}">` + dNum + `</a></td>`;
+                    if (dNum === nowD) {
+                        calendar += `<td id="today"><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum < 10 ? '0' + dNum : dNum}">` + dNum + `</a></td>`;
+                    } else {
+                        calendar += `<td><a class="calendarTag" href="/studyroom/plan/${nowY}-${nowM + 1 < 10 ? '0' + (nowM + 1) : nowM + 1}-${dNum < 10 ? '0' + dNum : dNum}">` + dNum + `</a></td>`;
+                    }
                 }
+
                 dNum++;
             }
         }
