@@ -24,4 +24,7 @@ public interface ClassListServiceIf {
     public ClassVideoDTO videoDetail(int id);
     public int classVideoUpdate(ClassVideoDTO classVideoDTO);
     public int classVideoUpdate1(ClassVideoDTO classVideoDTO);
+
+    //강좌명 얻어오기
+    public String className(int id);
 }

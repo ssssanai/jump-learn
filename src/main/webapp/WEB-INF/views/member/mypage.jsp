@@ -147,11 +147,18 @@
                             <th class="tbView">조회수</th>
                         </tr>
                         <tr class="tbB1">
-                            <td class="tbNo">${post.id}</td>
-                            <td class="tbTit"><a href="/post/view?id=${post.id}">${post.title}</a></td>
-                            <td class="tbName">${post.member_id.length() >= 3 ? post.member_id.substring(0, 3).concat("...") : post.member_id}</td>
-                            <td class="tbDate">${post.created_at}</td>
-                            <td class="tbView">${post.view_count}</td>
+                            <c:choose>
+                                <c:when test="${not empty post.id}">
+                                    <td class="tbNo">${post.id}</td>
+                                    <td class="tbTit"><a href="/post/view?id=${post.id}">${post.title}</a></td>
+                                    <td class="tbName">${post.member_id.length() >= 3 ? post.member_id.substring(0, 3).concat("...") : post.member_id}</td>
+                                    <td class="tbDate">${post.created_at}</td>
+                                    <td class="tbView">${post.view_count}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td colspan="5">추천 게시물이 없습니다.</td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </table>
                 </div>

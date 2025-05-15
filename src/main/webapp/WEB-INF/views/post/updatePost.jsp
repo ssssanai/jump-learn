@@ -27,22 +27,23 @@
 </div>
 <div class="wrap">
   <form id="frmWrite" name="frmWrite" action="/post/updatePost" method="post">
-    <input type="hidden" name="post_id" id="id" value="${dto.post_id}"/>
+    <input type="hidden" name="id" id="id" value="${dto.post_id}"/>
+
+    <!-- 제목 입력 -->
     <div class="boardTitle">
       <p>제목</p>
-      <input type="text" name="post_title" id="title" value="${dto.post_title}" placeholder="글 제목을 입력해주세요.">
+      <input type="text" name="title" id="title" value="${dto.post_title}" placeholder="글 제목을 입력해주세요.">
       <div id="titleError" class="error"></div>
     </div>
+
+    <!-- 내용 입력 -->
     <div class="boardCont">
       <p>내용</p>
       <textarea name="content" id="post_content" placeholder="content값">${dto.post_content}</textarea>
       <div id="contentError" class="error"></div>
     </div>
-    <div class="boardImg">
-      <p>이미지 첨부</p>
-      <input type="file" id="file" name="file" multiple accept=".png, .jpg, .jpeg">
-      <div id="contentError1" class="error"></div>
-    </div>
+
+    <!-- 버튼 영역 -->
     <div class="formBtn">
       <input class="endBtn" type="submit" value="등록">
       <input class="endBtn" type="reset" value="취소">

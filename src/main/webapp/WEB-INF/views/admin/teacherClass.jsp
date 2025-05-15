@@ -60,3 +60,6 @@
   </c:choose>
   </tbody>
 </table>
+<button>
+  <a href="/admin/teacher?id=${id}" class="button-link">뒤로가기</a>
+</button>

@@ -65,6 +65,7 @@
         SELECT
         v.id as id,
         v.class_id as class_id,
+        c.title as class_title,
         v.video_order as video_order,
         v.video_path as video_path,
         v.video_url as video_url,
@@ -169,5 +170,8 @@
         video_extension = NULL
         WHERE id = #{id}
     </update>
+    <select id="className">
+        select title from tbl_class where id=#{id}
+    </select>
 </mapper>
     
