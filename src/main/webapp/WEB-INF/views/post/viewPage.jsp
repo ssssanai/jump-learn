@@ -75,7 +75,7 @@
                         <p>작성자 : ${dto.post_member_id}</p>
                     </div>
                     <div class="boardRegDate">
-                        <p>작성일 : ${dto.post_created_at.toString().replace("T", " ")}</p>
+                        <p>${dto.post_created_at.toString().replace("T", " ")}</p>
                     </div>
                     <div class="boardViewCnt">
                         <p>조회수 ${dto.view_count}회</p>
@@ -100,12 +100,12 @@
                     </c:choose>
                 </div>
                 <div class="formBtn">
-                   <a href="/post/searchListPage"><input type="button" value="목록"></a>
+                   <a href="/post/searchListPage"><input class="endBtn" type="button" value="목록"></a>
                     <c:choose>
                         <c:when test="${loginInfo.id.equals(dto.post_member_id)}">
-                            <a href="/post/updatePost?id=${dto.post_id}"><input type="button" value="게시글 수정"></a>
-                            <a href="/post/updateFile?id=${dto.post_id}"><input type="button" value="사진 수정"></a>
-                            <a href="/post/deletePost?id=${dto.post_id}"><input type="button" value="삭제"></a>
+                            <a href="/post/updatePost?id=${dto.post_id}"><input class="endBtn" type="button" value="게시글 수정"></a>
+                            <a href="/post/updateFile?id=${dto.post_id}"><input class="endBtn" type="button" value="사진 수정"></a>
+                            <a href="/post/deletePost?id=${dto.post_id}"><input class="endBtn" type="button" value="삭제"></a>
                         </c:when>
                     </c:choose>
                 </div>

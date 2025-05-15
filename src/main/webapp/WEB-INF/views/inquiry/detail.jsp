@@ -180,6 +180,7 @@
             <input type="hidden" name="inquiry_comment_id_type" value="` + commenter_type + `"/>
             <textarea id="inquiry_comment_content_update" placeholder="` + original_comment + `" name="inquiry_comment_content"></textarea>
             <input id="btnCommentModifyDone" type="submit" value="수정 완료"/>
+            <button onclick="location.href='#'">취소</button>
         </form>`;
 
         $('#btnCommentModifyDone').on('click', function (e) {
