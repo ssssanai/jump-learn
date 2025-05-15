@@ -50,7 +50,7 @@
         <div class="formBox">
             <form method="post" action="/edu/editPage" enctype="multipart/form-data">
                 <div class="boardTitle">
-                    <p>제목${dto.post_title}</p>
+                    <p>${dto.post_title}</p>
                     <div class="boardListBtn">
                         <c:if test="${isLiked}">
 <%--                            <button>--%>
@@ -63,8 +63,7 @@
 <%--                            </button>--%>
                         </c:if>
 <%--                        <button>--%>
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-<%--                        </button>--%>
+                            <i class="fa-solid fa-triangle-exclamation" onclick=""></i>
                     </div>
                 </div>
                 <div class="formHead">
@@ -141,7 +140,7 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <p class="qnaCommentList2">댓글이없습니다.</p>
+                        <p class="qnaCommentList2">댓글이 없습니다.</p>
                     </c:otherwise>
                 </c:choose>
             </div>
