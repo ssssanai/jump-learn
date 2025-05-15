@@ -26,7 +26,7 @@
         <div class="profile">
             <div class="myInfo">
                 <p>회원등급 ${loginInfo.status}</p>
-                <h2>환영합니다 ${loginInfo.id}님!</h2>
+                <h2>환영합니다 ${loginInfo.name}님!</h2>
             </div>
         </div>
         <div class="sideMenu">
