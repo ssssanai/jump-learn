@@ -26,7 +26,7 @@
     </div>
     <div class="report-row">
         <div class="report-label">Target ID:</div>
-        <div class="report-value">${dto.target_id}</div>
+        <div class="report-value"><a href="/post/view?id=${dto.target_id}">${dto.target_id}</a></div>
     </div>
     <div class="report-row">
         <div class="report-label">Target Type:</div>
