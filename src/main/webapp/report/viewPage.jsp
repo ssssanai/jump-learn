@@ -7,8 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko_KR">
 <head>
@@ -53,128 +51,44 @@
         <div class="formBox">
             <form method="post" action="/edu/editPage" enctype="multipart/form-data">
                 <div class="boardTitle">
-                    <p>${dto.post_title}</p>
-                    <div class="boardListBtn">
-                        <c:if test="${isLiked}">
-<%--                            <button>--%>
-                                <i class="fa-solid fa-heart" onclick="location.href='/post/like/${loginInfo.id}/${dto.post_id}'"></i>
-<%--                            </button>--%>
-                        </c:if>
-                        <c:if test="${not isLiked}">
-<%--                            <button>--%>
-                                <i class="fa-regular fa-heart" style="color: #bebebe" onclick="location.href='/post/like/${loginInfo.id}/${dto.post_id}'"></i>
-<%--                            </button>--%>
-                        </c:if>
-<%--                        <button>--%>
-                            <i class="fa-solid fa-triangle-exclamation" onclick=""></i>
-                    </div>
+                    <p>신고자 제목</p>
                 </div>
                 <div class="formHead">
                     <div class="boardId">
-                        <p>번호 : ${dto.post_id}</p>
+                        <p>번호 : 1</p>
                     </div>
                     <div class="boardUser">
-                        <p>작성자 : ${dto.post_member_id}</p>
+                        <p>작성자 : 이동규</p>
                     </div>
                     <div class="boardRegDate">
-                        <p>${dto.post_created_at.toString().replace("T", " ")}</p>
+                        <p>2025-01-03</p>
                     </div>
                     <div class="boardViewCnt">
-                        <p>조회수 ${dto.view_count}회</p>
+                        <p>조회수 123회</p>
                     </div>
                     <div class="boardLikeCnt">
-                        <p>좋아요 ${dto.like_count} 개</p>
+                        <p>좋아요 123 개</p>
                     </div>
                 </div>
                 <div class="boardCont">
-                    <p>${dto.post_content}</p>
-                </div>
-                <div class="boardImage">
-                    <c:choose>
-                        <c:when test="${not empty fileList}">
-                            <c:forEach var="list" items="${fileList}" >
-                                <img src="/upload/${list.fileName}" alt="이미지"/>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-                <div class="formBtn">
-                   <a href="/post/searchListPage"><input class="endBtn" type="button" value="목록"></a>
-                    <c:choose>
-                        <c:when test="${loginInfo.id.equals(dto.post_member_id)}">
-                            <a href="/post/updatePost?id=${dto.post_id}"><input class="endBtn" type="button" value="게시글 수정"></a>
-                            <a href="/post/updateFile?id=${dto.post_id}"><input class="endBtn" type="button" value="사진 수정"></a>
-                            <a href="/post/deletePost?id=${dto.post_id}"><input class="endBtn" type="button" value="삭제"></a>
-                        </c:when>
-                    </c:choose>
+                    <p>글 내용 으하하하</p>
                 </div>
             </form>
-
-                <c:choose>
-                    <c:when test="${not empty commentList}">
-                        <c:forEach var="list" items="${commentList}" varStatus="loop">
-                            <div class="qnaCommentList">
-                                <div class="comment" id="${list.comment_id}">
-                                    <p>댓글 작성자 ID:  ${list.comment_member_id}</p>
-                                    <div class="commentBtn">
-                                        <c:if test="${loginInfo.id.equals(list.comment_member_id)}">
-                                            <a href=""><button class="btnCommentUpdate" onclick="comment_update_window('${list.comment_id}')">수정</button></a>
-                                            &nbsp;<a href="/post/deleteComment?id=${list.comment_id}"><button class="btnCommentDelete">삭제</button></a>
-                                        </c:if>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p class="contentPtage">댓글 내용: ${list.comment_content}</p>
-                                    <div class="contentDate">
-                                        <c:choose>
-                                            <c:when test="${empty list.updated_at}">
-                                                <p>댓글 작성 시간: ${list.created_at}</p>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <p>댓글 수정 시간: ${list.updated_at}</p>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <p class="qnaCommentList2">댓글이 없습니다.</p>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-            <c:if test="${ loginInfo.status == 1}" var="hasPermission">
-                <form name="inquiry_comment_form" id="inquiry_comment_form" action="/post/insertComment"
-                      method="post">
-                    <div class="qnaCommentWrite">
-                        <input type="hidden" name="comment_member_id" value="${loginInfo.id}" hidden/>
-                        <input type="hidden" name="post_id" value="${dto.post_id}" hidden/>
-                        <textarea id="inquiry_comment_content" name="comment_content" placeholder="댓글을 입력해주세요."></textarea>
-                        <input type="submit" value="등록" id="btnSubmit"/>
+            <div class="qnaCommentList">
+                <div class="comment" id="#">
+                    <p>관리자 ID : admin001</p>
+                </div>
+                <div class="content">
+                    <p class="contentPtage">응답 내용: 어쩌라고요 ㅋㅋㅋ 니사정~</p>
+                    <div class="contentDate">
+                        <p>답변일 : 2025-01-03</p>
                     </div>
-                </form>
-            </c:if>
-            <c:if test="${not hasPermission}">
-                <table>
-                    <tr>
-                        <td colspan="2">
-                            <div>운영 정책 위반으로 인해 댓글을 입력할 수 없습니다.</div>
-                        </td>
-                    </tr>
-                </table>
-            </c:if>
+                </div>
+            </div>
+            <p class="qnaCommentList2">답변이 없습니다.</p>
+            </div>
         </div>
     </div>
 </div>
-<script>
-    function comment_update_window(comment_id) {
-        const url = '/post/updateComment?comment_id=' + comment_id;
-        window.open(url, '_blank', 'width=400,height=300');
-    }
-</script>
 </body>
 </html>
