@@ -115,7 +115,7 @@
         if( search_category.value == 'created_at'  ) {
             search_word.value = '';
             search_word.style.display = 'none';
-            searchDate.style.display = 'block';
+            searchDate.style.display = 'flex';
         } else {
             search_word.style.display = 'block';
             search_date_from.value = '';
