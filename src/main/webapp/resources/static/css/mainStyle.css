@@ -239,11 +239,12 @@ article::-webkit-scrollbar {
 .gradeImg {
   width:100%; height:340px;
   border-bottom:1px solid #d6d6d6b3;
-  background-image: url('../images/mainPage/profile.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
+
+.gradeImg > img {
+  width: 100%; height:100%;
+}
+
 .gradeCont {
   width:100%; height:60px;
   background-color: #fff;

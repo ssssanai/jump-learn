@@ -13,6 +13,7 @@
     <title>JL - 관리자 로그인</title>
 </head>
 <body>
+<%@ include file="../../../resources/static/html/adminMsg.jsp"%>
 <div id="loginContainer">
     <form action="/admin/login" method="post">
         <h1>Jump Learn 관리자 로그인</h1>

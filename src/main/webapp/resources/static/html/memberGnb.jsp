@@ -8,14 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="header">
     <div class="logo">
-        <img src="/resources/static/images/registLogo2.svg" alt="로고"/>
+        <img src="/resources/static/images/registLogo2.svg" alt="로고" onclick="location.href='/main'"/>
     </div>
     <%-- 로그인 상태 --%>
     <c:if test="${loginInfo ne null}" var="isLogin">
         <ul class="mainmenu">
-            <li>
-                <a href="/course/list">강의</a>
-            </li>
+            <li><a href="/course/list">강의</a></li>
             <li><a href="/studyroom/enroll">나의 학습방</a></li>
             <li><a href="/member/mypage">마이페이지</a></li>
             <li>
@@ -25,7 +23,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">커뮤니티</a>
+                <a href="/post/searchListPage">커뮤니티</a>
                 <ul class="submenu">
                     <li><a href="/post/searchListPage">자유게시판</a></li>
                     <li><a href="/notice/searchListPage">공지사항 게시판</a></li>
