@@ -58,7 +58,7 @@
                         </tr>
                         <tr>
                             <td class="lfTd">회원가입 날짜</td>
-                            <td class="rtTd">${dto.signup_date}</td>
+                            <td class="rtTd">${dto.signup_date.toString().replace("T", " ")}</td>
                         </tr>
                     </table>
                     <div class="introduceBox">
@@ -77,7 +77,6 @@
                     </div>
                     <div class="tbA">
                         <a href="/teacher/ChangeInfo?id=${dto.id}">강사정보수정</a>
-                        <a href="#">비밀번호변경</a>
                     </div>
                 </div>
             </div>

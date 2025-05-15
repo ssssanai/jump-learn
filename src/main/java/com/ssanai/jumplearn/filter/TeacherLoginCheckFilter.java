@@ -2,9 +2,9 @@
 //
 //
 //import com.ssanai.jumplearn.dto.AdminDTO;
-//import com.ssanai.jumplearn.dto.MemberDTO;
+//import com.ssanai.jumplearn.dto.TeacherDTO;
 //import jakarta.servlet.*;
-//import jakarta.servlet.annotation.WebFilter;
+//		import jakarta.servlet.annotation.WebFilter;
 //import jakarta.servlet.http.HttpServletRequest;
 //import jakarta.servlet.http.HttpServletResponse;
 //import jakarta.servlet.http.HttpSession;
@@ -15,7 +15,7 @@
 //
 //@Log4j2
 //@WebFilter("/*")
-//public class AdminLoginCheckFilter implements Filter {
+//public class TeacherLoginCheckFilter implements Filter {
 //	@Override
 //	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 //		HttpServletRequest req = (HttpServletRequest) servletRequest;
@@ -24,12 +24,12 @@
 //
 //		String reqPath = req.getServletPath();
 //
-//        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
-//		if (reqPath.equals("/admin/login")
+//		TeacherDTO dto = (TeacherDTO) session.getAttribute("teacherInfo");
+//		if (reqPath.equals("/teacher/login")
 //				|| reqPath.equals("/main")
 //				|| reqPath.startsWith("/resources/")
-//                || reqPath.startsWith("/member/")
-//                || reqPath.startsWith("/teacher/")
+//				|| reqPath.startsWith("/member/")
+//				|| reqPath.startsWith("/admin/")
 //		) {
 //			filterChain.doFilter(servletRequest, servletResponse);
 //			return;
@@ -37,7 +37,7 @@
 //		if (dto == null || dto.getId() == null) {
 //			resp.setContentType("text/html;charset=utf-8");
 //			PrintWriter out = resp.getWriter();
-//			out.print("<script>alert('로그인 후 사용 가능합니다!');location.href='/admin/login';</script>");
+//			out.print("<script>alert('로그인 후 사용 가능합니다!');location.href='/teacher/login';</script>");
 //			out.close();
 //			return;
 //		}
@@ -45,3 +45,4 @@
 //		filterChain.doFilter(servletRequest, servletResponse);
 //	}
 //}
+//

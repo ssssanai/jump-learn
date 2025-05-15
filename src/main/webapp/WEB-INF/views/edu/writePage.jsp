@@ -39,7 +39,7 @@
         <div class="formBtn">
             <input class="endBtn" type="submit" value="등록">
             <input class="endBtn" type="reset" value="취소">
-            <input class="endBtn" type="button" value="목록">
+            <input class="endBtn" onclick="location.href = '/edu/searchListPage';" type="button" value="목록">
             <input type="hidden" name="admin_id" value="${adto.id}"/>
         </div>
     </form>
