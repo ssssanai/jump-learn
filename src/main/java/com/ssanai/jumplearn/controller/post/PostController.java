@@ -81,6 +81,9 @@ public class PostController {
 		model.addAttribute("fileList", postService.selectFileById(Integer.parseInt(id)));
 		List<CommentDTO> commentList = postService.selectCommentById(Integer.parseInt(id));
 		model.addAttribute("commentList", commentList);
+		// 좋아요 아이콘 처리를 위해 추가
+		boolean isLiked = postService.isLiked(Integer.parseInt(id), memberDTO.getId()) > 0;
+		model.addAttribute("isLiked", isLiked);
 		log.info("commentList" + commentList);
 		return "post/viewPage";
 	}
@@ -374,5 +377,29 @@ public class PostController {
 			redirectAttributes.addFlashAttribute("msg", "수정 성공");
 		}
 		return "redirect:/post/updateComment?comment_id="+dto.getComment_id();
+	}
+
+	@GetMapping("/like/{member_id}/{post_id}")
+	public String likePost(
+		@PathVariable("member_id") String member_id,
+		@PathVariable("post_id") int post_id,
+		RedirectAttributes ra
+	){
+		int id = postService.isLiked(post_id, member_id);
+		int result = 0;
+		if(id > 0) {
+			result = postService.cancelLike(id);
+		} else {
+			result = postService.insertLike(post_id, member_id);
+		}
+
+		if(result < 1) {
+			log.info("좋아요 컨트롤 실패");
+			ra.addFlashAttribute("msg", "처리 중 오류가 발생했습니다.");
+		} else {
+			log.info("좋아요 컨트롤 성공");
+		}
+
+		return "redirect:/post/view?id="+post_id;
 	}
 }

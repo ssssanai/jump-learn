@@ -138,4 +138,16 @@ public class PostServiceImpl implements PostServiceIf {
 		return postMapper.deleteComment(id);
 	}
 
+	@Override
+	public int isLiked(int post_id, String member_id) {
+		Integer result = postMapper.isLiked(post_id,member_id);
+		if(result != null) return result;
+		else return -1;
+	}
+
+	@Override
+	public int cancelLike(int id) { return postMapper.cancelLike(id); }
+
+	@Override
+	public int insertLike(int post_id, String member_id) { return postMapper.insertLike(post_id,member_id); }
 }

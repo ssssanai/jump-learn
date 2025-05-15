@@ -125,6 +125,7 @@ public class StudyRoomController {
 				isReviewed = true;
 			}
 		}
+		log.info(classDetailDTO);
 //		log.info(isReviewed);
 //		log.info("필터링 전 리뷰목록" + reviewList);
 		reviewList = reviewList.stream().filter(dto -> dto.getReview() != null).toList();
@@ -134,7 +135,7 @@ public class StudyRoomController {
 		// 내가 선생님한테 질문한 목록 가져오기
 		List<ClassQuestionVO> questedList = courseService.getClassQuestionList(class_id, member_id);
 		log.info("강좌 ID: {}", class_id);
-		log.info("내가 한 질문: {}", questedList);
+//		log.info("내가 한 질문: {}", questedList);
 		// 선생님이 답글 단 거 가져오기 -> Map에 담아서 전달
 		if (questedList != null && !questedList.isEmpty()) {
 			for (ClassQuestionVO vo : questedList) {
@@ -159,7 +160,10 @@ public class StudyRoomController {
 				}
 			}
 		}
-		log.info("qList: {}", qList);
+//		log.info("qList: {}", qList);
+		// 파일 가져오기
+		List<ClassDataDTO> cdList = courseService.getClassDataList(class_id);
+		log.info(cdList);
 
 		model.addAttribute("member", mDTO);
 		model.addAttribute("reviewList", reviewList);
@@ -167,6 +171,7 @@ public class StudyRoomController {
 		model.addAttribute("videoList", videoList);
 		model.addAttribute("isReviewed", isReviewed);
 		model.addAttribute("qList", qList);
+		model.addAttribute("cdList", cdList);
 		return "member/detail";
 	}
 
