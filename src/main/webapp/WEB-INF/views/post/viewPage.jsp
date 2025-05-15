@@ -62,7 +62,9 @@
                                 <i class="fa-regular fa-heart" style="color: #bebebe" onclick="location.href='/post/like/${loginInfo.id}/${dto.post_id}'"></i>
 <%--                            </button>--%>
                         </c:if>
-                        <button><i class="fa-solid fa-triangle-exclamation"></i></button>
+<%--                        <button>--%>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+<%--                        </button>--%>
                     </div>
                 </div>
                 <div class="formHead">
@@ -98,15 +100,14 @@
                     </c:choose>
                 </div>
                 <div class="formBtn">
-                    <input class="endBtn" type="button" value="목록" onClick="location.href='<c:url value='/post/searchListPage?${pageDTO.linkParams}'/>'" />
-                    <input class="endBtn" type="button" value="수정" id="btnModify">
-                    <input class="endBtn" type="button" value="삭제" id="btnDelete">
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${not empty sessionScope.loginInfo.status}">--%>
-<%--                            <input class="endBtn" type="button" value="수정" onClick="location.href='<c:url value='/edu/editPage?id=${dto.id}&${pageDTO.linkParams}'/>'" />--%>
-<%--                            <input class="endBtn" type="button" value="삭제" onClick="if (confirm('${dto.title} 글을 삭제하시겠습니까?')) {location.href='<c:url value='/edu/delete'/>?id=${dto.id}&${pageDTO.linkParams}';}" />--%>
-<%--                        </c:when>--%>
-<%--                    </c:choose>--%>
+                   <a href="/post/searchListPage"><input type="button" value="목록"></a>
+                    <c:choose>
+                        <c:when test="${loginInfo.id.equals(dto.post_member_id)}">
+                            <a href="/post/updatePost?id=${dto.post_id}"><input type="button" value="게시글 수정"></a>
+                            <a href="/post/updateFile?id=${dto.post_id}"><input type="button" value="사진 수정"></a>
+                            <a href="/post/deletePost?id=${dto.post_id}"><input type="button" value="삭제"></a>
+                        </c:when>
+                    </c:choose>
                 </div>
             </form>
 

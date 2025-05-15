@@ -57,5 +57,8 @@
         <td colspan="5">${dto.introduce3}</td>
     </tr>
 </table>
+<button>
+    <a href="/admin/teacherList" class="button-link">뒤로가기</a>
+</button>
 </body>
 </html>

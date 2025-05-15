@@ -125,4 +125,9 @@ public class ClassListServiceImpl implements ClassListServiceIf {
         return re;
     }
 
+    @Override
+    public String className(int id) {
+        return classListXmlMapper.className(id);
+    }
+
 }

@@ -56,5 +56,8 @@
         <td>${dto.last_pwd_date}</td>
     </tr>
 </table>
+<button>
+    <a href="/admin/memberList" class="button-link">뒤로가기</a>
+</button>
 </body>
 </html>

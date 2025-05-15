@@ -21,6 +21,7 @@ public interface PostServiceIf {
 	public int insertFile(BbsFileDTO fileDTO);
 	public int insertPost(PostDTO postDTO);
 	public int deletePost(int id);
+	public int deleteFile(int post_id);
 	public int updateFile(BbsFileDTO fileDTO);
 	public int updatePost(PostDTO postDTO);
 	public int bridgeFile(int f_id, int p_id);
