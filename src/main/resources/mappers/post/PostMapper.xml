@@ -141,5 +141,8 @@
     <delete id="cancelLike">
         DELETE FROM tbl_post_like WHERE id = #{id}
     </delete>
+    <update id="viewCountMinus">
+        UPDATE tbl_post SET view_count = view_count - 1 WHERE id = #{post_id};
+    </update>
 </mapper>
  

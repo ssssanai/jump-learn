@@ -145,4 +145,9 @@ public class PostServiceImpl implements PostServiceIf {
 
 	@Override
 	public int insertLike(int post_id, String member_id) { return postMapper.insertLike(post_id,member_id); }
+
+	@Override
+	public int viewCountMinus(int post_id) {
+		return postMapper.viewCountMinus(post_id);
+	}
 }

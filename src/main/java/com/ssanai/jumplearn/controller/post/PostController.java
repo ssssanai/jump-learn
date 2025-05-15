@@ -375,6 +375,7 @@ public class PostController {
 		} else {
 			log.info("좋아요 컨트롤 성공");
 		}
+		postService.viewCountMinus(post_id);
 
 		return "redirect:/post/view?id="+post_id;
 	}
