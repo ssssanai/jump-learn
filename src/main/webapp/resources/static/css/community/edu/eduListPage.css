@@ -181,7 +181,7 @@ ul li {
             padding-right: 20px;
         }
             .selectOption {
-                width:50px; height:25px;
+                width:70px; height:25px;
                 border: 0.5px solid #a0a0a0b3;
                 color:#838383;
                 font-size:12px;
@@ -201,7 +201,7 @@ ul li {
             }
             .searchDate {
                 display: flex;
-                width:220px; height:30px;
+                width:320px; height:30px;
             }
                 .searchDate > p {
                     width:20px; height:30px;
@@ -209,7 +209,7 @@ ul li {
                     line-height:28px;
                 }
                 .searchDate > input {
-                    width:100px; height:30px;
+                    width:150px; height:30px;
                     border-radius: 4px;
                     border: 0.5px solid #a0a0a0b3;
                     padding-left: 10px;
