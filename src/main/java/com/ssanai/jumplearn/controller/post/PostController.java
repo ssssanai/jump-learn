@@ -402,4 +402,28 @@ public class PostController {
 
 		return "redirect:/post/view?id="+post_id;
 	}
+	@GetMapping("/report_insert_popup")
+	public String reportInsertPopup(
+			@RequestParam("post_id")String post_id,
+			@RequestParam("member_id")String member_id,
+			Model model
+	){
+		model.addAttribute("post_id", post_id);
+		model.addAttribute("member_id", member_id);
+		return "post/report_insert_popup";
+	}
+	@PostMapping("/report_insert_popup")
+	public String reportInsertPopup(
+			ReportDTO dto,
+			RedirectAttributes redirectAttributes,
+			@RequestHeader(value = "Referer", required = false) String referer
+	){
+		int rs = postService.insertReport(dto);
+		if(rs < 1) {
+			redirectAttributes.addFlashAttribute("msg","신고 실패");
+		}else{
+			redirectAttributes.addFlashAttribute("msg","신고 처리 되었습니다.");
+		}
+		return "redirect:" + referer;
+	}
 }

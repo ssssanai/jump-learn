@@ -27,6 +27,7 @@ public interface PostMapper {
 	public int insertComment(CommentDTO commentDTO);
 	public int updateComment(CommentDTO commentDTO);
 	public int deleteComment(@Param("id") int id);
+	public int insertReport(ReportDTO reportDTO);
 
 	// 게시글 좋아요
 	public Integer isLiked(@Param("post_id") int post_id, @Param("member_id") String member_id);

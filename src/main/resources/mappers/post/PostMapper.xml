@@ -149,5 +149,9 @@
     <delete id="cancelLike">
         DELETE FROM tbl_post_like WHERE id = #{id}
     </delete>
+    <insert id="insertReport">
+        INSERT INTO tbl_report(target_id, target_type, member_id, reason)
+        VALUES(#{target_id}, "tbl_post", #{member_id}, #{reason})
+    </insert>
 </mapper>
  
