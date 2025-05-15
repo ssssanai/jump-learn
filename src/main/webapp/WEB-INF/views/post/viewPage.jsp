@@ -63,7 +63,7 @@
 <%--                            </button>--%>
                         </c:if>
 <%--                        <button>--%>
-                            <i class="fa-solid fa-triangle-exclamation" onclick=""></i>
+                            <i class="fa-solid fa-triangle-exclamation" onclick="report_insert_popup('${loginInfo.id}','${dto.post_id}')"></i>
 <%--                        </button>--%>
                     </div>
                 </div>
@@ -171,6 +171,10 @@
 <script>
     function comment_update_window(comment_id) {
         const url = '/post/updateComment?comment_id=' + comment_id;
+        window.open(url, '_blank', 'width=400,height=300');
+    }
+    function report_insert_popup(member_id,post_id){
+        const url = '/post/report_insert_popup?member_id=' + member_id + '&post_id=' + post_id;
         window.open(url, '_blank', 'width=400,height=300');
     }
 </script>
