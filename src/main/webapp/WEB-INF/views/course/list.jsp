@@ -118,6 +118,14 @@
                         <c:forEach items="${courseList}" var="course">
                             <div class="course">
                                 <div class="course_img">
+<%--                                    <c:choose>--%>
+<%--                                        <c:when test="${not empty course.class_file_name}">--%>
+<%--                                            <img src="/upload/${course.class_file_name}" alt="강좌 사진" style="width: 100%; height: 100%" />--%>
+<%--                                        </c:when>--%>
+<%--                                        <c:otherwise>--%>
+<%--                                            <img src="../../../resources/static/images/img.png" alt="기본 강좌 이미지" />--%>
+<%--                                        </c:otherwise>--%>
+<%--                                    </c:choose>--%>
                                     <img src="/upload/${course.file_name}" style="width: 100%; height: 100%">
                                 </div>
                                 <div class="lb2">
