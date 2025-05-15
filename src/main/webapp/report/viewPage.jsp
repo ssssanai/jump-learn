@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/resources/static/css/community/freeBoard/viewPage.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/report/viewPage.css" rel="stylesheet" type="text/css">
     <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <title>글 상세보기</title>
@@ -41,11 +41,14 @@
             <a href="/lib/searchListPage">자료실 게시판</a>
             <a href="/news/searchListPage">뉴스 게시판</a>
         </div>
+        <div class="reportPageBtn">
+            <a href="#">신고 내역</a>
+        </div>
     </div>
     <div class="main">
         <div class="writeTit">
-            <h2>자유 게시판</h2>
-            <p>자유롭게 소통하는 공간입니다.</p>
+            <h2>신고내역</h2>
+            <p>신고내역에 처리상태를 확인할 수 있습니다.</p>
         </div>
         <div class="formBox">
             <form method="post" action="/edu/editPage" enctype="multipart/form-data">
