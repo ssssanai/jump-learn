@@ -110,10 +110,14 @@
                                                                                 value="사진 수정"></a>
                             <a href="/post/deletePost?id=${dto.post_id}"><input class="endBtn" type="button" value="삭제"></a>
                         </c:when>
+                        <c:otherwise>
+                            <c:if test="${not empty adminInfo}">
+                                <a href="/post/deletePost?id=${dto.post_id}">
+                                    <input class="endBtn" type="button" value="삭제">
+                                </a>
+                            </c:if>
+                        </c:otherwise>
                     </c:choose>
-                    <c:if test="${not empty adminInfo}">
-                        <a href="/post/deletePost?id=${dto.post_id}"><input class="endBtn" type="button" value="삭제"></a>
-                    </c:if>
                 </div>
             </form>
 
