@@ -19,7 +19,7 @@
     <script src="https://kit.fontawesome.com/2d74121aef.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<%@ include file="../../../resources/static/html/adminMsg.jsp"%>
+<%@ include file="/resources/static/html/adminMsg.jsp"%>
 <div class="header">
     <img src="/resources/static/images/registLogo2.svg" alt="로고">
     <p>자유게시판 게시물 작성</p>
@@ -44,7 +44,7 @@
         <div class="formBtn">
             <input class="endBtn" type="submit" value="작성완료">
             <input class="endBtn" type="reset"  value="취소">
-            <input class="endBtn" type="button" value="목록">
+            <input class="endBtn" type="button" value="목록" onclick="location.href='/post/searchListPage'">
         </div>
     </form>
 </div>

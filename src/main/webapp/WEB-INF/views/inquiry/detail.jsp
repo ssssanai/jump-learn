@@ -168,13 +168,13 @@
     });
 
     $('.btnCommentUpdate').on('click', function () {
-        let box = document.getElementsByClassName('contentPage');
+        let box = $(this).parent().parent().next().children()[1];
         let commenter = $(this).parent().siblings()[0].innerText.replace("댓글 작성자 ID: ", ""); // 댓글 작성자
         let comment_id = $(this).parent().parent().attr('id'); // 댓글 ID
         let commenter_type = $(this).parent().parent().next().children()[0].innerText; // 댓글 작성자 타입
         let original_comment = $(this).parent().parent().next().children()[1].innerText.replace("댓글 내용: ", ""); // 원래 댓글
         let url = '/inquiry/comment/update/' + comment_id;
-        $(box).parent()[0].innerHTML = `
+        box.parentElement.innerHTML = `
         <form id="inquiry_comment_update_form" name="inquiry_comment_update_form" action="` + url + `" method="post">
             <input type="hidden" name="inquiry_id" value="` + ${inquiry[0].inquiry_id} +`"/>
             <input type="hidden" name="inquiry_commenter" value="` + commenter + `"/>
