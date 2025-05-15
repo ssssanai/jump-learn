@@ -64,7 +64,14 @@
             </c:choose>
           </td>
           <td>
-
+            <c:choose>
+              <c:when test="${not empty list.video_url}">
+                <a href="${list.video_url}" target="_blank">${list.video_url}</a>
+              </c:when>
+              <c:otherwise>
+                X
+              </c:otherwise>
+            </c:choose>
           </td>
           <td>
             <c:choose>

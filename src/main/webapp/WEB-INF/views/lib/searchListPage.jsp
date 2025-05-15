@@ -46,7 +46,7 @@
             <h2>자료실 게시판</h2>
             <p>수업 관련 링크를 얻을 수 있습니다.</p>
             <div class="wtBtn">
-                <c:if test="${isAdmin}">
+                <c:if test="${adminInfo != null}">
                     <a href="/lib/writePage">글쓰기</a>
                 </c:if>
 
@@ -92,7 +92,7 @@
                     <p class="listName">${post.admin_id}</p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
-                    <c:if test="${isAdmin}">
+                    <c:if test="${adminInfo != null}">
                         <div class="listDelBtnBox">
                             <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}"
                                    onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/lib/delete/${post.id}'}"

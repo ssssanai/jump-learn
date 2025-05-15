@@ -67,7 +67,7 @@
                 <div class="formBtn">
                     <input class="endBtn" type="button" value="목록"
                            onClick="location.href='/activity/searchListPage?${pageDTO.linkParams}'"/>
-                    <c:if test="${isAdmin}">
+                    <c:if test="${adminInfo != null}">
                         <input class="endBtn" type="button" value="수정"
                                onClick="location.href='/activity/editPage/${dto.id}'"/>
                         <input class="endBtn" type="button" value="삭제"
