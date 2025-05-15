@@ -22,12 +22,11 @@
 //
 //		Object loginInfo = req.getSession().getAttribute("loginInfo");
 //
-//		if(loginInfo instanceof MemberDTO) {
-//
-//		} else if(loginInfo instanceof String) {
-//
-//		}
-//
+////		if(loginInfo instanceof MemberDTO) {
+////
+////		} else if(loginInfo instanceof String) {
+////
+////		}
 //
 //		String reqPath = req.getServletPath();
 //
@@ -41,13 +40,10 @@
 //			filterChain.doFilter(servletRequest, servletResponse);
 //			return;
 //		}
-////
-////		UserDTO udto = session.getAttribute("loginInfo");
-////
+//
 ////		if( udto instanceof MemberDTO) {
 ////
 ////		}
-////
 //
 //		MemberDTO dto = (MemberDTO) session.getAttribute("loginInfo");
 //		if (dto == null || dto.getId() == null) {
