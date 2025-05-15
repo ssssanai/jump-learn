@@ -79,17 +79,17 @@
         </div>
     </div>
     <div class="main">
+        <h3 class="h33">강좌 / 작성된 후기</h3>
         <div class="box">
             <div class="studyBox3">
-                <h2>강좌</h2>
                 <div class="reviewList1">
                     <p class="studyNo1">순서</p>
                     <p class="studyTit1">제목</p>
                     <p class="studyContent1">내용</p>
                     <p class="studyUploadDate1">업로드날짜</p>
-                    <p class="studyUploadDate3">강의 시청</p>
-                    <p class="studyUploadDate3">강의 자료</p>
-                    <p class="studyUploadDate3">공지사항</p>
+                    <p class="btnVideoPlay1">강의 시청</p>
+                    <p class="btnVideoNotice1">강의 자료</p>
+                    <p class="btnDataDownload1">공지사항</p>
                 </div>
                 <div class="reviewListBox">
                     <c:forEach items="${videoList}" var="video">
@@ -110,13 +110,12 @@
                             <c:if test="${not isDataExist}">
                                 <button>X</button>
                             </c:if>
-                            <button class="btnVideoNotice" id="${video.notice}">공지 확인</button>
+                            <button class="btnVideoNotice" id="${video.notice}">확인</button>
                         </div>
                     </c:forEach>
                 </div>
             </div>
             <div class="studyBox3">
-                <h2>작성된 후기</h2>
                 <div class="reviewList3">
                     <p class="studyContent4">학생 ID</p>
                     <p class="studyTit4">후기</p>

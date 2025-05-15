@@ -29,10 +29,15 @@
         <div class="myInfo">
             <div class="radiusProfile">
                 <span>
-                    ${member.file_path} ${member.file_name} ${member.file_ext}
-                    <img src="/resources/static/images/notProfile.jpg" alt="프로필 이미지 없을시">
+                    <c:choose>
+                        <c:when test="${not empty member.file_name}">
+                            <img src="/upload/${member.file_name}" alt="기본 이미지">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/resources/static/images/notProfile.jpg" alt="기본 이미지">
+                        </c:otherwise>
+                    </c:choose>
                 </span>
-
             </div>
             <div class="myInfop">
                 <p>회원등급 ${member.grade}</p>
@@ -118,7 +123,13 @@
                         <c:forEach items="${courseList}" var="course">
                             <div class="course">
                                 <div class="course_img">
-                                    <img src="/upload/${course.file_name}" style="width: 100%; height: 100%">
+                                    <c:if test="${course.file_name != null}" var="isImageExist">
+                                        <img src="/upload/${course.file_name}" style="width: 100%; height: 100%">
+                                    </c:if>
+                                    <c:if test="${not isImageExist}">
+                                        <img src="/resources/static/images/img.png" style="width: 100%; height: 100%">
+                                    </c:if>
+
                                 </div>
                                 <div class="lb2">
                                     <a href="/course/detail/${course.id}" class="course_title">${course.title}</a>
@@ -132,10 +143,6 @@
                                 <div class="lb3">
                                     <p class="course_price">${course.price}원</p>
                                     <div class="buyBtn">
-                                        <a href="#">
-                                            <i class="fa-solid fa-heart"></i>
-                                        </a>
-
                                         <c:if test="${exceptList.contains(course.id)}" var="contained">
                                             <p href="#"><i class="fa-solid fa-check"></i></p>
                                         </c:if>

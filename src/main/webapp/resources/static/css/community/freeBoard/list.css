@@ -56,7 +56,10 @@ ul li {
                 margin-bottom: 5px;
             }
             .myInfo > h2 {
-                font-size:18px;
+                font-size: 18px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         .logoutBtn {
             display: flex;
