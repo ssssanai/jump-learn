@@ -163,7 +163,10 @@ public class StudyRoomController {
 //		log.info("qList: {}", qList);
 		// 파일 가져오기
 		List<ClassDataDTO> cdList = courseService.getClassDataList(class_id);
-		log.info(cdList);
+		if(cdList != null && cdList.size() > 0) {
+			model.addAttribute("cdList", cdList);
+		}
+		log.info("파일목록: {}", cdList);
 
 		model.addAttribute("member", mDTO);
 		model.addAttribute("reviewList", reviewList);
@@ -171,7 +174,6 @@ public class StudyRoomController {
 		model.addAttribute("videoList", videoList);
 		model.addAttribute("isReviewed", isReviewed);
 		model.addAttribute("qList", qList);
-		model.addAttribute("cdList", cdList);
 		return "member/detail";
 	}
 

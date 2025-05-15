@@ -23,15 +23,43 @@
 <%@include file="/resources/static/html/memberGnb.jsp" %>
 <div class="main">
     <%-- TODO: 슬라이드 처리 --%>
-
     <c:choose>
         <c:when test="${loginInfo eq null}">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <c:forEach var="recClass" items="${recommendList}">
                         <div class="swiper-slide">
+                            <div>
+                                <img src="/upload/${recClass.file_name}" alt="강좌 사진"/>
+                            </div>
                             <div class="buyStudy1">
-
+                                <div class="bsTitle">
+                                    <h1>${recClass.title}</h1>
+                                </div>
+                                <div class="bsCont">
+                                    <p>${recClass.introduce}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+            <!-- 비로그인 시 -->
+            <div class="loginBox1">
+                <div class="loginHead">
+                    <a href="member/login">로그인 하기</a>
+                </div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <c:forEach var="recClass" items="${recommendList}">
+                        <div class="swiper-slide">
+                            <div>
+                                <img src="/upload/${recClass.file_name}" alt="강좌 사진"/>
+                            </div>
+                            <div class="buyStudy1">
                                 <div class="bsTitle">
                                     <h1>${recClass.title}</h1>
                                 </div>
@@ -47,25 +75,6 @@
                     </c:forEach>
                 </div>
             </div>
-            <!-- 비로그인 시 -->
-            <div class="loginBox1">
-                <div class="loginHead">
-                    <a href="member/login">로그인 하기</a>
-                </div>
-                    <%--                <div class="myPageBtn">--%>
-                    <%--                    <a href="#">마이페이지</a>--%>
-                    <%--                </div>--%>
-                <div class="loginFoot">
-                    <div class="registBtn">
-                        <a href="member/register">회원가입</a>
-                    </div>
-                    <div class="foundPwd">
-                        <a href="#">비밀번호 찾기</a>
-                    </div>
-                </div>
-            </div>
-        </c:when>
-        <c:otherwise>
             <!-- 로그인 시 -->
             <div class="loginBox2">
                 <div class="profile">

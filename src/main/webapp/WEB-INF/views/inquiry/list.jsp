@@ -21,12 +21,12 @@
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/headerGnb.jsp"%>
+<%@include file="/resources/static/html/headerGnb.jsp" %>
 <div class="wrap">
     <div class="aside">
         <div class="profile">
             <div class="myInfo">
-                <p>회원등급  ${loginInfo.status}</p>
+                <p>회원등급 ${loginInfo.status}</p>
                 <h2>환영합니다 ${loginInfo.name}님!</h2>
             </div>
             <div class="sideMenu">
@@ -56,7 +56,8 @@
                     <option value="title">제목</option>
                     <option value="content">내용</option>
                 </select>
-                <input type="text" id="search_word" name="search_word" class="search_in" placeholder="검색어를 입력해주세요." value=""/>
+                <input type="text" id="search_word" name="search_word" class="search_in" placeholder="검색어를 입력해주세요."
+                       value=""/>
                 <input type="submit" id="btnSubmit" class="search_btn" name="serch_btn" value="검색">
             </div>
         </form>
@@ -73,55 +74,69 @@
                 </tr>
             </table>
 
-                <c:forEach items="${dtoList}" var="i">
-                    <c:choose>
-                        <c:when test="${i.visibility == 1}">
-                            <table class="wlBody">
-                                <tr>
-                                    <td class="listNo"><a href="/inquiry/detail/${i.inquiry_id}"> ${i.inquiry_id}</a></td>
-                                    <td class="listTit"><p>${i.inquiry_title}</p></td>
-                                    <td class="listContent"><p>${i.inquiry_content}</p></td>
-                                    <td class="listName"><p>${i.member_id}</p></td>
-                                    <td class="listDate"><p>${i.inquiry_created_at}</p></td>
-                                    <td class="listEditDate"><p>${i.inquiry_updated_at}</p></td>
-                                    <td class="listCnt"><p>${i.inquiry_status}</p></td>
-                                </tr>
-                            </table>
-                        </c:when>
-                        <c:otherwise>
-                            <c:choose>
-                                <c:when test="${i.member_id == loginInfo.id}">
+            <c:forEach items="${dtoList}" var="i">
+                <c:choose>
+                    <c:when test="${i.visibility == 1}">
+                        <table class="wlBody">
+                            <tr>
+                                <td class="listNo"><a href="/inquiry/detail/${i.inquiry_id}"> ${i.inquiry_id}</a></td>
+                                <td class="listTit"><p>${i.inquiry_title}</p></td>
+                                <td class="listContent"><p>${i.inquiry_content}</p></td>
+                                <td class="listName"><p>${i.member_id}</p></td>
+                                <td class="listDate"><p>${i.inquiry_created_at.toString().replace("T", " ")}</p></td>
+                                <td class="listEditDate"><p>${i.inquiry_updated_at.toString().replace("T", " ")}</p>
+                                </td>
+                                <td class="listCnt">
+                                    <c:if test="${i.inquiry_status.equals('completed')}" var="isCompleted">
+                                        <p style="color: green">처리 완료</p>
+                                    </c:if>
+                                    <c:if test="${not isCompleted}">
+                                        <p style="color: darkred">처리 중</p>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </table>
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${i.member_id == loginInfo.id}">
                                 <table class="wlBody">
                                     <tr>
-                                        <td class="listNo"><a href="/inquiry/detail/${i.inquiry_id}">${i.inquiry_id}</a></td>
+                                        <td class="listNo"><a href="/inquiry/detail/${i.inquiry_id}">${i.inquiry_id}</a>
+                                        </td>
                                         <td class="listTit"><p>${i.inquiry_title}</p></td>
                                         <td class="listContent"><p>${i.inquiry_content}</p></td>
                                         <td class="listName"><p>${i.member_id}</p></td>
-                                        <td class="listDate"><p>${i.inquiry_created_at}</p></td>
-                                        <td class="listEditDate"><p>${i.inquiry_updated_at}</p></td>
-                                        <td class="listCnt"><p>${i.inquiry_status}</p></td>
+                                        <td class="listDate"><p>${i.inquiry_created_at.toString().replace("T", " ")}</p>
+                                        </td>
+                                        <td class="listEditDate">
+                                            <p>${i.inquiry_updated_at.toString().replace("T", " ")}</p></td>
+                                        <td class="listCnt">
+                                            <c:if test="${i.inquiry_status.equals('completed')}" var="isCompleted">
+                                                <p style="color: green">처리 완료</p>
+                                            </c:if>
+                                            <c:if test="${not isCompleted}">
+                                                <p style="color: darkred">처리 중</p>
+                                            </c:if>
+                                        </td>
                                     </tr>
                                 </table>
-                                </c:when>
-                                <c:otherwise>
-                                    <table class="wlBody">
-                                        <tr>
-                                            <td class="listNo"><p>${i.inquiry_id}</p></td>
-                                            <td class="listsecrete" colspan="6"><p>비밀글입니다.</p></td>
-                                        </tr>
-                                    </table>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:otherwise>
-<%--                        <c:otherwise>--%>
-<%--                            <p>${i.inquiry_id}</p>--%>
-<%--                            <p>비밀글입니다.</p>--%>
-<%--                        </c:otherwise>--%>
-                    </c:choose>
-                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <table class="wlBody">
+                                    <tr>
+                                        <td class="listNo"><p>${i.inquiry_id}</p></td>
+                                        <td class="listsecrete" colspan="6"><p>비밀글입니다.</p></td>
+                                    </tr>
+                                </table>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
             </table>
             <div class="pagingBox">
-                <p>123456</p>
+                ${paging}
             </div>
         </div>
     </div>
