@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: lsm01
@@ -19,19 +20,19 @@
 </head>
 <body>
 <%--고정 헤더 파일--%>
-<%@include file="/resources/static/html/memberGnb.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp" %>
 <div class="wrap">
     <div class="aside">
         <div class="profile">
             <div class="myInfo">
-                <p>회원등급  ${loginInfo.status}</p>
+                <p>회원등급 ${loginInfo.status}</p>
                 <h2>환영합니다 ${loginInfo.name}님!</h2>
             </div>
         </div>
         <div class="sideMenu">
             <h2 class="sideMenuTitle">커뮤니티</h2>
             <a href="/post/searchListPage" class="select">자유게시판</a>
-            <a href="/notice/searchListPage" >공지사항 게시판</a>
+            <a href="/notice/searchListPage">공지사항 게시판</a>
             <a href="/edu/searchListPage">교육 정보 게시판</a>
             <a href="/info/searchListPage">대입 정보 게시판</a>
             <a href="/activity/searchListPage">대외활동 게시판</a>
@@ -42,42 +43,46 @@
     <div class="main">
         <div class="writeTit">
             <h2>신고내역</h2>
-            <p>신고내역에 처리상태를 확인할 수 있습니다.</p>
         </div>
         <div class="formBox">
-                <div class="boardTitle">
-                    <p>신고자 제목</p>
+            <div class="formHead">
+                <div class="boardId">
+                    <p>신고 번호 : ${reportDetail.report_id}</p>
                 </div>
-                <div class="formHead">
-                    <div class="boardId">
-                        <p>번호 : 1</p>
-                    </div>
-                    <div class="boardUser">
-                        <p>작성자 : 이동규</p>
-                    </div>
-                    <div class="boardRegDate">
-                        <p>2025-01-03</p>
-                    </div>
-                    <div class="boardViewCnt">
-                        <p>처리상태 : ??</p>
-                    </div>
+                <div class="boardUser">
+                    <p>신고자 : ${reportDetail.member_id}</p>
                 </div>
-                <div class="boardCont">
-                    <p>글 내용 으하하하</p>
+                <div class="boardRegDate">
+                    <p>신고일자 : ${reportDetail.report_create_date.toString().replace("T", " ")}</p>
                 </div>
-            <div class="qnaCommentList">
-                <div class="comment" id="#">
-                    <p>관리자 ID : admin001</p>
-                </div>
-                <div class="content">
-                    <p class="contentPtage">응답 내용: 어쩌라고요 ㅋㅋㅋ 니사정~</p>
-                    <div class="contentDate">
-                        <p>답변일 : 2025-01-03</p>
-                    </div>
+                <div class="boardViewCnt">
+                    <c:if test='${reportDetail.report_status.equals("complete")}' var="isComplete">
+                        <p style="color: green">처리 완료</p>
+                    </c:if>
+                    <c:if test="${not isComplete}">
+                        <p style="color: orangered">처리 중</p>
+                    </c:if>
                 </div>
             </div>
+            <div class="boardCont">
+                <p>${reportDetail.reason}</p>
+            </div>
+            <c:if test="${isComplete}">
+                <div class="qnaCommentList">
+                    <div class="comment" id="#">
+                        <p>관리자 ID : ${reportDetail.admin_id}</p>
+                    </div>
+                    <div class="content">
+                        <p class="contentPtage">응답 내용: ${reportDetail.resolution}</p>
+                        <div class="contentDate">
+                            <p>답변일 : ${reportDetail.resolution_create_date}</p>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${not isComplete}">
                 <p class="qnaCommentList2">답변이 없습니다.</p>
-            </div>
+            </c:if>
         </div>
     </div>
 </div>
