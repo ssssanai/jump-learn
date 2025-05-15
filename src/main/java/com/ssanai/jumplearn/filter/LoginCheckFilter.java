@@ -67,7 +67,6 @@ public class LoginCheckFilter implements Filter {
 
 		String referer = request.getHeader("Referer");
 
-
 		// 1. 공개 URL 처리
 		if (isPublicPath(path)) {
 			chain.doFilter(request, response);
