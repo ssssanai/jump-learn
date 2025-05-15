@@ -10,9 +10,8 @@
     <h2 class="ht">성적표</h2>
     <div class="myStudyList1">
         <p class="sc">번호</p>
-        <p class="sc2">과목</p>
-        <p class="sc5">강좌명</p>
-        <p class="sc3">학습 진행률</p>
+        <p class="sc5">과목</p>
+        <p class="sc3">강좌명</p>
         <p class="sc2">중간고사 점수</p>
         <p class="sc2">기말고사 점수</p>
         <p class="sc2">최종 점수</p>
@@ -22,9 +21,8 @@
             <c:forEach items="${GradeList}" var="g">
                 <div class="myStudyList2">
                     <p class="sc">${g.class_id}</p>
-                    <p class="sc2">${g.class_category}</p>
-                    <p class="sc5">${g.class_title}</p>
-                    <p class="sc3">${g.progress}</p>
+                    <p class="sc5">${g.class_category}</p>
+                    <p class="sc3">${g.class_title.length() > 10 ? g.class_title.substring(0, 7).concat("...") : g.class_title}</p>
                     <p class="sc2">${g.midterm_score}</p>
                     <p class="sc2">${g.final_score}</p>
                     <p class="sc2">${g.final_grade_score}</p>
