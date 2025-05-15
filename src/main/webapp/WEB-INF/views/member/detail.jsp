@@ -104,7 +104,12 @@
                             <c:if test="${not isLocal}">
                                 <button class="btnVideoPlay" id="${video.video_url}">재생</button>
                             </c:if>
-                            <button class="btnDataDownload"><a href="/upload/${cdList.get(video.video_order - 1).data_name}" download="${classDetailDTO.class_title}_강의자료_${video.video_order}강.pdf">다운로드</a> </button>
+                            <c:if test="${cdList != null and cdList.size() > 0}" var="isDataExist">
+                                <button class="btnDataDownload"><a href="/upload/${cdList.get(video.video_order - 1).data_name}" download="${classDetailDTO.class_title}_강의자료_${video.video_order}강.pdf">다운로드</a> </button>
+                            </c:if>
+                            <c:if test="${not isDataExist}">
+                                <button>X</button>
+                            </c:if>
                             <button class="btnVideoNotice" id="${video.notice}">공지 확인</button>
                         </div>
                     </c:forEach>

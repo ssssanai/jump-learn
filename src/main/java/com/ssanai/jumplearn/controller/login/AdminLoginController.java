@@ -33,7 +33,7 @@ public class AdminLoginController {
         AdminDTO aDto= aService.login(dto);
         if(aDto!=null && aDto.getName() != null){
             HttpSession session = req.getSession();
-            session.setAttribute("loginInfo", aDto);
+            session.setAttribute("adminInfo", aDto);
             session.setMaxInactiveInterval(60 * 60 * 3); //3시간
             log.info("로그인성공");
             log.info(aDto.toString());

@@ -139,7 +139,8 @@ public class MemberMyPageController {
 			HttpServletRequest req,
 			Model model
 	){
-		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		MemberDTO reqId = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		MemberDTO loginInfo = mainPageService.getMemberInfo(reqId.getId());
 		List<ReportDTO> reportList = memberMyPageService.reportList(loginInfo.getId());
 		model.addAttribute("reportList", reportList);
 		model.addAttribute("loginInfo", loginInfo);
@@ -147,14 +148,16 @@ public class MemberMyPageController {
 	}
 
 	@GetMapping("/report_detail/{report_id}")
-	public void reportDetail(
+	public String reportDetail(
 			HttpServletRequest req,
 			@PathVariable("report_id") int report_id,
 			Model model
 	) {
-		MemberDTO loginInfo = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		MemberDTO reqId = (MemberDTO) req.getSession().getAttribute("loginInfo");
+		MemberDTO loginInfo = mainPageService.getMemberInfo(reqId.getId());
 		ReportDTO reportDetail = reportService.reportDetail(report_id);
 		model.addAttribute("reportDetail", reportDetail);
-//		return "";
+		model.addAttribute("loginInfo", loginInfo);
+		return "member/report_detail";
 	}
 }

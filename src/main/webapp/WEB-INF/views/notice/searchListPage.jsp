@@ -46,7 +46,7 @@
             <h2>공지사항 게시판</h2>
             <p>공지사항 게시판입니다.</p>
             <div class="wtBtn">
-                <c:if test="${isAdmin}">
+                <c:if test="${adminInfo != null}">
                     <a href="/notice/writePage">글쓰기</a>
                 </c:if>
             </div>
@@ -88,7 +88,7 @@
                     <p class="listName">${post.admin_id}</p>
                     <p class="listDate">${fn:replace(post.created_at,'T',' ')}</p>
                     <p class="listCnt">${post.view_count}</p>
-                    <c:if test="${isAdmin}">
+                    <c:if test="${adminInfo != null}">
                         <div class="listDelBtnBox">
                             <input class="listDelBtn" type="button" id="deleteBtn${post.id}" name="deleteBtn${post.id}" onClick="if(confirm('${post.title} 글을 삭제하시겠습니까?')) {location.href='/notice/delete/${post.id}'}" value="삭제">
                         </div>

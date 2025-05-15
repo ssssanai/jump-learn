@@ -29,7 +29,7 @@ public class TeacherListController {
             Model model
     ) {
         log.info("teacherList시작");
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         PageResponseDTO<TeacherDTO> resDTO = teacherListService.searchList(reqDTO);
         StringBuilder URI = new StringBuilder()
                 .append(req.getRequestURI())
@@ -76,7 +76,7 @@ public class TeacherListController {
             HttpSession session,
             RedirectAttributes redirectAttributes
     ) {
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         if (dto == null || (dto.getStatus() != 1 && dto.getStatus() != 2)) {
             redirectAttributes.addFlashAttribute("msg", "생성 권한이 없습니다.");
             return "redirect:/admin/teacherList";
@@ -98,7 +98,7 @@ public class TeacherListController {
             RedirectAttributes redirectAttributes,
             @RequestParam(name = "id") String id
     ) {
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         log.info(dto.getStatus());
         if (dto == null || dto.getStatus() != 1) {
             redirectAttributes.addFlashAttribute("msg", "삭제 권한이 없습니다.");
@@ -122,7 +122,7 @@ public class TeacherListController {
             @RequestParam(name = "id") String id,
             @RequestParam(name = "s") String s
     ) {
-        AdminDTO loginInfo = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO loginInfo = (AdminDTO) session.getAttribute("adminInfo");
         int status = Integer.parseInt(s);
         int adminStatus = loginInfo.getStatus();
 

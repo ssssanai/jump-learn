@@ -29,7 +29,7 @@ public class EduBbsController {
 			Model model,
 			HttpSession session
 	) {
-		AdminDTO adto = (AdminDTO) session.getAttribute("loginInfo");
+		AdminDTO adto = (AdminDTO) session.getAttribute("adminInfo");
 		log.info("adto", adto.toString());
 		model.addAttribute("adto", adto);
 		return "edu/writePage";
@@ -70,7 +70,7 @@ public class EduBbsController {
 	) {
 		bbsService.viewCount(id, "tbl_edu");
 
-		Object loginInfo = session.getAttribute("loginInfo");
+		Object loginInfo = session.getAttribute("adminInfo");
 
 		if (loginInfo instanceof AdminDTO adto) {
 			log.info("관리자 로그인: {}", adto.toString());
@@ -96,7 +96,7 @@ public class EduBbsController {
 
 	) {
 
-		AdminDTO adto = (AdminDTO) session.getAttribute("loginInfo");
+		AdminDTO adto = (AdminDTO) session.getAttribute("adminInfo");
 		log.info("adto", adto.toString());
 		model.addAttribute("adto", adto);
 		model.addAttribute("dto", bbsService.selectOne(id, "tbl_edu")); // 게시글 정보
@@ -134,7 +134,7 @@ public class EduBbsController {
 		PageResponseDTO<BbsDefaultDTO> dto = bbsService.searchList(pageDTO, "tbl_edu");
 		int totalCount = bbsService.getTotalCount(pageDTO, "tbl_edu");
 
-		Object loginInfo = session.getAttribute("loginInfo");
+		Object loginInfo = session.getAttribute("adminInfo");
 
 		if (loginInfo instanceof AdminDTO adto) {
 			log.info("관리자 로그인: {}", adto.toString());

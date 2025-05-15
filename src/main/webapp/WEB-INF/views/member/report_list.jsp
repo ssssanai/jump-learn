@@ -46,10 +46,7 @@
     <div class="main">
         <div class="writeTit">
             <h2>신고내역</h2>
-            <p>신고내역에 처리상태를 확인할 수 있습니다.</p>
-            <div class="wtBtn">
-                <a href="/edu/writePage">글쓰기</a>
-            </div>
+            <p>신고내역과 처리상태를 확인할 수 있습니다.</p>
         </div>
         <div class="writeList">
             <table class="wlHeader">
@@ -67,18 +64,17 @@
                 <c:if test="${reportList.size() > 0}" var="isExist">
                     <c:forEach items="${reportList}" var="r">
                         <tr>
-                            <c:if test="${r.report_status == 'complete'}" var="isComplete">
-                                <td class="listReportNo"><p><a href="/member/report_detail/${r.report_id}">${r.report_id}<a/></p></td>
-                            </c:if>
-                            <c:if test="${not isComplete}">
-                                <td class="listReportNo"><p>${r.report_id}</p></td>
-                            </c:if>
+                            <td class="listReportNo">
+                                <p>
+                                    <a href="/member/report_detail/${r.report_id}">${r.report_id}</a>
+                                </p>
+                            </td>
                             <td class="listReportBoardNo"><p>${r.target_id}</p></td>
                             <td class="listReportName"><p>${r.target_type}</p></td>
                             <td><p class="listName">${r.reported_member_id}</p></td>
                             <td class="listReportBecause"><p>${r.reason}</p></td>
                             <td class="listReportDate"><p>${r.report_create_date.toString().replace("T", " ")}</p></td>
-                            <td class="listReportState"><p>${r.report_status}</p></td>
+                            <td class="listReportState"><p>${r.report_status.equals("complete") ? "처리 완료" : "처리 중"}</p></td>
                         </tr>
                     </c:forEach>
                 </c:if>
@@ -89,9 +85,9 @@
                 </c:if>
             </table>
 
-<%--            <div class="pagingBox">--%>
-<%--                <p>123456</p>--%>
-<%--            </div>--%>
+            <%--            <div class="pagingBox">--%>
+            <%--                <p>123456</p>--%>
+            <%--            </div>--%>
         </div>
     </div>
 </div>
