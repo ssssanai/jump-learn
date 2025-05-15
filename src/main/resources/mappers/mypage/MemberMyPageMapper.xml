@@ -76,8 +76,8 @@
     <select id="reportList" resultType="com.ssanai.jumplearn.dto.ReportDTO">
         SELECT
         tr.id AS 'report_id', tr.target_id AS 'target_id', tr.target_type AS 'target_type', tr.member_id AS 'member_id',
-        tr.reason AS 'reason', tr.created_at AS 'created_at', tr.report_status AS 'report_status',
-        tp.title AS 'reported_title', tp.member_id AS 'reported_member_id'
+        tr.reason AS 'reason', tr.created_at AS 'report_create_date', tr.report_status AS 'report_status',
+        tp.title AS 'report_title', tp.member_id AS 'reported_member_id'
         FROM tbl_report AS tr
         INNER JOIN tbl_post AS tp ON tr.target_id = tp.id
         WHERE tr.member_id = #{member_id};
