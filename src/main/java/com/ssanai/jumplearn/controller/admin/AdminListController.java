@@ -30,7 +30,7 @@ public class AdminListController {
             Model model
     ) {
         log.info("adminList시작");
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         PageResponseDTO<AdminDTO> resDTO = adminListService.searchList(reqDTO);
         String paging = BbsPage.pagingArea(resDTO.getTotal_count(), resDTO.getPage_no(), resDTO.getPage_size(), resDTO.getPage_block_size(), req.getContextPath());
         model.addAttribute("loginInfo", dto);
@@ -64,7 +64,7 @@ public class AdminListController {
             HttpSession session,
             RedirectAttributes redirectAttributes
     ){
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         if(dto == null || dto.getStatus() != 1) {
             redirectAttributes.addFlashAttribute("msg","생성 권한이 없습니다.");
             return "redirect:/admin/adminList";
@@ -78,7 +78,7 @@ public class AdminListController {
             HttpSession session,
             RedirectAttributes redirectAttributes
     ){
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         if(dto==null || (dto.getStatus() != 1 && dto.getStatus() != 2) ){
             redirectAttributes.addFlashAttribute("msg", "생성 권한이 없습니다.");
             return "redirect:/admin/teacherList";
@@ -99,7 +99,7 @@ public class AdminListController {
             HttpSession session,
             RedirectAttributes redirectAttributes
     ){
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         if(dto == null || dto.getStatus() != 1) {
             redirectAttributes.addFlashAttribute("msg","삭제권한이 없습니다.");
             return "redirect:/admin/adminList";
@@ -120,7 +120,7 @@ public class AdminListController {
             HttpSession session,
             RedirectAttributes redirectAttributes
     ){
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         if(dto == null || dto.getStatus() != 1) {
             redirectAttributes.addFlashAttribute("msg","변경 권한이 없습니다.");
             return "redirect:/admin/adminList";

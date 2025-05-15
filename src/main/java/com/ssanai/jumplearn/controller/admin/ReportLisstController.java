@@ -28,7 +28,7 @@ public class ReportLisstController {
             HttpSession session,
             @ModelAttribute("reqDTO") PageRequestDTO reqDTO,
             Model model) {
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         PageResponseDTO<ReportDTO> resDTO = reportListService.searchList(reqDTO);
         String paging = BbsPage.pagingArea(resDTO.getTotal_count(), resDTO.getPage_no(), resDTO.getPage_size(), resDTO.getPage_block_size(), req.getContextPath());
         model.addAttribute("dtoList", resDTO.getDtoList());
@@ -46,7 +46,7 @@ public class ReportLisstController {
             @ModelAttribute("reqDTO")PageRequestDTO reqDTO,
             Model model
     ){
-        AdminDTO dto = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dto = (AdminDTO) session.getAttribute("adminInfo");
         PageResponseDTO<ReportDTO> resDTO = reportListService.searchList(reqDTO);
         StringBuilder URI = new StringBuilder()
                 .append(req.getRequestURI())
@@ -80,7 +80,7 @@ public class ReportLisstController {
             RedirectAttributes redirectAttributes,
             @RequestHeader(value = "Referer", required = false) String referer
     ){
-        AdminDTO dtoAdmin = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO dtoAdmin = (AdminDTO) session.getAttribute("adminInfo");
         dto.setAdmin_id(dtoAdmin.getId());
         log.info("여기까지"+dto.toString());
         int rs = reportListService.reportResolution(dto);

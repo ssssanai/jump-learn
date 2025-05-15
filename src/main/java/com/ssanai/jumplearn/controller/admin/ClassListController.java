@@ -39,7 +39,7 @@ public class ClassListController {
             Model model
     ) {
         log.info("classList시작");
-        AdminDTO adminDTO = (AdminDTO) session.getAttribute("loginInfo");
+        AdminDTO adminDTO = (AdminDTO) session.getAttribute("adminInfo");
         PageResponseDTO<ClassDetailDTO> resDTO = classListService.searchList(reqDTO);
         String paging = BbsPage.pagingArea(resDTO.getTotal_count(), resDTO.getPage_no(), resDTO.getPage_size(), resDTO.getPage_block_size(), req.getContextPath());
         model.addAttribute("loginInfo", adminDTO);
