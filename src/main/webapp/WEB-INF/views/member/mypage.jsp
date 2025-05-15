@@ -180,7 +180,6 @@
                                                 ${noticeDTO.title.length() >= 10 ? noticeDTO.title.substring(0, 10).concat("...") : noticeDTO.title}
                                         </p></td>
                                         <td class="tbName1">${noticeDTO.admin_id}</td>
-                                        <td class="tbDate1">${noticeDTO.created_at}</td>
                                     </c:when>
                                     <c:otherwise>
                                         <td colspan="3">추천 게시물이 없습니다.</td>
