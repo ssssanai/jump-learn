@@ -19,7 +19,7 @@
   <span>${loginInfo.status == 1 ? '슈퍼관리자' : (loginInfo.status == 2 ? '중간 관리자' : (loginInfo.status == 3 ? '말단 관리자' : ''))}</span>
   <span>${loginInfo.name}</span>
 </div>
-<h1>강좌 조회</h1>
+<h1>${class_title} 강좌 조회</h1>
 <div id="total">
 <%--  총 강좌 : ${pageInfo.total_count} 개--%>
   <button>
@@ -80,7 +80,14 @@
           <td>${list.updated_at}</td>
           <td>
             <button>
-              <a href="/admin/class_data_create?class_id=${list.class_id}&order=${list.video_order}" class="button-link">자료 추가</a>
+              <c:choose>
+                <c:when test="${not empty list.data_name}">
+                  X
+                </c:when>
+                <c:otherwise>
+                  <a href="/admin/class_data_create?class_id=${list.class_id}&order=${list.video_order}" class="button-link">자료 추가</a>
+                </c:otherwise>
+              </c:choose>
             </button>
           </td>
           <td>
@@ -115,6 +122,9 @@
   </c:choose>
   </tbody>
 </table>
+<button>
+<a href="/admin/classList" class="button-link">뒤로가기</a>
+</button>
 <script>
   function checkDataName(dataName) {
     if (!dataName) {

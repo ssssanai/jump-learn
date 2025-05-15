@@ -126,8 +126,12 @@ public class ClassListController {
     ) {
         int id = Integer.parseInt(class_id);
         List<ClassVideoDTO> dtoList = classListService.videoList(id);
+        String title = classListService.className(id);
+
+        log.info(title);
         model.addAttribute("dtoList", dtoList);
         model.addAttribute("class_id", class_id);
+        model.addAttribute("class_title", title);
         log.info("강의" + dtoList.toString());
         return "admin/class";
     }
