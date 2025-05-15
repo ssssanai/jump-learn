@@ -34,7 +34,7 @@
             <c:forEach var="list" items="${dtoList}" varStatus="loop">
                 <tr>
                     <td>${loop.index + 1}</td>
-                    <td>${list.post_id}</td>
+                    <td><a href="/post/view?id=${list.post_id}">${list.post_id}</a></td>
                     <td>${list.post_title}</td>
                     <td>${list.view_count}</td>
                     <td>${list.like_count}</td>
