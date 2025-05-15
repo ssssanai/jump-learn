@@ -136,6 +136,7 @@
     </delete>
     <delete id="deleteFile">
         DELETE FROM tbl_post_file WHERE id=#{post_id}
+    </delete>
     <select id="isLiked" resultType="Integer">
         SELECT id
         FROM tbl_post_like

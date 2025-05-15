@@ -62,7 +62,9 @@
                                 <i class="fa-regular fa-heart" style="color: #bebebe" onclick="location.href='/post/like/${loginInfo.id}/${dto.post_id}'"></i>
 <%--                            </button>--%>
                         </c:if>
-                        <button><i class="fa-solid fa-triangle-exclamation"></i></button>
+<%--                        <button>--%>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+<%--                        </button>--%>
                     </div>
                 </div>
                 <div class="formHead">
