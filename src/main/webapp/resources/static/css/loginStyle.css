@@ -196,7 +196,6 @@ a:hover {
     color:#242424;
 }
 .regi_chgpwd_div {
-    display: grid;
     align-items: center;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;

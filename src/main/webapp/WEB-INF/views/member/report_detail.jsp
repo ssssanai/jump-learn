@@ -20,7 +20,6 @@
 <body>
 <%--고정 헤더 파일--%>
 <%@include file="/resources/static/html/memberGnb.jsp"%>
-<%@ include file="/resources/static/html/adminMsg.jsp"%>
 <div class="wrap">
     <div class="aside">
         <div class="profile">
@@ -39,9 +38,6 @@
             <a href="/lib/searchListPage">자료실 게시판</a>
             <a href="/news/searchListPage">뉴스 게시판</a>
         </div>
-        <div class="reportPageBtn">
-            <a href="#">신고 내역</a>
-        </div>
     </div>
     <div class="main">
         <div class="writeTit">
@@ -49,7 +45,6 @@
             <p>신고내역에 처리상태를 확인할 수 있습니다.</p>
         </div>
         <div class="formBox">
-            <form method="post" action="/edu/editPage" enctype="multipart/form-data">
                 <div class="boardTitle">
                     <p>신고자 제목</p>
                 </div>
@@ -64,16 +59,12 @@
                         <p>2025-01-03</p>
                     </div>
                     <div class="boardViewCnt">
-                        <p>조회수 123회</p>
-                    </div>
-                    <div class="boardLikeCnt">
-                        <p>좋아요 123 개</p>
+                        <p>처리상태 : ??</p>
                     </div>
                 </div>
                 <div class="boardCont">
                     <p>글 내용 으하하하</p>
                 </div>
-            </form>
             <div class="qnaCommentList">
                 <div class="comment" id="#">
                     <p>관리자 ID : admin001</p>
@@ -85,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <p class="qnaCommentList2">답변이 없습니다.</p>
+                <p class="qnaCommentList2">답변이 없습니다.</p>
             </div>
         </div>
     </div>
