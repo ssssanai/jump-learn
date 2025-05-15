@@ -12,8 +12,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../../resources/static/css/study/studyListPage.css" rel="stylesheet" type="text/css">
-    <link href="../../../resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/study/studyListPage.css" rel="stylesheet" type="text/css">
+    <link href="/resources/static/css/headerGnb2.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/aa252fc318.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <title>JL - 강의 목록</title>
@@ -21,7 +21,7 @@
 <body>
 
 <%--고정 헤더 파일--%>
-<%@include file="../../../resources/static/html/headerGnb.jsp"%>
+<%@include file="/resources/static/html/memberGnb.jsp"%>
 
 <div class="wrap" id="wrap">
     <div class="aside">

@@ -46,8 +46,12 @@
                     </div>
                     <div class="buyMain">
                         <div class="buyCont">
-                            <img src="/resources/static/images/notProfile.jpg" alt="강의 썸네일">
-                                ${p.class_file_name}
+                            <c:if test="${p.class_file_name != null}" var="isImageExist">
+                                <img src="/upload/${p.class_file_name}">
+                            </c:if>
+                            <c:if test="${not isImageExist}">
+                                <img src="/resources/static/images/img.png">
+                            </c:if>
                             <div class="bP">
                                 <h2>${p.class_title}</h2>
                                 <h3>${p.class_introduce}</h3>

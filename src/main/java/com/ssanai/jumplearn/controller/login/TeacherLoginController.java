@@ -34,7 +34,7 @@ public class TeacherLoginController {
         TeacherDTO teacherDTO = TeacherLoginService.login(dto);
         if(teacherDTO != null && teacherDTO.getId() != null){
             HttpSession session = req.getSession();
-            session.setAttribute("loginInfo",  teacherDTO);
+            session.setAttribute("teacherInfo",  teacherDTO);
             log.info("선생님 로그인 정보" +teacherDTO );
             return "redirect:/teacher/myPage";
         }else{

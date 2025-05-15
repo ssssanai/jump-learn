@@ -57,6 +57,7 @@ public class AdminListController {
         model.addAttribute("pageInfo", resDTO);
         model.addAttribute("paging", paging);
         log.info(resDTO);
+
         return "admin/adminList";
     }
     @GetMapping("/admin_create")

@@ -60,7 +60,12 @@
             </div>
             <div class="sbB3">
                 <div class="teacherPro">
-                    <img src="/upload/${classDetailDTO.teacher_file_name}" alt="강사 프로필 사진">
+                    <c:if test="${classDetailDTO.teacher_file_name != null}" var="isFileExist">
+                        <img src="/upload/${classDetailDTO.teacher_file_name}" alt="강사 프로필 사진">
+                    </c:if>
+                    <c:if test="${not isFileExist}">
+                        <img src="/resources/static/images/notProfile.jpg" alt="강좌 사진">
+                    </c:if>
                 </div>
                 <div class="teacherIn">
                     <p>${classDetailDTO.teacher_introduce1}<br>
@@ -74,17 +79,17 @@
         </div>
     </div>
     <div class="main">
+        <h3 class="h33">강좌 / 작성된 후기</h3>
         <div class="box">
             <div class="studyBox3">
-                <h2>강좌</h2>
                 <div class="reviewList1">
-                    <p class="studyNo1">강좌 수</p>
+                    <p class="studyNo1">순서</p>
                     <p class="studyTit1">제목</p>
-                    <p class="studyContent1">강좌 내용</p>
+                    <p class="studyContent1">내용</p>
                     <p class="studyUploadDate1">업로드날짜</p>
-                    <p class="studyUploadDate3">강의 시청</p>
-                    <p class="studyUploadDate3">강의 자료</p>
-                    <p class="studyUploadDate3">강의 공지사항</p>
+                    <p class="btnVideoPlay1">강의 시청</p>
+                    <p class="btnVideoNotice1">강의 자료</p>
+                    <p class="btnDataDownload1">공지사항</p>
                 </div>
                 <div class="reviewListBox">
                     <c:forEach items="${videoList}" var="video">
@@ -105,13 +110,12 @@
                             <c:if test="${not isDataExist}">
                                 <button>X</button>
                             </c:if>
-                            <button class="btnVideoNotice" id="${video.notice}">공지 확인</button>
+                            <button class="btnVideoNotice" id="${video.notice}">확인</button>
                         </div>
                     </c:forEach>
                 </div>
             </div>
             <div class="studyBox3">
-                <h2>작성된 후기</h2>
                 <div class="reviewList3">
                     <p class="studyContent4">학생 ID</p>
                     <p class="studyTit4">후기</p>
@@ -136,66 +140,82 @@
             </div>
             <%-- 질문 목록 (내가 한 질문만 가져오기) --%>
         </div>
-        <div>
-            <c:if test="${qList.size() > 0}">
-                <h3>질문</h3>
-                <c:forEach items="${qList}" var="q">
-                    <%--질문--%>
-                    <div>
-                        <p>${q.title}</p>
-                        <p>${q.content}</p>
-                        <p>질문 일시:${q.created_at.toString().replace("T", " ")}</p>
-                        <c:if test="${q.updated_at != null}">
-                            <p>수정 일시: ${q.updated_at.toString().replace("T", " ")}</p>
-                        </c:if>
-                    </div>
-                    <%--답글--%>
-                    <div>
-                        <c:if test="${q.quested_content != null}">
-                            <p>${q.commenter}</p>
-                            <p>${q.quested_content}</p>
-                            <p>질문 일시:${q.quested_created_at.toString().replace("T", " ")}</p>
-                            <c:if test="${q.quested_updated_at != null}">
-                                <p>수정 일시: ${q.quested_updated_at.toString().replace("T", " ")}</p>
+        <div class="box2">
+
+                <c:if test="${qList.size() > 0}">
+                    <h3>질문</h3>
+                    <c:forEach items="${qList}" var="q">
+                    <div class="questionList">
+                        <%--질문--%>
+                        <div class="questionContent">
+                            <div class="contentP">
+                                <h3>${q.title}</h3>
+                                <p>${q.content}</p>
+                            </div>
+                            <div class="contentDate">
+                                <p>질문 일시:${q.created_at.toString().replace("T", " ")}</p>
+                                <c:if test="${q.updated_at != null}">
+                                    <p>수정 일시: ${q.updated_at.toString().replace("T", " ")}</p>
+                                </c:if>
+                            </div>
+                        </div>
+                        <%--답글--%>
+                        <div class="questionContent2">
+                            <c:if test="${q.quested_content != null}">
+                                <div class="contentP2">
+                                    <h3>${q.commenter}</h3>
+                                    <p>${q.quested_content}</p>
+                                </div>
+                                <div class="contentDate2">
+                                    <p>질문 일시:${q.quested_created_at.toString().replace("T", " ")}</p>
+                                    <c:if test="${q.quested_updated_at != null}">
+                                        <p>수정 일시: ${q.quested_updated_at.toString().replace("T", " ")}</p>
+                                    </c:if>
+                                </div>
                             </c:if>
-                        </c:if>
+                        </div>
                     </div>
-                </c:forEach>
-            </c:if>
+                    </c:forEach>
+                </c:if>
+        </div>
+        <div class="box3">
             <%-- TODO: 질문 폼 CSS 수정 --%>
-            <div>
-                <form name="class_question" action="/studyroom/class_question" method="post">
+            <div class="questionForm">
+                <h3 class="questionFormp">질문하기</h3>
+                <form class="formBox" name="class_question" action="/studyroom/class_question" method="post">
                     <input type="hidden" value="${member.id}" name="member_id"/>
                     <input type="hidden" value="${classDetailDTO.class_id}" name="class_id"/>
-                    질문 제목: <input type="text" name="title"/><br>
-                    질문 내용: <textarea name="content"></textarea>
-                    <input type="submit" value="질문 등록"/>
+                    <div class="questionInputTitle">
+                        <p>질문 제목 : </p><input type="text" name="title"/>
+                    </div>
+                    <div class="questionInputContent">
+                        <p class="questionFormp">질문 내용: </p><textarea name="content"></textarea>
+                    </div>
+                    <input class="questionContentBtn" type="submit" value="질문 등록"/>
                 </form>
             </div>
-        </div>
-
-        <%--입력된 후기가 없을시--%>
-        <c:if test="${not isReviewed}">
-        <div class="reviewBox">
-            <h2>후기작성</h2>
-                <%-- 후기 추가 메소드 --%>
-            <form action="/studyroom/update_review" name="review" method="post">
-                <input type="hidden" name="member_id" value="${member.id}"/>
-                <input type="hidden" name="class_id" value="${classDetailDTO.class_id}"/>
-                <div class="review1">
+            <%--입력된 후기가 없을시--%>
+            <c:if test="${not isReviewed}">
+                <div class="reviewBox">
+                        <%-- 후기 추가 메소드 --%>
                     <h2>별점 입력</h2>
-                    <p class="reviewComment">1 ~ 5점까지 입력가능합니다.</p>
-                    <input type="number" min="1" max="5" step="1" value="5" name="feedback_score">
+                    <form class="reviewForm" action="/studyroom/update_review" name="review" method="post">
+                        <input type="hidden" name="member_id" value="${member.id}"/>
+                        <input type="hidden" name="class_id" value="${classDetailDTO.class_id}"/>
+                        <div class="review1">
+                            <p class="reviewComment">1 ~ 5점까지 입력가능합니다.</p>
+                            <input type="number" min="1" max="5" step="1" value="5" name="feedback_score">
+                        </div>
+                        <div class="review2">
+                            <h2>후기 입력</h2>
+                            <p class="reviewComment">최대 255자까지 입력 가능합니다.</p>
+                            <textarea type="text" name="review" placeholder="후기를 작성하세요." maxlength="255"></textarea>
+                        </div>
+                        <input type="submit" name="" class="reviewBtn" value="후기작성">
+                    </form>
                 </div>
-                <div class="review2">
-                    <h2>후기 입력</h2>
-                    <p class="reviewComment">최대 255자까지 입력 가능합니다.</p>
-                    <textarea type="text" name="review" placeholder="후기를 작성하세요." maxlength="255"></textarea>
-                </div>
-                <input type="submit" name="" class="reviewBtn" value="후기작성">
-            </form>
+            </c:if>
         </div>
-        </c:if>
         <script>
             // 강좌 공지사항
             document.getElementById('btnClassNotice').addEventListener('click', function () {

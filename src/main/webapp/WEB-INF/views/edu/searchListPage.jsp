@@ -49,7 +49,6 @@
                 <c:if test="${adminInfo != null}">
                     <a href="/edu/writePage">글쓰기</a>
                 </c:if>
-
             </div>
         </div>
         <form class="searchInput" name="frmSearch" id="frmSearch" method="GET" action="/edu/searchListPage">
