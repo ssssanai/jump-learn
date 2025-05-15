@@ -57,7 +57,10 @@ ul li {
                 margin-bottom: 5px;
             }
             .myInfo > h2 {
-                font-size:18px;
+                font-size: 18px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         .logoutBtn {
             display: flex;
@@ -110,7 +113,7 @@ ul li {
             float: left;
             width:20%; height:100%;
             line-height:48px;
-            font-size:24px;
+            font-size:22px;
         }
         .writeTit > p {
             float:left;

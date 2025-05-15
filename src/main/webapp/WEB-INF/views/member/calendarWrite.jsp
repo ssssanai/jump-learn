@@ -35,7 +35,7 @@
         </div>
         <div class="boardCont">
             <p>내용</p>
-            <textarea name="content" id="content" placeholder="content값"></textarea>
+            <textarea name="content" id="content" placeholder="학습계획 내용"></textarea>
             <div id="contentError" class="error"></div>
         </div>
         <div class="formBtn">
