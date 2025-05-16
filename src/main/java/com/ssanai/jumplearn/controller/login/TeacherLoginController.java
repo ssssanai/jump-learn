@@ -36,6 +36,15 @@ public class TeacherLoginController {
             HttpSession session = req.getSession();
             session.setAttribute("teacherInfo",  teacherDTO);
             log.info("선생님 로그인 정보" +teacherDTO );
+
+            if(session.getAttribute("loginInfo")!=null){
+                session.removeAttribute("loginInfo");
+            }
+
+            if(session.getAttribute("adminInfo")!=null){
+                session.removeAttribute("adminInfo");
+            }
+
             return "redirect:/teacher/myPage";
         }else{
             redirectAttributes.addFlashAttribute("msg", "Login 실패");
