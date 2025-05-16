@@ -35,7 +35,7 @@
                 <div class="myStudyList2">
                     <p class="comuNo">${dto.id}</p>
                     <p class="comuTit1">${dto.post_id}</p>
-                    <a href="#"
+                    <a href="/post/view?id=${dto.post_id}"
                        class="comuCont">${dto.content.length() >= 26 ? dto.content.substring(0, 30) + "..." : dto.content}</a>
                     <p class="comuRegDate">${dto.created_at.toString().split("T")[0]}&nbsp;${dto.created_at.toString().split("T")[1]}</p>
                 </div>

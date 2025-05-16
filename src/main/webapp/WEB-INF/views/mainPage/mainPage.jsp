@@ -147,7 +147,7 @@
         <c:forEach var="hs3Class" items="${hs3List}">
             <div class="gradeImg">
                 <c:if test="${hs3Class.file_name != null}" var="isImageExist">
-                    <img src="/upload/${hs1Class.file_name}" alt="강좌 사진"/>
+                    <img src="/upload/${hs3Class.file_name}" alt="강좌 사진"/>
                 </c:if>
                 <c:if test="${not isImageExist}">
                     <img src="/resources/static/images/img.png" alt="강좌 기본 사진"/>
