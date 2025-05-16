@@ -47,7 +47,7 @@
     <div class="formBtn">
       <input class="endBtn" type="submit" value="등록">
       <input class="endBtn" type="reset" value="취소">
-      <a href="post/searchListPage"><input type="button" value="뒤로 가기"></a>
+      <a href="/post/searchListPage"><input type="button" value="뒤로 가기"></a>
     </div>
   </form>
 </div>

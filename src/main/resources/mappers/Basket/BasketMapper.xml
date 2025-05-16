@@ -6,7 +6,7 @@
         SELECT tb.id,tb.class_id,tb.member_id,tb.created_at,
                tc.title,tc.introduce,tc.price,
                tc.file_path,tc.file_name,tc.file_ext,
-               tt.name
+               tt.name as teacher
         from tbl_basket as tb
                  inner join tbl_class as tc on tb.class_id = tc.id
                  inner join tbl_teacher as tt on tc.teacher_id = tt.id

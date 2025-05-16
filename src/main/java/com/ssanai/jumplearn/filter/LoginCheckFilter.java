@@ -77,35 +77,36 @@ public class LoginCheckFilter implements Filter {
 			// 2. 관리자 권한 체크
 			log.warn(referer);
 			if (session == null || session.getAttribute("adminInfo") == null) {
-				if(referer != null){
-					sendRedirect(response, referer);
-					return;
-				} else {
+//				if(referer != null){
+//					sendRedirect(response, referer);
+//					return;
+//				} else {
 					sendRedirect(response, "/admin/login");
 					return;
-				}
+//				}
 			}
 		} else if (isTeacherPath(path)) {
 			// 3. 선생님 권한 체크
 			if (session == null || session.getAttribute("teacherInfo") == null) {
-				if(referer != null){
-					sendRedirect(response, referer);
-					return;
-				} else {
+//				if(referer != null){
+//					sendRedirect(response, referer);
+//					return;
+//				} else {
 					sendRedirect(response, "/teacher/login");
 					return;
-				}
+//				}
 			}
 		} else if (isMemberPath(path)) {
 			// 4. 일반 회원 권한 체크
 			if (session == null || session.getAttribute("loginInfo") == null) {
-				if(referer != null){
-					sendRedirect(response, referer);
-					return;
-				} else {
+//				if(referer != null){
+//					log.warn(referer);
+//					sendRedirect(response, referer);
+//					return;
+//				} else {
 					sendRedirect(response, "/member/login");
 					return;
-				}
+//				}
 			}
 		}
 
