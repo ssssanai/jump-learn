@@ -55,7 +55,7 @@
                         <c:forEach items="${basketList}" var="b">
                             <div class="cart">
                                 <div class="cartTit1">
-                                    <p id="cart_course_title">${b.teacher}강사의 ${b.title}</p>
+                                    <p id="cart_course_title">${b.teacher} 강사의 ${b.title}</p>
                                 </div>
                                 <div class="cartTit2">
                                     <p id="cart_course_introduce">${b.introduce}</p>
