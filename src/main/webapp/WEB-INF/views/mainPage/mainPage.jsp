@@ -27,13 +27,13 @@
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <c:forEach var="recClass" items="${recommendList}">
-                        <div class="swiper-slide">
-                            <div>
+                        <div class="swiper-slide" style="display: flex; flex-direction: row;">
+                            <div style="height: 100%;  align-items: center;">
                                 <c:if test="${recClass.file_name != null}" var="isImageExist">
-                                    <img src="/upload/${recClass.file_name}" alt="강좌 사진"/>
+                                    <img style="height: 100%; object-fit: contain" src="/upload/${recClass.file_name}" alt="강좌 사진"/>
                                 </c:if>
                                 <c:if test="${not isImageExist}">
-                                    <img src="/resources/static/images/img.png" alt="강좌 기본 사진"/>
+                                    <img style="height: 100%; object-fit: contain"  src="/resources/static/images/img.png" alt="강좌 기본 사진"/>
                                 </c:if>
                             </div>
                             <div class="buyStudy1">
