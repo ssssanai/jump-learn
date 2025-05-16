@@ -116,6 +116,7 @@ public class StudyRoomController {
 		ClassDetailDTO classDetailDTO = courseService.getClassDetailById(class_id);
 		List<ReviewDTO> reviewList = courseService.getReviewListById(class_id);
 		List<ClassVideoDTO> videoList = courseService.getClassVideoList(class_id);
+		log.warn(videoList);
 		boolean isReviewed = false;
 		for (ReviewDTO reviewDTO : reviewList) {
 			if (reviewDTO.getMember_id().equals(member_id)
