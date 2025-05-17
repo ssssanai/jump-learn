@@ -16,8 +16,8 @@
 
 ## 역할 소개
 - 팀장: 임경근(BE/DB/FE) - 자유게시판, 선생님 페이지, 관리자 페이지
+- 팀원: 강경민(BE/FE/버전관리) - 장바구니 페이지, QnA 페이지, 강좌/강의 페이지, 결제내역 페이지, 메인 페이지, 버전관리(Git 사용)
 - 팀원: 박진우(BE) - 교육정보게시판, 테스트 케이스 작성
-- 팀원: 강경민(BE/FE/버전관리) - 장바구니 페이지, 메인 페이지, 버전관리(Git 사용)
 - 팀원: 이동규(FE/UI/UX 디자인) - 학생 / 선생 페이지 제작 및 디자인, 발표자료 준비
 
 ## 주요 기능
@@ -41,14 +41,14 @@
 
 ## 기술 스택
 **Frontend**
-- HTML5, CSS3, Javascript
+- HTML5, CSS3, Javascript, jQuery v3.7.1
 
 **Backend**
-- Spring
+- Spring v3.0
 
 **Server**
-- Tomcat(10.1)
+- Tomcat v10.1.39
 
 **Database**
-- MariaDB(10.11)
+- MariaDB v10.11
 
